@@ -18,8 +18,8 @@ const options = [
 export default function CreateCollection() {
     // const classes = useStyles();
 	// const [ logo, setLogo ] = useState("");
-	const [ FeaturedImg, setFeaturedImg ] = useState("");
-	const [ BannerImg, setBannerImg ] = useState("");
+	const [ FeaturedImg, setFeaturedImg ] = useState<any>("");
+	const [ BannerImg, setBannerImg ] = useState<any>("");
 	const [ name, setName ] = useState("");
 	const [ url, setUrl ] = useState("https://opensea.io/collection/");
 	const [ description, setDescription ] = useState("");
@@ -103,7 +103,7 @@ export default function CreateCollection() {
                     { !FeaturedImg ? <i className="fa fa-image" style={{ fontSize: '4.5em' }} /> :
                         <i className="fa fa-image FeaturedImgIcon" /> }
                     { FeaturedImg && <div className="FeaturedImg">
-                        <img src={FeaturedImg} width={300} height={200}alt=''/>
+                        <img src={URL.createObjectURL(FeaturedImg) } width={300} height={200}alt=''/>
                     </div> }
                 </label>
                 { FeaturedImg && <span className={'removeImg'} onClick={ () => removeImg('FeaturedImg') }>&times;</span>  }
@@ -119,7 +119,7 @@ export default function CreateCollection() {
                     { !BannerImg ? <i className="fa fa-image" style={{ fontSize: '4.5em' }} /> :
                         <i className="fa fa-image BannerImgIcon" /> }
                     { BannerImg && <div className="BannerImg">
-                        <img src={BannerImg} width={700} height={200} alt='' />
+                        <img src={URL.createObjectURL(BannerImg)} width={700} height={200} alt='' />
                     </div> }
                 </label>
                 { BannerImg && <span className={'removeImg'} onClick={ () => removeImg('BannerImg') }>&times;</span> }
