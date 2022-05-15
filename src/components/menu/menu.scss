@@ -1,0 +1,188 @@
+@import "../../global.scss";
+.sidebar{
+    height: 110vh;
+    position: fixed;
+    width: 200px;
+    right:-200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    transition: all 1s ease;
+    // background-color: #dfe1fe;
+    backdrop-filter: blur(5px);
+    z-index: 15;
+    position: fixed;
+    top: 5rem;
+    @include mobile_potrait{
+        top: 5rem;
+        width: 150px;
+        right:-150px;
+        
+    }
+    @include mobile_landscape{
+        top: 5rem;
+        width: 150px;
+        right:-150px;
+    }
+    &.active{
+        right: 0;
+    }
+    
+    ul{
+        margin-top: 1rem;
+        padding: 0;
+        list-style: none;
+        font-weight: 400;
+        color:black;
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        font-size: 0.8rem;
+        .menuItem1{
+            transition: right 1s ease;
+            transition-delay: 0.1s;
+        }
+        .menuItem2{
+            transition:  right 1s ease;
+            transition-delay: 0.15s;
+        }
+        .menuItem3{
+            transition:  right 1s ease;
+            transition-delay: 0.2s;
+        }
+        .menuItem4{
+            transition:  right 1s ease;
+            transition-delay: 0.25s;
+        }
+        .menuItem5{
+            transition:  right 1s ease;
+            transition-delay: 0.3s;
+        }
+        .menuItem6{
+            transition:  right 1s ease;
+            transition-delay: 0.35s;
+        }
+        .menuItem7{
+            transition:  right 1s ease;
+            transition-delay: 0.4s;
+        }
+        .menuItem8{
+            transition:  right 1s ease;
+            transition-delay: 0.45s;
+        }
+        .menuItem9{
+            transition:  right 1s ease;
+            transition-delay: 0.5s;
+        }
+        li{
+            position: relative;
+            transition: right 0s ease;
+            right:-200px;
+            margin-bottom: 1.5rem;
+            a{
+                text-decoration: none;
+                font-size: 1rem;
+                color: white;
+                text-transform: uppercase;
+                @include mobile_potrait{
+                    font-size: 0.8rem;
+                }
+                @include mobile_landscape{
+                    font-size: 0.8rem;
+                }
+            }
+            &:hover{
+                font-weight: 700;
+            }
+            
+            &.active{
+                right:0;
+            }
+            span{
+                position: absolute;
+                font-size: 0.6rem;
+                color: #fff;
+                background-color: #ff4322;
+                padding: 0rem 0.5rem;
+                bottom: -0.6rem;
+                right: -1rem;
+                border-radius: 3px;
+            }
+            .topBarDropdown{
+                *{
+                    font-size: 0.8rem;
+
+                }
+                ul{
+                    margin: 0;
+                    padding: 0;
+                    
+                    li{
+                        right: 0;
+                        padding: 5px !important;
+                    }
+                }
+                .dropdown {
+                    margin-left: 5px !important;
+                    border-color: #ffffff00 !important;
+                }
+            }
+            .socialLinks{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: row;
+                margin-left: 1rem;
+                @include mobile_potrait{
+                    margin-left: 0rem;
+                }
+                a{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    text-decoration: none;
+                    color: white;
+                    font-size: 2rem;
+                    margin-right: 1rem;
+                    transition: all 0.3s ease;
+                    @include mobile_potrait{
+                        font-size: 1.2rem;
+                        margin-right: 0.5rem;
+                    }
+                    @include mobile_landscape{
+                        font-size: 1.2rem;
+                        margin-right: 0.5rem;
+                    }
+                    img{
+                        height: 2.3rem;
+                        transition: all ease 0.3s;
+                        filter: grayscale(0);
+                        border-radius: 50%;
+                        @include mobile_potrait{
+                            height: 1.2rem;
+                        }
+                        @include mobile_landscape{
+                            height: 1.2rem;
+                        }
+                    }
+                    &:hover{
+                        color: #D8A525;
+                        img{
+                            filter: grayscale(0.3);
+                        }
+                    }
+                }
+            }
+            
+        }
+        .colored{
+            a{
+                color: #FF8C22;
+            }
+        }
+    }
+} 

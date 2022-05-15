@@ -1,0 +1,223 @@
+@import "../../global.scss";
+
+.myNftsPage{
+    .sections{
+        .container{
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: flex-start;
+            flex-direction: column;
+            margin-top: 7rem;
+            max-width: 1220px;
+            @include mobile_potrait{
+                margin-top: 5rem;
+            }
+            @include mobile_landscape{
+                margin-top: 5rem;
+            }
+            .transferBox{
+                position: fixed;
+                bottom: 0;
+                height: 100px;
+                width: 100%;
+                background: #00141f;
+                border-top: 1px solid rgb(21, 27, 34);
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+        
+                .cart-container{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: calc(100% - 2rem);
+                    font-size: 19px;
+        
+                    .cart-box{
+                        height: 80px;
+                        flex: 1;
+                        display: flex;
+        
+                        @media (max-width: 768px){
+                            display: none;
+                        }
+        
+                        p{
+                            color: white;
+                            margin: 0,
+                        }
+        
+                        .cart-item{
+                            width: 80px;
+                            padding: 10px;
+                        }
+        
+                        .cart-img{
+                            width: 60px;
+                            height: 60px;
+                            border-radius: 15px;
+                            overflow: hidden;
+                        }
+                    }
+        
+                    .transfer-btn{
+                        height: 48px;
+                        width: 130px;
+                        text-transform: none;
+                        display: inline-flex;
+                        flex-direction: row;
+                        -webkit-box-align: center;
+                        align-items: center;
+                        border-radius: 10px;
+                        -webkit-box-pack: center;
+                        justify-content: center;
+                        font-size: 16px;
+                        font-weight: 600;
+                        padding: 12px 20px;
+                        background-color: #2081e2;
+                        border: 1px solid rgb(32, 129, 226);
+                        color: rgb(255, 255, 255);
+                        transition: all 0.3s ease;
+                        &:hover{
+                            background-color: #57aafd;
+                        }
+                    }
+        
+                    .transfer-cancel-btn{
+                        height: 48px;
+                        width: 130px;
+                        margin-left: 4px;
+                        text-transform: none;
+                        display: inline-flex;
+                        flex-direction: row;
+                        -webkit-box-align: center;
+                        align-items: center;
+                        border-radius: 10px;
+                        -webkit-box-pack: center;
+                        justify-content: center;
+                        font-size: 16px;
+                        font-weight: 600;
+                        padding: 12px 20px;
+                        background-color: #202225;
+                        border: 1px solid #0eabff;
+                        color: rgb(229, 232, 235);
+                        transition: all 0.3s ease;
+                        &:hover{
+                            background-color: #4a4f56;
+                        }
+                    }
+                }
+            }
+        }
+        
+        .partTitle {
+            text-align: center;
+            // '& .items li a:hover .media img':  {
+            //     transform: 'scale(1.1)'
+            // },
+    
+            .top {
+                text-align: center;
+                color: #ced4da;
+                margin-bottom: 16px;
+                padding-top: 32px;
+                font-style: 32px;
+                font-weight: bold;
+                @include mobile_potrait{
+                    font-size: 25px;
+                    padding-top: 5px;
+                }
+                @include mobile_landscape{
+                    font-size: 25px;
+                    padding-top: 5px;
+                }
+            }
+    
+            .stats {
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                display: flex;
+                gap: 8px;
+                margin: 0 5px 32px;
+                list-style: none;
+                padding: 0;
+                position: relative;
+                padding: 10px;
+                &::after{
+                    content: "";
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    width: 20px;
+                    height: 20px;
+                    border-width: 1px;
+                    border-style: solid;
+                    border-radius: 0px 0px 6px 0px;
+                    border-color: transparent #0eabff #0eabff   transparent;
+                    border-image: initial;
+                    transition: width 0.2s ease-out 0s, height 0.2s ease-out 0s;
+                    transform: rotate(180deg);
+                    box-sizing: border-box;
+                    z-index: 1;
+                }
+                &::before{
+                    content: "";
+                    position: absolute;
+                    bottom: 0px;
+                    right: 0px;
+                    width: 20px;
+                    height: 20px;
+                    border-width: 1px;
+                    border-style: solid;
+                    border-radius: 6px 0px 0px 0px;
+                    border-color:  #0eabff transparent transparent #0eabff ;
+                    border-image: initial;
+                    transition: width 0.2s ease-out 0s, height 0.2s ease-out 0s;
+                    transform: rotate(180deg);
+                    box-sizing: border-box;
+                    z-index: 1;
+                }
+                
+    
+                li {
+                    text-align: center;
+                    background-color: #0eabff22;
+                    border-radius: 8px;
+                    padding: 8px 24px;
+                    box-shadow: 0px 0px 2px #fff;
+                    @include mobile_potrait{
+                        padding: 8px 15px;
+                    }
+                    @include mobile_landscape{
+                        padding: 8px 15px;
+                    }
+                    .name {
+                        text-transform: uppercase;
+                        color: #0eabff;
+                        margin-bottom: 4px;
+                        font-size: 10px;
+                        @include mobile_potrait{
+                            font-size: 8px;
+                        }
+                        @include mobile_landscape{
+                            font-size: 8px;
+                        }
+                    }
+    
+                    .value {
+                        color: #fff;
+                        @include mobile_potrait{
+                            font-size: 12px;
+                        }
+                        @include mobile_landscape{
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

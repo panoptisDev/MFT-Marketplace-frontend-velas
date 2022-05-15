@@ -1,0 +1,42 @@
+@import "../../../global.scss";
+.settingContainer{
+	width: calc(100% - 250px);
+	margin-bottom: 15px;
+	h2{
+		font-size: 3rem;
+		@include mobile_potrait{
+			font-size: 2rem;
+		}
+		@include mobile_landscape{
+			font-size: 2rem;
+		}
+	}
+	*{
+		color: #ffffff;
+		@include mobile_potrait{
+			font-size: 12px;
+		}
+		@include mobile_landscape{
+			font-size: 12px;
+		}
+	}
+	h2, h1, h3, h4, h5{
+		font-weight: bold;
+	}
+	.textBox{
+		border: 1px solid;
+		padding: 40px;
+		background: #96bf964d;
+		text-align: center;
+		margin-top: 35px;
+	}
+	.ALink{
+		color: rgb(32, 129, 226);
+		text-decoration: none;
+		&:hover{
+			color: rgb(24, 104, 183);
+		}
+	}
+
+}
+	

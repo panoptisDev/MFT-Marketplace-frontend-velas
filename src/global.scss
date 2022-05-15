@@ -1,0 +1,14 @@
+$width : 450px;
+$bg_color: #000;
+$str_color:rgb(60, 190, 112);
+@mixin mobile_potrait{
+    @media screen and (max-width: $width) and (orientation:portrait){
+        @content
+    }
+};
+@mixin mobile_landscape{
+    @media screen and (max-height: $width) and (orientation:landscape){
+        @content
+    }
+};
+

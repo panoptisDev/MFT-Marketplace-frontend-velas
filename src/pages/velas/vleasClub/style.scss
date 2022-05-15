@@ -1,0 +1,123 @@
+.velasPage{
+    .sections{
+        .container{
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: flex-start;
+            flex-direction: column;
+            margin-top: 7rem;
+
+            .partTitle{
+                text-align: center;
+        
+                .top{
+                    text-align: center;
+                    color: #ced4da;
+                    margin-bottom: 16px;
+                    padding-top: 32px;
+                    font-size: 32px;
+                    font-weight: bold;
+        
+                    .img-mark{
+                        vertical-align: top;
+                        width: 24px;
+                        height: 24px;
+                        margin-left: 8px
+                    }
+                }
+        
+                .desc{
+                    color: #868e96;
+                    font-size: 12px;
+                }
+        
+                .other-site .site-item{
+                    color: #868e96;
+                    width: 24px;
+                    height: 24px;
+                    cursor: pointer;
+                    margin: 0 5px;
+        
+                    &:hover{
+                        color: #228be6
+                    }
+                }
+        
+                .stats{
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 8px;
+                    margin: 0 5px 32px;
+                    display: flex;
+                    list-style: none;
+                    padding: 10px;
+                    position: relative;
+                    &::after{
+                        content: "";
+                        position: absolute;
+                        top: 0px;
+                        left: 0px;
+                        width: 20px;
+                        height: 20px;
+                        border-width: 1px;
+                        border-style: solid;
+                        border-radius: 0px 0px 6px 0px;
+                        border-color: transparent #0eabff #0eabff   transparent;
+                        border-image: initial;
+                        transition: width 0.2s ease-out 0s, height 0.2s ease-out 0s;
+                        transform: rotate(180deg);
+                        box-sizing: border-box;
+                        z-index: 1;
+                    }
+                    &::before{
+                        content: "";
+                        position: absolute;
+                        bottom: 0px;
+                        right: 0px;
+                        width: 20px;
+                        height: 20px;
+                        border-width: 1px;
+                        border-style: solid;
+                        border-radius: 6px 0px 0px 0px;
+                        border-color:  #0eabff transparent transparent #0eabff ;
+                        border-image: initial;
+                        transition: width 0.2s ease-out 0s, height 0.2s ease-out 0s;
+                        transform: rotate(180deg);
+                        box-sizing: border-box;
+                        z-index: 1;
+                    }
+                    li{
+                        text-align: center;
+                        // background: #361b97e6;
+                        background-color: #0eabff22;
+                        border-radius: 8px;
+                        padding: 8px 24px;
+                        box-shadow: 0px 0px 2px #fff;
+        
+                        .name{
+                            text-transform: uppercase;
+                            color: #868e96;
+                            margin-bottom: 4px;
+                            font-size: 10px;
+                        }
+        
+                        .value{
+                            color: white;
+        
+                            .label-blue{
+                                color: #339af0
+                            }
+                        }
+                    }
+                }
+        
+                .img-mark-16{
+                    width: 16px;
+                    height: 16px
+                }
+            }
+        }
+    }
+}

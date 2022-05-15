@@ -1,0 +1,100 @@
+@import "../../../global.scss";
+.fileContainer{
+    width: 350px;
+    border: 3px dashed #0eabff;
+    height: 260px;
+    padding: 4px;
+    border-radius: 10px;
+
+    @include mobile_potrait{
+        width: 90% !important;
+        height: 200px;
+        
+    }
+    @include mobile_landscape{
+        height: 260px;
+    }
+    .rbFileInput {
+        width: 100%;
+        cursor: pointer;
+        height: 100%;
+        display: flex;
+        position: relative;
+        align-items: center;
+        border-radius: 10px;
+        
+        justify-content: center;
+        .fa{
+            color: #0eabff;
+        }
+        .rbFile {
+            width: 100%;
+            height: 100%;
+            padding: 4px;
+            overflow: hidden;
+            position: absolute;
+            border-radius: 5px;
+            &:hover{
+                background-color: #222;
+                .video-change {
+                    color: #2178fa;
+                }
+            }
+            
+            .removeImg {
+                top: 12px;
+                color: #cccccc;
+                right: 12px;
+                position: absolute;
+                font-size: 38px;
+                line-height: 50%;
+            }
+            img{
+                width: 100%;
+                height: 100%;
+                opacity: 1;
+                object-fit: cover;
+                transition: opacity 400ms ease 0s;
+                border-radius: 10px;
+            }
+            .video-change {
+                color: white;
+                height: 50px;
+                font-size: 20px;
+                text-align: center;
+                line-height: 50px;
+            }
+        }
+        p {
+            display: block;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            color: white;
+            font-size: 14px;
+            margin: 0 0 10px;
+            max-width: 1280px;
+            text-align: left;
+        }
+        .text-label{
+            font-size: 18px;
+            margin-top: 15px;
+            font-weight: bold;
+            .text-danger {
+                color: #eb5757;
+                margin: 0px 3px;
+            }
+        }
+    }
+    label {
+        font-size: 14px;
+        line-height: 1.42857;
+        color: #aaaaaa;
+        font-weight: 400;
+    }
+}
+.w-h-160{
+    width: 160px;
+    height: 160px;
+}

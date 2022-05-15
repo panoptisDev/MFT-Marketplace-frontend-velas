@@ -1,0 +1,68 @@
+.settingContainer{
+	width: calc(100% - 250px);
+	margin-bottom: 15px;
+	.support{
+		*{
+			color :  #ffffff
+		}
+		h2, h1, h3, h4, h5{
+			font-weight :  bold
+		}
+	}
+	.helpItem{
+		border :  1px solid #0eabff;
+		border-bottom-width :  0;
+
+		.buttonText{
+			@media (max-width: 576px){
+				font-size: 12px !important;
+			}
+		}
+
+		.expand {
+			background :  none;
+			box-shadow :  none;
+			display :  block;
+			width :  calc(100% - 60px);
+			padding :  20px 30px;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			transition: all 0.3s ease;
+			cursor: pointer;
+			&:hover{
+				background :  #ffffff11;
+				box-shadow :  none;
+			}
+			&:focus{
+				background :  none;
+				box-shadow :  none;
+			}
+			.buttonText{
+				font-weight :  bold;
+				font-size :  140%;
+				overflow :  hidden;
+				text-overflow :  ellipsis;
+			}
+			span{
+				display :  flex;
+				justify-content: space-between;
+			}
+		}
+		.itemDesc{
+			padding: 0 10px 10px 30px;
+		}
+	}
+	.textBox{
+		border :  1px solid;
+		padding :  15px;
+		background :  #96bf964d;
+		margin :  0 30px 30px 30px;
+		display :  flex;
+		svg{
+			margin :  10px 10px 10px 0;
+			align-content:  center
+		}
+	}
+}

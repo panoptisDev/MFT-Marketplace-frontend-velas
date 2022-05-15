@@ -1,0 +1,33 @@
+.themeGroup {
+    display: flex;
+    .item {
+        border: 1px solid #e5e8eb;
+        border-radius: 10px;
+        cursor: pointer;
+        height: 100%;
+        padding: 12px 12px 20px;
+        text-align: center;
+        flex: 1;
+        margin: 0 6px 0 6px;
+        &:hover {
+            border: 1px solid #228be6;
+        }
+        div{
+            color: #fff;
+        }
+    }
+
+    .activeTheme {
+        border: 1px solid #228be6;
+        position: relative;
+        &::after{
+            content: " ";
+            width: 24px;
+            height: 24px;
+            background: url(verified.svg) 0 0/contain;
+            position: absolute;
+            top: -6px;
+            right: -6px;
+        }
+    }
+}

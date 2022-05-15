@@ -1,0 +1,99 @@
+@import "../../../global.scss";
+.settingContainer{
+	width: calc(100% - 250px);
+	margin-bottom: 15px;
+	@include mobile_potrait{
+		width: 90%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+	@include mobile_landscape{
+		width: 90%;
+	}
+	h2{
+		@include mobile_potrait{
+			font-size: 2rem;
+		}
+		@include mobile_landscape{
+			font-size: 2rem;
+		}
+	}
+		*{
+			color: #ffffff;
+		}
+		h2, h1, h3, h4, h5{
+			font-weight: bold;
+		}
+		
+	p{
+		margin-bottom: 1rem;
+	}
+	.smallHead{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin: 30px 0;
+		@include mobile_potrait{
+			width: 100%;
+			flex-direction: column;
+		}
+		@include mobile_landscape{
+			font-size: 2rem;
+		}
+	}
+	.verify{
+		padding: 20px;
+		.main{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 1rem;
+			svg{
+				font-size: 60px;
+				@include mobile_potrait{
+					font-size: 30px;
+				}
+				@include mobile_landscape{
+					font-size: 30px;
+				}
+			}
+			&>div{
+				margin: 0 20px;
+				flex: 1;
+				h4{
+					margin: 0;
+					font-weight: normal;
+					@include mobile_potrait{
+						font-size: 12px;
+					}
+					@include mobile_landscape{
+						font-size: 12px;
+					}
+				}
+				span{
+					@include mobile_potrait{
+						font-size: 10px;
+					}
+					@include mobile_landscape{
+						font-size: 10px;
+					}
+				}
+			}
+			
+		}
+		ul{
+			li{
+				font-weight: normal;
+				margin-bottom: 0.5rem;
+				@include mobile_potrait{
+					font-size: 12px;
+				}
+				@include mobile_landscape{
+					font-size: 12px;
+				}
+			}
+		}
+	}
+}

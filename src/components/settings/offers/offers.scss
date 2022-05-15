@@ -1,0 +1,54 @@
+@import "../../../global.scss";
+.settingContainer{
+	width: calc(100% - 250px);
+	* {
+		color: #ffffff;
+	}
+	p{
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		width: 100%;
+		svg{
+			margin-left: 0.5rem;
+			cursor: pointer;
+		}
+		@include mobile_potrait{
+			font-size: 12px;
+		}
+		@include mobile_landscape{
+			font-size: 12px;
+		}
+	}
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		@include mobile_potrait{
+			width: 100%;
+		}
+		@include mobile_landscape{
+			width: 100%;
+		}
+		h2 {
+			font-weight: bold;
+			margin: 0;
+			@include mobile_potrait{
+				font-size: 1.5rem !important;
+			}
+			@include mobile_landscape{
+				font-size: 2rem;
+			}
+		}
+	}
+
+	.noOffers {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		border: 1px solid #0eabff;
+		padding: 100px 16px;
+		border-radius: 6px;
+	}
+}
+	
