@@ -15,6 +15,7 @@ import Dropdown from "components/dropdown/Dropdown";
 import { useWeb3React } from '@web3-react/core';
 import { getIpfsHash, getIpfsHashFromFile } from 'utils/ipfs';
 import toast from "react-hot-toast";
+import { createNewCollection } from "utils/contracts";
 
 const options = [
 	{ value: "ethereum", label: "Ethereum", customAbbreviation: "an open-source blockchain that powers most NFT sails" },
@@ -27,8 +28,8 @@ export default function CreateCollection() {
 	const [ FeaturedImg, setFeaturedImg ] = useState<any>("");
 	const [ BannerImg, setBannerImg ] = useState<any>("");
 	const [ name, setName ] = useState("");
-	const [ url, setUrl ] = useState("https://opensea.io/collection/");
 	const [ description, setDescription ] = useState("");
+    const [ category, setCategory] = useState("");
 	const [ yourSite, setYourSite ] = useState("");
 	const [ discord, setDiscord ] = useState("https://discord.gg/");
 	const [ instagram, setInstagram ] = useState("https://www.instagram.com/");
@@ -64,14 +65,11 @@ export default function CreateCollection() {
 	const nameHandle = (e) => {
 		setName(e.target.value);
 	}
-	const urlHandle = (e) => {
-		setUrl(e.target.value);
-	}
 	const descriptionHandle = (e) => {
 		setDescription(e.target.text);
 	}
 	const categoryHandle = (value) => {
-		setDescription(value);
+		setCategory(value);
 	}
 	const feeHandle = (e) => {
 		setFee(e.target.value);
@@ -100,7 +98,6 @@ export default function CreateCollection() {
             toast.error('Please connect your wallet correctly!');
             return;
         }
-
         if (!logo){
             toast.error("Logo Image is required!");
             return;
@@ -109,7 +106,38 @@ export default function CreateCollection() {
             toast.error("Collection Name is required");
             return;
         }
+        const load_toast_id = toast.loading("Please wait...");
+        try{
+            // let logo_hash = await getIpfsHashFromFile(logo);
+            // let banner_hash;
+            // if (BannerImg !== "") banner_hash = await getIpfsHashFromFile(BannerImg);
+            // let featuredImg_hash;
+            // if (FeaturedImg !== "") featuredImg_hash = await getIpfsHashFromFile(FeaturedImg);
+            // let metaData = {
+            //     logo_uri : `https://boatsail_testing.mypinata.cloud/ipfs/${logo_hash}`,
+            //     banner_uri : !banner_hash && `https://boatsail_testing.mypinata.cloud/ipfs/${banner_hash}`,
+            //     featured_uri : !featuredImg_hash && `https://boatsail_testing.mypinata.cloud/ipfs/${featuredImg_hash}`,
+            //     name : name,
+            //     description : description,
+            //     category : isExplicit ? category === "" ? ["sensitive"] : [category, "sensitive"] : [""],
+            //     social_my_link : yourSite,
+            //     social_discord_link : discord,
+            //     social_instagram_link : instagram,
+            //     social_medium_link : medium,
+            //     social_telegram_link : tme,
+            //     royalty : fee
+            // }
+            // const metaDataHash = await getIpfsHash(metaData);
+            // const tokenUri = `https://boatsail_testing.mypinata.cloud/ipfs/${metaDataHash}`;
+            // console.log(tokenUri);
+            let collectionAddress = await createNewCollection(name, "https://boatsail_testing.mypinata.cloud/ipfs/QmdcLYFCTFiCBkE8ocvuXDtLnaZ1yhpdRa8SbDjA9Ft1cv", true, chainId,library.getSigner());
+            console.log(collectionAddress);
+            toast.dismiss(load_toast_id);
 
+        }catch(err){
+            console.log(err);
+            toast.error("NFT Collection Creation is failed!")
+        }
     }
   return (
     <div className='createCollectionContainer'>
@@ -153,12 +181,6 @@ export default function CreateCollection() {
         <div className={'formControl'}>
             <h4><strong>Name</strong><span style={{ color: 'red' }}>*</span></h4>
             <input className={'textInput'} type="text" onChange={nameHandle} value={name} placeholder={'Example: Treasures of the Sea'} required />
-        </div>
-
-        <div className={'formControl'}>
-            <h4><strong>URL</strong></h4>
-            <p>Customize your URL on OpenSea. Must only contain lowercase letters,numbers, and hyphens.</p>
-            <input className={'textInput'} type="text" onChange={urlHandle} placeholder={'Example: Treasures of the Sea'} value={url} required />
         </div>
 
         <div className={'formControl'}>
@@ -223,7 +245,7 @@ export default function CreateCollection() {
             <input className={'textInput'} type="text" onChange={feeHandle} value={fee} placeholder={'e.g. 2.5'} required />
         </div>
 
-        <div className={'formControl'}>
+        {/* <div className={'formControl'}>
             <h4><strong>Blockchain</strong></h4>
             <p>Select the blockchain where you'd like new items from this collection to be added by default.</p>
             <Select
@@ -235,9 +257,9 @@ export default function CreateCollection() {
             />
         </div>
 
-        <PaymentTokens />
+        <PaymentTokens /> 
 
-        <Theme />
+        <Theme />*/}
 
         <div className={'formControl'}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>

@@ -95,27 +95,26 @@ export default function CreateItem() {
         const load_toast_id = toast.loading("Please wait...");
         try{
             let hash = await getIpfsHashFromFile(fileSrc);
-            const assetUrl = `https://gateway.pinata.cloud/ipfs/${hash}`;
+            const assetUrl = `https://boatsail_testing.mypinata.cloud/ipfs/${hash}`;
             let metaData = {
                 assetType : fileType,
                 assetUrl : assetUrl,
                 name : nameItem,
-                externalLink : externalLink,
                 description : description,
-                chainId : chain_Id,
+                external_link : externalLink,
                 properties : proData,
                 levels : lvlData,
                 stats : statsData,
-                isUnlockable : isUnlockable,
+                unlockable : isUnlockable,
                 lockContent : lockContent,
-                isSensitive : isSensitive,
-                supply : supply,
-                collectionAddress : selectedCollection.address
+                sensitive : isSensitive,
+                itemCollection : selectedCollection.address
             }
             setCreatingItem(true);   
             const metaDataHash = await getIpfsHash(metaData);
-            const tokenUri = `https://gateway.pinata.cloud/ipfs/${metaDataHash}`;
+            const tokenUri = `https://boatsail_testing.mypinata.cloud/ipfs/${metaDataHash}`;
             console.log(tokenUri);
+            toast.dismiss(load_toast_id);
             let tokenId = await addItem(selectedCollection, tokenUri, 0, chainId, library.getSigner());
             if (tokenId){
                 toast.success("NFT Product is created successfully");
@@ -344,7 +343,7 @@ export default function CreateItem() {
                 </div>
             </div>
             <div className="hline"></div>
-            <p className="text-label">Supply</p>
+            {/* <p className="text-label">Supply</p>
             <p className="display-flex">
                 The number of items that can be minted. No gas cost to you!
                 <Tooltip
@@ -358,9 +357,9 @@ export default function CreateItem() {
                     <ErrorOutline className="tooltip-icon" />
                 </Tooltip>
             </p>
-            <input className="bordered-input" placeholder="1" onChange={event => setSupply(event.target.value)} />
+            <input className="bordered-input" placeholder="1" onChange={event => setSupply(event.target.value)} /> */}
 
-            <p className="text-label">Blockchain</p>
+            {/* <p className="text-label">Blockchain</p>
             <Select
                 defaultValue={options[0]}
                 formatOptionLabel={FormatOptionLabel}
@@ -368,7 +367,7 @@ export default function CreateItem() {
                 instanceId='chainSelect'
                 className="select-gray"
                 onChange={(e) => setChainId(e.chainId)}
-            />
+            /> */}
 
             <p className="text-label display-flex">
                 Freeze metadata
