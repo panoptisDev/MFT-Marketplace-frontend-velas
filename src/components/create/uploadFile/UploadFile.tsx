@@ -29,6 +29,7 @@ export default function UploadFile({setFileSrc, setFileType} : PropsType) {
 
 		var files = e.target.files;
         const file = e.target.files[0]; 
+        setMainFile(file);
         var filesArray = [].slice.call(files);
         filesArray.forEach((e:any) => {
             if (e.name.search('avi') >= 0 || e.name.search('mpg') >= 0 || e.name.search('m4v') >= 0 || e.name.search('mp4') >=0){
@@ -40,12 +41,14 @@ export default function UploadFile({setFileSrc, setFileType} : PropsType) {
             if (e.name.search('mp3') >=0){
                 setFileType('audio')
                 setFileSrc(file)
+                showVideo(true);
+				showPreview(false);
             }
             if (e.name.search('png') >=0 || e.name.search('bmp') >=0 || e.name.search('gif') >=0 || e.name.search('jpg') >=0 || e.name.search('jpeg') >=0 || e.name.search('webp') >=0){
                 setFileType('image')
                 setFileSrc(file)
                 showVideo(false);
-				showPreview(true);
+				showPreview(false);
             }
         });
 	}
@@ -68,6 +71,7 @@ export default function UploadFile({setFileSrc, setFileType} : PropsType) {
 		e.preventDefault();
 		setPreviewImg("");
 	}
+    console.log(mainFile);
   return (
       <>
       <div className="fileContainer">
