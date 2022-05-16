@@ -1,4 +1,4 @@
-// import { useWeb3React } from '@web3-react/core';
+import { useWeb3React } from '@web3-react/core';
 import { useEffect, useState } from 'react';
 import { HashLink } from 'react-router-hash-link'
 import ConnectModal from '../connectModal/ConnectModal';
@@ -6,6 +6,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import './topbar.scss'
 import Button from 'components/customButtons/Button';
 import CustomDropdown from 'components/dropdown/CustomDropdown';
+import { truncateWalletString } from 'utils';
 
 type MenuType = {
     menuOpen?: boolean;
@@ -16,12 +17,12 @@ type MenuType = {
 export default function Topbar({ menuOpen, setMenuOpen, setIsLoading }: MenuType) {
     const [showConnectModal, setShowConnectModal] = useState(false);
 
-    // const [loginStatus, setLoginStatus] = useState(false);
-    // const { connector, library, chainId, account, active } = useWeb3React();
-    // useEffect(() => {
-    //     const isLoggedin = account && active && chainId === parseInt(process.env.REACT_APP_NETWORK_ID, 10);
-    //     setLoginStatus(isLoggedin);
-    // }, [connector, library, account, active, chainId]);
+    const [loginStatus, setLoginStatus] = useState(false);
+    const { connector, library, chainId, account, active } = useWeb3React();
+    useEffect(() => {
+        const isLoggedin = account && active && chainId === parseInt(process.env.REACT_APP_NETWORK_ID, 10);
+        setLoginStatus(isLoggedin);
+    }, [connector, library, account, active, chainId]);
 
     const [navId, setNavId] = useState('mint')
     const search = useLocation();
@@ -145,7 +146,7 @@ export default function Topbar({ menuOpen, setMenuOpen, setIsLoading }: MenuType
                 <Button 
                     className='outLineBtn'
                     children = {
-                        <span>CONNECT WALLET
+                        <span>{loginStatus ? truncateWalletString(account) : "CONNECT WALLET"}
                         </span>
                     }
                     onClick={() => {setShowConnectModal(true)}}

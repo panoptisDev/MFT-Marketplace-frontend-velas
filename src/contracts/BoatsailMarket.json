@@ -1,14 +1,45 @@
 [
     {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "_adminAddress",
-                "type": "address"
-            }
-        ],
+        "inputs": [],
         "stateMutability": "nonpayable",
         "type": "constructor"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "collection_address",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "uri",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "bool",
+                "name": "isPublic",
+                "type": "bool"
+            }
+        ],
+        "name": "CollectionCreated",
+        "type": "event"
     },
     {
         "anonymous": false,
@@ -46,6 +77,12 @@
             },
             {
                 "indexed": false,
+                "internalType": "address",
+                "name": "tokenAdr",
+                "type": "address"
+            },
+            {
+                "indexed": false,
                 "internalType": "uint256",
                 "name": "price",
                 "type": "uint256"
@@ -53,8 +90,20 @@
             {
                 "indexed": false,
                 "internalType": "address",
+                "name": "creator",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
                 "name": "owner",
                 "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "creatorFee",
+                "type": "uint256"
             }
         ],
         "name": "ItemListed",
@@ -77,25 +126,6 @@
             }
         ],
         "name": "OwnershipTransferred",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "id",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "price",
-                "type": "uint256"
-            }
-        ],
-        "name": "PriceUpdated",
         "type": "event"
     },
     {
@@ -130,6 +160,21 @@
                         "type": "address"
                     },
                     {
+                        "internalType": "address",
+                        "name": "creator",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "tokenAdr",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "creatorFee",
+                        "type": "uint256"
+                    },
+                    {
                         "internalType": "uint256",
                         "name": "price",
                         "type": "uint256"
@@ -141,7 +186,7 @@
                     }
                 ],
                 "indexed": false,
-                "internalType": "struct Market.Pair",
+                "internalType": "struct BoatsailMarket.Pair",
                 "name": "pair",
                 "type": "tuple"
             }
@@ -208,6 +253,35 @@
         "type": "function"
     },
     {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "_name",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_uri",
+                "type": "string"
+            },
+            {
+                "internalType": "bool",
+                "name": "bPublic",
+                "type": "bool"
+            }
+        ],
+        "name": "createCollection",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "collection",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "currentPairId",
         "outputs": [
@@ -250,6 +324,19 @@
         "inputs": [
             {
                 "internalType": "address",
+                "name": "_adminAddress",
+                "type": "address"
+            }
+        ],
+        "name": "initialize",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
                 "name": "_collection",
                 "type": "address"
             },
@@ -257,6 +344,11 @@
                 "internalType": "uint256",
                 "name": "_token_id",
                 "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "_tokenAdr",
+                "type": "address"
             },
             {
                 "internalType": "uint256",
@@ -347,6 +439,21 @@
                 "type": "address"
             },
             {
+                "internalType": "address",
+                "name": "creator",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "tokenAdr",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "creatorFee",
+                "type": "uint256"
+            },
+            {
                 "internalType": "uint256",
                 "name": "price",
                 "type": "uint256"
@@ -425,26 +532,21 @@
         "type": "function"
     },
     {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "_id",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_price",
-                "type": "uint256"
-            }
-        ],
-        "name": "updatePrice",
+        "inputs": [],
+        "name": "withdrawCoin",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "withdrawCoin",
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "tokenAddress",
+                "type": "address"
+            }
+        ],
+        "name": "withdrawToken",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"

@@ -13,6 +13,7 @@
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.2",
     "@mui/utils": "^5.4.4",
+    "@pinata/sdk": "^1.1.23",
     "@react-pdf-viewer/core": "^3.0.0",
     "@react-pdf-viewer/default-layout": "^3.0.0",
     "@testing-library/jest-dom": "^5.11.4",

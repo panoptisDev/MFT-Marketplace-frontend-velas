@@ -1,33 +1,44 @@
 import { useState } from 'react';
 import ReactPlayer from 'react-player';
 import './uploadFile.scss'
-
-export default function UploadFile() {
+type PropsType = {
+    setFileSrc(value:any):void
+    setFileType(value:any):void
+}
+export default function UploadFile({setFileSrc, setFileType} : PropsType) {
     // const classes = useStyles();
-	const [ mainFile, setMainFile ] = useState(null);
+    const [mainFile, setMainFile] = useState(null);
 	const [ previewImg, setPreviewImg ] = useState(null);
 	const [ isShowVideo, showVideo ] = useState(false);
 	const [isPlaying, setIsPlaying] = useState(true);
 	const [ isShowPreview, showPreview ] = useState(false);
 
-	const onChangeMainFile =(e) => {
-		if (e.target.files && e.target.files.length > 0) {
-			const type = e.target.files[0].type.split("/")[0];
-			if (type === "video") {
-				showVideo(true);
-				showPreview(true);
-			} else {
-				showVideo(false);
-				showPreview(false);
-			}
-			setMainFile(e.target.files[0]);
-		}
+	const onChangeMainFile =(e:any) => {
+		var files = e.target.files;
+        const file = e.target.files[0]; 
+        var filesArray = [].slice.call(files);
+        filesArray.forEach((e:any) => {
+            if (e.name.search('avi') >= 0 || e.name.search('mpg') >= 0 || e.name.search('m4v') >= 0 || e.name.search('mp4') >=0){
+                setFileType('video')
+                setFileSrc(file)
+            }
+            if (e.name.search('mp3') >=0){
+                setFileType('audio')
+                setFileSrc(file)
+            }
+            if (e.name.search('png') >=0 || e.name.search('bmp') >=0 || e.name.search('gif') >=0 || e.name.search('jpg') >=0 || e.name.search('jpeg') >=0 || e.name.search('webp') >=0){
+                setFileType('image')
+                setFileSrc(file)
+            }
+        });
 	}
 
 	const removeMainImage =(e) => {
 		e.preventDefault();
 		console.log(4705);
 		setMainFile("");
+        setFileType("");
+        setFileSrc(null);
         setIsPlaying(true);
 	}
     const onChangePreviewImg =(e) => {

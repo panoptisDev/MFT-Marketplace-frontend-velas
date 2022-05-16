@@ -1,10 +1,11 @@
-// import useAuth from 'hooks/useAuth';
+import useAuth from 'hooks/useAuth';
 import { useEffect, useState } from 'react';
 import './connectModal.scss'
+
 interface Props {
     showConnectModal: boolean,
     setShowConnectModal?: any
-    setIsLoading(value:boolean):void
+    setIsLoading(value: boolean): void
 }
 const ConnectModal: React.FC<Props> = ({
     showConnectModal,
@@ -12,25 +13,26 @@ const ConnectModal: React.FC<Props> = ({
     setIsLoading
 }) => {
 
-    // const { login } = useAuth();
+    const { login } = useAuth();
 
     const connectMetamask = () => {
-        // login(1);
+        login(1);
         setShowConnectModal(false);
     }
     const connectWalletConnector = () => {
-        // login(2);
+        login(2);
         setShowConnectModal(false);
     }
+    
     const [imgCount, setImgCount] = useState(0)
     useEffect(() => {
-        if(imgCount>=3 ){
+        if (imgCount >= 3) {
             setIsLoading(false)
         }
-    }, [imgCount, setIsLoading ]);
-    const onImgLoad=()=>{
+    }, [imgCount, setIsLoading]);
+    const onImgLoad = () => {
         setImgCount(imgCount + 1)
-        
+
     }
     return (
         <div className={showConnectModal === true ? "connectModal active" : "connectModal"}>
@@ -39,14 +41,14 @@ const ConnectModal: React.FC<Props> = ({
 
                     <h1 className="connectWalletTitle">Connect Wallet</h1>
                     <button className="connectModalCloseButton" onClick={() => { setShowConnectModal(false) }}><i className="fas fa-times"></i></button>
-                    
+
                 </div>
                 <div className="hline"></div>
                 <div className="connectWalletWrapper">
                     <div className="metaMask" onClick={connectMetamask}>
                         <div className="left">
                             <div className="icon">
-                                <img src="/assets/metamask.png" alt="" onLoad={onImgLoad}  />
+                                <img src="/assets/metamask.png" alt="" onLoad={onImgLoad} />
                             </div>
 
                         </div>
@@ -55,13 +57,13 @@ const ConnectModal: React.FC<Props> = ({
                     </div>
                     <div className="wallet" onClick={connectWalletConnector}>
                         <div className="left">
-                            <div className="icon"><img src="/assets/wallet-connect.png" alt="" onLoad={onImgLoad}  /></div>
+                            <div className="icon"><img src="/assets/wallet-connect.png" alt="" onLoad={onImgLoad} /></div>
                         </div>
                         <div className="middle"><h2>Wallet Connect</h2><p>Connect using mobile wallet</p></div>
                         <div className="right"><button><i className="fas fa-chevron-right"></i></button></div>
                     </div>
                 </div>
-                
+
             </div>
 
 
