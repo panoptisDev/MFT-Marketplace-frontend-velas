@@ -11,6 +11,7 @@ import { Dehaze, ErrorOutline } from '@material-ui/icons';
 import Button from 'components/customButtons/Button';
 import CustomDropdown from 'components/dropdown/CustomDropdown';
 import Card2 from 'components/cards/Card2';
+import './style.scss'
 export default function MyCollectionsPage( ) {
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(false);

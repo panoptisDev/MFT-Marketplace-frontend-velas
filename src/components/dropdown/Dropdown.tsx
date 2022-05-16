@@ -13,7 +13,7 @@ import Icon from "@material-ui/core/Icon";
 import Popper from "@material-ui/core/Popper";
 
 import Button from "components/customButtons/Button";
-
+import './customDropStyle.scss'
 
 export default function Dropdown(props) {
 	// const classes = useStyles();
@@ -64,7 +64,7 @@ export default function Dropdown(props) {
       break;
   }
   return (
-    <div>
+    <div className="topBarDropdown">
       <div>
 		  <Button
 			  aria-label="Notifications"
@@ -72,7 +72,7 @@ export default function Dropdown(props) {
 			  aria-haspopup="true"
 			  {...buttonProps}
 			  onClick={handleClick}
-              className = "dropdown"
+        className = "dropdownBtn"
 			  
 		  >
 			  {icon}
@@ -122,7 +122,7 @@ export default function Dropdown(props) {
             <Paper className="dropdown" style={
             	buttonProps.width
 				 ? {width: buttonProps.width, marginLeft: '0'}
-				 : {width: '250px', marginLeft: '0'}
+				 : {width: '150px', marginLeft: '0'}
             }>
               <ClickAwayListener onClickAway={handleCloseAway}>
                 <MenuList role="menu" className="menuList">

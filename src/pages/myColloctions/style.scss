@@ -75,10 +75,10 @@
                 }
             }
             .collectionContainer {
-                width: 100%;
+                width: 100% !important;
                 display: flex;
                 margin-top: 50px;
-
+                flex-direction: row;
                 @include mobile_potrait{
                     width: 90%;
                     flex-direction: column;

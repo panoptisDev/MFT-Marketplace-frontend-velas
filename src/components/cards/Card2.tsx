@@ -17,8 +17,8 @@ export default function Card2({
                     <br />
                     <strong>etect V3</strong>
                     <div>by you</div>
-                    <div style={{ margin: '25px 0' }}>Explore the etet V3 collection</div>
-                    <div style={{ marginBottom: '25px' }}>0 items</div>
+                    <div style={{ margin: '10px 0' }}>Explore the etet V3 collection</div>
+                    <div style={{ marginBottom: '10px' }}>0 items</div>
                 </div>
         </Link>
     </div>

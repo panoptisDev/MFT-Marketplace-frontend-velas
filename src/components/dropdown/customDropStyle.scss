@@ -5,6 +5,7 @@
         pointer-events: none;
     }
     div{
+        display: flex;
         .topBarDrop{
             @include mobile_potrait{
                 font-size: 10px;
@@ -46,20 +47,47 @@
             padding: 0px !important;
         }
     }
-    .dropdown {
+    .dropdownBtn {
         border-radius: 3px;
-       
         box-shadow: 0 2px 5px 0 #00000042;
         top: 100%;
-        z-index: 1000;
         min-width: 160px;
-        padding: 5px 0;
-        margin: 2px 0 0;
+        margin: 2px 5px 0;
         font-size: 14px;
         text-align: left;
         list-style: none;
         background-color: #00141f;
         border: 1px #0eabff33 solid;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include mobile_potrait{
+            font-size: 10px;
+            
+            
+        }
+        @include mobile_landscape{
+            font-size: 10px;
+            margin-left: 0.5rem !important;
+            min-width: 100px;
+        }
+    }
+    .dropdown {
+        border-radius: 3px;
+        box-shadow: 0 2px 5px 0 #00000042;
+        top: 100%;
+        z-index: 1000;
+        min-width: 160px;
+        padding: 5px 10px;
+        margin: 2px 5px 0;
+        font-size: 14px;
+        text-align: left;
+        list-style: none;
+        background-color: #00141f;
+        border: 1px #0eabff33 solid;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         @include mobile_potrait{
             font-size: 10px;
             
@@ -78,6 +106,39 @@
         justify-content: flex-start;
         flex-direction: column;
         padding: 3px;
+        .dropdownItem{
+            width: calc(100% - 20px);
+            font-size: 13px;
+            padding: 10px 10px;
+            margin: 0 0px;
+            border-radius: 2px;
+            position: relative;
+            transition: all 150ms linear;
+            display: block;
+            clear: both;
+            font-weight: 400;
+            height: fit-content;
+            color: #fff !important;
+            min-height: unset;
+            // background: transparent !important;
+            &:hover{
+                background-color: #0eabff;
+                color: #FFFFFF;
+            }
+            span{
+                display: none;
+            }
+            @include mobile_potrait{
+                font-size: 10px;
+                padding: 5px 10px;
+                margin: 0 0px;
+            }
+            @include mobile_landscape{
+                font-size: 10px;
+                padding: 5px 10px;
+                margin: 0 0px;
+            }
+        }
         .dropdownItem{
             width: calc(100% - 20px);
             font-size: 13px;
