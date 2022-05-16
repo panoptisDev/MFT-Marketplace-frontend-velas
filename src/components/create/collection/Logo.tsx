@@ -15,7 +15,7 @@ export default function Logo({ onChange }:PropsType) {
 	}
 	return (
 		<div className={'formControl'}>
-			<h4 className="requireHead"><strong>Logo image</strong></h4>
+			<h4 className="requireHead"><strong>Logo image</strong><span style={{ color: 'red' }}>*</span></h4>
 			<p>This image will also be used for navigation. 350 x 350 recommended.</p>
 			<label className="logoImgInput" htmlFor="logoInput">
 				<input type="file" id="logoInput" name="logoInput" accept="image/*" style={{ display: 'none' }} onChange={logoChange} />

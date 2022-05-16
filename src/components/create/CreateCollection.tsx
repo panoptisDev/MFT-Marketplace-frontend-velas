@@ -11,13 +11,19 @@ import Theme from "./collection/Theme";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import Dropdown from "components/dropdown/Dropdown";
+
+import { useWeb3React } from '@web3-react/core';
+import { getIpfsHash, getIpfsHashFromFile } from 'utils/ipfs';
+import toast from "react-hot-toast";
+
 const options = [
 	{ value: "ethereum", label: "Ethereum", customAbbreviation: "an open-source blockchain that powers most NFT sails" },
 	{ value: "polygon", label: "Polygon", customAbbreviation: "A fast gas-free blockchain experience that works with Ethereum" },
 ];
 export default function CreateCollection() {
     // const classes = useStyles();
-	// const [ logo, setLogo ] = useState("");
+	const [ logo, setLogo ] = useState("");
+    const { library, chainId, account } = useWeb3React();
 	const [ FeaturedImg, setFeaturedImg ] = useState<any>("");
 	const [ BannerImg, setBannerImg ] = useState<any>("");
 	const [ name, setName ] = useState("");
@@ -33,7 +39,7 @@ export default function CreateCollection() {
 	const [ isExplicit, setIsExplicit] = useState(false);
 	const logoChange = (e) => {
 		if (e.target.files && e.target.files.length > 0) {
-			// setLogo(e.target.files[0]);
+			setLogo(e.target.files[0]);
 		}
 	};
 	const FeaturedImgChange = (e) => {
@@ -88,6 +94,23 @@ export default function CreateCollection() {
 	// const blockchainHandle = (val) => {
 	// 	setBlockchain(val);
 	// }
+
+    async function onCreateCollection(){
+        if (!account || !library) {
+            toast.error('Please connect your wallet correctly!');
+            return;
+        }
+
+        if (!logo){
+            toast.error("Logo Image is required!");
+            return;
+        }
+        if (!name){
+            toast.error("Collection Name is required");
+            return;
+        }
+
+    }
   return (
     <div className='createCollectionContainer'>
         <p><span style={{ color: 'red' }}>*</span> Required fields</p>
@@ -128,7 +151,7 @@ export default function CreateCollection() {
         </div>
 
         <div className={'formControl'}>
-            <h4><strong>Name</strong></h4>
+            <h4><strong>Name</strong><span style={{ color: 'red' }}>*</span></h4>
             <input className={'textInput'} type="text" onChange={nameHandle} value={name} placeholder={'Example: Treasures of the Sea'} required />
         </div>
 
@@ -161,12 +184,6 @@ export default function CreateCollection() {
                     "Art",
                     { divider: true },
                     "Collectibles",
-                    { divider: true },
-                    "Something else here",
-                    { divider: true },
-                    "Separated link",
-                    { divider: true },
-                    "One more separated link",
                     { divider: true },
                 ]}
             />
@@ -265,7 +282,7 @@ export default function CreateCollection() {
             </div>
         </div>
 
-        <Button className="outLineBtn" ><strong>Create</strong></Button>
+        <Button className="outLineBtn" onClick={() => onCreateCollection()} ><strong>Create</strong></Button>
     </div>
   )
 }
