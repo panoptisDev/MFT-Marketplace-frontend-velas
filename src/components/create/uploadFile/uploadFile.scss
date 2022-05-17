@@ -48,6 +48,11 @@
                 position: absolute;
                 font-size: 38px;
                 line-height: 50%;
+                transition: all 0.3s ease ;
+                z-index: 1;
+                &:hover{
+                    color: #fff;
+                }
             }
             img{
                 width: 100%;
