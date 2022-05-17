@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 import { useWeb3React } from '@web3-react/core';
 import { getIpfsHash, getIpfsHashFromFile } from 'utils/ipfs';
 import { addItem } from "utils/contracts";
+import API from "utils/api";
 
 
 const options = [
@@ -56,11 +57,11 @@ export default function CreateItem() {
     }, [selectedCollection]);
 
     function fetchCollections() {
-        axios.get(`/api/collection`)
-            .then((res) => {
-                console.log("res: ", res);
-                setCollections(res.data.collections);
-                res.data.collections.forEach((item, i) => {
+        API.get(`/collection`)
+            .then(res => {
+                console.log("res: ", res["collections"]);
+                setCollections(res["collections"]);
+                res["collections"].forEach((item, i) => {
                     if (item.isPublic) {
                         setSelectedCollection(item);
                     }

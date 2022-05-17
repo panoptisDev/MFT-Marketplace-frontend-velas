@@ -108,29 +108,29 @@ export default function CreateCollection() {
         }
         const load_toast_id = toast.loading("Please wait...");
         try{
-            // let logo_hash = await getIpfsHashFromFile(logo);
-            // let banner_hash;
-            // if (BannerImg !== "") banner_hash = await getIpfsHashFromFile(BannerImg);
-            // let featuredImg_hash;
-            // if (FeaturedImg !== "") featuredImg_hash = await getIpfsHashFromFile(FeaturedImg);
-            // let metaData = {
-            //     logo_uri : `https://boatsail_testing.mypinata.cloud/ipfs/${logo_hash}`,
-            //     banner_uri : !banner_hash && `https://boatsail_testing.mypinata.cloud/ipfs/${banner_hash}`,
-            //     featured_uri : !featuredImg_hash && `https://boatsail_testing.mypinata.cloud/ipfs/${featuredImg_hash}`,
-            //     name : name,
-            //     description : description,
-            //     category : isExplicit ? category === "" ? ["sensitive"] : [category, "sensitive"] : [""],
-            //     social_my_link : yourSite,
-            //     social_discord_link : discord,
-            //     social_instagram_link : instagram,
-            //     social_medium_link : medium,
-            //     social_telegram_link : tme,
-            //     royalty : fee
-            // }
-            // const metaDataHash = await getIpfsHash(metaData);
-            // const tokenUri = `https://boatsail_testing.mypinata.cloud/ipfs/${metaDataHash}`;
-            // console.log(tokenUri);
-            let collectionAddress = await createNewCollection(name, "https://boatsail_testing.mypinata.cloud/ipfs/QmdcLYFCTFiCBkE8ocvuXDtLnaZ1yhpdRa8SbDjA9Ft1cv", true, chainId,library.getSigner());
+            let logo_hash = await getIpfsHashFromFile(logo);
+            let banner_hash;
+            if (BannerImg !== "") banner_hash = await getIpfsHashFromFile(BannerImg);
+            let featuredImg_hash;
+            if (FeaturedImg !== "") featuredImg_hash = await getIpfsHashFromFile(FeaturedImg);
+            let metaData = {
+                logo_uri : `https://boatsail_testing.mypinata.cloud/ipfs/${logo_hash}`,
+                banner_uri : banner_hash ? `https://boatsail_testing.mypinata.cloud/ipfs/${banner_hash}` : "",
+                featured_uri : featuredImg_hash ? `https://boatsail_testing.mypinata.cloud/ipfs/${featuredImg_hash}` : "",
+                name : name,
+                description : description,
+                category : isExplicit ? category === "" ? ["sensitive"] : [category, "sensitive"] : [""],
+                social_my_link : yourSite,
+                social_discord_link : discord,
+                social_instagram_link : instagram,
+                social_medium_link : medium,
+                social_telegram_link : tme,
+                royalty : fee
+            }
+            const metaDataHash = await getIpfsHash(metaData);
+            const tokenUri = `https://boatsail_testing.mypinata.cloud/ipfs/${metaDataHash}`;
+            console.log(tokenUri);
+            let collectionAddress = await createNewCollection(name, tokenUri, true, chainId,library.getSigner());
             console.log(collectionAddress);
             toast.dismiss(load_toast_id);
 
