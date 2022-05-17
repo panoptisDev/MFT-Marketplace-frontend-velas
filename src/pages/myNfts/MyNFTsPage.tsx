@@ -1,4 +1,5 @@
 import { Block, Send, Storefront, VisibilityOff } from '@material-ui/icons';
+import { useWeb3React } from '@web3-react/core';
 import MyCollectionList from 'components/collectionList/MyCollectionList';
 import Button from 'components/customButtons/Button';
 import Loading from 'components/loading/Loading';
@@ -6,6 +7,7 @@ import Menu from 'components/menu/Menu';
 import Topbar from 'components/topbar/Topbar';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import API from 'utils/api';
 // import { useHistory } from 'react-router-dom';
 import './style.scss'
 export default function MyNFTsPage( ) {
@@ -17,6 +19,16 @@ export default function MyNFTsPage( ) {
     const [menuOpen, setMenuOpen] = useState(false);
     const isTabletOrMobile = useMediaQuery({query: "screen and (max-width: 450px) and (orientation:portrait)",});
     const isLandOrMobile = useMediaQuery({query: "screen and (max-height: 450px) and (orientation:landscape)",});
+
+	const { library, chainId, account } = useWeb3React();
+	const [ items,  setItems ] = useState<any>([])
+	useEffect(() => {
+		if (!account)API.getWithParams(`/item`, account)
+		.then(res =>{
+			setItems(res["items"]);
+		});		
+	}, [account]);
+
     useEffect(() => {
         if (isLoading || isTopLoading) {
             setLoadingHeight(100)
@@ -106,7 +118,7 @@ export default function MyNFTsPage( ) {
 							</li>
 						</ul>
 					</div>
-                    <MyCollectionList  handleCommand={handleCommand}/>
+                    <MyCollectionList  items={items}/>
                     {
 				isShowSubMenu &&
 				<div className="transferBox">

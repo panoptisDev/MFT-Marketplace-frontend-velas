@@ -147,7 +147,7 @@ const ProfileTabBody = (props) => {
 						<div className="clear-btn" onClick={removeAllConditions}>Clear All</div>
 					</div>
 				}
-				{(props.tab === "collection" || props.tab === "created" || props.tab === "created_collection"
+				{/* {(props.tab === "collection" || props.tab === "created" || props.tab === "created_collection"
 					|| props.tab === "hidden") &&
                     <MyCollectionList  handleCommand={handleCommand}/>
 					// <CollectionList handleCommand={handleCommand} handleClickItem={handleClickItem}
@@ -157,7 +157,7 @@ const ProfileTabBody = (props) => {
 					<MyCollectionList handleCommand={handleCommand}/>
 					// <MyNFTsList handleCommand={handleCommand} handleClickItem={handleClickItem}
 					// 			selectedList={selectedList} isDoingCommand={false} hasAction={false} />
-				}
+				} */}
 				{props.tab === "activity" &&
 					<ActivitiesTable />
 				}

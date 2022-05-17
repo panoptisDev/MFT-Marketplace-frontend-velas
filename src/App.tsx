@@ -15,6 +15,7 @@ import SettingsPage from 'pages/settings/SettingsPage';
 import UnTitledCollection from 'pages/colloctions/unTitledCollection/UnTitledCollection';
 import VelasPage from 'pages/velas/VelasPage';
 import VelasClubPage from 'pages/velas/vleasClub/VelasClubPage';
+import DetailPage from 'pages/itemDetail/ItemDetailPage';
 function App() {
   useEagerConnect();
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route exact path="/velas/velas-apes-club" component={VelasPage} />
         <Route exact path="/velas/velas-apes-club" component={VelasPage} />
         <Route exact path="/velas/velas-apes-club/215" component={VelasClubPage} />
+        <Route exact path="/itemdetail" component={DetailPage} />
       </Switch>
     </Router>
   );

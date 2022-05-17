@@ -22,6 +22,20 @@ class API {
         });
     }
 
+    public getWithParams = (path: string, params:any) => {
+        return new Promise((resole, reject) => {
+            axios.get(path, {params : params})
+                .then(function (response) {
+                    //console.log(response.data, response.status, response.statusText);
+                    response.status === 200 ? resole(response.data) : reject(new Error(response.statusText));
+                })
+                .catch(function (error) {
+                    //console.log(error);
+                    reject(error);
+                });
+        });
+    }
+
     public post = (path: string, data: any) => {
         return new Promise((resole, reject) => {
             axios.post(path, data)

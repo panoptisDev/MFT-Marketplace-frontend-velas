@@ -1,19 +1,16 @@
 import Card1 from 'components/cards/Card1';
 import './collectionList.scss'
 type CollectionType = {
-    posY?:number
+    collections?:[]
 }
-export default function CollectionList({posY}:CollectionType) {
- 
+export default function CollectionList({collections}:CollectionType) {
     return (
         <div className="collectionList" id = "sneak">
-            <Card1 link = {"/velas/velas-apes-club/"}/>
-            <Card1 link = {"/velas/velas-apes-club/"}/>
-            <Card1 link = {"/velas/velas-apes-club/"}/>
-            <Card1 link = {"/velas/velas-apes-club/"}/>
-            <Card1 link = {"/velas/velas-apes-club/"}/>
-            <Card1 link = {"/velas/velas-apes-club/"}/>
-            <Card1 link = {"/velas/velas-apes-club/"}/>
+            {
+                collections.map((collection) => {
+                    return <Card1 collection={collection}/>
+                })
+            }            
         </div>
     )
 }

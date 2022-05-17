@@ -4,16 +4,12 @@ import { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import './card.scss'
 type CardProps = {
-	tokenID ? : string
-	link ?: string
-	handleClickCommand ? :(type : string, token : string)=>void
+	item?:any
 }
 
 export default function Card3(
 		{
-			handleClickCommand, 
-			tokenID,
-			link
+			item
 		}:CardProps) {
 
   const [anchorElTop, setAnchorElTop] = useState(null);
@@ -23,22 +19,20 @@ export default function Card3(
 	}
 	const router = useHistory();
 	const gotToPage = (url:string)=>{
-		router.push(url)
+		//router.push(url)
 	}
   return (
     <div className='card'>
-      <div className="imgContainer" onClick={()=>{gotToPage(link)}}>
-      <img src="https://m.raregems.io/c/21725?optimizer=image&amp;width=400" alt="" className="nft" />
-        
+      <div className="imgContainer" onClick={()=>{gotToPage(item.address)}}>
+      	<img src={item.assetUrl} alt="" className="nft" />
       </div>
-      <h4>code ID</h4>
-      <h4> <img src="/assets/img/logos/velas.svg" alt="" />  velas</h4>
-      <h3>Name of project</h3>
+      <h4>{item.name}</h4>
+      <h3>{item.description}</h3>
 
 	  <div className="moreActionBox" onClick={showMoreActions}>
 			<MoreVert />
 		</div>
-      <Popover
+      {/* <Popover
 		classes={{
 			paper: "popover",
 		}}
@@ -88,7 +82,7 @@ export default function Card3(
 				</div>
 			</div>
 		</div>
-	</Popover>
+	</Popover> */}
     </div>
   )
 }

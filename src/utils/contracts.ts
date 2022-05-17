@@ -16,7 +16,7 @@ export async function addItem(collection, uri, royalty, chainId, provider) {
     const collectionContract = getCollectionContract(collection, chainId, provider);
     const BoatsailNFTContractInfo = getContractInfo('BoatsailNFT', chainId);
     try {
-        const tx = await collectionContract.addItem(uri,royalty)
+        const tx = await collectionContract.mintTo(uri,royalty)
         const receipt = await tx.wait(2);
         if(receipt.confirmations) {
             const interf = new ethers.utils.Interface(BoatsailNFTContractInfo.abi);

@@ -12,7 +12,7 @@ export const CONTRACTS_BY_NETWORK = {
       abi: BoatsailNFTAbI,
     },
     BoatsailMarket: {
-      address: '0xbdd7EEa1952Fb1eA375314E076D06E9D6F93154F',
+      address: '0x1a0879f5fec6ec8d67d41a608bd6fb083cdfad5c',
       abi: BoatsailMarketAbI,
     },
     BoatsailAuction: {

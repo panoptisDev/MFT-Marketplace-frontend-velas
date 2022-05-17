@@ -59,7 +59,6 @@ export default function CreateItem() {
     function fetchCollections() {
         API.get(`/collection`)
             .then(res => {
-                console.log("res: ", res["collections"]);
                 setCollections(res["collections"]);
                 res["collections"].forEach((item, i) => {
                     if (item.isPublic) {
@@ -116,10 +115,10 @@ export default function CreateItem() {
             const tokenUri = `https://boatsail_testing.mypinata.cloud/ipfs/${metaDataHash}`;
             console.log(tokenUri);
             toast.dismiss(load_toast_id);
-            let tokenId = await addItem(selectedCollection, tokenUri, 0, chainId, library.getSigner());
+            let tokenId = await addItem(selectedCollection.address, tokenUri, 0, chainId, library.getSigner());
             if (tokenId){
                 toast.success("NFT Product is created successfully");
-                await axios.get(`/api/sync_block`);
+                await axios.get(`/sync_block`);
                 history.push("/")
                 setCreatingItem(false);
             }

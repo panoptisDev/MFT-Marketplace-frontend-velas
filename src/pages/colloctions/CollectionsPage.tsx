@@ -7,6 +7,7 @@ import { useMediaQuery } from 'react-responsive';
 import Filter from 'components/filter/Filter';
 import './style.scss'
 import CollectionList from 'components/collectionList/CollectionList';
+import API from 'utils/api';
 export default function CollectionsPage( ) {
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(false);
@@ -37,6 +38,19 @@ export default function CollectionsPage( ) {
 
     };
 
+    const [collections, setCollections] = useState<any>([]);
+    useEffect(() => {
+        API.get(`/collection`)
+            .then(res => {
+                setCollections(res["collections"]);
+            })
+            .catch((err) => {
+                console.log("err: ", err.message);
+                setCollections([]);
+            });
+    });
+
+
     return (
         <>
             <Topbar menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
@@ -54,7 +68,7 @@ export default function CollectionsPage( ) {
                             <ul className="stats">
                                 <li>
                                     <div className="name">Collections</div>
-                                    <div className="value">190</div>
+                                    <div className="value">{collections.length}</div>
                                 </li>
                                 <li>
                                     <div className="name">Tokens</div>
@@ -66,7 +80,7 @@ export default function CollectionsPage( ) {
                                 </li>
                             </ul>
                         </div>
-                        <CollectionList/>
+                        <CollectionList collections={collections}/>
                     </div>
                 </div>
                 <img src="assets/home_bg.jpg" alt="" className="bg1" />

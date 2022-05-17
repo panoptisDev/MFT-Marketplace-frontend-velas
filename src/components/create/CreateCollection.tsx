@@ -129,9 +129,7 @@ export default function CreateCollection() {
             }
             const metaDataHash = await getIpfsHash(metaData);
             const tokenUri = `https://boatsail_testing.mypinata.cloud/ipfs/${metaDataHash}`;
-            console.log(tokenUri);
             let collectionAddress = await createNewCollection(name, tokenUri, true, chainId,library.getSigner());
-            console.log(collectionAddress);
             toast.dismiss(load_toast_id);
 
         }catch(err){
