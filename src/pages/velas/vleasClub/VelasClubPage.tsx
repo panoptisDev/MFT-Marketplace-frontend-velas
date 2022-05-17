@@ -6,7 +6,12 @@ import { useMediaQuery } from 'react-responsive';
 
 import './style.scss'
 import ItemDetail from 'components/itemDetail/ItemDetail';
-export default function VelasClubPage( ) {
+type propsType = {
+    getUser : any,
+    user : any,
+    login : any,
+}
+export default function VelasClubPage({getUser, user, login} : propsType) {
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(false);
     const [sectionHeight, setSectionHeight] = useState("0vh");

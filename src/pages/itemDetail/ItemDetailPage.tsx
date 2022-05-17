@@ -8,7 +8,12 @@ import { useMediaQuery } from 'react-responsive';
 import Filter from 'components/filter/Filter';
 import './style.scss'
 import CollectionList from 'components/collectionList/CollectionList';
-export default function ItemDetailPage( ) {
+type propsType = {
+    getUser : any,
+    user : any,
+    login : any,
+}
+export default function ItemDetailPage({getUser, user, login} : propsType) {
     const [isLoading, setIsLoading] = useState(true);
     const [isTopLoading, setIsTopLoading] = useState(true);
     const [sectionHeight, setSectionHeight] = useState("0vh");

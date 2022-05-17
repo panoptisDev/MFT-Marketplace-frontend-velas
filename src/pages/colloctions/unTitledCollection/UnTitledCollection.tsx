@@ -10,7 +10,12 @@ import Loading from "components/loading/Loading";
 import { useMediaQuery } from "react-responsive";
 import Menu from "components/menu/Menu";
 import ProfileTabBody from "components/profile/tabBody/ProfileTabBody";
-export default function UnTitledCollectionPage({userInfo}) {
+type propsType = {
+    getUser : any,
+    user : any,
+    login : any,
+}
+export default function UnTitledCollectionPage({getUser, user, login} : propsType) {
 
 	// const router = useHistory();
 

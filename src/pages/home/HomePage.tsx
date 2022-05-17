@@ -5,7 +5,12 @@ import Topbar from 'components/topbar/Topbar';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import './style.scss'
-export default function HomePage( ) {
+type propsType = {
+    getUser : any,
+    user : any,
+    login : any,
+}
+export default function HomePage({getUser, user, login} : propsType) {
     const [isLoading, setIsLoading] = useState(true);
     const [isTopLoading, setIsTopLoading] = useState(true);
     const [sectionHeight, setSectionHeight] = useState("0vh");

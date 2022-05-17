@@ -17,12 +17,6 @@ import toast from "react-hot-toast";
 import { useWeb3React } from '@web3-react/core';
 import { getIpfsHash, getIpfsHashFromFile } from 'utils/ipfs';
 import { addItem } from "utils/contracts";
-import API from "utils/api";
-
-
-const options = [
-    { value: "ethereum", chainId: 4, label: "Ethereum", customAbbreviation: "an open-source blockchain that powers most NFT sails" }
-];
 
 export default function CreateItem() {
     const history = useHistory();
@@ -57,10 +51,10 @@ export default function CreateItem() {
     }, [selectedCollection]);
 
     function fetchCollections() {
-        API.get(`/collection`)
+        axios.get(`/collection`)
             .then(res => {
-                setCollections(res["collections"]);
-                res["collections"].forEach((item, i) => {
+                setCollections(res.data.collections);
+                res.data.collections.forEach((item, i) => {
                     if (item.isPublic) {
                         setSelectedCollection(item);
                     }

@@ -1,11 +1,15 @@
+import './profile.scss'
 import { useState } from "react";
-
 //components
 import {Instagram, Language, Twitter, FileCopy, LibraryAddCheck} from '@material-ui/icons';
 
-
 import Button from "components/customButtons/Button";
-import './profile.scss'
+
+import { useWeb3React } from "@web3-react/core";
+import toast from "react-hot-toast";
+import { getIpfsHashFromFile } from "utils/ipfs";
+import axios from 'axios';
+
 export default function Profile() {
 
 	const [ name, setName ] = useState("");
@@ -13,10 +17,15 @@ export default function Profile() {
 	const [ email, setEmail ] = useState("");
 	const [ site, setSite ] = useState("");
 	const [ instagram, setInstagram ] = useState("");
-	const wallet = "0x2c7af865dc845ccca1b3d4f64229811d498cbfba";
+	const [ twitter, setTwitter ] = useState("");
 	const [ avatar, setAvatar ] = useState(null);
-	const [ BannerImg, setBannerImg ] = useState(null);
+	const [ banner, setBanner ] = useState(null);
 	const [ copied, setCopied ] = useState(false);
+	const [ update, setUpdating ] = useState(false);
+
+	const { library, chainId, account } = useWeb3React();
+	//useEffect(() => {},[account, library])
+
 	const avatarHandle = (e) => {
 		if (e.target.files && e.target.files.length > 0) {
 			setAvatar(e.target.files[0]);
@@ -24,7 +33,7 @@ export default function Profile() {
 	}
 	const BannerImgChange = (e) => {
 		if (e.target.files && e.target.files.length > 0) {
-			setBannerImg(e.target.files[0]);
+			setBanner(e.target.files[0]);
 		}
 	};
 	const nameHandle = (e) => {
@@ -42,9 +51,14 @@ export default function Profile() {
 	const instagramHandle = (e) => {
 		setInstagram(e.target.value);
 	}
-
+	const twitterHandle = (e) => {
+		setTwitter(e.target.value);
+	}
+	const removeLogo = () => {
+		setAvatar('');
+	};
 	const removeBanner = () => {
-		setBannerImg('');
+		setBanner('');
 	};
 	const copyHandle = () => {
 
@@ -56,7 +70,7 @@ export default function Profile() {
 		}
 		else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
 			let textarea = document.createElement("textarea");
-			textarea.textContent = wallet;
+			textarea.textContent = account;
 			textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in Microsoft Edge.
 			document.body.appendChild(textarea);
 			textarea.select();
@@ -73,6 +87,53 @@ export default function Profile() {
 			}
 		}
 	};
+
+	async function onSave(){
+		if (!account || !library){
+			toast.error("Please connect to your wallet");
+			return;
+		}
+		setUpdating(true);
+		let load_toast_id = toast.loading("Please wait...");
+		let avatar_url = "";
+		if (avatar){
+			let avatar_hash = await getIpfsHashFromFile(avatar);
+			avatar_url = `https://boatsail_testing.mypinata.cloud/ipfs/${avatar_hash}`;
+		}
+		
+		let banner_url = "";
+		if (banner){
+			let banner_hash = await getIpfsHashFromFile(banner);
+			banner_url = `https://boatsail_testing.mypinata.cloud/ipfs/${banner_hash}`;
+		}
+		const data : any = {
+			address : account,
+			name : name || "NoName",
+			bio : bio || "",
+			email : email || "",
+			site_link : site || "",
+			social_twitter_link : twitter || "",
+			social_instagram_link : instagram || "",
+			//logo_url : avatar_url || "",
+			//bannerr_url : banner_url || "",
+			logo_url : "https://boatsail_testing.mypinata.cloud/ipfs/QmdkB2xajtJA9GmuqEpTuwTzpMLVj7Ym4YhToyp43DDCnv",
+			banner_url : "https://boatsail_testing.mypinata.cloud/ipfs/QmW6bqSEvgr4tFScBdkpQ2SjUuu2QSJ7WVdxfkN2AHGkYf"
+		}
+		axios.post("/user/update", data)
+			.then(res => {
+				setAvatar('');
+				setBanner('');
+				setUpdating(false);
+				toast.dismiss(load_toast_id);
+				toast.success("Profile is updated successfully.");
+			})
+			.catch(err => {
+				setUpdating(false);
+				toast.dismiss(load_toast_id);
+				toast.error("Profile Updating is failed.")
+			})
+
+	}
 
 	return (
 		<div className="settingContainer">
@@ -96,26 +157,18 @@ export default function Profile() {
 							<input className={'textInput'} type="email" onChange={emailHandle} value={email} placeholder={'Enter Email'} required />
 						</div>
 						<div className="formControl">
-							<h4><strong>Social Connections</strong></h4>
-							<p>Customize your URL on OpenSea. Must only contain lowercase letters,numbers, and hyphens.</p>
-							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-								<div style={{ display: 'flex', alignItems: 'center' }}>
-									<Twitter />
-									&nbsp;
-									<h4 className="mb0" >Twitter</h4>
-								</div>
-								<Button className="outLineBtn" ><strong>Connect</strong></Button>
-							</div>
-						</div>
-						<div className="formControl">
 							<h4><strong>Links</strong></h4>
 							<div style={{ background: '#353840' }}>
-								<div className={"linkInput"} style={{ borderRadius: '6px 6px 0 0' }}>
-									<Instagram />
-									<input type={"text"} onChange={siteHandle} value={site} placeholder={'your site url'} />
-								</div>
 								<div className={"linkInput"} style={{ borderRadius: '0 0 6px 6px', borderBottomWidth: '1px' }}>
 									<Language />
+									<input type={"text"} onChange={siteHandle} value={site} placeholder={'Your Site URL'} />
+								</div>
+								<div className={"linkInput"} style={{ borderRadius: '6px 6px 0 0' }}>
+									<Twitter />
+									<input type={"text"} onChange={twitterHandle} value={twitter} placeholder={'https://www.twitter.com/'} />
+								</div>
+								<div className={"linkInput"} style={{ borderRadius: '6px 6px 0 0' }}>
+									<Instagram />
 									<input type={"text"} onChange={instagramHandle} value={instagram} placeholder={'https://www.instagram.com/'} />
 								</div>
 							</div>
@@ -123,7 +176,7 @@ export default function Profile() {
 						<div className="formControl">
 							<h4><strong>Wallet Address</strong></h4>
 							<div className={'iconInput'}>
-								<input type="text" value={wallet} readOnly />
+								<input type="text" value={account} readOnly />
 								{
 									copied ? <LibraryAddCheck onClick={copyHandle} style={{ cursor: 'pointer' }} />
 										: <FileCopy onClick={copyHandle} style={{ cursor: 'pointer' }} />
@@ -149,18 +202,20 @@ export default function Profile() {
 							<div className="BannerImgInput">
 								<label htmlFor="BannerInput">
 									<input type="file" id="BannerInput" name="BannerInput" accept="image/*" style={{ display: 'none' }} onChange={BannerImgChange} />
-									{ !BannerImg ? <i className="fa fa-image" style={{ fontSize: '4.5em' }} /> :
+									{ !banner ? <i className="fa fa-image" style={{ fontSize: '4.5em' }} /> :
 										<i className="fa fa-image BannerImgIcon" /> }
-									{ BannerImg && <div className="BannerImg">
-										<img src={URL.createObjectURL(BannerImg)} width={160} height={160}alt = ''/>
+									{ banner && <div className="BannerImg">
+										<img src={URL.createObjectURL(banner)} width={160} height={160}alt = ''/>
 									</div> }
 								</label>
-								{ BannerImg && <span className={'removeImg'} onClick={ removeBanner }>&times;</span>  }
+								{ banner && <span className={'removeImg'} onClick={ removeBanner }>&times;</span>  }
 							</div>
 						</div>
 					</div>
 				</div>
-				<Button className="saveBtn outLineBtn"><strong>Save</strong></Button>
+				{
+					!update && <Button className="saveBtn outLineBtn" onClick={()=>onSave()}><strong>Save</strong></Button>
+				}
 			</form>
 		</div>
 	);

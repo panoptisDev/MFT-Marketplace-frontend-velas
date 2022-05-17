@@ -1,13 +1,6 @@
 import "@ethersproject/shims"
-import { BigNumber, Contract, ethers } from "ethers";
-import toast from "react-hot-toast";
-import { currentNetwork, getContractObj, getCollectionContract, getContractInfo } from ".";
-import { NFTMintEngineDetail, NFTTrainingEngineDetail, StakingEngineDetail, VotingEngineDetail } from "./typs";
-
-import FreeMap from "./FreeMap.json";
-import WhiteListMap from "./WhiteListMap.json";
-import { RPC_URLS } from "./connectors";
-import BoatsailMarketABI from 'contracts/BoatsailMarket.json'
+import { ethers } from "ethers";
+import { getContractObj, getCollectionContract, getContractInfo } from ".";
 
 /**
  * NFT Contract Management

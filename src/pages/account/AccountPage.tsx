@@ -10,7 +10,12 @@ import { Popover } from '@material-ui/core';
 import { Link, useHistory } from 'react-router-dom';
 import CopyBox from 'components/copyBox/CopyBox';
 import ProfileTagList from 'components/profile/tagList/ProfileTagList';
-export default function AccountPage( ) {
+type propsType = {
+    getUser : any,
+    user : any,
+    login : any,
+}
+export default function AccountPage({getUser, user, login} : propsType) {
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(false);
     const [sectionHeight, setSectionHeight] = useState("0vh");

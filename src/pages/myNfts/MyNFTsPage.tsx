@@ -7,10 +7,14 @@ import Menu from 'components/menu/Menu';
 import Topbar from 'components/topbar/Topbar';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import API from 'utils/api';
-// import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 import './style.scss'
-export default function MyNFTsPage( ) {
+type propsType = {
+    getUser : any,
+    user : any,
+    login : any,
+}
+export default function MyNFTsPage({getUser, user, login} : propsType) {
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(true);
     const [sectionHeight, setSectionHeight] = useState("0vh");
@@ -20,12 +24,13 @@ export default function MyNFTsPage( ) {
     const isTabletOrMobile = useMediaQuery({query: "screen and (max-width: 450px) and (orientation:portrait)",});
     const isLandOrMobile = useMediaQuery({query: "screen and (max-height: 450px) and (orientation:landscape)",});
 
-	const { library, chainId, account } = useWeb3React();
+	const { account } = useWeb3React();
 	const [ items,  setItems ] = useState<any>([])
 	useEffect(() => {
-		if (!account)API.getWithParams(`/item`, account)
+		if (account)axios.get(`/item`,{params : {owner : account}})
 		.then(res =>{
-			setItems(res["items"]);
+			console.log(res.data.items)
+			setItems(res.data.items);
 		});		
 	}, [account]);
 

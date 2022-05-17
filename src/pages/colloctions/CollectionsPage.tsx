@@ -7,8 +7,13 @@ import { useMediaQuery } from 'react-responsive';
 import Filter from 'components/filter/Filter';
 import './style.scss'
 import CollectionList from 'components/collectionList/CollectionList';
-import API from 'utils/api';
-export default function CollectionsPage( ) {
+import axios from 'axios';
+type propsType = {
+    getUser : any,
+    user : any,
+    login : any,
+}
+export default function CollectionsPage({getUser, user, login} : propsType) {
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(false);
     const [sectionHeight, setSectionHeight] = useState("0vh");
@@ -40,9 +45,9 @@ export default function CollectionsPage( ) {
 
     const [collections, setCollections] = useState<any>([]);
     useEffect(() => {
-        API.get(`/collection`)
+        axios.get(`/collection`)
             .then(res => {
-                setCollections(res["collections"]);
+                setCollections(res.data.collections);
             })
             .catch((err) => {
                 console.log("err: ", err.message);

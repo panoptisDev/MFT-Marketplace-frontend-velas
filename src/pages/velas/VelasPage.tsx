@@ -10,7 +10,12 @@ import VelasCollectionList from 'components/collectionList/VelasCollectionList';
 // import { useHistory } from 'react-router-dom';
 import CopyBox from 'components/copyBox/CopyBox';
 import { Language, Telegram, Twitter, Widgets } from '@material-ui/icons';
-export default function VelasPage( ) {
+type propsType = {
+    getUser : any,
+    user : any,
+    login : any,
+}
+export default function VelasPage({getUser, user, login} : propsType) {
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(false);
     const [sectionHeight, setSectionHeight] = useState("0vh");

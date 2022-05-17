@@ -7,6 +7,7 @@ import './topbar.scss'
 import Button from 'components/customButtons/Button';
 import CustomDropdown from 'components/dropdown/CustomDropdown';
 import { truncateWalletString } from 'utils';
+import useAuth from 'hooks/useAuth';
 
 type MenuType = {
     menuOpen?: boolean;
@@ -18,6 +19,7 @@ export default function Topbar({ menuOpen, setMenuOpen, setIsLoading }: MenuType
     const [showConnectModal, setShowConnectModal] = useState(false);
 
     const [loginStatus, setLoginStatus] = useState(false);
+    const { logout } = useAuth();
     const { connector, library, chainId, account, active } = useWeb3React();
     useEffect(() => {
         const isLoggedin = account && active && chainId === parseInt(process.env.REACT_APP_NETWORK_ID, 10);
@@ -56,8 +58,10 @@ export default function Topbar({ menuOpen, setMenuOpen, setIsLoading }: MenuType
 		} else if (url === "My Collections") {
 			const href = "/myCollections";
 			router.push(href)
-		}
-		// TODO Logout logic
+		} else if (url === "Log Out"){
+            logout();
+        }
+		
 	};
 
     return (

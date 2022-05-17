@@ -12,7 +12,14 @@ import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import './style.scss'
 import { useLocation } from 'react-router-dom';
-export default function SettingsPage( ) {
+
+type propsType = {
+    getUser : any,
+    user : any,
+    login : any,
+}
+
+export default function SettingsPage({getUser, user, login} : propsType) {
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(true);
     const [sectionHeight, setSectionHeight] = useState("0vh");
@@ -34,6 +41,7 @@ export default function SettingsPage( ) {
         if (!isLandOrMobile && !isTabletOrMobile) {
             setMenuOpen(false);
         }
+        console.log(JSON.stringify(user));
     }, [isLoading, isTabletOrMobile, isLandOrMobile,isTopLoading]);
 	
     // loading part
