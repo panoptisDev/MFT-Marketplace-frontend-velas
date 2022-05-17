@@ -7,14 +7,15 @@ type PropsType = {
 }
 export default function UploadFile({setFileSrc, setFileType} : PropsType) {
     // const classes = useStyles();
-    const [mainFile, setMainFile] = useState(null);
-	const [ previewImg, setPreviewImg ] = useState(null);
+    const [mainFile, setMainFile] = useState<any>(null);
+	const [ previewImg, setPreviewImg ] = useState<any>(null);
 	const [ isShowVideo, showVideo ] = useState(false);
 	const [isPlaying, setIsPlaying] = useState(true);
 	const [ isShowPreview, showPreview ] = useState(false);
 
 	const onChangeMainFile =(e:any) => {
-
+        // var files = e.target.files;
+        // console.log(files)
         // if (e.target.files && e.target.files.length > 0) {
 		// 	const type = e.target.files[0].type.split("/")[0];
 		// 	if (type === "video") {
@@ -24,33 +25,43 @@ export default function UploadFile({setFileSrc, setFileType} : PropsType) {
 		// 		showVideo(false);
 		// 		showPreview(false);
 		// 	}
+        //     if (type === "audio") {
+		// 		showVideo(true);
+		// 		showPreview(true);
+		// 	} else {
+		// 		showVideo(false);
+		// 		showPreview(false);
+		// 	}
 		// 	setMainFile(e.target.files[0]);
+        //     console.log(type)
 		// }
 
-		var files = e.target.files;
-        const file = e.target.files[0]; 
-        setMainFile(file);
-        var filesArray = [].slice.call(files);
-        filesArray.forEach((e:any) => {
-            if (e.name.search('avi') >= 0 || e.name.search('mpg') >= 0 || e.name.search('m4v') >= 0 || e.name.search('mp4') >=0){
-                setFileType('video')
-                setFileSrc(file)
-                showVideo(true);
-				showPreview(true);
-            }
-            if (e.name.search('mp3') >=0){
-                setFileType('audio')
-                setFileSrc(file)
-                showVideo(true);
-				showPreview(false);
-            }
-            if (e.name.search('png') >=0 || e.name.search('bmp') >=0 || e.name.search('gif') >=0 || e.name.search('jpg') >=0 || e.name.search('jpeg') >=0 || e.name.search('webp') >=0){
-                setFileType('image')
-                setFileSrc(file)
-                showVideo(false);
-				showPreview(false);
-            }
-        });
+		if (e.target.files && e.target.files.length > 0) {
+            var files = e.target.files;
+            const file = e.target.files[0]; 
+            setMainFile(file);
+            var filesArray = [].slice.call(files);
+            filesArray.forEach((e:any) => {
+                if (e.name.search('avi') >= 0 || e.name.search('mpg') >= 0 || e.name.search('m4v') >= 0 || e.name.search('mp4') >=0){
+                    setFileType('video')
+                    setFileSrc(file)
+                    showVideo(true);
+                    showPreview(true);
+                }
+                if (e.name.search('mp3') >=0){
+                    setFileType('audio')
+                    setFileSrc(file)
+                    showVideo(true);
+                    showPreview(false);
+                }
+                if (e.name.search('png') >=0 || e.name.search('bmp') >=0 || e.name.search('gif') >=0 || e.name.search('jpg') >=0 || e.name.search('jpeg') >=0 || e.name.search('webp') >=0){
+                    setFileType('image')
+                    setFileSrc(file)
+                    showVideo(false);
+                    showPreview(false);
+                }
+            });
+        }
 	}
 
 	const removeMainImage =(e) => {
@@ -71,7 +82,6 @@ export default function UploadFile({setFileSrc, setFileType} : PropsType) {
 		e.preventDefault();
 		setPreviewImg("");
 	}
-    console.log(mainFile);
   return (
       <>
       <div className="fileContainer">
