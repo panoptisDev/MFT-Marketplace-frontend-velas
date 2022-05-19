@@ -24,6 +24,7 @@ const useAuth = () => {
 
   const logout = useCallback(() => {
     deactivate()
+    window.localStorage.setItem(connectorLocalStorageKey, "");
   }, [deactivate])
 
   return { login, logout }

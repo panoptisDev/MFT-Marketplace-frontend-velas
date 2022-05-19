@@ -15,7 +15,6 @@ export function useEagerConnect() {
       const currentConnector = getConnector(connector)
       if (connector === "injectedConnector") {
         (currentConnector as InjectedConnector).isAuthorized().then((isAuthorized) => {
-          console.log("useEagerConnect:", { active, isAuthorized })
           if (isAuthorized) {            
             activate(currentConnector, undefined, true).catch((error) => {              
               if (error instanceof UnsupportedChainIdError) {

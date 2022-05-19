@@ -1,26 +1,23 @@
+import Button from 'components/customButtons/Button';
 import { Link } from 'react-router-dom'
 import './card.scss'
 
-type PropsType = {
-    href ?: string
-
-}
-export default function Card2({
-    href,
-}:PropsType) {
+const Card2 = (props) => {
+  const { collection } = props;
   return (
     <div className="collectionItem">
-        <Link to={href}>
-                <img src={'https://m.raregems.io/c/21725?optimizer=image&amp;width=400'} alt = ''/>
+        <Button >
+                <img src={collection && collection.banner_uri} alt = ''/>
                 <div className="collectionInfo">
-                    <img src={'/assets/img/faces/camp.jpg'}  alt = ''/>
+                    <img src={collection && collection.logo_uri}  alt = ''/>
                     <br />
-                    <strong>etect V3</strong>
-                    <div>by you</div>
-                    <div style={{ margin: '10px 0' }}>Explore the etet V3 collection</div>
-                    <div style={{ marginBottom: '10px' }}>0 items</div>
+                    <strong>{collection.name}</strong>
+                    <div></div>
+                    <div style={{ margin: '10px 0' }}>{collection.description}</div>
+                    <div style={{ marginBottom: '10px' }}>{collection.itemCount} items</div>
                 </div>
-        </Link>
+        </Button>
     </div>
   )
 }
+export default Card2;

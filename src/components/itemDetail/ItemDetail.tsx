@@ -6,9 +6,10 @@ import Button from "components/customButtons/Button";
 import { Link } from "react-router-dom";
 
 
-export default function ItemDetail() {
+const ItemDetail = (props) => {
+	const { item } = props;
 
-	const buyToken = (val:string) => {
+	const onBid = (val:string) => {
 		//	TODO do buy logic
 		return;
 	}
@@ -16,7 +17,7 @@ export default function ItemDetail() {
 	return (
 		<div className="imageDetail">
 			<div className="nftContainer">
-			<img src="https://m.raregems.io/c/21725?optimizer=image&amp;width=400" alt="icon"
+			<img src={item.assetUrl} alt="icon"
 						 className="detail-img" />
 			</div>
 			<div className="property-box">
@@ -27,8 +28,8 @@ export default function ItemDetail() {
 						</Link>
 						<ShareOutlined className="share-icon" />
 					</div>
-					<h2 className="billy-header">BILLY</h2>
-					<p className="billy-desc">A Common EnergyWeb DOGE NFT.</p>
+					<h2 className="billy-header">{item.name}</h2>
+					<p className="billy-desc">{item.description}</p>
 					<div className="hline"></div>
 					<ul className="attrs raw">
 						<li>
@@ -43,7 +44,7 @@ export default function ItemDetail() {
 						<li>
 							<div className="name">CONTRACT ADDR</div>
 							<div className="value text-white">
-								0xbf0e…B253
+								{item.owner}
 							</div>
 						</li>
 						<li>
@@ -55,19 +56,19 @@ export default function ItemDetail() {
 						<li>
 							<div className="name">TOKEN ID</div>
 							<div className="value text-white">
-								215
+								{item.tokenId}
 							</div>
 						</li>
 						<li>
 							<div className="name">OWNER</div>
 							<div className="value link-blue">
-								0xc501…776F
+								{item.owner}
 							</div>
 						</li>
 						<li>
 							<div className="name">EXTERNAL URL</div>
 							<div className="value link-blue inline-flex">
-								Link<LinkIcon />
+								{item.external_link}<LinkIcon />
 							</div>
 						</li>
 					</ul>
@@ -107,9 +108,9 @@ export default function ItemDetail() {
 					<div className="buy-div">
 						<Button
 							className="buyBtn"
-							onClick={()=>buyToken("injected")}
+							onClick={()=>onBid("injected")}
 						>
-							Buy for 11 EWT
+							Bid
 						</Button>
 					</div>
 				</div>
@@ -118,4 +119,4 @@ export default function ItemDetail() {
 	);
 }
 
-ItemDetail.propTypes = {};
+export default ItemDetail;

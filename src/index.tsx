@@ -14,14 +14,12 @@ function getLibrary(provider) {
 }
 
 ReactDOM.render(
-  <React.StrictMode>
     <Web3ReactProvider getLibrary={getLibrary}>
       <AuthProvider>
         <BrowserRouter>
           <App />
         </BrowserRouter>
       </AuthProvider>
-    </Web3ReactProvider>
-  </React.StrictMode>,
+    </Web3ReactProvider>,
   document.getElementById('root')
 );

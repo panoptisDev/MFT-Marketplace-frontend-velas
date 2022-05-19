@@ -3,6 +3,7 @@ import Menu from 'components/menu/Menu';
 import Topbar from 'components/topbar/Topbar';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import axios from 'axios';
 
 import { useWeb3React } from '@web3-react/core';
 import { useHistory } from 'react-router-dom';
@@ -13,11 +14,11 @@ import CustomDropdown from 'components/dropdown/CustomDropdown';
 import Card2 from 'components/cards/Card2';
 import './style.scss'
 type propsType = {
-    getUser : any,
-    user : any,
-    login : any,
+    user : any
 }
-export default function MyCollectionsPage({getUser, user, login} : propsType) {
+const MyCollectionsPage = (props) => {
+
+    const { user } = props;
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(false);
     const [sectionHeight, setSectionHeight] = useState("0vh");
@@ -59,6 +60,18 @@ export default function MyCollectionsPage({getUser, user, login} : propsType) {
         }
     }, [connector, library, account, active, chainId, loginStatus]);
 
+    const [ myCollections, setMyCollections ] = useState(undefined);
+    
+    useEffect(() => {
+        if (loginStatus && !myCollections){
+            axios.get(`/collection`, {params : {owner : account}})
+            .then(res => {
+                setMyCollections(res.data.collections);
+            });            
+        }
+    });
+
+
     const linkList = {
 		"Import an existing smart contract": 'https://studio.manifold.xyz/',
 		"Mint with Manifold Studio": 'https://studio.manifold.xyz/',
@@ -73,10 +86,13 @@ export default function MyCollectionsPage({getUser, user, login} : propsType) {
 		router.push(linkList[key]);
 	};
 
+    const onCreateCollection = () => {
+		router.push("/create/collection");
+    };
 
     return (
         <>
-            <Topbar menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
+            <Topbar user={user} menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
             <Menu menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}/>
             <div className='page myCollectionPage'>
                 <div className="loding" style = {{width: "100%", height: loadingHeight + "%", display: loadingHeight === 0? 'none':'flex'}}>
@@ -99,7 +115,7 @@ export default function MyCollectionsPage({getUser, user, login} : propsType) {
                             </Tooltip>
                         </div>
                         <div className="btns">
-                            <Button className='outLineBtn' >Create a collection</Button>
+                            <Button className='outLineBtn' onClick={onCreateCollection}>Create a collection</Button>
                             <div style={{ display: 'inline-block' }}>
                                 <CustomDropdown
                                     navDropdown
@@ -124,8 +140,11 @@ export default function MyCollectionsPage({getUser, user, login} : propsType) {
                         </div>
                         
                         <div className="collectionContainer">
-							<Card2 href='/collections/untitled-collection-316120299'/>
-                            <Card2 href='/collections/untitled-collection-316120299'/>
+                            {
+                                myCollections && myCollections.map((collection, index) => {
+                                    return <Card2 {...props} collection = {collection}/>
+                                })
+                            }
 						</div>
                     </div>
                     
@@ -135,3 +154,4 @@ export default function MyCollectionsPage({getUser, user, login} : propsType) {
         </>
     )
 }
+export default MyCollectionsPage;

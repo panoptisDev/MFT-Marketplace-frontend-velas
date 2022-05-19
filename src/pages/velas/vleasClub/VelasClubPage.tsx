@@ -3,15 +3,14 @@ import Menu from 'components/menu/Menu';
 import Topbar from 'components/topbar/Topbar';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import axios from 'axios';
 
 import './style.scss'
 import ItemDetail from 'components/itemDetail/ItemDetail';
-type propsType = {
-    getUser : any,
-    user : any,
-    login : any,
-}
-export default function VelasClubPage({getUser, user, login} : propsType) {
+import { useLocation } from 'react-router-dom';
+
+const VelasClubPage = (props) => {
+    const { user } = props;
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(false);
     const [sectionHeight, setSectionHeight] = useState("0vh");
@@ -38,12 +37,37 @@ export default function VelasClubPage({getUser, user, login} : propsType) {
     window.onload = ()=> {
         setIsLoading(false)
         setIsTopLoading(false)
-
     };
+
+    const [ item, setItem ] =useState(null);
+    const [ rate, setRate ] = useState(0);
+    const location = useLocation();
+
+    function fetchItem(){
+        const urlData = location.pathname.toString();
+        const len = urlData.split("/").length;
+        const collectionAddress = urlData.split("/")[len - 2];
+        const tokenId = urlData.split("/")[len - 1];
+        axios.get(`/item/${collectionAddress}/${tokenId}`)
+        .then(res => {
+          setItem(res.data.item) 
+          setRate(res.data.rate)          
+        })
+        .catch(err => {
+          //show an error page that the item doesnt exist
+          setItem(undefined)
+          setRate(0)
+        })
+    }
+    useEffect(() => {
+        if(!item) {
+            fetchItem();
+        }
+    }, [item])
 
     return (
         <>
-            <Topbar menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
+            <Topbar user={user} menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
             <Menu menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}/>
             <div className='page velasPage'>
                 <div className="loding" style = {{width: "100%", height: loadingHeight + "%", display: loadingHeight === 0? 'none':'flex'}}>
@@ -51,8 +75,7 @@ export default function VelasClubPage({getUser, user, login} : propsType) {
                 </div>
                 <div className="sections" style = {{width: "100%", height: sectionHeight}}>
                     <div className="container">
-                        
-                        <ItemDetail/>
+                        {item && <ItemDetail item = {item}/>}
                     </div>
                     
                 </div>
@@ -61,3 +84,4 @@ export default function VelasClubPage({getUser, user, login} : propsType) {
         </>
     )
 }
+export default VelasClubPage;

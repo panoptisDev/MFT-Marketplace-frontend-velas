@@ -5,10 +5,11 @@ import {
 } from '@material-ui/icons';
 import Popover from "@material-ui/core/Popover";
 import { useHistory } from "react-router-dom";
-// import {useRouter} from "next/router";
+import axios from "axios";
 import './tagListStyle.scss'
 import ProfileTabBody from "../tabBody/ProfileTabBody";
 const ProfileTagList = (props) => {
+	const {switchTab, tab, userAddress} = props;
 	const router = useHistory();
 	const [anchorElCreated, setAnchorElCreated] = React.useState(null);
 	const [anchorElOffers, setAnchorElOffers] = React.useState(null);
@@ -28,26 +29,42 @@ const ProfileTagList = (props) => {
 		e.preventDefault();
 		setAnchorElListings(e.currentTarget);
 	}
-	const [searchedUrl, setSearchedUrl] = useState('collection')
+	const [searchedUrl, setSearchedUrl] = useState('collections')
 	const goToPage = (url : string) => {
-		router.push(`/account?tab=${url}`);
+		props.history.push({
+			pathname : '/account',
+			search : `?tab=${url}`,
+			state: { address : props.userAddress}
+		})
+		switchTab(url);
 		setSearchedUrl(url);
 	};
 	useEffect(() => {
-		setSearchedUrl(router.location.search.replace('?tab=', ''))
-		console.log(router.location.search.replace('?tab=', ''))
-    }, [router, setSearchedUrl]);
+		setSearchedUrl(tab);
+    });
+
+    const [collections, setCollections] = useState(undefined);
+    useEffect(() => {
+        if (!collections){
+            if (userAddress && userAddress !== ""){
+                axios.get(`/collection`, {params : {owner : userAddress}})
+                .then(res => {
+                    setCollections(res.data.collections);
+                });
+            }
+        }
+    });
 
 	return (
 		<div className="tagList">
 			<div className="tab-header">
 				<div 
-                className={"tab-item" + (searchedUrl === "collection" ? " selected" : "")} 
-                onClick={() => goToPage("collection")}
+                className={"tab-item" + (searchedUrl === "collections" ? " selected" : "")} 
+                onClick={() => goToPage("collections")}
                 >
 					<PhotoFilter className="tab-icon" />
 					<span className="tab-title">Collected</span>
-					<span>2</span>
+					<span>{collections && collections.length}</span>
 				</div>
 				<div className={"tab-item" + ((searchedUrl === "created" || searchedUrl === "created_collections") ? " selected" : "")}
 					 onClick={showMoreCreated}>
@@ -203,7 +220,7 @@ const ProfileTagList = (props) => {
 				
 			</div>
 			<div className="hline"></div>
-			<ProfileTabBody tab={props.tab.split('=')[1] || 'colloection'} />
+			<ProfileTabBody {...props}/>
 		</div>
 	);
 }

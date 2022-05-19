@@ -30,15 +30,9 @@ export default function Menu({ menuOpen, setMenuOpen }: MenuType) {
                 <li onClick={() => setMenuOpen(false)} className={`menuItem1 ${menuOpen && "active"} ${navId === "collections" && "colored"}`}>
                     <HashLink to="/collections">COLLECTIOONS</HashLink>
                 </li>
-
-                <li onClick={() => setMenuOpen(false)} className={`menuItem2 ${menuOpen && "active"} ${navId === "myNfts" && "colored"}`}>
-                    <HashLink to="/myNfts" smooth>My NFTS</HashLink>
-                </li>
                 <li onClick={() => setMenuOpen(false)} className={`menuItem3 ${menuOpen && "active"} ${navId === "offers" && "colored"}`}>
                     <HashLink to="/offers" smooth>LATEST OFFER</HashLink>
                 </li>
-
-
                 <li onClick={() => setMenuOpen(false)} className={`menuItem4 ${menuOpen && "active"} ${navId === "trades" && "colored"}`}>
                     <HashLink to="/trades" smooth>LATEST TRADE</HashLink>
                 </li>

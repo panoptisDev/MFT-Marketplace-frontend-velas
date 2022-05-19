@@ -3,19 +3,15 @@ import { useEffect, useState } from 'react';
 import { HashLink } from 'react-router-hash-link'
 import ConnectModal from '../connectModal/ConnectModal';
 import { useHistory, useLocation } from "react-router-dom";
+import axios from 'axios';
 import './topbar.scss'
 import Button from 'components/customButtons/Button';
 import CustomDropdown from 'components/dropdown/CustomDropdown';
 import { truncateWalletString } from 'utils';
 import useAuth from 'hooks/useAuth';
 
-type MenuType = {
-    menuOpen?: boolean;
-    setMenuOpen(flag: boolean): void;
-    setIsLoading(value: boolean): void
-};
-
-export default function Topbar({ menuOpen, setMenuOpen, setIsLoading }: MenuType) {
+const Topbar = (props) => {
+    const { user, menuOpen, setMenuOpen, setIsLoading, setInfoUpdated, isInfoUpdated } = props
     const [showConnectModal, setShowConnectModal] = useState(false);
 
     const [loginStatus, setLoginStatus] = useState(false);
@@ -25,6 +21,23 @@ export default function Topbar({ menuOpen, setMenuOpen, setIsLoading }: MenuType
         const isLoggedin = account && active && chainId === parseInt(process.env.REACT_APP_NETWORK_ID, 10);
         setLoginStatus(isLoggedin);
     }, [connector, library, account, active, chainId]);
+
+    useEffect(() => {
+        if (loginStatus || isInfoUpdated){
+            //fetchUser();
+        }
+    });
+
+    const [ logo, setLogo ] = useState("");
+    function fetchUser(){
+        axios.get(`/user/${account}`)
+            .then((res) => {
+                setLogo(res.data.user.logo_url);
+                setInfoUpdated(false);
+            }).catch((err) => {
+                setLogo("");
+            })
+    }
 
     const [navId, setNavId] = useState('mint')
     const search = useLocation();
@@ -47,16 +60,25 @@ export default function Topbar({ menuOpen, setMenuOpen, setIsLoading }: MenuType
     
     const goToProfilePage = (url) => {
 		if (url === "Profile") {
-			const href = "/account";
-			router.push(href)
+			router.push({
+                pathname : '/account',
+                search : '?tab=collections',
+                state: { address : account}
+            })
 		} else if (url === "Favorites") {
-			const href = "/account?tab=favorites";
-			router.push(href)
+			router.push({
+                pathname : '/account',
+                search : '?tab=favorites',
+                state: { address : account}
+            })
 		} else if (url === "Settings") {
 			const href = "/account/settings";
 			router.push(href)
 		} else if (url === "My Collections") {
 			const href = "/myCollections";
+			router.push(href)
+		} else if (url === "My Nfts") {
+			const href = "/myNfts";
 			router.push(href)
 		} else if (url === "Log Out"){
             logout();
@@ -74,9 +96,6 @@ export default function Topbar({ menuOpen, setMenuOpen, setIsLoading }: MenuType
                 <ul>
                     <li onClick={() => { setNavId('') }} className={navId === 'collections' ? "slected" : ""} ><HashLink to="/collections" smooth>COLLECTIOONS</HashLink></li>
 
-                    <li onClick={() => { setNavId('myNfts') }} className={navId === 'myNfts' ? "slected" : ""} >
-                        <HashLink to="/myNfts" smooth>My NFTS</HashLink>
-                    </li>
                     <li onClick={() => { setNavId('offers') }} className={navId === 'offers' ? "slected" : ""} >
                         <HashLink to="/offers" smooth>LATEST OFFER</HashLink>
                     </li>
@@ -85,7 +104,7 @@ export default function Topbar({ menuOpen, setMenuOpen, setIsLoading }: MenuType
                         <HashLink to="/trades" smooth>LATEST TRADE</HashLink>
                     </li>
 
-                    <li onClick={() => { setNavId('create') }} className={navId === 'create' ? "slected" : ""} >
+                    {loginStatus && <li onClick={() => { setNavId('create') }} className={navId === 'create' ? "slected" : ""} >
  
                         <CustomDropdown
                             navDropdown
@@ -106,25 +125,21 @@ export default function Topbar({ menuOpen, setMenuOpen, setIsLoading }: MenuType
                         />
 
                         {/* <HashLink to="/create/collection" smooth>Create</HashLink> */}
-                    </li>
+                    </li>}
                 </ul>
 
             </div>
 
             <div className="btns">
-                    {/* <div className="socialLinks">
-                        <a href="https://discord.gg/m7TcCtzhCm" target="_blank" rel="noreferrer"><img src="assets/discord.webp" alt="" /></a>
-                        <a href="https://twitter.com/streetbrawlerz" target="_blank" rel="noreferrer"><img src="assets/twitter.webp" alt="" /></a>
-                        <a href="https://verify.raritysniper.com/" target="_blank" rel="noreferrer"><img src="assets/image03.png" alt="" /></a>
-                    </div> */}
-                <CustomDropdown
+                    
+                {loginStatus && <CustomDropdown
 					navDropdown
                     caret = {false}
                             
 					buttonText={
 						<>
 							<img
-								src="/assets/img/faces/avatar.jpg"
+								src={logo !== "" ? logo : "/assets/img/faces/avatar.jpg"}
 								className="img"
 								alt="profile"
 							/>
@@ -142,18 +157,19 @@ export default function Topbar({ menuOpen, setMenuOpen, setIsLoading }: MenuType
 						"Profile",
 						"Favorites",
 						"My Collections",
+                        "My Nfts",
 						"Settings",
 						"Log Out",
 					]}
 					// className="activeLink"
-				/>
+				/>}
                 <Button 
                     className='outLineBtn'
                     children = {
                         <span>{loginStatus ? truncateWalletString(account) : "CONNECT WALLET"}
                         </span>
                     }
-                    onClick={() => {setShowConnectModal(true)}}
+                    onClick={() => { !loginStatus && setShowConnectModal(true)}}
                 />
             </div>
 
@@ -166,3 +182,4 @@ export default function Topbar({ menuOpen, setMenuOpen, setIsLoading }: MenuType
         </div>
     )
 }
+export default Topbar;

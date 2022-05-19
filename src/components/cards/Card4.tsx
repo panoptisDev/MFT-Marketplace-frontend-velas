@@ -1,33 +1,25 @@
 import Button from "components/customButtons/Button";
+import { useHistory } from "react-router-dom";
 import './card.scss'
-type CardProps = {
-	tokenID ? : string
-	handleClickCommand ? :(type : string, token : string)=>void
-}
 
-export default function Card4(
-		{
-			handleClickCommand, 
-			tokenID
-		}:CardProps) {
-
-//   const [anchorElTop, setAnchorElTop] = useState(null);
-//   const showMoreActions = (e) => {
-// 		e.preventDefault();
-// 		setAnchorElTop(e.currentTarget);
-// 	}
+const Card4 = (props) => {
+  const { item } = props;
+  const gotoDetail = () => {
+	  props.history.push(`/itemdetail/${item.itemCollection}/${item.tokenId}`)
+  }
   return (
     <div className='card'>
       <div className="imgContainer">
-      <img src="/assets/8cf6b8695ae6dbe3745551c218d62202.jpg" alt="" className="nft" />
+      <img src={item && item.assetUrl} alt="" className="nft" />
         
       </div>
-	  <h3>Name of project</h3>
-      <p className="socre">Rarity Score : 161</p>
+	  <h3>{item.name}</h3>
+      <p className="socre">{item.description}</p>
 	  <div className="btns">
-		<Button className="buyBtn" link="/velas/velas-apes-club/215">Buy For 11 EWT</Button>
+		<Button className="buyBtn" onClick={gotoDetail}>Bid</Button>
 	  </div>
 	 
     </div>
   )
 }
+export default Card4;

@@ -8,12 +8,8 @@ import { useMediaQuery } from 'react-responsive';
 import Filter from 'components/filter/Filter';
 import './style.scss'
 import CollectionList from 'components/collectionList/CollectionList';
-type propsType = {
-    getUser : any,
-    user : any,
-    login : any,
-}
-export default function ItemDetailPage({getUser, user, login} : propsType) {
+const ItemDetailPage = (props) => {
+    const { user } = props;
     const [isLoading, setIsLoading] = useState(true);
     const [isTopLoading, setIsTopLoading] = useState(true);
     const [sectionHeight, setSectionHeight] = useState("0vh");
@@ -57,7 +53,7 @@ export default function ItemDetailPage({getUser, user, login} : propsType) {
 
     return (
         <>
-            <Topbar menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
+            <Topbar user={user} menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
             <Menu menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}/>
             <div className='page collectionPage'>
                 <div className="loding" style = {{width: "100%", height: loadingHeight + "%", display: loadingHeight === 0? 'none':'flex'}}>
@@ -99,3 +95,4 @@ export default function ItemDetailPage({getUser, user, login} : propsType) {
         </>
     )
 }
+export default ItemDetailPage;

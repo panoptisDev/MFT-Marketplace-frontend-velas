@@ -1,8 +1,5 @@
 import axios from 'axios';
-import React, { useState, useReducer } from 'react';
-import Querystring from "query-string"
-
-
+import React, { useReducer } from 'react';
 /**
  * Context
  */
@@ -46,7 +43,6 @@ export const AuthProvider = ({ children }) => {
 export async function getUser(dispatch, address) {
     axios.get(`/user/${address}`)
         .then(async res => {
-            console.log(res);
             dispatch({ type: 'FETCH_USER_SUCCESS', payload: res.data.user });
         })
         .catch(err => {
@@ -63,7 +59,7 @@ export async function loginUser(dispatch, account, nonce, signer) {
             );
 
             if (signature) {
-                const { data } = await axios.post(`/login`, Querystring.stringify({ address: account, signature: signature }))
+                const { data } = await axios.post(`/login`, { address: account, signature: signature })
                 const token = data.token;
                 if (token) {
                     localStorage.setItem('Token', token);

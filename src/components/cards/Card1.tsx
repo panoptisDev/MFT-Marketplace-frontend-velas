@@ -1,17 +1,11 @@
 import { useHistory } from 'react-router-dom';
 import './card.scss'
-type CardProps = {
-	collection? : any
-}
-export default function Card1(
-  {
-    collection
-  }:CardProps
-) {
 
+const Card1 = (props) => {
+  const { collection } = props;
   const router = useHistory();
 	const gotToPage = (url:string)=>{
-		//router.push(url)
+		props.history.push("/collections/" + collection.name);
 	}
   return (
     <div className='card' onClick={()=>{gotToPage(collection.address)}}>
@@ -28,3 +22,5 @@ export default function Card1(
     </div>
   )
 }
+
+export default Card1;

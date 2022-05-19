@@ -6,11 +6,9 @@ import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import './style.scss'
 type propsType = {
-    getUser : any,
-    user : any,
-    login : any,
+    user : any
 }
-export default function CreateCollectionPage({getUser, user, login} : propsType) {
+export default function CreateCollectionPage({user} : propsType) {
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(false);
     const [sectionHeight, setSectionHeight] = useState("0vh");
@@ -42,7 +40,7 @@ export default function CreateCollectionPage({getUser, user, login} : propsType)
     
     return (
         <>
-            <Topbar menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
+            <Topbar user={user} menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
             <Menu menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}/>
             <div className='page createPage'>
                 <div className="loding" style = {{width: "100%", height: loadingHeight + "vh", display: loadingHeight === 0? 'none':'flex'}}>

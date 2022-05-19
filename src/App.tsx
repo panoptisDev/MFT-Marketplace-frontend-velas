@@ -20,13 +20,14 @@ import CreateCollectionPage from 'pages/create/CreateCollectionPage';
 import AccountPage from 'pages/account/AccountPage';
 import MyCollectionsPage from 'pages/myColloctions/MyCollectionsPage';
 import SettingsPage from 'pages/settings/SettingsPage';
-import UnTitledCollection from 'pages/colloctions/unTitledCollection/UnTitledCollection';
+import CollectionDetailPage from 'pages/colloctions/CollectionDetailPage/CollectionDetailPage';
 import VelasPage from 'pages/velas/VelasPage';
 import VelasClubPage from 'pages/velas/vleasClub/VelasClubPage';
 import DetailPage from 'pages/itemDetail/ItemDetailPage';
 import { getUser, loginUser, useAuthDispatch, useAuthState } from 'context/authContext';
 import { useWeb3React } from '@web3-react/core';
 import { Button, Modal } from '@material-ui/core';
+import Topbar from 'components/topbar/Topbar';
 function App() {
   const [errorModalOpen, setErrorModalOpen] = useState(null);
   const [networkError, setNetworkError] = useState(null);
@@ -78,7 +79,7 @@ function App() {
 
   const dispatch = useAuthDispatch();
   const { user, token } = useAuthState();
-
+  
   const login = async () => {
     if(!account || !library) {
       console.log('not connected to wallet')
@@ -86,19 +87,18 @@ function App() {
     }
     if(!user) {
       console.log('fetching user')
-      await getUser(dispatch, account);
+      await getUser(dispatch, account)
     }
     if(!user?.nonce || token) {
       console.log('nonce is invalid or already logged in')
       return;
     }
-    console.log(JSON.stringify(user));
     loginUser(dispatch, account, user?.nonce, library.getSigner())
   }
 
   useEffect(() => {      
     if (active && account){
-      getUser(dispatch, account)
+      getUser(dispatch, account);
     }
   }, [active, account])
 
@@ -123,22 +123,21 @@ function App() {
         }}
       />
       <Switch>
-        <Route exact path="/" render={(props) => (<HomePage getUser={getUser} user={user} login={login}/>)} />
-        <Route exact path="/collections" render={(props) => (<CollectionsPage getUser={getUser} user={user} login={login}/>)} />
-        <Route exact path="/myNfts" render={(props) => (<MyNFTsPage getUser={getUser} user={user} login={login}/>)} />
-        <Route exact path="/offers" render={(props) => (<LatestOffersPage getUser={getUser} user={user} login={login}/>)} />
-        <Route exact path="/trades" render={(props) => (<LatestTradePage getUser={getUser} user={user} login={login}/>)} />
-        <Route exact path="/create/item" render={(props) => (<CreateItemPage getUser={getUser} user={user} login={login}/>)} />
-        <Route exact path="/create/collection" render={(props) => (<CreateCollectionPage getUser={getUser} user={user} login={login}/>)} />
-        <Route exact path="/account" render={(props) => (<AccountPage getUser={getUser} user={user} login={login}/>)} />
-        <Route exact path="/myCollections" render={(props) => (<MyCollectionsPage getUser={getUser} user={user} login={login}/>)} />
-        {/* <Route exact path="/account/settings" component={SettingsPage} /> */}
-        <Route exact path="/account/settings" render={(props) => (<SettingsPage getUser={getUser} user={user} login={login}/>)} />
-        <Route exact path="/collections/untitled-collection-316120299" render={(props) => (<UnTitledCollection getUser={getUser} user={user} login={login}/>)} />
-        <Route exact path="/velas/velas-apes-club" render={(props) => (<VelasPage getUser={getUser} user={user} login={login}/>)} />
-        <Route exact path="/velas/velas-apes-club" render={(props) => (<VelasPage getUser={getUser} user={user} login={login}/>)} />
-        <Route exact path="/velas/velas-apes-club/215" render={(props) => (<VelasClubPage getUser={getUser} user={user} login={login}/>)} />
-        <Route exact path="/itemdetail" render={(props) => (<DetailPage getUser={getUser} user={user} login={login}/>)} />
+        <Route exact path="/" render={(props) => (<HomePage {...props} user={user}/>)} />
+        <Route exact path="/collections" render={(props) => (<CollectionsPage {...props} user={user}/>)} />
+        <Route exact path="/offers" render={(props) => (<LatestOffersPage {...props} user={user}/>)} />
+        <Route exact path="/trades" render={(props) => (<LatestTradePage {...props} user={user}/>)} />
+        <Route exact path="/create/item" render={(props) => (<CreateItemPage {...props} user={user}/>)} />
+        <Route exact path="/create/collection" render={(props) => (<CreateCollectionPage {...props} user={user}/>)} />
+        <Route exact path="/account" render={(props) => (<AccountPage {...props} user={user} login={login}/>)} />
+        <Route exact path="/myCollections" render={(props) => (<MyCollectionsPage {...props} user={user}/>)} />
+        <Route exact path="/myNfts" render={(props) => (<MyNFTsPage {...props} user={user}/>)} />
+        <Route exact path="/account/settings" render={(props) => (<SettingsPage {...props} user={user} login={login}/>)} />
+        <Route exact path="/collections/:name" render={(props) => (<CollectionDetailPage {...props} user={user}/>)} />
+        <Route exact path="/velas/velas-apes-club" render={(props) => (<VelasPage {...props} user={user}/>)} />
+        <Route exact path="/velas/velas-apes-club" render={(props) => (<VelasPage {...props} user={user}/>)} />
+        <Route exact path="/velas/velas-apes-club/215" render={(props) => (<VelasClubPage user={user}/>)} />
+        <Route exact path="/itemdetail/:collection_address/:tokenId" render={(props) => (<VelasClubPage {...props} user={user}/>)} />
       </Switch>
     </Router>
       <Modal

@@ -3,14 +3,8 @@ import { MoreVert, Send, Storefront, VisibilityOff } from '@material-ui/icons';
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import './card.scss'
-type CardProps = {
-	item?:any
-}
 
-export default function Card3(
-		{
-			item
-		}:CardProps) {
+const Card3 = (props) => {
 
   const [anchorElTop, setAnchorElTop] = useState(null);
   const showMoreActions = (e) => {
@@ -23,11 +17,11 @@ export default function Card3(
 	}
   return (
     <div className='card'>
-      <div className="imgContainer" onClick={()=>{gotToPage(item.address)}}>
-      	<img src={item.assetUrl} alt="" className="nft" />
+      <div className="imgContainer" onClick={()=>{gotToPage(props.collection.address)}}>
+      	<img src={props.collection.logo_uri} alt="" className="nft" />
       </div>
-      <h4>{item.name}</h4>
-      <h3>{item.description}</h3>
+      <h4>{props.collection.name}</h4>
+      <h3>{props.collection.description}</h3>
 
 	  <div className="moreActionBox" onClick={showMoreActions}>
 			<MoreVert />
@@ -86,3 +80,4 @@ export default function Card3(
     </div>
   )
 }
+export default Card3;

@@ -6,16 +6,14 @@ import { useMediaQuery } from 'react-responsive';
 
 import Filter from 'components/filter/Filter';
 import './style.scss'
-import VelasCollectionList from 'components/collectionList/VelasCollectionList';
+import NFTItemList from 'components/collectionList/NFTItemList';
 // import { useHistory } from 'react-router-dom';
 import CopyBox from 'components/copyBox/CopyBox';
 import { Language, Telegram, Twitter, Widgets } from '@material-ui/icons';
 type propsType = {
-    getUser : any,
-    user : any,
-    login : any,
+    user : any
 }
-export default function VelasPage({getUser, user, login} : propsType) {
+export default function VelasPage({user} : propsType) {
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(false);
     const [sectionHeight, setSectionHeight] = useState("0vh");
@@ -89,7 +87,7 @@ export default function VelasPage({getUser, user, login} : propsType) {
 	// };
     return (
         <>
-            <Topbar menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
+            <Topbar user={user} menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
             <Menu menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}/>
             <div className='page velasPage'>
                 <div className="loding" style = {{width: "100%", height: loadingHeight + "%", display: loadingHeight === 0? 'none':'flex'}}>
@@ -154,7 +152,7 @@ export default function VelasPage({getUser, user, login} : propsType) {
 							</li>
 						</ul>
 					</div>
-                        <VelasCollectionList  handleCommand={handleCommand}/>
+                        <NFTItemList  handleCommand={handleCommand}/>
                     </div>
                     
                 </div>

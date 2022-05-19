@@ -1,7 +1,7 @@
 import './profile.scss'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 //components
-import {Instagram, Language, Twitter, FileCopy, LibraryAddCheck} from '@material-ui/icons';
+import { Instagram, Language, Twitter, FileCopy, LibraryAddCheck } from '@material-ui/icons';
 
 import Button from "components/customButtons/Button";
 
@@ -9,31 +9,61 @@ import { useWeb3React } from "@web3-react/core";
 import toast from "react-hot-toast";
 import { getIpfsHashFromFile } from "utils/ipfs";
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
-export default function Profile() {
+const Profile = (props) => {
+	const { user, login } = props;
+	const [isFirst, setFirst] = useState(true); //is used for displaying user data when enter in this screen.
+	const [name, setName] = useState("");
+	const [bio, setBio] = useState("");
+	const [email, setEmail] = useState("");
+	const [site, setSite] = useState("");
+	const [instagram, setInstagram] = useState("");
+	const [twitter, setTwitter] = useState("");
+	const [avatar_url, setAvatarUrl] = useState("");
+	const [banner_url, setBannerUrl] = useState("");
+	const [avatar, setAvatar] = useState(null);
+	const [banner, setBanner] = useState(null);
+	const [copied, setCopied] = useState(false);
+	const [update, setUpdating] = useState(false);
 
-	const [ name, setName ] = useState("");
-	const [ bio, setBio ] = useState("");
-	const [ email, setEmail ] = useState("");
-	const [ site, setSite ] = useState("");
-	const [ instagram, setInstagram ] = useState("");
-	const [ twitter, setTwitter ] = useState("");
-	const [ avatar, setAvatar ] = useState(null);
-	const [ banner, setBanner ] = useState(null);
-	const [ copied, setCopied ] = useState(false);
-	const [ update, setUpdating ] = useState(false);
+	const router = useHistory ();
 
 	const { library, chainId, account } = useWeb3React();
-	//useEffect(() => {},[account, library])
+	useEffect(() => {
+		if (!!user) login();
+	}, [user, account, library])
+
+	useEffect(() => {
+		if (isFirst){
+			setProfile(user);
+			setFirst(false);
+		}		
+	})
+
+	function setProfile(_user){
+		if (_user){
+			setName(_user.name);
+			setBio(_user.bio);
+			setEmail(_user.email);
+			setSite(_user.site_link);
+			setTwitter(_user.social_twitter_link);
+			setInstagram(_user.social_instagram_link);
+			setBannerUrl(_user.banner_url);
+			setAvatarUrl(_user.logo_url)
+		}
+	}
 
 	const avatarHandle = (e) => {
 		if (e.target.files && e.target.files.length > 0) {
 			setAvatar(e.target.files[0]);
+			setAvatarUrl("");
 		}
 	}
 	const BannerImgChange = (e) => {
 		if (e.target.files && e.target.files.length > 0) {
 			setBanner(e.target.files[0]);
+			setBannerUrl("");
 		}
 	};
 	const nameHandle = (e) => {
@@ -55,14 +85,14 @@ export default function Profile() {
 		setTwitter(e.target.value);
 	}
 	const removeLogo = () => {
-		setAvatar('');
+		setAvatar(null);
 	};
 	const removeBanner = () => {
-		setBanner('');
+		setBanner(null);
 	};
 	const copyHandle = () => {
 
-		if (window.Clipboard ) {
+		if (window.Clipboard) {
 			// Internet Explorer-specific code path to prevent textarea being shown while dialog is visible.
 			// window.clipboardData.setData("Text", wallet);
 			return setCopied(true);
@@ -88,44 +118,45 @@ export default function Profile() {
 		}
 	};
 
-	async function onSave(){
-		if (!account || !library){
+	async function onSave() {
+		if (!account || !library) {
 			toast.error("Please connect to your wallet");
 			return;
 		}
 		setUpdating(true);
 		let load_toast_id = toast.loading("Please wait...");
-		let avatar_url = "";
-		if (avatar){
+		let avatar_temp_url = avatar_url;
+		if (avatar) {
 			let avatar_hash = await getIpfsHashFromFile(avatar);
-			avatar_url = `https://boatsail_testing.mypinata.cloud/ipfs/${avatar_hash}`;
+			avatar_temp_url = `https://boatsail_testing.mypinata.cloud/ipfs/${avatar_hash}`;
 		}
-		
-		let banner_url = "";
-		if (banner){
+		let banner_temp_url = banner_url;
+		if (banner) {
 			let banner_hash = await getIpfsHashFromFile(banner);
-			banner_url = `https://boatsail_testing.mypinata.cloud/ipfs/${banner_hash}`;
+			banner_temp_url = `https://boatsail_testing.mypinata.cloud/ipfs/${banner_hash}`;
 		}
-		const data : any = {
-			address : account,
-			name : name || "NoName",
-			bio : bio || "",
-			email : email || "",
-			site_link : site || "",
-			social_twitter_link : twitter || "",
-			social_instagram_link : instagram || "",
-			//logo_url : avatar_url || "",
-			//bannerr_url : banner_url || "",
-			logo_url : "https://boatsail_testing.mypinata.cloud/ipfs/QmdkB2xajtJA9GmuqEpTuwTzpMLVj7Ym4YhToyp43DDCnv",
-			banner_url : "https://boatsail_testing.mypinata.cloud/ipfs/QmW6bqSEvgr4tFScBdkpQ2SjUuu2QSJ7WVdxfkN2AHGkYf"
+		const data: any = {
+			address: account,
+			name: name || "NoName",
+			bio: bio || "",
+			email: email || "",
+			site_link: site || "",
+			social_twitter_link: twitter || "",
+			social_instagram_link: instagram || "",
+			logo_url : avatar_temp_url,
+			banner_url : banner_temp_url,
+			// logo_url: "https://boatsail_testing.mypinata.cloud/ipfs/QmdkB2xajtJA9GmuqEpTuwTzpMLVj7Ym4YhToyp43DDCnv",
+			// banner_url: "https://boatsail_testing.mypinata.cloud/ipfs/QmW6bqSEvgr4tFScBdkpQ2SjUuu2QSJ7WVdxfkN2AHGkYf"
 		}
 		axios.post("/user/update", data)
 			.then(res => {
-				setAvatar('');
-				setBanner('');
+				removeBanner();
+				removeLogo();
+				setProfile(res.data.user);
 				setUpdating(false);
 				toast.dismiss(load_toast_id);
 				toast.success("Profile is updated successfully.");
+				router.push(`/account/${account}`)
 			})
 			.catch(err => {
 				setUpdating(false);
@@ -189,11 +220,14 @@ export default function Profile() {
 							<h4 style={{ textAlign: 'center' }}><strong>Profile image</strong></h4>
 							<label className="avatarImgInput" htmlFor="avatarInput">
 								<input type="file" id="avatarInput" name="avatarInput" accept="image/*" style={{ display: 'none' }} onChange={avatarHandle} />
-								{ !avatar ? <i className="fa fa-image" style={{ fontSize: '4.5em' }} /> :
-									<i className="fa fa-image imgIcon" /> }
-								{ avatar && <div className="avatarImg">
-									<img src={ URL.createObjectURL(avatar) } width={160} height={160} alt = ''/>
-								</div> }
+								{(avatar_url === "" || !avatar) ? <i className="fa fa-image" style={{ fontSize: '4.5em' }} /> :
+									<i className="fa fa-image imgIcon" />}
+								{avatar && <div className="avatarImg">
+									<img src={URL.createObjectURL(avatar)} width={160} height={160} alt='' />
+								</div>}
+								{avatar_url !== "" && <div className="avatarImg">
+									<img src={avatar_url} width={160} height={160} alt='' />
+								</div>}
 							</label>
 						</div>
 
@@ -202,23 +236,26 @@ export default function Profile() {
 							<div className="BannerImgInput">
 								<label htmlFor="BannerInput">
 									<input type="file" id="BannerInput" name="BannerInput" accept="image/*" style={{ display: 'none' }} onChange={BannerImgChange} />
-									{ !banner ? <i className="fa fa-image" style={{ fontSize: '4.5em' }} /> :
-										<i className="fa fa-image BannerImgIcon" /> }
-									{ banner && <div className="BannerImg">
-										<img src={URL.createObjectURL(banner)} width={160} height={160}alt = ''/>
-									</div> }
+									{(banner_url === "" || !banner)  ? <i className="fa fa-image" style={{ fontSize: '4.5em' }} /> :
+										<i className="fa fa-image BannerImgIcon" />}
+									{banner && <div className="BannerImg">
+										<img src={URL.createObjectURL(banner)} width={160} height={160} alt='' />
+									</div>}
+									{banner_url !== "" && <div className="BannerImg">
+										<img src={banner_url} width={160} height={160} alt='' />
+									</div>}
 								</label>
-								{ banner && <span className={'removeImg'} onClick={ removeBanner }>&times;</span>  }
+								{banner && <span className={'removeImg'} onClick={removeBanner}>&times;</span>}
 							</div>
 						</div>
 					</div>
 				</div>
 				{
-					!update && <Button className="saveBtn outLineBtn" onClick={()=>onSave()}><strong>Save</strong></Button>
+					!update && <Button className="saveBtn outLineBtn" onClick={() => onSave()}><strong>Save</strong></Button>
 				}
 			</form>
 		</div>
 	);
 }
 
-Profile.propTypes = {};
+export default Profile;

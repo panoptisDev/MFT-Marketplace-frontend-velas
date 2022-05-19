@@ -2,17 +2,9 @@ import useAuth from 'hooks/useAuth';
 import { useEffect, useState } from 'react';
 import './connectModal.scss'
 
-interface Props {
-    showConnectModal: boolean,
-    setShowConnectModal?: any
-    setIsLoading(value: boolean): void
-}
-const ConnectModal: React.FC<Props> = ({
-    showConnectModal,
-    setShowConnectModal,
-    setIsLoading
-}) => {
+const ConnectModal = (props) => {
 
+    const { showConnectModal, setShowConnectModal, setIsLoading} = props;
     const { login } = useAuth();
 
     const connectMetamask = () => {

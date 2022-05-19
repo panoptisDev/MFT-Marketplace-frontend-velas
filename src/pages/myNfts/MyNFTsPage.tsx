@@ -9,12 +9,10 @@ import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import axios from 'axios';
 import './style.scss'
-type propsType = {
-    getUser : any,
-    user : any,
-    login : any,
-}
-export default function MyNFTsPage({getUser, user, login} : propsType) {
+import NFTItemList from 'components/collectionList/NFTItemList';
+
+const MyNFTsPage = (props) => {
+	const { user } = props;
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(true);
     const [sectionHeight, setSectionHeight] = useState("0vh");
@@ -29,7 +27,6 @@ export default function MyNFTsPage({getUser, user, login} : propsType) {
 	useEffect(() => {
 		if (account)axios.get(`/item`,{params : {owner : account}})
 		.then(res =>{
-			console.log(res.data.items)
 			setItems(res.data.items);
 		});		
 	}, [account]);
@@ -98,7 +95,7 @@ export default function MyNFTsPage({getUser, user, login} : propsType) {
 	};
     return (
         <>
-            <Topbar menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
+            <Topbar user={user} menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
             <Menu menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}/>
             <div className='page myNftsPage'>
                 <div className="loding" style = {{width: "100%", height: loadingHeight + "vh", display: loadingHeight === 0? 'none':'flex'}}>
@@ -123,7 +120,7 @@ export default function MyNFTsPage({getUser, user, login} : propsType) {
 							</li>
 						</ul>
 					</div>
-                    <MyCollectionList  items={items}/>
+                    <NFTItemList  {...props} items={items} />
                     {
 				isShowSubMenu &&
 				<div className="transferBox">
@@ -159,3 +156,4 @@ export default function MyNFTsPage({getUser, user, login} : propsType) {
         </>
     )
 }
+export default MyNFTsPage;

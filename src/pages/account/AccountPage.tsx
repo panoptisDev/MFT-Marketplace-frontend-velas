@@ -7,15 +7,37 @@ import { useMediaQuery } from 'react-responsive';
 import './style.scss'
 import { Edit, Facebook, Settings, Share } from '@material-ui/icons';
 import { Popover } from '@material-ui/core';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import axios from 'axios';
 import CopyBox from 'components/copyBox/CopyBox';
 import ProfileTagList from 'components/profile/tagList/ProfileTagList';
-type propsType = {
-    getUser : any,
-    user : any,
-    login : any,
-}
-export default function AccountPage({getUser, user, login} : propsType) {
+import { getIpfsHashFromFile } from 'utils/ipfs';
+import toast from 'react-hot-toast';
+const AccountPage = (props) => {
+
+    const { user } = props;
+    const [userProfile, setUserProfile] = useState(undefined);
+    const location = useLocation();
+    const [userAddress, setUserAddress] = useState("");
+    
+    useEffect(() => {
+        if (!userProfile){
+            getUser();
+        }
+    }, [user]);
+    
+    function getUser(){
+        const state = location.state;
+        const userAddr = state && state["address"];
+        if (userAddr && userAddr !== ""){
+            setUserAddress(userAddr);
+            axios.get(`/user/${userAddr}`)
+            .then(res => {                
+                setUserProfile(res.data.user)                
+            })
+        }        
+    }
+
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(false);
     const [sectionHeight, setSectionHeight] = useState("0vh");
@@ -55,22 +77,53 @@ export default function AccountPage({getUser, user, login} : propsType) {
 		setAnchorElTop(e.currentTarget);
 	}
 
-	const onChangeBannerFile =(e) => {
+	const onChangeBannerFile = async (e) => {
 		if (e.target.files && e.target.files.length > 0) {
 			setBannerFile(e.target.files[0]);
+            const load_toast_id = toast.loading("Please wait...");
+            let banner_hash = await getIpfsHashFromFile(e.target.files[0]);
+            userProfile.banner_url = `https://boatsail_testing.mypinata.cloud/ipfs/${banner_hash}`;
+            axios.post("/user/update", userProfile)
+                .then(res => {
+                    setUserProfile(res.data.user);
+                    toast.dismiss(load_toast_id);
+                })
+                .catch(err => {
+                    setIsTopLoading(false);
+                    toast.dismiss(load_toast_id);
+                })
 		}
 	}
 
-	const onChangeAvatarFile =(e) => {
+	const onChangeAvatarFile = async(e) => {
 		if (e.target.files && e.target.files.length > 0) {
 			setAvatarFile(e.target.files[0]);
+            const load_toast_id = toast.loading("Please wait...");
+            let avatar_hash = await getIpfsHashFromFile(e.target.files[0]);
+            userProfile.logo_url = `https://boatsail_testing.mypinata.cloud/ipfs/${avatar_hash}`;
+            axios.post("/user/update", userProfile)
+                .then(res => {
+                    setUserProfile(res.data.user);
+                    toast.dismiss(load_toast_id);
+                })
+                .catch(err => {
+                    toast.dismiss(load_toast_id);
+                })
 		}
 	}
-    const router = useHistory();
-    const tab = router.location.search ? router.location.search : "collection";
+
+    const [tab, setTab] = useState("");
+    useEffect(() => {
+        setTab(location.search ? location.search.replace("?tab=", "") : "collections");
+    });
+
+    function switchTab(_tab){
+        setTab(_tab);
+    }
+    
     return (
         <>
-            <Topbar menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
+            <Topbar  user={user} menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
             <Menu menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}/>
             <div className='page accountPage'>
                 <div className="loding" style = {{width: "100%", height: loadingHeight + "%", display: loadingHeight === 0? 'none':'flex'}}>
@@ -84,7 +137,7 @@ export default function AccountPage({getUser, user, login} : propsType) {
                             {
                                 bannerFile
                                     ? <img src={ URL.createObjectURL(bannerFile) } className="banner-img" alt = "" />
-                                    : <img src="/assets/img/bg7.jpg" className="banner-img" alt = "" />
+                                    : <img src={userProfile && userProfile.banner_url} className="banner-img" alt = "" />
                             }
                             <div className="hover-back" >
                                 <Edit className="edit-icon" />
@@ -97,11 +150,10 @@ export default function AccountPage({getUser, user, login} : propsType) {
                                     <input type="file" id="avatar_file" name="avatar_file" style={{ display: 'none' }}
                                         accept=".jpg,.png,.gif,.svg" onChange={onChangeAvatarFile} alt = "" />
                                     <Edit className="edit-icon" />
-                                    <img src={avatarFile ? URL.createObjectURL(avatarFile) : "/assets/img/faces/avatar.jpg"} className="avatar-img" alt = "" />
+                                    <img src={avatarFile ? URL.createObjectURL(avatarFile) : userProfile && userProfile.logo_url} className="avatar-img" alt = "" />
                                 </label>
-                                <h2 className="user-name">Unnamed</h2>
-                                <CopyBox value={"asdfasdfasdfasdfasdf"} />
-                                <p className="joined-label">Joined April 2022</p>
+                                <h2 className="user-name">{userProfile && userProfile.name}</h2>
+                                <CopyBox value={userProfile && userProfile.address} />
                             </div>
                             <div className="setting-box">
                                 <div className="setting-container">
@@ -128,7 +180,6 @@ export default function AccountPage({getUser, user, login} : propsType) {
                                         <div className="actionList">
                                             <div className="action-item" onClick={() => {
                                                 setAnchorElTop(null);
-                                                // props.handleClickCommand("sell", props.info.token);
                                             }}>
                                                 <div className="action-icon">
                                                     {/* <Copyright /> */}
@@ -137,7 +188,6 @@ export default function AccountPage({getUser, user, login} : propsType) {
                                             </div>
                                             <div className="action-item" onClick={() => {
                                                 setAnchorElTop(null);
-                                                // props.handleClickCommand("transfer", props.info.token);
                                             }}>
                                                 <div className="action-icon">
                                                     <Facebook />
@@ -148,7 +198,6 @@ export default function AccountPage({getUser, user, login} : propsType) {
                                             </div>
                                             <div className="action-item" onClick={() => {
                                                 setAnchorElTop(null);
-                                                // props.handleClickCommand("hide", props.info.token);
                                             }}>
                                                 <div className="action-icon">
                                                     {/* <Twitter /> */}
@@ -167,10 +216,15 @@ export default function AccountPage({getUser, user, login} : propsType) {
                         </div>
 
                     </div>
-                    <ProfileTagList tab={tab} />
+                    {userAddress && <ProfileTagList
+                                        {...props}
+                                        userAddress = {userAddress}
+                                        tab={tab} 
+                                        switchTab={switchTab}/>}
                 </div>
-                <img src="assets/img/bg8.jpg" alt="" className="bg1" />
+                <img src="assets/img/bg8.jpg" alt="" className="bg1"/>
             </div>
         </>
     )
 }
+export default AccountPage;
