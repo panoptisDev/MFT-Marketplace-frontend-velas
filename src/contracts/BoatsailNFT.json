@@ -59,32 +59,6 @@
         "inputs": [
             {
                 "indexed": false,
-                "internalType": "bool",
-                "name": "isPublic",
-                "type": "bool"
-            }
-        ],
-        "name": "CollectionPublicUpdated",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "string",
-                "name": "collection_uri",
-                "type": "string"
-            }
-        ],
-        "name": "CollectionUriUpdated",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
                 "internalType": "uint256",
                 "name": "id",
                 "type": "uint256"
@@ -158,6 +132,19 @@
     {
         "inputs": [],
         "name": "FEE_MAX_PERCENT",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "FEE_MINT",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -279,19 +266,6 @@
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "collection_uri",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [
             {
                 "internalType": "uint256",
@@ -356,25 +330,7 @@
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "getCollectionURI",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [
-            {
-                "internalType": "string",
-                "name": "_collection_uri",
-                "type": "string"
-            },
             {
                 "internalType": "address",
                 "name": "creator",
@@ -606,25 +562,12 @@
     {
         "inputs": [
             {
-                "internalType": "string",
-                "name": "newURI",
-                "type": "string"
+                "internalType": "uint256",
+                "name": "fee_mint_price",
+                "type": "uint256"
             }
         ],
-        "name": "setCollectionURI",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "bool",
-                "name": "bPublic",
-                "type": "bool"
-            }
-        ],
-        "name": "setPublic",
+        "name": "setFeeMint",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"

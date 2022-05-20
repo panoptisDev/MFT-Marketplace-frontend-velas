@@ -87,7 +87,7 @@ const MyCollectionsPage = (props) => {
 	};
 
     const onCreateCollection = () => {
-		router.push("/create/collection");
+		router.push("/collection/create");
     };
 
     return (

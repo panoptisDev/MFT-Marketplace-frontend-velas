@@ -128,11 +128,12 @@ function App() {
         <Route exact path="/offers" render={(props) => (<LatestOffersPage {...props} user={user}/>)} />
         <Route exact path="/trades" render={(props) => (<LatestTradePage {...props} user={user}/>)} />
         <Route exact path="/create/item" render={(props) => (<CreateItemPage {...props} user={user}/>)} />
-        <Route exact path="/create/collection" render={(props) => (<CreateCollectionPage {...props} user={user}/>)} />
-        <Route exact path="/account" render={(props) => (<AccountPage {...props} user={user} login={login}/>)} />
+        <Route exact path="/collection/create" render={(props) => (<CreateCollectionPage {...props} user={user}/>)} />
+        <Route exact path="/collection/edit/:name" render={(props) => (<CreateCollectionPage {...props} user={user}/>)} />
+        <Route exact path="/account" render={(props) => (<AccountPage {...props} user={user}/>)}/>
         <Route exact path="/myCollections" render={(props) => (<MyCollectionsPage {...props} user={user}/>)} />
         <Route exact path="/myNfts" render={(props) => (<MyNFTsPage {...props} user={user}/>)} />
-        <Route exact path="/account/settings" render={(props) => (<SettingsPage {...props} user={user} login={login}/>)} />
+        <Route exact path="/account/settings" render={(props) => (<SettingsPage {...props} user={user}/>)} />
         <Route exact path="/collections/:name" render={(props) => (<CollectionDetailPage {...props} user={user}/>)} />
         <Route exact path="/velas/velas-apes-club" render={(props) => (<VelasPage {...props} user={user}/>)} />
         <Route exact path="/velas/velas-apes-club" render={(props) => (<VelasPage {...props} user={user}/>)} />

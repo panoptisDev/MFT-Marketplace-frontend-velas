@@ -4,11 +4,12 @@ import Menu from 'components/menu/Menu';
 import Topbar from 'components/topbar/Topbar';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 import './style.scss'
-type propsType = {
-    user : any
-}
-export default function CreateCollectionPage({user} : propsType) {
+
+const CreateCollectionPage = (props) => {
+    const { user } = props;
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(false);
     const [sectionHeight, setSectionHeight] = useState("0vh");
@@ -37,6 +38,9 @@ export default function CreateCollectionPage({user} : propsType) {
         setIsLoading(false)
         setIsTopLoading(false)
     };
+    const location = useLocation();
+    const isCreate = location.pathname.split("/")[2] === "create";
+    const collectionName = location.pathname.split("/")[3];
     
     return (
         <>
@@ -49,9 +53,10 @@ export default function CreateCollectionPage({user} : propsType) {
                 <div className="sections" style = {{width: "100%", height: sectionHeight}}>
                     <div className="container">
                         <h1 className="title" style={{marginTop: '20px'}}>
-                        Create a Collection
+                            { isCreate ? "Create a Collection" : "Edit My Collection"}
                         </h1>
-                        <CreateCollection/>
+                        
+                        <CreateCollection {...props} isCreate={isCreate} collectionName={collectionName}/>
                     </div>
                 </div>
                 <img src="/assets/home_bg.jpg" alt="" className="bg1" />
@@ -59,3 +64,4 @@ export default function CreateCollectionPage({user} : propsType) {
         </>
     )
 }
+export default CreateCollectionPage;

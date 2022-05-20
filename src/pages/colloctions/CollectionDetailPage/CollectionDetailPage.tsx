@@ -64,6 +64,7 @@ const CollectionDetailPage = (props) => {
     const showMoreActions = (e) => {
         e.preventDefault();
         // setAnchorElTop(e.currentTarget);
+        props.history.push(`/collection/edit/${collection.name}`);
     }
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(false);

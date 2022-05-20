@@ -1,19 +1,17 @@
 import Select from "react-select";
 import Tooltip from '@material-ui/core/Tooltip';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {ErrorOutline} from "@material-ui/icons";
 import Button from 'components/customButtons/Button';
 import './createCollection.scss'
 import Logo from './collection/Logo';
-import FormatOptionLabel from './item/FormatOptionLabel';
-import PaymentTokens from "./collection/PaymentTokens";
-import Theme from "./collection/Theme";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import Dropdown from "components/dropdown/Dropdown";
 
 import { useWeb3React } from '@web3-react/core';
 import { getIpfsHash, getIpfsHashFromFile } from 'utils/ipfs';
+import axios from 'axios';
 import toast from "react-hot-toast";
 import { createNewCollection } from "utils/contracts";
 
@@ -21,11 +19,53 @@ const options = [
 	{ value: "ethereum", label: "Ethereum", customAbbreviation: "an open-source blockchain that powers most NFT sails" },
 	{ value: "polygon", label: "Polygon", customAbbreviation: "A fast gas-free blockchain experience that works with Ethereum" },
 ];
-export default function CreateCollection() {
-    // const classes = useStyles();
-	const [ logo, setLogo ] = useState("");
+const CreateCollection = (props) => {
+    
+    const { isCreate, collectionName } = props;
+
+    const [collection, setCollection] = useState(null);
+    let tempName = collectionName;
+    useEffect(() => {
+        if (!collection &&  !isCreate && collectionName) {
+            fetchCollection();
+        }
+    }, [collection]);
+
+    function fetchCollection() {
+        axios.get(`/collection/detail/${tempName}`)
+            .then(res => {
+                setCollection(res.data.collection);
+            })
+            .catch((err) => {
+                setCollection(null);
+            });
+    }
+
+    useEffect(() => {
+        if (collection && !isLoaded){
+            setName(collection.name);
+            setDescription(collection.description);
+            setYourSite(collection.social_my_link);
+            setDiscord(collection.social_discord_link);
+            setInstagram(collection.social_instagram_link);
+            setMedium(collection.social_medium_link);
+            setTme(collection.social_telegram_link);
+            setLogoUri(collection.logo_uri);
+            setBannerUri(collection.banner_uri);
+            setFeaturedUri(collection.featured_uri);
+            setCategory(collection.category[0]);
+            setIsExplicit(collection.category[1] === "sensitive");
+            setFee(collection.royalty);
+            setIsLoaded(true);
+        }
+    });
+
+	const [ logo, setLogo ] = useState<any>("");
+    const [ logo_uri, setLogoUri ] = useState("");
     const { library, chainId, account } = useWeb3React();
 	const [ FeaturedImg, setFeaturedImg ] = useState<any>("");
+    const [ featured_uri, setFeaturedUri ] = useState("");
+    const [ banner_uri, setBannerUri ] = useState("");
 	const [ BannerImg, setBannerImg ] = useState<any>("");
 	const [ name, setName ] = useState("");
 	const [ description, setDescription ] = useState("");
@@ -38,19 +78,23 @@ export default function CreateCollection() {
 	const [ fee, setFee ] = useState("");
 	// const [ blockchain, setBlockchain ] = useState([]);
 	const [ isExplicit, setIsExplicit] = useState(false);
+    const [ isLoaded, setIsLoaded] = useState(false);
 	const logoChange = (e) => {
 		if (e.target.files && e.target.files.length > 0) {
 			setLogo(e.target.files[0]);
+            setLogoUri("");
 		}
 	};
 	const FeaturedImgChange = (e) => {
 		if (e.target.files && e.target.files.length > 0) {
 			setFeaturedImg(e.target.files[0]);
+            setFeaturedUri("");
 		}
 	};
 	const BannerImgChange = (e) => {
 		if (e.target.files && e.target.files.length > 0) {
 			setBannerImg(e.target.files[0]);
+            setBannerUri("");
 		}
 	};
 	const removeImg = (img) => {
@@ -66,7 +110,7 @@ export default function CreateCollection() {
 		setName(e.target.value);
 	}
 	const descriptionHandle = (e) => {
-		setDescription(e.target.text);
+		setDescription(e.target.value);
 	}
 	const categoryHandle = (value) => {
 		setCategory(value);
@@ -98,7 +142,8 @@ export default function CreateCollection() {
             toast.error('Please connect your wallet correctly!');
             return;
         }
-        if (!logo){
+        if (isCreate)
+        if ((isCreate && !logo) || (!isCreate && (!collection.logo_uri || !logo)) ){
             toast.error("Logo Image is required!");
             return;
         }
@@ -108,18 +153,35 @@ export default function CreateCollection() {
         }
         const load_toast_id = toast.loading("Please wait...");
         try{
-            let logo_hash = await getIpfsHashFromFile(logo);
-            let banner_hash;
-            if (BannerImg !== "") banner_hash = await getIpfsHashFromFile(BannerImg);
-            let featuredImg_hash;
-            if (FeaturedImg !== "") featuredImg_hash = await getIpfsHashFromFile(FeaturedImg);
+            let logo_uri = isCreate ? ""  : collection.logo_uri;
+            if (logo !== ""){
+                let logo_hash = await getIpfsHashFromFile(logo);
+                logo_uri = `https://boatsail_testing.mypinata.cloud/ipfs/${logo_hash}`;
+            }
+            let banner_uri = isCreate ? ""  : collection.banner_uri;
+            if (BannerImg !== ""){
+                let banner_hash = await getIpfsHashFromFile(BannerImg);
+                banner_uri = `https://boatsail_testing.mypinata.cloud/ipfs/${banner_hash}`;
+            }
+            let featured_uri = isCreate ? ""  : collection.featured_uri;
+            if (FeaturedImg !== ""){
+                let featured_hash = await getIpfsHashFromFile(FeaturedImg);
+                featured_uri = `https://boatsail_testing.mypinata.cloud/ipfs/${featured_hash}`;
+            }
+            let collection_address = "";
+            if (isCreate){
+                collection_address = await createNewCollection(true, chainId,library.getSigner());
+            }else{
+                collection_address = collection.address;
+            }
             let metaData = {
-                logo_uri : `https://boatsail_testing.mypinata.cloud/ipfs/${logo_hash}`,
-                banner_uri : banner_hash ? `https://boatsail_testing.mypinata.cloud/ipfs/${banner_hash}` : "",
-                featured_uri : featuredImg_hash ? `https://boatsail_testing.mypinata.cloud/ipfs/${featuredImg_hash}` : "",
+                address : collection_address,
+                logo_uri : logo_uri,
+                banner_uri : banner_uri,
+                featured_uri : featured_uri,
                 name : name,
                 description : description,
-                category : isExplicit ? category === "" ? ["sensitive"] : [category, "sensitive"] : [""],
+                category : isExplicit ? category === "" ? ["sensitive"] : [category, "sensitive"] : [],
                 social_my_link : yourSite,
                 social_discord_link : discord,
                 social_instagram_link : instagram,
@@ -127,13 +189,22 @@ export default function CreateCollection() {
                 social_telegram_link : tme,
                 royalty : fee
             }
-            const metaDataHash = await getIpfsHash(metaData);
-            const tokenUri = `https://boatsail_testing.mypinata.cloud/ipfs/${metaDataHash}`;
-            let collectionAddress = await createNewCollection(name, tokenUri, true, chainId,library.getSigner());
-            toast.dismiss(load_toast_id);
+            await axios.post(`/collection/update/`, metaData)
+                .then(res => {
+                    tempName = name;
+                    setCollection(res.data.collection);
+                    const msg = isCreate ? "Created" : "Updated";
+                    toast.success("NFT Collection is " + msg + " Successfully");
+                    toast.dismiss(load_toast_id);
+                })
+                .catch(err => {
+                    console.log(err);
+                    toast.dismiss(load_toast_id);
+                })
 
         }catch(err){
             console.log(err);
+            toast.dismiss(load_toast_id);
             toast.error("NFT Collection Creation is failed!")
         }
     }
@@ -141,7 +212,7 @@ export default function CreateCollection() {
     <div className='createCollectionContainer'>
         <p><span style={{ color: 'red' }}>*</span> Required fields</p>
 
-        <Logo onChange={(e)=>logoChange(e)} />
+        <Logo logoUri={logo_uri} onChange={(e)=>logoChange(e)} />
 
         <div className='formControl'>
             <h4><strong>Featured image</strong></h4>
@@ -149,10 +220,13 @@ export default function CreateCollection() {
             <div className="FeaturedImgInput">
                 <label htmlFor="FeaturedInput">
                     <input type="file" id="FeaturedInput" name="FeaturedInput" accept="image/*" style={{ display: 'none' }} onChange={FeaturedImgChange} />
-                    { !FeaturedImg ? <i className="fa fa-image" style={{ fontSize: '4.5em' }} /> :
+                    { !FeaturedImg && featured_uri  !== ""? <i className="fa fa-image" style={{ fontSize: '4.5em' }} /> :
                         <i className="fa fa-image FeaturedImgIcon" /> }
-                    { FeaturedImg && <div className="FeaturedImg">
+                    { FeaturedImg && featured_uri ===  "" && <div className="FeaturedImg">
                         <img src={URL.createObjectURL(FeaturedImg) } width={300} height={200}alt=''/>
+                    </div> }
+                    { featured_uri && !FeaturedImg && <div className="FeaturedImg">
+                        <img src={featured_uri} width={300} height={200}alt=''/>
                     </div> }
                 </label>
                 { FeaturedImg && <span className={'removeImg'} onClick={ () => removeImg('FeaturedImg') }>&times;</span>  }
@@ -165,10 +239,13 @@ export default function CreateCollection() {
             <div className="BannerImgInput">
                 <label htmlFor="BannerInput">
                     <input type="file" id="BannerInput" name="BannerInput" accept="image/*" style={{ display: 'none' }} onChange={BannerImgChange} />
-                    { !BannerImg ? <i className="fa fa-image" style={{ fontSize: '4.5em' }} /> :
+                    { !BannerImg && banner_uri !== "" ? <i className="fa fa-image" style={{ fontSize: '4.5em' }} /> :
                         <i className="fa fa-image BannerImgIcon" /> }
-                    { BannerImg && <div className="BannerImg">
+                    { BannerImg && banner_uri === "" && <div className="BannerImg">
                         <img src={URL.createObjectURL(BannerImg)} width={700} height={200} alt='' />
+                    </div> }
+                    { banner_uri && !BannerImg && <div className="BannerImg">
+                        <img src={banner_uri} width={700} height={200} alt='' />
                     </div> }
                 </label>
                 { BannerImg && <span className={'removeImg'} onClick={ () => removeImg('BannerImg') }>&times;</span> }
@@ -184,7 +261,7 @@ export default function CreateCollection() {
         <div className={'formControl'}>
             <h4><strong>Description</strong></h4>
             <p><a target={'_blank'}rel="noreferrer" href={"https://www.markdownguide.org/cheat-sheet/"} style={{color: 'rgb(32, 129, 226)'}}>Markdown</a> syntax is supported. 0 of 1000 characters used.</p>
-            <textarea className={'textareaInput'} rows={4} onChange={descriptionHandle} required value={description}/>
+            <textarea className={'textareaInput'} rows={4} onChange={descriptionHandle} required value={description} placeholder={'Write briefly about this collection'}/>
         </div>
 
         <div className={'formControl'}>
@@ -206,6 +283,7 @@ export default function CreateCollection() {
                     "Collectibles",
                     { divider: true },
                 ]}
+                defaultValue={category}
             />
         </div>
 
@@ -302,7 +380,8 @@ export default function CreateCollection() {
             </div>
         </div>
 
-        <Button className="outLineBtn" onClick={() => onCreateCollection()} ><strong>Create</strong></Button>
+        <Button className="outLineBtn" onClick={() => onCreateCollection()} ><strong>{isCreate ? "Create" : "Save"}</strong></Button>
     </div>
   )
 }
+export default CreateCollection;

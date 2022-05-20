@@ -21,18 +21,6 @@
             },
             {
                 "indexed": false,
-                "internalType": "string",
-                "name": "name",
-                "type": "string"
-            },
-            {
-                "indexed": false,
-                "internalType": "string",
-                "name": "uri",
-                "type": "string"
-            },
-            {
-                "indexed": false,
                 "internalType": "bool",
                 "name": "isPublic",
                 "type": "bool"
@@ -254,16 +242,6 @@
     },
     {
         "inputs": [
-            {
-                "internalType": "string",
-                "name": "_name",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_uri",
-                "type": "string"
-            },
             {
                 "internalType": "bool",
                 "name": "bPublic",

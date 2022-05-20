@@ -12,7 +12,6 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 const Profile = (props) => {
-	const { user, login } = props;
 	const [isFirst, setFirst] = useState(true); //is used for displaying user data when enter in this screen.
 	const [name, setName] = useState("");
 	const [bio, setBio] = useState("");
@@ -31,13 +30,16 @@ const Profile = (props) => {
 
 	const { library, chainId, account } = useWeb3React();
 	useEffect(() => {
-		if (!!user) login();
-	}, [user, account, library])
+		//if (!!user) login();
+	}, [account, library])
 
 	useEffect(() => {
-		if (isFirst){
-			setProfile(user);
-			setFirst(false);
+		if (isFirst && account !== ""){
+			axios.get(`/user/${account}`)
+            .then(res => {                
+                setProfile(res.data.user)                
+				setFirst(false);
+            })
 		}		
 	})
 
@@ -156,7 +158,11 @@ const Profile = (props) => {
 				setUpdating(false);
 				toast.dismiss(load_toast_id);
 				toast.success("Profile is updated successfully.");
-				router.push(`/account/${account}`)
+				props.history.push({
+					pathname : '/account',
+					search : '?tab=collections',
+					state: { address : account}
+				})
 			})
 			.catch(err => {
 				setUpdating(false);

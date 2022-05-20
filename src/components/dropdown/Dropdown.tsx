@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 
@@ -26,10 +26,14 @@ export default function Dropdown(props) {
 		dropdownHeader,
 		caret,
 		left,
-		onChangeHandle
+		onChangeHandle,
+    defaultValue
 	} = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [category, setCategory] = React.useState(null);
+  useEffect(() => {
+    setCategory(defaultValue);
+  });
   const handleClick = (event) => {
     if (anchorEl && anchorEl.contains(event.target)) {
       setAnchorEl(null);
@@ -194,4 +198,5 @@ Dropdown.propTypes = {
   // function that retuns the selected item
   onClick: PropTypes.func,
   onChangeHandle: PropTypes.func,
+  defaultValue: PropTypes.string
 };

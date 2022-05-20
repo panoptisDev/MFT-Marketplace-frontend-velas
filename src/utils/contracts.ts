@@ -34,11 +34,11 @@ export async function addItem(collection, uri, royalty, chainId, provider) {
  * Market Contract Management
  */
 
- export async function createNewCollection(name, uri, bPublic, chainId, provider) {
+ export async function createNewCollection(bPublic, chainId, provider) {
   const marketContract = getContractObj('BoatsailMarket', chainId, provider);
   const marketContractInfo = getContractInfo('BoatsailMarket', chainId);
   try {
-      const tx =  await marketContract.createCollection(name, uri, bPublic);
+      const tx =  await marketContract.createCollection(bPublic);
       const receipt = await tx.wait(2);
       if(receipt.confirmations) {
           const interf = new ethers.utils.Interface(marketContractInfo.abi);
@@ -52,9 +52,9 @@ export async function addItem(collection, uri, royalty, chainId, provider) {
             }
           }
       }
-      return false;
+      return "";
   }catch(e) {
       console.log(e);
-      return false;
+      return "";
   }
 }
