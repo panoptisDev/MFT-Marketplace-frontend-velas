@@ -15,10 +15,10 @@ import { ethers } from 'ethers';
 const ItemDetail = (props) => {
 	const { item, fetchItem } = props;
 
-	const { account, active, chainId, library} = useWeb3React();
-	const [ balance, setBalance] = useState(0)
-	const [ showPlaceBidModal, setShowPlaceBidModal] = useState(false);
-	const [ bidPrice, setBidPrice ] = useState(0);
+	const { account, active, chainId, library } = useWeb3React();
+	const [balance, setBalance] = useState(0)
+	const [showPlaceBidModal, setShowPlaceBidModal] = useState(false);
+	const [bidPrice, setBidPrice] = useState(0);
 	useEffect(() => {
 		console.log(item.auction);
 		console.log(account);
@@ -29,12 +29,12 @@ const ItemDetail = (props) => {
 		if (!!account && !!library) {
 			const rawBalance = await library.getBalance(account);
 			const value = parseFloat(ethers.utils.formatEther(rawBalance));
-			setBalance(value);         
+			setBalance(value);
 		}
 		return () => {
 			setBalance(0)
 		}
-	},[]);
+	}, []);
 
 	const onSell = () => {
 		props.history.push({
@@ -47,7 +47,7 @@ const ItemDetail = (props) => {
 	const onCancelListing = () => {
 		setIsLoading(true);
 		const load_toast_id = toast.loading("Please wait");
-		if (item.pair){
+		if (item.pair) {
 			delistItem(
 				item.pair.id,
 				chainId,
@@ -69,7 +69,7 @@ const ItemDetail = (props) => {
 					toast.error("Unlisting failed")
 				}
 			});
-		}else if (item.auction){
+		} else if (item.auction) {
 			finalizeAuction(
 				item.auction.id,
 				chainId,
@@ -92,77 +92,77 @@ const ItemDetail = (props) => {
 				}
 			});
 		}
-		
+
 	}
 
 	function onPlaceBidModal() {
-		if (item.auction.owner.toLowerCase() === account.toLowerCase()){
+		if (item.auction.owner.toLowerCase() === account.toLowerCase()) {
 			toast.error("You are owner of this item.");
 			return
 		}
 		setShowPlaceBidModal(true);
-	  }
-	  function onPlaceBidClose(value) {
+	}
+	function onPlaceBidClose(value) {
 		setShowPlaceBidModal(false);
 		setBidPrice(value);
-	  }
+	}
 
-	  function closePlaceBidModal(){
-        setShowPlaceBidModal(false)
-        setBidPrice(0)
-    }
+	function closePlaceBidModal() {
+		setShowPlaceBidModal(false)
+		setBidPrice(0)
+	}
 
 	function submitPlaceBid() {
-		
-        if ( !(item?.auction.bids) && (bidPrice - item.auction.price  < 0)) {
-            toast.error("Your bid must be higher than minimum bid price!")
-                        
-            return
-        }
-        
-        if ((item?.auction.bids?.length > 0) && (bidPrice - item.auction.price * 1.05  <= 0)){
-            toast.error("Your bid must be 5% higher than current bid!")
-            return
-        }   
-        
-        if (balance - bidPrice < 0 ){              
-            toast.error("Your available balance is less than the bid price!")
-            return
-        }
-        setIsLoading(true)
+
+		if (!(item?.auction.bids) && (bidPrice - item.auction.price < 0)) {
+			toast.error("Your bid must be higher than minimum bid price!")
+
+			return
+		}
+
+		if ((item?.auction.bids?.length > 0) && (bidPrice - item.auction.price * 1.05 <= 0)) {
+			toast.error("Your bid must be 5% higher than current bid!")
+			return
+		}
+
+		if (balance - bidPrice < 0) {
+			toast.error("Your available balance is less than the bid price!")
+			return
+		}
+		setIsLoading(true)
 		const load_toast_id = toast.loading("Placing a bid");
-        bidOnAuction(
-            account,
-            item.auction.id,
-            bidPrice,
-            chainId,
-            library.getSigner()
-        ).then((result) => {
-            if (result) {
-                axios.get(`/sync_block`)
-                .then((res) => {
-                    setIsLoading(false);
-                    closePlaceBidModal()
-					toast.dismiss(load_toast_id);
-                    toast.success("Placed a Bid Successfully");
-                    fetchItem()                    
-                    return true;
-                })
-                .catch((error) => {
-                    if (error.response) {
-                        setIsLoading(false);
+		bidOnAuction(
+			account,
+			item.auction.id,
+			bidPrice,
+			chainId,
+			library.getSigner()
+		).then((result) => {
+			if (result) {
+				axios.get(`/sync_block`)
+					.then((res) => {
+						setIsLoading(false);
+						closePlaceBidModal()
 						toast.dismiss(load_toast_id);
-                        toast.error(error.response.data.message);    
-                    }
-                });
-            } else {
-                setIsLoading(false);
+						toast.success("Placed a Bid Successfully");
+						fetchItem()
+						return true;
+					})
+					.catch((error) => {
+						if (error.response) {
+							setIsLoading(false);
+							toast.dismiss(load_toast_id);
+							toast.error(error.response.data.message);
+						}
+					});
+			} else {
+				setIsLoading(false);
 				toast.dismiss(load_toast_id);
-                toast.error("Failed Transaction");
-            }
-        });       
-        
-    }
+				toast.error("Failed Transaction");
+			}
+		});
+
+	}
 	return (
 		<div className="imageDetail">
 			<div className="nftContainer">
@@ -256,10 +256,10 @@ const ItemDetail = (props) => {
 					<span className="hover-blue">@ block #14773518: 0x0000…0000 ➞ 0xc501…776F </span>
 					{
 						item && !item.pair && item.auction && <div className="buy-div">
-						<Button className="buyBtn" onClick={() => onPlaceBidModal()}>
-							Place Bid
-						</Button>
-					</div>
+							<Button className="buyBtn" onClick={() => onPlaceBidModal()}>
+								Place Bid
+							</Button>
+						</div>
 
 					}
 					{
@@ -288,7 +288,7 @@ const ItemDetail = (props) => {
 					balance={balance}
 					nftFee={0}
 				/>
-      		)}
+			)}
 		</div>
 	);
 }
