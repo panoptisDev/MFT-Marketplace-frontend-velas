@@ -196,6 +196,7 @@ const CreateCollection = (props) => {
                     const msg = isCreate ? "Created" : "Updated";
                     toast.success("NFT Collection is " + msg + " Successfully");
                     toast.dismiss(load_toast_id);
+                    if (isCreate)props.history.push(`/collections`);
                 })
                 .catch(err => {
                     console.log(err);

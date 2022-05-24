@@ -6,6 +6,7 @@ type ButtonProps = {
     btnIcon ? : HTMLScriptElement
     children ? : any
     link ? : string
+    disabled ? : boolean 
     onClick ? : ()=>void
 }
 export default function Button(
@@ -15,10 +16,11 @@ export default function Button(
         btnIcon,
         link,
         children,
+        disabled,
         onClick
     }: ButtonProps) {
   return (
-    <button className={className} onClick = {onClick}>
+    <button className={className} onClick = {onClick} disabled = {disabled}>
         {
         link ? <HashLink to={link} smooth>{children}</HashLink>:
         children

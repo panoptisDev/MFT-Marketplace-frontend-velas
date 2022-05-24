@@ -6,8 +6,8 @@ const CollectionList = (props) => {
     return (
         <div className="collectionList" id = "sneak">
             {
-                collections && collections.map((collection) => {
-                    return <Card1 {...props} collection={collection}/>
+                collections && collections.map((collection, index) => {
+                    return <Card1 {...props} collection={collection} key={index}/>
                 })
             }            
         </div>

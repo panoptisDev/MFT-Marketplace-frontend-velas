@@ -8,7 +8,8 @@ import './style.scss'
 type propsType = {
     user : any
 }
-export default function HomePage({user} : propsType) {
+const HomePage = (props) => {
+    const { user } = props;
     const [isLoading, setIsLoading] = useState(true);
     const [isTopLoading, setIsTopLoading] = useState(true);
     const [sectionHeight, setSectionHeight] = useState("0vh");
@@ -66,7 +67,7 @@ export default function HomePage({user} : propsType) {
                         that certifies a digital asset to be unique and therefore not interchangeable</h4>
                     <Button
                         className='outLineBtn'
-                        link="/collections"
+                        onClick={() => props.history.push("/collections")}
                         // rel="noopener noreferrer"
                     >
                         Browse All Collections
@@ -84,3 +85,4 @@ export default function HomePage({user} : propsType) {
         </>
     )
 }
+export default HomePage;

@@ -23,7 +23,7 @@ import SettingsPage from 'pages/settings/SettingsPage';
 import CollectionDetailPage from 'pages/colloctions/CollectionDetailPage/CollectionDetailPage';
 import VelasPage from 'pages/velas/VelasPage';
 import VelasClubPage from 'pages/velas/vleasClub/VelasClubPage';
-import DetailPage from 'pages/itemDetail/ItemDetailPage';
+import ListItemSalePage from 'pages/sale/ListItemSalePage';
 import { getUser, loginUser, useAuthDispatch, useAuthState } from 'context/authContext';
 import { useWeb3React } from '@web3-react/core';
 import { Button, Modal } from '@material-ui/core';
@@ -127,7 +127,7 @@ function App() {
         <Route exact path="/collections" render={(props) => (<CollectionsPage {...props} user={user}/>)} />
         <Route exact path="/offers" render={(props) => (<LatestOffersPage {...props} user={user}/>)} />
         <Route exact path="/trades" render={(props) => (<LatestTradePage {...props} user={user}/>)} />
-        <Route exact path="/create/item" render={(props) => (<CreateItemPage {...props} user={user}/>)} />
+        <Route exact path="/item/create" render={(props) => (<CreateItemPage {...props} user={user}/>)} />
         <Route exact path="/collection/create" render={(props) => (<CreateCollectionPage {...props} user={user}/>)} />
         <Route exact path="/collection/edit/:name" render={(props) => (<CreateCollectionPage {...props} user={user}/>)} />
         <Route exact path="/account" render={(props) => (<AccountPage {...props} user={user}/>)}/>
@@ -138,7 +138,8 @@ function App() {
         <Route exact path="/velas/velas-apes-club" render={(props) => (<VelasPage {...props} user={user}/>)} />
         <Route exact path="/velas/velas-apes-club" render={(props) => (<VelasPage {...props} user={user}/>)} />
         <Route exact path="/velas/velas-apes-club/215" render={(props) => (<VelasClubPage user={user}/>)} />
-        <Route exact path="/itemdetail/:collection_address/:tokenId" render={(props) => (<VelasClubPage {...props} user={user}/>)} />
+        <Route exact path="/item/:collection_address/:tokenId" render={(props) => (<VelasClubPage {...props} user={user}/>)} />
+        <Route exact path="/item/:collection_address/:tokenId/sell" render={(props) => (<ListItemSalePage user={user}/>)} />
       </Switch>
     </Router>
       <Modal

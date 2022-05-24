@@ -8,11 +8,11 @@ export const currentNetwork = process.env.REACT_APP_NETWORK_ID;
 export const CONTRACTS_BY_NETWORK = {
   [currentNetwork]: {
     BoatsailNFT: {
-      address: '0xB170437c192fB49A35930809fE68932feC888508',
+      address: '0xb170437c192fb49a35930809fe68932fec888508',
       abi: BoatsailNFTAbI,
     },
     BoatsailMarket: {
-      address: '0x669c5a51d7e32cce27755c71038aa25ca47df477',
+      address: '0x00f6cdbb13c41acd30b2365ef6d10be4795d8b68',
       abi: BoatsailMarketAbI,
     },
     BoatsailAuction: {

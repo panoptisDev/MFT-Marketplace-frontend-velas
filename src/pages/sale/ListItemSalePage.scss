@@ -1,0 +1,337 @@
+
+	@import "../../global.scss";
+    .saleContainer{
+        padding: 20px;
+        width: calc(100% - 250px);
+        margin-bottom: 15px;
+        @include mobile_potrait{
+            width: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        @include mobile_landscape{
+            width: 90%;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            *{
+                color: #ffffff;
+            }
+            &>h2 {
+                font-weight: bold;
+                margin: 0;
+                @include mobile_potrait{
+                    font-size: 2rem;
+                }
+                @include mobile_landscape{
+                    font-size: 2rem;
+                }
+            }
+        }
+        form {
+            margin-top: 30px;
+            *{
+                color: #ffffff;
+            }
+            .formControl {
+                margin-bottom: 30px;
+                @include mobile_potrait{
+                    width: 100%;
+                }
+                @include mobile_landscape{
+                    font-size: 2rem;
+                }
+            }
+            >div{
+                display: flex;
+                flex-direction: row;
+                @media (max-width: 1024px) {
+                    flex-direction: column;
+                }
+            }
+        }
+    
+        .inputGroup {
+            flex-grow: 1;
+            @media (min-width: 1024px) {
+                margin-right: 80px;
+            }
+        }
+        .formControl {
+            margin-bottom: 30px;
+            @include mobile_potrait{
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                &>div:first-of-type{
+                    width: 100%;
+                }
+            }
+            @include mobile_landscape{
+                font-size: 2rem;
+            }
+            h4{
+                margin-bottom: 1rem;
+            }
+            .mb0{
+                margin-bottom: 0;
+            }
+            .textInput{
+                background: #353840;
+                color: #ffffff;
+                width: 100%;
+                height: 30px;
+                border: 1px solid #ced4da;
+                border-radius: 6px;
+                font-size: 107%;
+                padding: 10px;
+                border: 1px solid #0eabff;
+                &:focus{
+                    outline: none;
+                }
+                @include mobile_potrait{
+                    width: 90%;
+                    height: 20px;
+                    font-size: 12px;
+                }
+                @include mobile_landscape{
+                    height: 20px;
+                    font-size: 12px;
+                }
+            }
+
+            .linkInput {
+                display: flex;
+                align-items: center;
+                border: 1px solid #0eabff;
+                border-bottom-width: 0;
+                svg {
+                    margin: 0 12px;
+                }
+
+                input {
+                    background: #353840;
+                    border: none;
+                    height: 48px;
+                    flex-grow: 1;
+                    &:focus{
+                        outline: none;
+                    }
+                    @include mobile_potrait{
+                        height: 30px;
+                        font-size: 12px;
+                    }
+                    @include mobile_landscape{
+                        height: 30px;
+                        font-size: 12px;
+                    }
+                }
+                @include mobile_potrait{
+                    width: 100%;
+                    
+                }
+                @include mobile_landscape{
+                }
+            }
+
+            .iconInput {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: #353840;
+                color: #ffffff;
+                width: 100%;
+                height: 48px;
+                border: 1px solid #0eabff;
+                border-radius: 6px;
+                padding-left: 10px;
+                padding-right: 10px;
+                font-size:  107%;
+                input {
+                    background: #353840;
+                    color: #ffffff;
+                    border: none;
+                    flex: 1;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    &:focus{
+                        outline: none;
+                    }
+                    @include mobile_potrait{
+                        height: 30px;
+                        font-size: 12px;
+                    }
+                    @include mobile_landscape{
+                        height: 30px;
+                        font-size: 12px;
+                    }
+                }
+                @include mobile_potrait{
+                    width: 90%;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+                @include mobile_landscape{
+                }
+            }
+        }
+    .avatarImgInput{
+        cursor: pointer;
+        border-radius: 50%;
+        outline: 3px dashed #0eabff;
+        outline-offset: 4px;
+        width: 160px;
+        height: 160px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background: none;
+        transition: all 100ms ease 0s;
+        margin: auto;
+    
+        .imgIcon {
+            font-size: 4.5em;
+            opacity: 0;
+            transition: opacity 100ms ease 0s;
+        }
+    
+        .fa:not(.imgIcon) {
+            opacity: 1;
+            transition: opacity 100ms ease 0s;
+            color: #0eabff;
+        }
+    
+        .avatarImg {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            padding: 4px;
+    
+            img {
+                min-width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                transition: opacity 100ms ease 0s;
+                opacity: 1;
+            }
+        }
+    
+        &:hover {
+            background: #353840;
+            .imgIcon {
+                z-index: 1;
+                opacity: 1;
+                color: #b3b3b3;
+            }
+    
+            img {
+                opacity: 0.7 !important;
+            }
+    
+            .fa:not(.imgIcon) {
+                opacity: 0.7;
+            }
+    
+        }
+    }
+    .BannerImgInput {
+        border-radius: 10px;
+        outline: 3px dashed #0eabff;
+        outline-offset: 4px;
+        transition: all 100ms ease 0s;
+        width: 160px;
+        height: 160px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin: auto;
+        label {
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+
+        .BannerImgIcon {
+            font-size: 4.5em;
+            opacity: 0;
+            transition: opacity 100ms ease 0s;
+            
+        }
+
+        .fa:not(.BannerImgIcon) {
+            opacity: 1;
+            transition: opacity 100ms ease 0s;
+            color: #0eabff;
+        }
+
+        .BannerImg {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            padding: 4px;
+            img{
+                max-width: 100%;
+                height: 100%;
+                border-radius: 10px;
+                transition: opacity 100ms ease 0s;
+                opacity: 1;
+                object-fit: cover;
+            }
+        }
+
+        .removeImg {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            color: rgb(204, 204, 204);
+            line-height: 50%;
+            font-size:  38px;
+            transition: opacity 100ms ease 0s;
+            cursor: pointer;
+        }
+
+        &:hover {
+            background: #353840;
+            .BannerImgIcon {
+                z-index: 1;
+                opacity: 1;
+                color: rgb(179, 179, 179);
+            }
+
+            img {
+                opacity: 0.7 !important;
+            }
+
+            .fa:not(.imgIcon) {
+                opacity: 0.7;
+            }
+        }
+
+    }
+    .saveBtn {
+        @media (max-width: 1024px) {
+            display: block;
+            margin: auto;
+            width: 100%;
+        }
+    }
+}
+    
+
+
+
+

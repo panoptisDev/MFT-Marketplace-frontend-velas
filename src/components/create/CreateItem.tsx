@@ -107,18 +107,18 @@ export default function CreateItem() {
             setCreatingItem(true);   
             const metaDataHash = await getIpfsHash(metaData);
             const tokenUri = `https://boatsail_testing.mypinata.cloud/ipfs/${metaDataHash}`;
-            console.log(tokenUri);
-            toast.dismiss(load_toast_id);
-            let tokenId = await addItem(selectedCollection.address, tokenUri, 0, chainId, library.getSigner());
-            if (tokenId){
+            let isCreated = await addItem(selectedCollection.address, tokenUri, 0, chainId, library.getSigner());
+            if (isCreated){
                 toast.success("NFT Product is created successfully");
                 await axios.get(`/sync_block`);
+                toast.dismiss(load_toast_id);
                 history.push("/")
                 setCreatingItem(false);
             }
 
         }catch(error){
             console.log(error);
+            toast.dismiss(load_toast_id);
             toast.error("NFT Artist Create Failed!")
         }
     }

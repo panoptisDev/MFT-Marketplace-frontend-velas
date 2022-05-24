@@ -75,7 +75,7 @@ const VelasClubPage = (props) => {
                 </div>
                 <div className="sections" style = {{width: "100%", height: sectionHeight}}>
                     <div className="container">
-                        {item && <ItemDetail item = {item}/>}
+                        {item && <ItemDetail {...props} item = {item} fetchItem = {fetchItem}/>}
                     </div>
                     
                 </div>

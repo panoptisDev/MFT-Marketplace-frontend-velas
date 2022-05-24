@@ -54,7 +54,7 @@ const Topbar = (props) => {
 
     const router = useHistory ();
 	const goToPage = (url) => {
-		const href = "/create/" + url.toLowerCase();
+		const href = "/" + url.toLowerCase() + "/create";
 		router.push(href)
 	};
     

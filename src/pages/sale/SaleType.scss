@@ -1,0 +1,63 @@
+@import "../../global.scss";
+
+.saleType{
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    margin-top: 3vh;
+    
+    div{
+        width: 325px;
+        height: 325px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        cursor: pointer;
+        // border: 1px black solid;
+        border-radius: 1rem;
+        animation: saleTypeAni 1s linear 0s 1 alternate forwards ;
+        transition: all 0.2s ease;
+        
+        @keyframes saleTypeAni {
+            0%{
+            opacity: 0;
+            }
+            100%{
+                opacity: 1;
+            }
+        }
+        &:hover{
+            transform: scale(1.01);
+        }
+        @include mobile_potrait{
+            width: 25vw;
+            height: 25vw;
+        }
+        @include mobile_landscape{
+            width: 20vw;
+            height: 20vw;
+        }
+
+        .saleIcon {
+            font-size: 4rem;
+            color: black;
+            @include mobile_potrait{
+                font-size: 2rem;
+            }
+            @include mobile_landscape{
+                font-size: 2rem;
+            }
+        }
+        p{
+            font-size: 2rem;
+            @include mobile_potrait{
+                font-size: 1rem;
+            }
+            @include mobile_landscape{
+                font-size: 1rem;
+            }
+        }
+    }
+}
