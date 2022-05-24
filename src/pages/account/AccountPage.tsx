@@ -24,7 +24,7 @@ const AccountPage = (props) => {
         if (!userProfile){
             getUser();
         }
-    }, [user]);
+    }, [user, userProfile]);
     
     function getUser(){
         const state = location.state;
@@ -33,10 +33,12 @@ const AccountPage = (props) => {
             setUserAddress(userAddr);
             axios.get(`/user/${userAddr}`)
             .then(res => {                
-                setUserProfile(res.data.user)                
+                setUserProfile(res.data.user)    
+                console.log(res.data.user)            
             })
         }        
     }
+    // console.log(userProfile)
 
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(false);
@@ -136,8 +138,8 @@ const AccountPage = (props) => {
                                 accept=".jpg,.png,.gif,.svg" onChange={onChangeBannerFile} />
                             {
                                 bannerFile
-                                    ? <img src={ URL.createObjectURL(bannerFile) } className="banner-img" alt = "" />
-                                    : <img src={userProfile && userProfile.banner_url} className="banner-img" alt = "" />
+                                    ? <img src={ URL.createObjectURL(bannerFile) || "/assets/img/bg7.jpg"} className="banner-img" alt = "" />
+                                    : <img src={userProfile && userProfile.banner_url || "/assets/img/bg7.jpg"} className="banner-img" alt = "" />
                             }
                             <div className="hover-back" >
                                 <Edit className="edit-icon" />
@@ -150,7 +152,7 @@ const AccountPage = (props) => {
                                     <input type="file" id="avatar_file" name="avatar_file" style={{ display: 'none' }}
                                         accept=".jpg,.png,.gif,.svg" onChange={onChangeAvatarFile} alt = "" />
                                     <Edit className="edit-icon" />
-                                    <img src={avatarFile ? URL.createObjectURL(avatarFile) : userProfile && userProfile.logo_url} className="avatar-img" alt = "" />
+                                    <img src={avatarFile ? URL.createObjectURL(avatarFile) : userProfile && userProfile.logo_url || "/assets/img/faces/avatar.jpg"} className="avatar-img" alt = "" />
                                 </label>
                                 <h2 className="user-name">{userProfile && userProfile.name}</h2>
                                 <CopyBox value={userProfile && userProfile.address} />

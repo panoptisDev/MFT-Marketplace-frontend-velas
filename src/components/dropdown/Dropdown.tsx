@@ -33,7 +33,7 @@ export default function Dropdown(props) {
   const [category, setCategory] = React.useState(null);
   useEffect(() => {
     setCategory(defaultValue);
-  });
+  },[]);
   const handleClick = (event) => {
     if (anchorEl && anchorEl.contains(event.target)) {
       setAnchorEl(null);
