@@ -1,4 +1,4 @@
-
+@import "../../global.scss";
 	.imageDetail{
 		padding: 16px;
 		width: 100%;
@@ -7,19 +7,102 @@
 		align-items: flex-start;
 		justify-content: center;
 		flex-direction: row;
-
+		@include mobile_potrait{
+            flex-direction: column;
+        }
 		@media (min-width: 576px){
 			height: 100%;
+			
 		}
 		.nftContainer{
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			flex-direction: column;
 			flex: 0.5;
-			img{
-				width: 90%;
-				border-radius: 10px;
+			@include mobile_potrait{
+				margin-bottom: 1rem;
 			}
+			.imgContaner{
+				width: calc(100% - 2rem);
+				border: 1px #228be67c solid;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				margin-left: 1rem;
+				margin-right: 1rem;
+				border-radius: 10px;
+				margin-bottom: 1rem;
+				img{
+					width: 100%;
+					border-radius: 10px;
+				}
+			}
+			.col-div{
+				width: calc(100% - 4rem);
+				display: flex;
+				align-items: flex-start;
+				justify-content: center;
+				flex-direction: column;
+				
+				padding: 1rem;
+				border-radius: 10px;
+				.billy-header{
+					color: #fff;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					font-size: 1.2rem;
+					margin-bottom: 0.5rem;
+					svg{
+						font-size: 1.2rem;
+						margin-right: 0.5rem;
+
+					}
+				}
+				p{
+					color: #aaa;
+					margin-top: 0.5rem;
+					margin-bottom: 0.5rem;
+					a{
+						color: #228be6;
+						text-decoration: none;
+						transition: all 0.3s ease;
+						margin-left: 0.5rem;
+						&:hover{
+							color: #7a99fe;
+						}
+					}
+				}
+			}
+			a{
+				color: #228be6;
+				text-decoration: none;
+				transition: all 0.3s ease;
+				margin-left: 0.5rem;
+				&:hover{
+					color: #7a99fe;
+				}
+			}
+			.br-div{
+				border: 1px #228be67c solid;
+			}
+			.row-div{
+				width: 100%;
+				display: flex;
+				align-items: center;
+			}
+			.m-b{
+				margin-top: 1rem;
+			}
+			.s-b{
+				justify-content: space-between;
+			}
+			.cursor-pointer{
+				cursor: pointer;
+			}
+			
 		}
 
 		.property-box{
@@ -29,6 +112,13 @@
 			padding: 30px;
 			height: 100%;
 			flex: 0.5;
+			@include mobile_potrait{
+				width: calc(100% - 4rem);
+				padding: 1rem;
+				margin: 1rem;
+
+
+			}
 			.property-div{
 				height: 100%;
 	
@@ -76,6 +166,73 @@
 						&:hover{
 							color: #495057;
 						}
+					}
+				}
+				.row-div{
+					width: 100%;
+					display: flex;
+					align-items: center;
+					.billy-desc{
+						display: flex;
+						align-items: center;
+						margin: 0.5rem 0.5rem 0.5rem 0;
+						a{
+							color: #228be6;
+							text-decoration: none;
+							transition: all 0.3s ease;
+							margin-left: 0.5rem;
+							&:hover{
+								color: #7a99fe;
+							}
+						}
+						&.hover-blue{
+							color: #868e96;
+							font-size:12px;
+							line-height: 24px;
+							margin-left: 5px;
+							cursor: pointer;
+							transition: all 0.3s ease;
+							&:hover{
+								color: #228be6;
+							}
+						}
+					}
+				}
+				.br-div{
+					padding-top: 2rem;
+					padding-bottom: 2rem;
+
+				}
+				.aic{
+					width: 100%;
+					margin-top: 1rem;
+					align-items: center !important;
+				}
+				.jcc{
+					width: 100%;
+					justify-content: center;
+				}
+
+				.col-div{
+					width: 100%;
+					display: flex;
+					align-items: flex-start;
+					justify-content: center;
+					flex-direction: column;
+				}
+				.outLineBtn{
+					display: flex;
+					align-items: center;
+					margin: 0.5rem 1.5rem 0.5rem 0;
+					svg{
+						font-size: 1.2rem;
+						margin-right: 0.5rem;
+					}
+					&::after{
+						display: none;
+					}
+					&::before{
+						display: none;
 					}
 				}
 				.billy-header{
@@ -150,6 +307,12 @@
 					}
 				}
 			}
+			.cursor-pointer{
+				cursor: pointer;
+			}
+			.s-b{
+				justify-content: space-between;
+			}
 	
 			.text-white{
 				color: white;
@@ -166,7 +329,15 @@
 			.m-l-4{
 				margin-left: 4px;
 			}
-	
+			.m-b-5{
+				margin-bottom: 5px;
+			}
+			.p-t-10{
+				padding-top: 10px;
+			}
+			.p-b-10{
+				padding-bottom: 10px;
+			}
 			.with-border{
 				text-align: center !important;
 				border-radius: 8px;
@@ -191,6 +362,39 @@
 	
 				&:hover{
 					color: #228be6;
+				}
+			}
+			.select-gray {
+				margin-right: 1rem;
+				@include mobile_potrait{
+					margin-right: 0rem !important;
+					width: 100%;
+					margin-left: 0px !important;
+				}
+				@include mobile_landscape{
+				}
+				&>div:first-of-type{
+					border: 1px solid #0eabff;
+					background: #353840;
+					// border-color: #353840;
+					min-width: 200px;
+					@include mobile_potrait{
+						width: 100%;
+						margin-bottom: 0.5rem;
+						font-size: 12px;
+						height: 25px;
+						margin-right: 0rem !important;
+					}
+					@include mobile_landscape{
+						font-size: 12px;
+					}
+					div{
+						color: #ffffff !important;
+					}
+					input{
+						display: none !important;
+						
+					}
 				}
 			}
 		}

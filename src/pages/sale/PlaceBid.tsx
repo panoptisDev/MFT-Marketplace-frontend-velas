@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Button, Modal } from '@material-ui/core';
-
+import './PlaceBid.scss'
 export default function PlaceBid({ balance, nftFee, onClose, onSubmit }) {
   const [open, setOpen] = useState(true);
   const [currencyValue, setCurrencyValue] = useState('ETH');
@@ -26,6 +26,7 @@ export default function PlaceBid({ balance, nftFee, onClose, onSubmit }) {
 
   return (
     <Modal
+      className='place-bid'
         open={true}
         onClose={(event, reason) => {
           if (reason === "backdropClick") {
@@ -38,18 +39,22 @@ export default function PlaceBid({ balance, nftFee, onClose, onSubmit }) {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         >
-        <div>
+        <div className='modal-content'>
         <div className="place_bid_title">Place a Bid</div>
            <div className="placeContainer">
              <input name="price" onChange={onChangePrice} placeholder="Your Bid Price:" />
-             <div>The price should be higer than 0.111ETH</div>
-             <select>
+             {parseFloat(bidPrice) < 0.111 && <div className='warning'>The price should be higer than 0.111ETH</div>}
+             
+             <select  onChange={onChangePrice}>
                <option value="eth">ETH</option>
              </select>
            </div>
            <br />
-          <Button className="" onClick={handleClose} variant="contained" color="primary">Close</Button>            
-          <Button className="" onClick={placeBid} variant="contained" color="primary">Place a Bid</Button>            
+           <div className="btns">
+           <Button className="" onClick={handleClose} variant="contained" color="primary">Close</Button>            
+           <Button className="" onClick={placeBid} variant="contained" color="primary">Place a Bid</Button>      
+           </div>
+                
         </div>
       </Modal>
   );

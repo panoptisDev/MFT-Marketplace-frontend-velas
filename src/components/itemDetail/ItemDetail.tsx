@@ -1,8 +1,10 @@
-import { ShareOutlined, Link as LinkIcon } from '@material-ui/icons';
-
+import {  ShareOutlined, Link as LinkIcon, ExpandLess } from '@material-ui/icons';
+import {Loupe, ViewList, MoreVert, Refresh, Visibility, Favorite, Loyalty, ExpandMore, Timeline, List, Description} from '@material-ui/icons';
+// import LoupeIcon from '@mui/icons-material/Loupe';
 // material-ui components
 import './itemDetail.scss'
 import Button from "components/customButtons/Button";
+
 import { Link } from "react-router-dom";
 import { bidOnAuction, delistItem, finalizeAuction } from 'utils/contracts';
 import { useWeb3React } from '@web3-react/core';
@@ -11,6 +13,11 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import PlaceBid from 'pages/sale/PlaceBid';
 import { ethers } from 'ethers';
+import Select from "react-select";
+import Expand from "react-expand-animated";
+import FormatOptionLabel from 'components/create/item/FormatOptionLabel';
+import FormatsortOptionLabel from './FormatsortOptionLabel';
+import MakeOffer from 'pages/sale/MakeOffer';
 
 const ItemDetail = (props) => {
 	const { item, fetchItem } = props;
@@ -43,6 +50,8 @@ const ItemDetail = (props) => {
 		})
 		return;
 	}
+
+
 	const [isLoading, setIsLoading] = useState(false);
 	const onCancelListing = () => {
 		setIsLoading(true);
@@ -106,6 +115,8 @@ const ItemDetail = (props) => {
 		setShowPlaceBidModal(false);
 		setBidPrice(value);
 	}
+	
+
 
 	function closePlaceBidModal() {
 		setShowPlaceBidModal(false)
@@ -163,11 +174,103 @@ const ItemDetail = (props) => {
 		});
 
 	}
+
+	const [isPriceExpand, setIsPriceExpand] = useState(false)
+	const [isListExpand, setIsListExpand] = useState(false)
+	const styles = {
+        open: { width: "100%" },
+        close: { width: "100%" }
+    };
+    const transitions = ["height", "opacity", "background"];
+	const options = [
+		{ value: "1d", label: "1 day", customAbbreviation: "1d" },
+		{ value: "2d", label: "2 days", customAbbreviation: "2d" },
+		{ value: "3d", label: "3 days", customAbbreviation: "3d" },
+		{ value: "7d", label: "7 days", customAbbreviation: "7d" },
+		{ value: "1m", label: "Bundles", customAbbreviation: "1m" },
+	];
+	// Make Offer
+	const [showOfferModal, setShowOfferModal] = useState(false);
+	const [offerPrice, setOfferPrice] = useState(0);
+	function onMakeOfferClose(value:number) {
+		setShowOfferModal(false);
+		setOfferPrice(value)
+		console.log(offerPrice)
+	}
+	function submitOffer(value:number) {
+		setOfferPrice(value)
+		console.log(value)
+	}
+
+	// Listing
+	const [showListingModal, setShowListingModal] = useState(false);
+	// About 
+	const [isAboutExpand, setIsAboutExpand] = useState(false)
+	const [isDetailExpand, setIsDetailExpand] = useState(false)
 	return (
 		<div className="imageDetail">
 			<div className="nftContainer">
-				<img src={item.assetUrl} alt="icon"
-					className="detail-img" />
+				<div className="imgContaner">
+				<img src={item.assetUrl} alt="icon" className="detail-img" />
+				</div>
+				<div className="col-div br-div">
+					<h2 className="billy-header"><Description/> Description</h2>
+					<div className="hline"></div>
+					<p className="billy-desc">Created by <a href="https://testnets.opensea.io/0x5367b4557D29cE1Ce3F333Ba1ad155d6A1754C68" target={'_blank'} className="billy-desc">5367B4</a></p>
+					<p className="billy-desc">{item.description}</p>
+					<div className="hline"></div>
+						<div className="row-div cursor-pointer s-b m-b" onClick={()=>{setIsAboutExpand(!isAboutExpand)}}>
+							<h2 className="billy-header"><ViewList/> About Boatsail NFT V2</h2>
+							<h2 className="billy-header">{!isAboutExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
+						
+						</div>
+						<Expand
+                                open={isAboutExpand}
+                                duration={300}
+                                styles={styles}
+                                transitions={transitions}
+                            >
+								<div className="col-div aic jcc">
+									<p className="billy-desc">This collection has no description yet. Contact the owner of this collection about setting it up on OpenSea!</p>
+								</div>
+                            </Expand>
+						<div className="row-div cursor-pointer s-b" onClick={()=>{setIsDetailExpand(!isDetailExpand)}}>
+						<h2 className="billy-header"><Loupe/> Details</h2>
+						<h2 className="billy-header">{!isDetailExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
+						
+						</div>
+						<Expand
+                                open={isDetailExpand}
+                                duration={300}
+                                styles={styles}
+                                transitions={transitions}
+                            >
+								<div className="col-div aic jcc">
+									<div className="row-div cursor-pointer s-b">
+										<p>Contract Address</p>
+										<a href="https://testnets.opensea.io/0x5367b4557D29cE1Ce3F333Ba1ad155d6A1754C68" target={'_blank'} className="billy-desc">0xb170...8508</a>
+									</div>
+									<div className="row-div cursor-pointer s-b">
+										<p>Token ID</p>
+										<p>2</p>
+									</div>
+									<div className="row-div cursor-pointer s-b">
+										<p>Token Standard</p>
+										<p>ERC-721</p>
+									</div>
+									<div className="row-div cursor-pointer s-b">
+										<p>Blockchain</p>
+										<p>Rinkeby</p>
+									</div>
+									<div className="row-div cursor-pointer s-b">
+										<p>Creator Fees</p>
+										<p>0%</p>
+									</div>
+								</div>
+                            </Expand>
+				</div>
+				
+				
 			</div>
 			<div className="property-box">
 				<div className="property-div">
@@ -175,12 +278,117 @@ const ItemDetail = (props) => {
 						<Link to="/velas/velas-apes-club" className="link-blue">
 							velas
 						</Link>
+						<div className="share-icons">
+						<Refresh className="share-icon"/>
 						<ShareOutlined className="share-icon" />
+						<MoreVert className="share-icon"/>
+						</div>
+						
 					</div>
 					<h2 className="billy-header">{item.name}</h2>
-					<p className="billy-desc">{item.description}</p>
+					<div className="row-div">
+						
+						<p className="billy-desc">Owned by <a href="https://testnets.opensea.io/0x5367b4557D29cE1Ce3F333Ba1ad155d6A1754C68" target={'_blank'} className="billy-desc">5367B4</a></p>
+						<p className="billy-desc"><Visibility/> 12 views</p>
+						<p className="billy-desc hover-blue"><Favorite/> 1 favorite</p>
+					</div>
 					<div className="hline"></div>
-					<ul className="attrs raw">
+					<div className="col-div br-div">
+						<p className="billy-desc m-b-5">Highest offer</p>
+						<div className="row-div m-b-5">
+							<h2 className="billy-header">0.01</h2>
+							<p className="billy-desc">($ 20.23)</p>
+						</div>
+						<div className="row-div">
+						{
+							item &&
+							<Button className="outLineBtn" onClick={() => setShowOfferModal(true)}>
+								<Loyalty/> Make Offer
+							</Button>
+						}
+
+						{
+							item && item.pair && item.auction && 
+								<Button className="outLineBtn" onClick={() => onPlaceBidModal()}>
+									Place Bid
+								</Button>
+
+						}
+						{
+							item && item.pair && item.auction && 
+								<Button className="outLineBtn" onClick={() => onSell()}>
+									Sell
+								</Button>
+						}
+
+						{
+							item && item.pair && !item.auction && 
+								<Button className="outLineBtn" onClick={() => onCancelListing()}>
+									Cancel Listing
+								</Button>
+						}
+						</div>
+					</div>
+					<div className="hline"></div>
+					<div className="col-div p-t-10 p-b-10">
+						<div className="row-div cursor-pointer s-b" onClick={()=>{setIsPriceExpand(!isPriceExpand)}}>
+						<h2 className="billy-header"><Timeline/> Price History</h2>
+						<h2 className="billy-header">{!isPriceExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
+						
+						</div>
+						<Expand
+                                open={isPriceExpand}
+                                duration={300}
+                                styles={styles}
+                                transitions={transitions}
+                            >
+                               
+							   <div className="col-div p-t-10 p-b-10">
+								<Select
+									defaultValue={options[0]}
+									formatOptionLabel={FormatsortOptionLabel}
+									options={options}
+									instanceId='chainSelect'
+									className="select-gray flex-1 m-r-5"
+								/>
+								<div className="col-div aic jcc">
+									<img src="/assets/no-chart-data.svg" alt="" />
+									<p className="billy-desc">No item activity yet</p>
+								</div>
+									
+							   </div>
+                            </Expand>
+					</div>
+					<div className="hline"></div>
+
+					<div className="col-div p-t-10 p-b-10">
+						<div className="row-div cursor-pointer s-b" onClick={()=>{setIsListExpand(!isListExpand)}}>
+						<h2 className="billy-header"><List/> Listings</h2>
+						<h2 className="billy-header">{!isListExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
+						
+						</div>
+						<Expand
+                                open={isListExpand}
+                                duration={300}
+                                styles={styles}
+                                transitions={transitions}
+                            >
+                               
+							   <div className="col-div p-t-10 p-b-10">
+								
+								<div className="col-div aic jcc">
+									<img src="/assets/empty-asks.svg" alt="" />
+									<p className="billy-desc">No listings yet</p>
+								</div>
+									
+							   </div>
+                            </Expand>
+					</div>
+					<div className="hline"></div>
+
+					{/* <p className="billy-desc">{item.description}</p> */}
+					
+					{/* <ul className="attrs raw">
 						<li>
 							<div className="name">BLOCKCHAIN</div>
 							<div className="value inline-flex">
@@ -220,9 +428,8 @@ const ItemDetail = (props) => {
 								{item.external_link}<LinkIcon />
 							</div>
 						</li>
-					</ul>
-					<div className="hline"></div>
-					<h2 className="billy-header">
+					</ul> */}
+					{/* <h2 className="billy-header">
 						Attributes<span className="text-green m-l-1em">Rarity Score: 35</span>
 					</h2>
 					<ul className="attrs raw">
@@ -250,33 +457,11 @@ const ItemDetail = (props) => {
 							<div className="name">suit</div>
 							<div className="value text-white">Blue_Suit</div>
 						</li>
-					</ul>
+					</ul> */}
 					<h2 className="billy-header with-border-bottom">Transfer History</h2>
 					<div className="hline"></div>
 					<span className="hover-blue">@ block #14773518: 0x0000…0000 ➞ 0xc501…776F </span>
-					{
-						item && !item.pair && item.auction && <div className="buy-div">
-							<Button className="buyBtn" onClick={() => onPlaceBidModal()}>
-								Place Bid
-							</Button>
-						</div>
-
-					}
-					{
-						item && !item.pair && !item.auction && <div className="buy-div">
-							<Button className="buyBtn" onClick={() => onSell()}>
-								Sell
-							</Button>
-						</div>
-					}
-
-					{
-						item && item.pair && !item.auction && <div className="buy-div">
-							<Button className="buyBtn" onClick={() => onCancelListing()}>
-								Cancel Listing
-							</Button>
-						</div>
-					}
+					
 
 
 				</div>
@@ -285,6 +470,15 @@ const ItemDetail = (props) => {
 				<PlaceBid
 					onClose={onPlaceBidClose}
 					onSubmit={submitPlaceBid}
+					balance={balance}
+					nftFee={0}
+				/>
+			)}
+
+		{showOfferModal&& (
+				<MakeOffer
+					onClose={onMakeOfferClose}
+					onSubmit={submitOffer}
 					balance={balance}
 					nftFee={0}
 				/>
