@@ -50,6 +50,7 @@ const VelasClubPage = (props) => {
         const tokenId = urlData.split("/")[len - 1];
         axios.get(`/item/${collectionAddress}/${tokenId}`)
         .then(res => {
+            console.log(res.data.item);
           setItem(res.data.item) 
           setRate(res.data.rate)          
         })

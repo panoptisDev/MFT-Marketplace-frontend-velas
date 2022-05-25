@@ -139,7 +139,7 @@ function App() {
         <Route exact path="/velas/velas-apes-club" render={(props) => (<VelasPage {...props} user={user}/>)} />
         <Route exact path="/velas/velas-apes-club/215" render={(props) => (<VelasClubPage user={user}/>)} />
         <Route exact path="/item/:collection_address/:tokenId" render={(props) => (<VelasClubPage {...props} user={user}/>)} />
-        <Route exact path="/item/:collection_address/:tokenId/sell" render={(props) => (<ListItemSalePage user={user}/>)} />
+        <Route exact path="/item/:collection_address/:tokenId/sell" render={(props) => (<ListItemSalePage {...props} user={user}/>)} />
       </Switch>
     </Router>
       <Modal

@@ -112,6 +112,7 @@ const ListItemSalePage = (props) => {
 			chainId,
 			library.getSigner()
 		);
+		console.log(tokenId);
 		if (tokenId){
 			axios.get('/sync_block')
 			.then((res) => {

@@ -26,8 +26,6 @@ const ItemDetail = (props) => {
 	const [showPlaceBidModal, setShowPlaceBidModal] = useState(false);
 	const [bidPrice, setBidPrice] = useState(0);
 	useEffect(() => {
-		console.log(item.auction);
-		console.log(account);
 		fetchBalance();
 	}, [account, chainId, library])
 
@@ -299,28 +297,27 @@ const ItemDetail = (props) => {
 						</div>
 						<div className="row-div">
 						{
-							item &&
+							item && item.owner.toLowerCase() !== account.toLowerCase() && item.pair &&
 							<Button className="outLineBtn" onClick={() => setShowOfferModal(true)}>
 								<Loyalty/> Make Offer
 							</Button>
 						}
-
 						{
-							item && item.pair && item.auction && 
+							item && item.owner.toLowerCase() !== account.toLowerCase() && !item.pair && item.auction && 
 								<Button className="outLineBtn" onClick={() => onPlaceBidModal()}>
 									Place Bid
 								</Button>
 
 						}
 						{
-							item && item.pair && item.auction && 
+							item && item.owner.toLowerCase() === account.toLowerCase() && !item.pair && !item.auction && 
 								<Button className="outLineBtn" onClick={() => onSell()}>
 									Sell
 								</Button>
 						}
 
 						{
-							item && item.pair && !item.auction && 
+							item && item.owner.toLowerCase() === account.toLowerCase() && item.pair && !item.auction && 
 								<Button className="outLineBtn" onClick={() => onCancelListing()}>
 									Cancel Listing
 								</Button>
