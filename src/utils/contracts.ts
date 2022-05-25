@@ -123,7 +123,7 @@ export async function listItem(collection, owner, token_id, price, chainId, prov
             isApproved = await setNFTApprovalForMarket(collection, true, chainId, provider);            
         }
         if (isApproved) {
-            const tx =  await marketContract.list(collection, token_id, '0x11D634457F99595aBE7B582739fd52b7ed48995A', ethers.utils.parseEther(price));
+            const tx =  await marketContract.list(collection, token_id, '0x0', ethers.utils.parseEther(price));
             const receipt = await tx.wait(2);
             if(receipt.confirmations) {
                 const interf = new ethers.utils.Interface(marketContractInfo.abi);
@@ -172,7 +172,7 @@ export async function delistItem(id, chainId, provider) {
             isApproved = await setNFTApprovalForAuction(collection, true, chainId, provider);            
         }
         if (isApproved) {
-            const tx =  await auctionContract.createAuction(collection, token_id, "0x11D634457F99595aBE7B582739fd52b7ed48995A", ethers.utils.parseEther(startPrice),startTime,endTime);
+            const tx =  await auctionContract.createAuction(collection, token_id, "0x0", ethers.utils.parseEther(startPrice),startTime,endTime);
             const receipt = await tx.wait(2);
             if(receipt.confirmations) {
                 return true

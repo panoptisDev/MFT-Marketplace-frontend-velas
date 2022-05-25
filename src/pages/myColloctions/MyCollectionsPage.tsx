@@ -13,9 +13,7 @@ import Button from 'components/customButtons/Button';
 import CustomDropdown from 'components/dropdown/CustomDropdown';
 import Card2 from 'components/cards/Card2';
 import './style.scss'
-type propsType = {
-    user : any
-}
+
 const MyCollectionsPage = (props) => {
 
     const { user } = props;
@@ -142,7 +140,7 @@ const MyCollectionsPage = (props) => {
                         <div className="collectionContainer">
                             {
                                 myCollections && myCollections.map((collection, index) => {
-                                    return <Card2 {...props} collection = {collection}/>
+                                    return <Card2 {...props} collection = {collection} key={index}/>
                                 })
                             }
 						</div>
