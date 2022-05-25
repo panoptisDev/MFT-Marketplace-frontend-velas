@@ -18,6 +18,7 @@ import Expand from "react-expand-animated";
 import FormatsortOptionLabel from './FormatsortOptionLabel';
 import MakeOffer from 'pages/sale/MakeOffer';
 import ReactPlayer from 'react-player';
+import SellPage from 'pages/sale/SellPage';
 
 const ItemDetail = (props) => {
 	const { item, fetchItem } = props;
@@ -54,6 +55,7 @@ const ItemDetail = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const onCancelListing = () => {
 		setIsLoading(true);
+		console.log(isLoading)
 		const load_toast_id = toast.loading("Please wait");
 		if (item.pair) {
 			delistItem(
@@ -200,13 +202,16 @@ const ItemDetail = (props) => {
 		setOfferPrice(value)
 		console.log(value)
 	}
-
+	// Sell page
+	const [showSellModal, setShowSellModal] = useState(false);
+	function onSellClose(value:number) {
+		setShowSellModal(false);
+		console.log(offerPrice)
+	}
 	// Listing
 	// About 
 	const [isAboutExpand, setIsAboutExpand] = useState(false)
 	const [isDetailExpand, setIsDetailExpand] = useState(false)
-
-	const [isPlaying, setIsPlaying] = useState(true);
 
 	return (
 		<div className="imageDetail">
@@ -214,7 +219,7 @@ const ItemDetail = (props) => {
 				<div className="imgContaner">
 					{item && (item.assetType === 'video' || item.assetType === 'audio')&& 
 					<ReactPlayer width="100%" height="100%" url={item.assetUrl}
-					playing={ isPlaying } controls />
+					playing={ true } controls />
 					}
 					{item && item.assetType === 'image' && <img src={item.assetUrl} alt="icon" className="detail-img" />}
 				</div>
@@ -253,7 +258,7 @@ const ItemDetail = (props) => {
 								<div className="col-div aic jcc">
 									<div className="row-div cursor-pointer s-b">
 										<p>Contract Address</p>
-										<a href="https://testnets.opensea.io/0x5367b4557D29cE1Ce3F333Ba1ad155d6A1754C68" target={'_blank'} className="billy-desc">0xb170...8508</a>
+										<a href="https://testnets.opensea.io/0x5367b4557D29cE1Ce3F333Ba1ad155d6A1754C68" target={'_blank'} rel="noreferrer"className="billy-desc">0xb170...8508</a>
 									</div>
 									<div className="row-div cursor-pointer s-b">
 										<p>Token ID</p>
@@ -293,7 +298,7 @@ const ItemDetail = (props) => {
 					<h2 className="billy-header">{item.name}</h2>
 					<div className="row-div">
 						
-						<p className="billy-desc">Owned by <a href="https://testnets.opensea.io/0x5367b4557D29cE1Ce3F333Ba1ad155d6A1754C68" target={'_blank'} className="billy-desc">5367B4</a></p>
+						<p className="billy-desc">Owned by <a href="https://testnets.opensea.io/0x5367b4557D29cE1Ce3F333Ba1ad155d6A1754C68" target={'_blank'} rel="noreferrer"className="billy-desc">5367B4</a></p>
 						<p className="billy-desc"><Visibility/> 12 views</p>
 						<p className="billy-desc hover-blue"><Favorite/> 1 favorite</p>
 					</div>
@@ -319,7 +324,7 @@ const ItemDetail = (props) => {
 						}
 						{
 							item && item.owner.toLowerCase() === account.toLowerCase() && !item.pair && !item.auction && 
-								<Button className="outLineBtn" onClick={() => onSell()}>
+								<Button className="outLineBtn" onClick={() => setShowSellModal(true)}>
 									Sell
 								</Button>
 						}
@@ -478,7 +483,7 @@ const ItemDetail = (props) => {
 				/>
 			)}
 
-		{showOfferModal&& (
+			{showOfferModal&& (
 				<MakeOffer
 					onClose={onMakeOfferClose}
 					onSubmit={submitOffer}
@@ -486,6 +491,16 @@ const ItemDetail = (props) => {
 					nftFee={0}
 				/>
 			)}
+			{showSellModal && (
+				<SellPage
+					onClose={onSellClose}
+					onSubmit={submitOffer}
+					balance={balance}
+					nftFee={0}
+				/>
+			)}
+
+			
 		</div>
 	);
 }

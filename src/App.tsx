@@ -24,10 +24,9 @@ import CollectionDetailPage from 'pages/colloctions/CollectionDetailPage/Collect
 import VelasPage from 'pages/velas/VelasPage';
 import VelasClubPage from 'pages/velas/vleasClub/VelasClubPage';
 import ListItemSalePage from 'pages/sale/ListItemSalePage';
-import { getUser, loginUser, useAuthDispatch, useAuthState } from 'context/authContext';
+import { getUser, useAuthDispatch, useAuthState } from 'context/authContext';
 import { useWeb3React } from '@web3-react/core';
 import { Button, Modal } from '@material-ui/core';
-import Topbar from 'components/topbar/Topbar';
 function App() {
   const [errorModalOpen, setErrorModalOpen] = useState(null);
   const [networkError, setNetworkError] = useState(null);
@@ -56,7 +55,7 @@ function App() {
 
   useAxios();
 
-  const {account, library, active, connector} = useWeb3React();
+  const {account, active, connector} = useWeb3React();
   
   // handle logic to recognize the connector currently being activated
   const [activatingConnector, setActivatingConnector] = React.useState()
@@ -78,29 +77,29 @@ function App() {
   }
 
   const dispatch = useAuthDispatch();
-  const { user, token } = useAuthState();
+  const { user } = useAuthState();
   
-  const login = async () => {
-    if(!account || !library) {
-      console.log('not connected to wallet')
-      return;
-    }
-    if(!user) {
-      console.log('fetching user')
-      await getUser(dispatch, account)
-    }
-    if(!user?.nonce || token) {
-      console.log('nonce is invalid or already logged in')
-      return;
-    }
-    loginUser(dispatch, account, user?.nonce, library.getSigner())
-  }
+  // const login = async () => {
+  //   if(!account || !library) {
+  //     console.log('not connected to wallet')
+  //     return;
+  //   }
+  //   if(!user) {
+  //     console.log('fetching user')
+  //     await getUser(dispatch, account)
+  //   }
+  //   if(!user?.nonce || token) {
+  //     console.log('nonce is invalid or already logged in')
+  //     return;
+  //   }
+  //   loginUser(dispatch, account, user?.nonce, library.getSigner())
+  // }
 
   useEffect(() => {      
     if (active && account){
       getUser(dispatch, account);
     }
-  }, [active, account])
+  }, [active, account, dispatch])
 
   const closeErrorModal = () => {
     window.localStorage.setItem(connectorLocalStorageKey, connectors[0].key);

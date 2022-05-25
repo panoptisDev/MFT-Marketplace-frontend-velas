@@ -11,15 +11,21 @@ export default function MarketPlaceType({setSaleType}:SaleType) {
     }
     return (
         <div className="saleType">
-            <div className="fixedPrice" onClick={()=>{clickHandle('FixedPrice')}} style={{border:`${selected==='FixedPrice'? "3px blue solid": "1px black solid"}`}}>
+            <div className="fixedPrice" 
+                onClick={()=>{clickHandle('FixedPrice')}} 
+                style={{border:`${selected==='FixedPrice'? "2px #0eabff solid": "2px #aaa solid"}`}}
+            >
                 <i className="saleIcon fas fa-tag"></i>
-                <p>Fixed</p>
-                <p>Price</p>
+                <p>Fixed Price</p>
+                <p></p>
             </div>
-            <div className="timedAuction" onClick={()=>{clickHandle('TimedAuction')}} style={{border:`${selected==='TimedAuction'? "3px blue solid": "1px black solid"}`}}>
+            <div className="timedAuction" 
+                onClick={()=>{clickHandle('TimedAuction')}} 
+                style={{border:`${selected==='TimedAuction'? "2px #0eabff solid": "2px #aaa solid"}`}}
+            >
                 <i className="saleIcon far fa-clock"></i>
-                <p>Timed</p>
-                <p>Auction</p>
+                <p>Timed Auction</p>
+                <p></p>
             </div>
         </div>
     )

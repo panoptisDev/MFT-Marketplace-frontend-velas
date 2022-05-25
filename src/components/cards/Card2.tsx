@@ -1,5 +1,3 @@
-import Button from 'components/customButtons/Button';
-import { Link } from 'react-router-dom'
 import './card.scss'
 
 const Card2 = (props) => {

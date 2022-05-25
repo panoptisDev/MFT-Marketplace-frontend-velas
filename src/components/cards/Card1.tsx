@@ -1,9 +1,7 @@
-import { useHistory } from 'react-router-dom';
 import './card.scss'
 
 const Card1 = (props) => {
   const { collection } = props;
-  const router = useHistory();
 	const gotToPage = (url:string)=>{
 		props.history.push("/collections/" + collection.name);
 	}
