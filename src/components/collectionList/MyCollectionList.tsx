@@ -8,7 +8,7 @@ const MyCollectionList = (props) => {
         <div className="collectionList" id = "sneak">
             {
                 collections && collections.map((collection, index) => {
-                    return <Card3 collection={collection}/>
+                    return <Card3 key = {index} collection={collection}/>
                 })
             }    
         </div>

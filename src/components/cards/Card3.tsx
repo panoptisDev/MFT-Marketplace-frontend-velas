@@ -1,7 +1,5 @@
-import Popover from "@material-ui/core/Popover";
-import { MoreVert, Send, Storefront, VisibilityOff } from '@material-ui/icons';
+import { MoreVert, } from '@material-ui/icons';
 import { useState } from 'react';
-import { useHistory } from "react-router-dom";
 import './card.scss'
 
 const Card3 = (props) => {
@@ -11,7 +9,6 @@ const Card3 = (props) => {
 		e.preventDefault();
 		setAnchorElTop(e.currentTarget);
 	}
-	const router = useHistory();
 	const gotToPage = (url:string)=>{
 		//router.push(url)
 	}

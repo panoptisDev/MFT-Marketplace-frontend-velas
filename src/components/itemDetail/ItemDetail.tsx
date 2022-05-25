@@ -15,14 +15,13 @@ import PlaceBid from 'pages/sale/PlaceBid';
 import { ethers } from 'ethers';
 import Select from "react-select";
 import Expand from "react-expand-animated";
-import FormatOptionLabel from 'components/create/item/FormatOptionLabel';
 import FormatsortOptionLabel from './FormatsortOptionLabel';
 import MakeOffer from 'pages/sale/MakeOffer';
 
 const ItemDetail = (props) => {
 	const { item, fetchItem } = props;
 
-	const { account, active, chainId, library } = useWeb3React();
+	const { account, chainId, library } = useWeb3React();
 	const [balance, setBalance] = useState(0)
 	const [showPlaceBidModal, setShowPlaceBidModal] = useState(false);
 	const [bidPrice, setBidPrice] = useState(0);
@@ -203,7 +202,6 @@ const ItemDetail = (props) => {
 	}
 
 	// Listing
-	const [showListingModal, setShowListingModal] = useState(false);
 	// About 
 	const [isAboutExpand, setIsAboutExpand] = useState(false)
 	const [isDetailExpand, setIsDetailExpand] = useState(false)

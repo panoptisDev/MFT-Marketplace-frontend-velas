@@ -7,6 +7,7 @@ const Card2 = (props) => {
   const goToPage = () => {
     props.history.push("/collections/" + collection.name);
   }
+  
   return (
     <div className="collectionItem">
         <div onClick={goToPage}>

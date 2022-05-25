@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Tooltip from "@material-ui/core/Tooltip";
 import { FormatListBulleted, AddSharp, Star, BarChart, LockOpen, Warning, ErrorOutline } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
@@ -34,11 +34,9 @@ export default function CreateItem() {
     const [collections, setCollections] = useState([]);
     const [selectedCollection, setSelectedCollection] = useState(null);
 
-    const [chain_Id, setChainId] = useState(4);
     const [nameItem, setItemName] = useState("");
     const [externalLink, setExternalLink] = useState("");
     const [description, setDescription] = useState("");
-    const [supply, setSupply] = useState("");
 
     const [fileSrc, setFileSrc] = useState("");
     const [fileType, setFileType] = useState("")

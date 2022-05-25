@@ -70,7 +70,7 @@ const MyCollectionsPage = (props) => {
             });            
         }
     });
-
+    console.log(myCollections)
 
     const linkList = {
 		"Import an existing smart contract": 'https://studio.manifold.xyz/',
@@ -142,7 +142,7 @@ const MyCollectionsPage = (props) => {
                         <div className="collectionContainer">
                             {
                                 myCollections && myCollections.map((collection, index) => {
-                                    return <Card2 {...props} collection = {collection}/>
+                                    return <Card2 key = {index}{...props} collection = {collection}/>
                                 })
                             }
 						</div>
