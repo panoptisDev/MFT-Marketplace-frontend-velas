@@ -124,7 +124,6 @@ const CollectionDetailPage = (props) => {
                             {
                                 collection && collection.owner.toLowerCase() === account.toLowerCase() ?
                                 <div className="setting-box">
-                                    <button className="add-btn">Add Item</button>
                                     <div className="setting-container">
                                         <div className="share-btn" onClick={showMoreActions}>
                                             <Edit />

@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import {ArrowForward, Block, Send, Storefront, VisibilityOff, Close} from '@material-ui/icons';
+import { useEffect, useState } from "react";
+import { ArrowForward, Block, Send, Storefront, VisibilityOff, Close } from '@material-ui/icons';
 import Select from "react-select";
 import axios from "axios";
 import FormatsortOptionLabel from "../FormatsortOptionLabel";
@@ -11,7 +11,7 @@ import ActivitiesTable from "../activitiesTable/ActivitiesTable";
 import DataCard from "../dataCard/DataCard";
 import MyCollectionList from "components/collectionList/MyCollectionList";
 const ProfileTabBody = (props) => {
-	const { tab , userAddress } = props;
+	const { tab, userAddress } = props;
 	const options = [
 		{ value: "single_items", label: "Single items", customAbbreviation: "single_items" },
 		{ value: "all_items", label: "All items", customAbbreviation: "all_items" },
@@ -75,7 +75,7 @@ const ProfileTabBody = (props) => {
 		setCommandType("");
 		setSelectedList([]);
 	};
-    // const router = useHistory();
+	// const router = useHistory();
 	const handleClickCommand = () => {
 		if (selectedList.length > 0 && commandType !== "hide") {
 			// router.push({
@@ -85,30 +85,29 @@ const ProfileTabBody = (props) => {
 		}
 	};
 
-    const [collections, setCollections] = useState(undefined);
-    useEffect(() => {
-        if (!collections){
-            if (userAddress && userAddress !== ""){
-                axios.get(`/collection`, {params : {owner : userAddress}})
-                .then(res => {
-                    setCollections(res.data.collections);
-                });
-            }
-        }
-    });
+	const [collections, setCollections] = useState(undefined);
+	useEffect(() => {
+		if (!collections) {
+			if (userAddress && userAddress !== "") {
+				axios.get(`/collection`, { params: { owner: userAddress } })
+					.then(res => {
+						setCollections(res.data.collections);
+					});
+			}
+		}
+	});
 
-    const [createdCollections, setCreatedCollections] = useState(undefined);
-    useEffect(() => {
-        if (!createdCollections){
-            if (userAddress && userAddress !== ""){
-                axios.get(`/collection`, {params : {creater : userAddress}})
-                .then(res => {
-					console.log(collections)
-                    setCreatedCollections(res.data.collections);
-                });
-            }
-        }
-    });
+	const [createdCollections, setCreatedCollections] = useState(undefined);
+	useEffect(() => {
+		if (!createdCollections) {
+			if (userAddress && userAddress !== "") {
+				axios.get(`/collection`, { params: { creater: userAddress } })
+					.then(res => {
+						setCreatedCollections(res.data.collections);
+					});
+			}
+		}
+	});
 
 	return (
 		<div className="tabBody">
@@ -116,9 +115,9 @@ const ProfileTabBody = (props) => {
 				<div className={"left-filter-bar" + (isShowLeftMenu ? " active" : "")}>
 					{isShowLeftMenu
 						? <LeftFilterBox handleChangeFilterCondition={setFilterConditions} filterConditions={filterConditions}
-										 handleClickToggleBtn={handleClickToggleBtn} tab={tab} />
+							handleClickToggleBtn={handleClickToggleBtn} tab={tab} />
 						: <div className="toggle-box" onClick={handleClickToggleBtn}>
-							<ArrowForward className="toggle-btn"/>
+							<ArrowForward className="toggle-btn" />
 						</div>
 					}
 				</div>
@@ -126,14 +125,14 @@ const ProfileTabBody = (props) => {
 			{isShowMobileFilterMenu &&
 				<div className="mobile-filter-bar">
 					<LeftFilterBox handleChangeFilterCondition={setFilterConditions} filterConditions={filterConditions}
-								   handleClickToggleBtn={handleClickToggleBtn} tab={tab}
-								   hideMenu={() => setIsShowMobileFilterMenu(false)} isMobile={true} />
+						handleClickToggleBtn={handleClickToggleBtn} tab={tab}
+						hideMenu={() => setIsShowMobileFilterMenu(false)} isMobile={true} />
 				</div>
 			}
 			<div className="content-box">
 				{!(tab === "activity" || tab.includes("bids") || tab.includes("listings")) &&
 					<div className="search-box">
-						<input className="bordered-input m-r-5 flex-1" placeholder="Search"/>
+						<input className="bordered-input m-r-5 flex-1" placeholder="Search" />
 						<div className="flex-1 sort-box">
 							<Select
 								defaultValue={options[0]}
@@ -151,13 +150,13 @@ const ProfileTabBody = (props) => {
 							/>
 						</div>
 						{
-				!isShowSubMenu && !isShowMobileFilterMenu && tab !== "favorites" &&
-				<div className="filterButton">
-					<div className="filter-btn" onClick={() => setIsShowMobileFilterMenu(!isShowMobileFilterMenu)}>
-						Filter
-					</div>
-				</div>
-			}
+							!isShowSubMenu && !isShowMobileFilterMenu && tab !== "favorites" &&
+							<div className="filterButton">
+								<div className="filter-btn" onClick={() => setIsShowMobileFilterMenu(!isShowMobileFilterMenu)}>
+									Filter
+								</div>
+							</div>
+						}
 					</div>
 				}
 				{filterConditions.length > 0 &&
@@ -173,24 +172,12 @@ const ProfileTabBody = (props) => {
 						<div className="clear-btn" onClick={removeAllConditions}>Clear All</div>
 					</div>
 				}
-				{ tab === "collections" && <MyCollectionList collections={collections}/>}
-				{ (tab === "created" || tab === "created_collections") && <MyCollectionList collections={createdCollections}/>}
-				{ tab === "hidden" && <MyCollectionList collections={collections}/>
-                    // <MyCollectionList  handleCommand={handleCommand}/>
-					// <CollectionList handleCommand={handleCommand} handleClickItem={handleClickItem}
-					// 			selectedList={selectedList} isDoingCommand={false} />
-				}
-				{tab === "favorites" &&  <MyCollectionList collections={createdCollections}/>
-					//<MyCollectionList handleCommand={handleCommand}/>
-					// <MyNFTsList handleCommand={handleCommand} handleClickItem={handleClickItem}
-					// 			selectedList={selectedList} isDoingCommand={false} hasAction={false} />
-				}
-				{tab === "activity" &&
-					<ActivitiesTable />
-				}
-				{(tab.includes("bids") || tab.includes("listings")) &&
-					<DataCard />
-				}
+				{tab === "collections" && <MyCollectionList {...props} collections={collections} />}
+				{(tab === "created" || tab === "created_collections") && <MyCollectionList collections={createdCollections} />}
+				{tab === "hidden" && <MyCollectionList collections={collections} />}
+				{tab === "favorites" && <MyCollectionList collections={createdCollections} />}
+				{tab === "activity" && <ActivitiesTable />}
+				{(tab.includes("bids") || tab.includes("listings")) && <DataCard />}
 			</div>
 			{
 				isShowSubMenu &&
@@ -201,7 +188,7 @@ const ProfileTabBody = (props) => {
 								selectedList.map((item, key) =>
 									<div className="cart-item" key={key}>
 										<img src="https://m.raregems.io/c/21725?optimizer=image&amp;width=400"
-											 className="cart-img" alt="cart-img" />
+											className="cart-img" alt="cart-img" />
 									</div>
 								)
 							}
@@ -212,10 +199,10 @@ const ProfileTabBody = (props) => {
 									verification status.</p>
 							}
 						</div>
-						<Button 
-                            className="transfer-btn" 
-                            onClick={handleClickCommand}
-                        >
+						<Button
+							className="transfer-btn"
+							onClick={handleClickCommand}
+						>
 							{commandType === "transfer" ? <Send /> : (commandType === "sell" ? <Storefront /> : <VisibilityOff />)}
 							{commandType === "transfer" ? "Transfer" : (commandType === "sell" ? "Sell" : "Hide")}
 						</Button>
@@ -223,7 +210,7 @@ const ProfileTabBody = (props) => {
 					</div>
 				</div>
 			}
-			
+
 		</div>
 	);
 }
