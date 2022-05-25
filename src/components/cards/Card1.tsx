@@ -7,6 +7,7 @@ const Card1 = (props) => {
 	const gotToPage = (url:string)=>{
 		props.history.push("/collections/" + collection.name);
 	}
+  
   return (
     <div className='card' onClick={()=>{gotToPage(collection.address)}}>
       <div className="imgContainer">

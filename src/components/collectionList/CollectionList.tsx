@@ -3,6 +3,7 @@ import './collectionList.scss'
 
 const CollectionList = (props) => {
     const { collections } = props;
+    
     return (
         <div className="collectionList" id = "sneak">
             {

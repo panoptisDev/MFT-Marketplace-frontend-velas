@@ -68,7 +68,6 @@ const MyCollectionsPage = (props) => {
             });            
         }
     });
-    console.log(myCollections)
 
     const linkList = {
 		"Import an existing smart contract": 'https://studio.manifold.xyz/',

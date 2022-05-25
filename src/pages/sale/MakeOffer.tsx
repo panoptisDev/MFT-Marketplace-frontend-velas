@@ -58,6 +58,7 @@ export default function MakeOffer({ balance, nftFee, onClose, onSubmit }) {
         >
         <div className='modal-content'>
           <div className="place_bid_title">Make an offer</div>
+          <p className='flex-start'>Price</p>
           <div className="placeContainer">
             <Select
               defaultValue={options[0]}
@@ -66,7 +67,7 @@ export default function MakeOffer({ balance, nftFee, onClose, onSubmit }) {
               instanceId='chainSelect'
               className="select-gray flex-1 m-r-5"
             />
-            <input className='price' name="price" onChange={onChangePrice} placeholder="Your Offer Price:" />
+            <input className='price' name="price" onChange={onChangePrice} placeholder="Amount" />
             <span className='usd'>$0.00</span>
           </div>
           <div className="balance">
@@ -91,7 +92,7 @@ export default function MakeOffer({ balance, nftFee, onClose, onSubmit }) {
               defaultChecked={isChecked}
               onChange={() => setIsChecked(!isChecked)} 
             />
-            <p>Blockchain transactions are irreversible.</p>
+            <p>I agree to <a href="/" target={'_blank'}>Terms of Service.</a></p>
           </div>
           <br />
           <div className="btns">
@@ -101,7 +102,7 @@ export default function MakeOffer({ balance, nftFee, onClose, onSubmit }) {
               color="primary"
               disabled = {!isChecked}
             >Make Offer</Button>      
-            <Button className="" onClick={handleClose} variant="contained" color="primary">Close</Button>            
+            <Button className="addFund" onClick={handleClose} variant="contained" color="primary">Add Funds</Button>            
           </div>
         </div>
       </Modal>

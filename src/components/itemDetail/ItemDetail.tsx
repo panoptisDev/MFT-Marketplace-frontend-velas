@@ -17,6 +17,7 @@ import Select from "react-select";
 import Expand from "react-expand-animated";
 import FormatsortOptionLabel from './FormatsortOptionLabel';
 import MakeOffer from 'pages/sale/MakeOffer';
+import ReactPlayer from 'react-player';
 
 const ItemDetail = (props) => {
 	const { item, fetchItem } = props;
@@ -47,6 +48,7 @@ const ItemDetail = (props) => {
 		})
 		return;
 	}
+	
 
 
 	const [isLoading, setIsLoading] = useState(false);
@@ -203,11 +205,18 @@ const ItemDetail = (props) => {
 	// About 
 	const [isAboutExpand, setIsAboutExpand] = useState(false)
 	const [isDetailExpand, setIsDetailExpand] = useState(false)
+
+	const [isPlaying, setIsPlaying] = useState(true);
+
 	return (
 		<div className="imageDetail">
 			<div className="nftContainer">
 				<div className="imgContaner">
-				<img src={item.assetUrl} alt="icon" className="detail-img" />
+					{item && (item.assetType === 'video' || item.assetType === 'audio')&& 
+					<ReactPlayer width="100%" height="100%" url={item.assetUrl}
+					playing={ isPlaying } controls />
+					}
+					{item && item.assetType === 'image' && <img src={item.assetUrl} alt="icon" className="detail-img" />}
 				</div>
 				<div className="col-div br-div">
 					<h2 className="billy-header"><Description/> Description</h2>
@@ -307,7 +316,6 @@ const ItemDetail = (props) => {
 								<Button className="outLineBtn" onClick={() => onPlaceBidModal()}>
 									Place Bid
 								</Button>
-
 						}
 						{
 							item && item.owner.toLowerCase() === account.toLowerCase() && !item.pair && !item.auction && 
