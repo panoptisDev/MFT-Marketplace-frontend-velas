@@ -309,8 +309,32 @@ const ItemDetail = (props) => {
                                 transitions={transitions}
                             >
 								<div className="col-div aic jcc">
-										<p>Properties</p>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum obcaecati numquam nihil quasi dolor possimus similique accusamus nam sequi quo repellat aliquid ullam fugit nemo, quae et! Aut, consequatur totam!</p>
+								<ul className="attrs raw">
+										<li className="with-border">
+											<div className="name">background</div>
+											<div className="value text-white">Green</div>
+										</li>
+										<li className="with-border">
+											<div className="name">fur</div>
+											<div className="value text-white">Light_Brown</div>
+										</li>
+										<li className="with-border">
+											<div className="name">body</div>
+											<div className="value text-white">Dog</div>
+										</li>
+										<li className="with-border">
+											<div className="name">mouth</div>
+											<div className="value text-white">Normal</div>
+										</li>
+										<li className="with-border">
+											<div className="name">eyes</div>
+											<div className="value text-white">Small</div>
+										</li>
+										<li className="with-border">
+											<div className="name">suit</div>
+											<div className="value text-white">Blue_Suit</div>
+										</li>
+									</ul>
 								</div>
 						</Expand>
 						<div className="hline"></div>
@@ -357,7 +381,7 @@ const ItemDetail = (props) => {
                                 transitions={transitions}
                             >
 								<div className="col-div aic jcc">
-										<p>Localable Content</p>
+										<p>Locakable Content</p>
 										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum obcaecati numquam nihil quasi dolor possimus similique accusamus nam sequi quo repellat aliquid ullam fugit nemo, quae et! Aut, consequatur totam!</p>
 								</div>
 						</Expand>
