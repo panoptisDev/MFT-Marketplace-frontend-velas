@@ -160,6 +160,18 @@ export async function delistItem(id, chainId, provider) {
     }
 }
 
+export async function buy(account, id, price, chainId, provider) {
+    const marketContract = getContractObj('BoatsailMarket', chainId, provider)
+    if (!marketContract) return false;
+    try {
+           const tx = await marketContract.buy(id)
+           await tx.wait(2)
+           return true
+    } catch (e) {
+      console.log(e)
+      return false
+    }
+}
 
 /**
  * Auction Contract Management

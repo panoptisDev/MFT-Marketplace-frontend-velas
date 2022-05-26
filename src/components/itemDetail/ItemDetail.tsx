@@ -9,7 +9,7 @@ import './itemDetail.scss'
 import Button from "components/customButtons/Button";
 
 import { Link } from "react-router-dom";
-import { bidOnAuction, delistItem, finalizeAuction } from 'utils/contracts';
+import { bidOnAuction, buy, delistItem, finalizeAuction } from 'utils/contracts';
 import { useWeb3React } from '@web3-react/core';
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
@@ -224,7 +224,48 @@ const ItemDetail = (props) => {
 	}
 
 	function submitBuy(){
-
+		if (!item.pair){
+			console.log("Item Buy is disabled");
+			return;
+		}
+		if (balance  < item.pair.price){
+			toast.error("Your available balance is less than the price!");
+			return;
+		}
+		setIsLoading(true);
+		const load_toast_id = toast.loading("Please wait...");
+		buy(
+            account,
+            item.pair.id,
+            item.pair.price,
+            chainId,
+            library.getSigner()
+        ).then((tokenId) => {
+            if (tokenId) {
+                axios.get(`/api/sync_block`)
+                .then((res) => {
+                    setIsLoading(false);
+                    setShowBuyModal(false)
+					toast.dismiss(load_toast_id);
+                    toast.success("Bought Successfully");     
+                    props.history.push(`/seller/${account}`)                    
+                    return true;
+                })
+                .catch((error) => {
+                    if (error.response) {
+						toast.dismiss(load_toast_id);
+                    	toast.error("Failed Transaction");     
+                        setIsLoading(false);
+                    	setShowBuyModal(false);
+                    }
+                });
+            } else {
+                toast.dismiss(load_toast_id);
+				toast.error("Failed Transaction");     
+				setIsLoading(false);
+				setShowBuyModal(false);
+            }
+        });
 	}
 
 	//Accept Bid
