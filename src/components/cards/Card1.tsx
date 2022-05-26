@@ -2,11 +2,7 @@ import './card.scss'
 
 const Card1 = (props) => {
   const { collection } = props;
-<<<<<<< Updated upstream
-	const gotToPage = (url:string)=>{
-=======
 	const gotToPage = ()=>{
->>>>>>> Stashed changes
 		props.history.push("/collections/" + collection.name);
 	}
   

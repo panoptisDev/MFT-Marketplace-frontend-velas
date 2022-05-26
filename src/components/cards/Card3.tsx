@@ -9,13 +9,8 @@ const Card3 = (props) => {
 		e.preventDefault();
 		setAnchorElTop(e.currentTarget);
 	}
-<<<<<<< Updated upstream
-	const gotToPage = (url:string)=>{
-		//router.push(url)
-=======
 	const gotToPage = () => {
 		props.history.push("/collections/" + props.collection.name);
->>>>>>> Stashed changes
 	}
 	return (
 		<div className='card'>
