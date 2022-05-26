@@ -651,7 +651,6 @@ const ItemDetail = (props) => {
 																<div>{bid.bidPrice}</div>
 																<div>{Math.ceil((parseFloat(item.auction.endTime) - parseFloat(bid.timestamp)) / (60 * 60 * 24))} days</div>
 																<div>{String(bid.from).substring(2, 7).toUpperCase()}</div>
-																<button onClick={onBidAccept}>Accept</button>
 															</div>
 														})
 													}
