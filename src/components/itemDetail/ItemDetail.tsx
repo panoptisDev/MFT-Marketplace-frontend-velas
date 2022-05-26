@@ -308,7 +308,7 @@ const ItemDetail = (props) => {
                                 styles={styles}
                                 transitions={transitions}
                             >
-								<div className="col-div aic jcc">
+								<div className="col-div aic jcc w-100">
 								<ul className="attrs raw">
 										<li className="with-border">
 											<div className="name">background</div>
