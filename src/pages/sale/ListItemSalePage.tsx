@@ -14,19 +14,11 @@ import SaleType from './SaleType';
 import { Modal } from '@material-ui/core';
 import { useWeb3React } from '@web3-react/core';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-const ListItemSalePage = ({ balance, nftFee, onClose, onSubmit }) => {
+const ListItemSalePage = ({ item, balance, nftFee, onClose, onSubmit }) => {
 
 	const { register, handleSubmit } = useForm();
 
 	const { account, active, chainId, library } = useWeb3React();
-
-	const [item, setItem] = useState(null);
-	const location = useLocation();
-	useEffect(() => {
-		const state = location.state;
-        setItem(state && state["item"]);
-	})
-
 	const [saleType, setSaleType] = useState("FixedPrice");	
 
 	const [listing, setListing] = useState(false);
@@ -118,9 +110,6 @@ const ListItemSalePage = ({ balance, nftFee, onClose, onSubmit }) => {
 	const handleClose = () => {
 		onClose();
 	};
-	useEffect(() => {
-		console.log(saleType);
-	})
 	
 	return (
 
@@ -148,7 +137,7 @@ const ListItemSalePage = ({ balance, nftFee, onClose, onSubmit }) => {
 							{saleType === 'FixedPrice' ? <FixedPrice register={register} balance = {balance}/> : <></>}
 							{saleType === 'TimedAuction' ? <TimedAuction register={register} /> : <></>}
 						</div>
-						<Button onClick={handleClose} className="listBtn outLineBtn"><strong>Complete Listing</strong></Button>
+						<Button className="listBtn outLineBtn"><strong>Complete Listing</strong></Button>
 					</form>
 			</div>
 		</Modal>

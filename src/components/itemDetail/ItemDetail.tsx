@@ -60,7 +60,6 @@ const ItemDetail = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const onCancelListing = () => {
 		setIsLoading(true);
-		console.log(isLoading)
 		const load_toast_id = toast.loading("Please wait");
 		if (item.pair) {
 			delistItem(
@@ -508,12 +507,13 @@ const ItemDetail = (props) => {
 					nftFee={0}
 				/>
 			)}
-			{showListingModal && (
+			{showListingModal && item && (
 				<ListItemSalePage
 					onClose={onListingClose}
 					onSubmit={onCancelListing}
 					balance={balance}
 					nftFee={0}
+					item={item}
 				/>
 			)}
 			{showCancelListingModal && (
