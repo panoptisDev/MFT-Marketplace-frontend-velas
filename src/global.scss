@@ -14,7 +14,7 @@ $str_color:rgb(60, 190, 112);
 
 @mixin select(){
     position: relative;
-    width: 10%;
+    width: 30%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,7 +31,9 @@ $str_color:rgb(60, 190, 112);
         font-size: 1.2rem;
         cursor: pointer;
         line-height: 1.1;
-        background-color: #fff;
+        // background-color: #fff;
+        background-color: #ffffff33;
+        color: #fff;
         @include mobile_potrait{
             font-size: 0.8rem;
         }

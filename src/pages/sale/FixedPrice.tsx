@@ -8,9 +8,9 @@ export default function FixedPrice({register}) {
                 <div className="inputPart">
                     <input {...register("price")} type="number" step=".001" placeholder="Enter price for on piece" />
                     <div className="tokenType">
-                    <select>
-                        <option value="eth">ETH</option>
-                    </select>     
+                        <select>
+                            <option value="eth">ETH</option>
+                        </select>     
                     </div>
                 </div>
                 <div className="bellow">

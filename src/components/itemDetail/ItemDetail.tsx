@@ -19,6 +19,8 @@ import FormatsortOptionLabel from './FormatsortOptionLabel';
 import MakeOffer from 'pages/sale/MakeOffer';
 import ReactPlayer from 'react-player';
 import SellPage from 'pages/sale/SellPage';
+import ListItemSalePage from 'pages/sale/ListItemSalePage';
+import CancelListPage from 'pages/sale/CancelListPage';
 
 const ItemDetail = (props) => {
 	const { item, fetchItem } = props;
@@ -43,11 +45,11 @@ const ItemDetail = (props) => {
 	}, []);
 
 	const onSell = () => {
-		props.history.push({
-			pathname: `/item/${item.itemCollection}/${item.tokenId}/sell`,
-			state: { item: item }
-		})
-		return;
+		// props.history.push({
+		// 	pathname: `/item/${item.itemCollection}/${item.tokenId}/sell`,
+		// 	state: { item: item }
+		// })
+		// return;
 	}
 	
 
@@ -209,6 +211,18 @@ const ItemDetail = (props) => {
 		console.log(offerPrice)
 	}
 	// Listing
+	const [showListingModal, setShowListingModal] = useState(false);
+	function onListingClose(value:number) {
+		setShowListingModal(false);
+		console.log(offerPrice)
+	}
+	// Cancel Listing
+	const [showCancelListingModal, setShowCancelListingModal] = useState(false);
+	function onCancelListingClose(value:number) {
+		setShowCancelListingModal(false);
+		console.log(offerPrice)
+	}
+
 	// About 
 	const [isAboutExpand, setIsAboutExpand] = useState(false)
 	const [isDetailExpand, setIsDetailExpand] = useState(false)
@@ -331,7 +345,7 @@ const ItemDetail = (props) => {
 
 						{
 							item && item.owner.toLowerCase() === account.toLowerCase() && item.pair && !item.auction && 
-								<Button className="outLineBtn" onClick={() => onCancelListing()}>
+								<Button className="outLineBtn" onClick={() => setShowListingModal(true)}>
 									Cancel Listing
 								</Button>
 						}
@@ -494,13 +508,27 @@ const ItemDetail = (props) => {
 			{showSellModal && (
 				<SellPage
 					onClose={onSellClose}
-					onSubmit={submitOffer}
+					onSubmit={onSell}
 					balance={balance}
 					nftFee={0}
 				/>
 			)}
-
-			
+			{showListingModal && (
+				<ListItemSalePage
+					onClose={onListingClose}
+					onSubmit={onCancelListing}
+					balance={balance}
+					nftFee={0}
+				/>
+			)}
+			{showCancelListingModal && (
+				<CancelListPage
+					onClose={onCancelListingClose}
+					onSubmit={onCancelListingClose}
+					balance={balance}
+					nftFee={0}
+				/>
+			)}
 		</div>
 	);
 }

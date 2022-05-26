@@ -1,5 +1,29 @@
 
 	@import "../../global.scss";
+
+    .listingPage{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .modal-content {
+            width: 45rem;
+            background: #3a3a3aee;
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px #0eabff65 solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            .row-div{
+                width: calc(100% - 250px);
+                align-items: flex-start;
+                .closeBtn{
+                    border: none;
+                }
+            }
+        }
+    }
     .saleContainer{
         padding: 20px;
         width: calc(100% - 250px);
@@ -40,6 +64,7 @@
             }
             .formControl {
                 margin-bottom: 30px;
+
                 @include mobile_potrait{
                     width: 100%;
                 }

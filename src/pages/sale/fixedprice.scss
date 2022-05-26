@@ -16,6 +16,7 @@
             width: 100%;
             font-size: 1.2rem;
             font-weight: 500;
+            color: #fff;
             @include mobile_potrait{
                 font-size: 1rem;
             }
@@ -34,9 +35,13 @@
             border-bottom: 2px gray solid;
             
             input{
-                width: 90%;
+                width: 65%;
                 border: none;
                 font-size: 1rem;
+                padding: 0.5rem;
+                border-radius: 0.25em;
+                background-color: #ffffff33;
+                color: #fff;
                 @include mobile_potrait{
                     font-size: 0.8rem;
                     width: 80%;
@@ -50,6 +55,7 @@
             }
             span{
                 font-size: 1rem;
+                
                 @include mobile_potrait{
                     font-size: 0.8rem;
                 }
@@ -60,6 +66,7 @@
             .tokenType{
                 @include select();
             }
+            
         }
         .bellow{
             width: 100%;
@@ -67,6 +74,7 @@
             p{
                 width: 100%;
                 margin-bottom: 1vh;
+                color: #fff;
                 @include mobile_potrait{
                     font-size: 0.6rem;
                 }
