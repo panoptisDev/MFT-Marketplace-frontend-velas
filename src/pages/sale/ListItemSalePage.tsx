@@ -143,9 +143,9 @@ const ListItemSalePage = ({ balance, nftFee, onClose, onSubmit }) => {
 					  <Button onClick={handleClose} className="closeBtn"><ArrowBackIcon/></Button>
 					  </div>
 					<form className='saleContainer' onSubmit={handleSubmit(onList)}>
-						<div>
+						<div className='row-div'>
 							<SaleType setSaleType={setSaleType}></SaleType>
-							{saleType === 'FixedPrice' ? <FixedPrice register={register}/> : <></>}
+							{saleType === 'FixedPrice' ? <FixedPrice register={register} balance = {balance}/> : <></>}
 							{saleType === 'TimedAuction' ? <TimedAuction register={register} /> : <></>}
 						</div>
 						<Button onClick={handleClose} className="listBtn outLineBtn"><strong>Complete Listing</strong></Button>

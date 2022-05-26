@@ -90,7 +90,6 @@ export default function SellPage({ balance, nftFee, onClose, onSubmit }) {
               className="select-gray flex-1 radius1"
             />
           </div>
-
           <p className='flex-start'>Price</p>
           <div className="placeContainer">
             <Select

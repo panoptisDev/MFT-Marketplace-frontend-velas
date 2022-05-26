@@ -1,5 +1,8 @@
-import {  ShareOutlined, ExpandLess } from '@material-ui/icons';
+import {  ShareOutlined, ExpandLess, LocalLibrary } from '@material-ui/icons';
 import {Loupe, ViewList, MoreVert, Refresh, Visibility, Favorite, Loyalty, ExpandMore, Timeline, List, Description} from '@material-ui/icons';
+import TaskIcon from '@mui/icons-material/Task';
+import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 // import LoupeIcon from '@mui/icons-material/Loupe';
 // material-ui components
 import './itemDetail.scss'
@@ -226,7 +229,10 @@ const ItemDetail = (props) => {
 	// About 
 	const [isAboutExpand, setIsAboutExpand] = useState(false)
 	const [isDetailExpand, setIsDetailExpand] = useState(false)
-
+	const [isLocalExpand, setIsLocalExpand] = useState(false)
+	const [isPropertyExpand, setIsPropertyExpand] = useState(false)
+	const [isStatsExpand, setIsStatsExpand] = useState(false)
+	const [isLevelExpand, setIsLevelExpand] = useState(false)
 	return (
 		<div className="imageDetail">
 			<div className="nftContainer">
@@ -257,11 +263,10 @@ const ItemDetail = (props) => {
 								<div className="col-div aic jcc">
 									<p className="billy-desc">This collection has no description yet. Contact the owner of this collection about setting it up on OpenSea!</p>
 								</div>
-                            </Expand>
-						<div className="row-div cursor-pointer s-b" onClick={()=>{setIsDetailExpand(!isDetailExpand)}}>
-						<h2 className="billy-header"><Loupe/> Details</h2>
-						<h2 className="billy-header">{!isDetailExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
-						
+						</Expand>
+						<div className="row-div cursor-pointer s-b mt-1" onClick={()=>{setIsDetailExpand(!isDetailExpand)}}>
+							<h2 className="billy-header"><Loupe/> Details</h2>
+							<h2 className="billy-header">{!isDetailExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
 						</div>
 						<Expand
                                 open={isDetailExpand}
@@ -291,7 +296,73 @@ const ItemDetail = (props) => {
 										<p>0%</p>
 									</div>
 								</div>
-                            </Expand>
+						</Expand>
+						<div className="hline"></div>
+
+						<div className="row-div cursor-pointer s-b mt-1" onClick={()=>{setIsPropertyExpand(!isPropertyExpand)}}>
+							<h2 className="billy-header"><TaskIcon/> Properties</h2>
+							<h2 className="billy-header">{!isPropertyExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
+						</div>
+						<Expand
+                                open={isPropertyExpand}
+                                duration={300}
+                                styles={styles}
+                                transitions={transitions}
+                            >
+								<div className="col-div aic jcc">
+										<p>Properties</p>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum obcaecati numquam nihil quasi dolor possimus similique accusamus nam sequi quo repellat aliquid ullam fugit nemo, quae et! Aut, consequatur totam!</p>
+								</div>
+						</Expand>
+						<div className="hline"></div>
+						<div className="row-div cursor-pointer s-b mt-1" onClick={()=>{setIsStatsExpand(!isStatsExpand)}}>
+							<h2 className="billy-header"><SettingsApplicationsIcon/> Stats</h2>
+							<h2 className="billy-header">{!isStatsExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
+						</div>
+						<Expand
+                                open={isStatsExpand}
+                                duration={300}
+                                styles={styles}
+                                transitions={transitions}
+                            >
+								<div className="col-div aic jcc">
+										<p>Stats</p>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum obcaecati numquam nihil quasi dolor possimus similique accusamus nam sequi quo repellat aliquid ullam fugit nemo, quae et! Aut, consequatur totam!</p>
+								</div>
+						</Expand>
+						<div className="hline"></div>
+						<div className="row-div cursor-pointer s-b mt-1" onClick={()=>{setIsLevelExpand(!isLevelExpand)}}>
+							<h2 className="billy-header"><AssessmentIcon/> Level</h2>
+							<h2 className="billy-header">{!isLevelExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
+						</div>
+						<Expand
+                                open={isLevelExpand}
+                                duration={300}
+                                styles={styles}
+                                transitions={transitions}
+                            >
+								<div className="col-div aic jcc">
+										<p>Stats</p>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum obcaecati numquam nihil quasi dolor possimus similique accusamus nam sequi quo repellat aliquid ullam fugit nemo, quae et! Aut, consequatur totam!</p>
+								</div>
+						</Expand>
+						<div className="hline"></div>
+						<div className="row-div cursor-pointer s-b mt-1" onClick={()=>{setIsLocalExpand(!isLocalExpand)}}>
+							<h2 className="billy-header"><LocalLibrary/> Localable Content</h2>
+							<h2 className="billy-header">{!isLocalExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
+						</div>
+						<Expand
+                                open={isLocalExpand}
+                                duration={300}
+                                styles={styles}
+                                transitions={transitions}
+                            >
+								<div className="col-div aic jcc">
+										<p>Localable Content</p>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum obcaecati numquam nihil quasi dolor possimus similique accusamus nam sequi quo repellat aliquid ullam fugit nemo, quae et! Aut, consequatur totam!</p>
+								</div>
+						</Expand>
+
 				</div>
 				
 				
