@@ -59,7 +59,7 @@ export async function setNFTApprovalForAuction(collection, approved, chainId, pr
 
 export async function addItem(collection, uri, royalty, chainId, provider) {
     const collectionContract = getCollectionContract(collection, chainId, provider);
-    const BoatsailNFTContractInfo = getContractInfo('BoatsailNFT', chainId);
+    //const BoatsailNFTContractInfo = getContractInfo('BoatsailNFT', chainId);
     try {
         const tx = await collectionContract.mintTo(uri,royalty)
         // const receipt = await tx.wait(2);
@@ -123,20 +123,22 @@ export async function listItem(collection, owner, token_id, price, chainId, prov
             isApproved = await setNFTApprovalForMarket(collection, true, chainId, provider);            
         }
         if (isApproved) {
-            const tx =  await marketContract.list(collection, token_id, '0x0', ethers.utils.parseEther(price));
+            const tx =  await marketContract.list(collection, token_id, ethers.constants.AddressZero, ethers.utils.parseEther(price));
             const receipt = await tx.wait(2);
             if(receipt.confirmations) {
-                const interf = new ethers.utils.Interface(marketContractInfo.abi);
-                const logs = receipt.logs;
-                let pairId  = 0;
-                for(let index = 0; index < logs.length; index ++) {
-                    const log = logs[index];
-                    if(marketContractInfo.address.toLowerCase() === log.address.toLowerCase()) {
-                        pairId = interf.parseLog(log).args.id.toString();
-                        return pairId;
-                    }
-                }
+                return true;
+                // const interf = new ethers.utils.Interface(marketContractInfo.abi);
+                // const logs = receipt.logs;
+                // let pairId  = 0;
+                // for(let index = 0; index < logs.length; index ++) {
+                //     const log = logs[index];
+                //     if(marketContractInfo.address.toLowerCase() === log.address.toLowerCase()) {
+                //         pairId = interf.parseLog(log).args.id.toString();
+                //         return pairId;
+                //     }
+                // }
             }
+            return false;
         }               
         return false;
     }catch(e) {

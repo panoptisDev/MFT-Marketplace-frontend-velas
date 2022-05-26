@@ -2,12 +2,12 @@ import './card.scss'
 
 const Card1 = (props) => {
   const { collection } = props;
-	const gotToPage = (url:string)=>{
+	const gotToPage = ()=>{
 		props.history.push("/collections/" + collection.name);
 	}
   
   return (
-    <div className='card' onClick={()=>{gotToPage(collection.address)}}>
+    <div className='card' onClick={gotToPage}>
       <div className="imgContainer">
       <img src={collection.logo_uri} alt="" className="nft" />
         

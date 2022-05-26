@@ -137,7 +137,7 @@ const Profile = (props) => {
 			let banner_hash = await getIpfsHashFromFile(banner);
 			banner_temp_url = `https://boatsail_testing.mypinata.cloud/ipfs/${banner_hash}`;
 		}
-		const data: any = {
+		const data = {
 			address: account,
 			name: name || "NoName",
 			bio: bio || "",
@@ -150,7 +150,7 @@ const Profile = (props) => {
 			// logo_url: "https://boatsail_testing.mypinata.cloud/ipfs/QmdkB2xajtJA9GmuqEpTuwTzpMLVj7Ym4YhToyp43DDCnv",
 			// banner_url: "https://boatsail_testing.mypinata.cloud/ipfs/QmW6bqSEvgr4tFScBdkpQ2SjUuu2QSJ7WVdxfkN2AHGkYf"
 		}
-		axios.post("/user/update", data)
+		axios.post(`/user/update/`, data)
 			.then(res => {
 				removeBanner();
 				removeLogo();

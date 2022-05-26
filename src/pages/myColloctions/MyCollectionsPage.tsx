@@ -58,7 +58,7 @@ const MyCollectionsPage = (props) => {
         }
     }, [connector, library, account, active, chainId, loginStatus]);
 
-    const [ myCollections, setMyCollections ] = useState(undefined);
+    const [ myCollections, setMyCollections ] = useState([]);
     
     useEffect(() => {
         if (loginStatus && !myCollections){

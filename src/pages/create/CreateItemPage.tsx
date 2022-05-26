@@ -52,7 +52,6 @@ export default function CreateItemPage({user} : propsType) {
                         Create New Item
                         </h1>
                         <CreateItem/>
-
                     </div>
                 </div>
                 <img src="/assets/home_bg.jpg" alt="" className="bg1" />

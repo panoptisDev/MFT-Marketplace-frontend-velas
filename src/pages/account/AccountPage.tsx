@@ -85,7 +85,7 @@ const AccountPage = (props) => {
             const load_toast_id = toast.loading("Please wait...");
             let banner_hash = await getIpfsHashFromFile(e.target.files[0]);
             userProfile.banner_url = `https://boatsail_testing.mypinata.cloud/ipfs/${banner_hash}`;
-            axios.post("/user/update", userProfile)
+            axios.post("/user/update/", userProfile)
                 .then(res => {
                     setUserProfile(res.data.user);
                     toast.dismiss(load_toast_id);
@@ -103,7 +103,7 @@ const AccountPage = (props) => {
             const load_toast_id = toast.loading("Please wait...");
             let avatar_hash = await getIpfsHashFromFile(e.target.files[0]);
             userProfile.logo_url = `https://boatsail_testing.mypinata.cloud/ipfs/${avatar_hash}`;
-            axios.post("/user/update", userProfile)
+            axios.post("/user/update/", userProfile)
                 .then(res => {
                     setUserProfile(res.data.user);
                     toast.dismiss(load_toast_id);
