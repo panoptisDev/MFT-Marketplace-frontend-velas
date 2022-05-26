@@ -5,7 +5,7 @@ type SaleType = {
 };
 export default function MarketPlaceType({setSaleType}:SaleType) {
     const [selected, setSelected] = useState('FixedPrice')
-    const clickHandle=(value:any)=>{
+    const clickHandle=(value:string)=>{
         setSaleType(value)
         setSelected(value)
     }

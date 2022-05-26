@@ -13,6 +13,7 @@ import Button from 'components/customButtons/Button';
 import CustomDropdown from 'components/dropdown/CustomDropdown';
 import Card2 from 'components/cards/Card2';
 import './style.scss'
+import CollectionList from 'components/collectionList/CollectionList';
 
 const MyCollectionsPage = (props) => {
 
@@ -53,18 +54,18 @@ const MyCollectionsPage = (props) => {
     useEffect(() => {
         const isLoggedin = account && active && chainId === parseInt(process.env.REACT_APP_NETWORK_ID, 10);
         setLoginStatus(isLoggedin);
-        if(!loginStatus){
-            console.log(loginStatus)
-        }
     }, [connector, library, account, active, chainId, loginStatus]);
 
-    const [ myCollections, setMyCollections ] = useState([]);
+    const [ myCollections, setMyCollections ] = useState<any>([]);
     
     useEffect(() => {
-        if (loginStatus && !myCollections){
+        if (loginStatus){
             axios.get(`/collection`, {params : {owner : account}})
             .then(res => {
                 setMyCollections(res.data.collections);
+            }).catch(err => {
+                console.log("err: ", err.message);
+                setMyCollections([]);
             });            
         }
     });
@@ -137,11 +138,7 @@ const MyCollectionsPage = (props) => {
                         </div>
                         
                         <div className="collectionContainer">
-                            {
-                                myCollections && myCollections.map((collection, index) => {
-                                    return <Card2 key = {index}{...props} collection = {collection}/>
-                                })
-                            }
+                            <CollectionList {...props} collections={myCollections}/>
 						</div>
                     </div>
                     

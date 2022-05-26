@@ -6,7 +6,7 @@ import FormatsortOptionLabel from 'components/itemDetail/FormatsortOptionLabel';
 import FormatMoneyOptionLabel from 'components/profile/FormatMoneyOptionLabel';
 
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import MarketPlaceType from './SaleType';
+import SaleType from './SaleType';
 import { ErrorOutline } from '@material-ui/icons';
 
 export default function SellPage({ balance, nftFee, onClose, onSubmit }) {
@@ -47,7 +47,7 @@ export default function SellPage({ balance, nftFee, onClose, onSubmit }) {
     console.log(parseFloat(value.target.value))
     setOfferPrice(parseFloat(value.target.value));
   };
-  const [sellType, setSellType] = useState("");
+  const [sellType, setSellType] = useState("FixedPrice");
   return (
     <Modal
       className='sellPage'
@@ -66,7 +66,7 @@ export default function SellPage({ balance, nftFee, onClose, onSubmit }) {
         <div className='modal-content'>
           <div className="place_bid_title">List item for sale</div>
           <p className='flex-start'>Type</p>
-          <MarketPlaceType setSaleType = {setSellType}/>
+          <SaleType setSaleType = {setSellType}/>
 
           <p className="space-between mb-1 mt-1">
                 Method

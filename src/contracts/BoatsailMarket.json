@@ -3,7 +3,7 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "addr",
+                "name": "collAddr",
                 "type": "address"
             }
         ],

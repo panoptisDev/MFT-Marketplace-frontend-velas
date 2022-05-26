@@ -8,7 +8,6 @@ const Card4 = (props) => {
   const gotoDetail = () => {
     props.history.push(`/item/${item.itemCollection}/${item.tokenId}`)
   }
-  console.log(item)
   return (
     <div className='card' onClick={gotoDetail}>
       <div className="imgContainer">

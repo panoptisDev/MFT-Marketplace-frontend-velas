@@ -33,8 +33,7 @@ const AccountPage = (props) => {
             setUserAddress(userAddr);
             axios.get(`/user/${userAddr}`)
             .then(res => {                
-                setUserProfile(res.data.user)    
-                console.log(res.data.user)            
+                setUserProfile(res.data.user)        
             })
         }        
     }

@@ -19,21 +19,6 @@ const ListItemSalePage = ({ balance, nftFee, onClose, onSubmit }) => {
 	const { register, handleSubmit } = useForm();
 
 	const { account, active, chainId, library } = useWeb3React();
-    // const [balance, setBalance] = useState(0)
-	// const fetchBalance = useCallback(async () => {
-	// 	if (!!account && !!library) {
-	// 		const rawBalance = await library.getBalance(account);
-	// 		const value = parseFloat(ethers.utils.formatEther(rawBalance));
-	// 		console.log(value);
-	// 		setBalance(value);         
-	// 	}
-	// 	return () => {
-	// 		setBalance(0)
-	// 	}
-	// },[]);
-	// useEffect(() => {
-	// 	fetchBalance();
-    // }, [account, chainId, library])
 
 	const [item, setItem] = useState(null);
 	const location = useLocation();
@@ -84,8 +69,6 @@ const ListItemSalePage = ({ balance, nftFee, onClose, onSubmit }) => {
             }
 			startTimeStamp = moment(updatedData.startTime).valueOf();
 			endTimeStamp = moment(updatedData.endTime).valueOf();
-			console.log(startTimeStamp);
-			console.log(endTimeStamp);
             if (moment(updatedData.startTime).valueOf() >= moment(updatedData.endTime).valueOf()) {
                 toast.error('End time should be late than start time!');
                 return;
@@ -135,6 +118,10 @@ const ListItemSalePage = ({ balance, nftFee, onClose, onSubmit }) => {
 	const handleClose = () => {
 		onClose();
 	};
+	useEffect(() => {
+		console.log(saleType);
+	})
+	
 	return (
 
 		<Modal

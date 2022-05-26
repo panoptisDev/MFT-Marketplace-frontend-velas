@@ -23,7 +23,9 @@ export default function CopyBox({value}:PropType) {
 	return (
 		<div className="copyBox">
 			<img src="/assets/img/parts/moonriver.svg" alt="..." className="img-mark-16" />
-			<input ref={tokenInputRef} value={value || '0x3fA4fFb85f0e528882Df600a600CFaB391Aa658b'} className="label-token"  read-only = {true} onChange = {()=>{}}/>
+			{
+				value && <input ref={tokenInputRef} value={value} className="label-token" type="text" readOnly/>
+			}
 			{
 				copySuccess !== "Copied!" &&
 				<FileCopy onClick={copyToClipboard} className="img-copy" />
