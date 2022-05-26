@@ -87,15 +87,13 @@ const ListItemSalePage = ({ item, balance, nftFee, onClose, onSubmit }) => {
 			chainId,
 			library.getSigner()
 		);
-		console.log(tokenId);
 		if (tokenId){
 			axios.get('/sync_block')
 			.then((res) => {
-				console.log(res.data);
 				toast.dismiss(load_toast_id);
 				toast.success("Listed Successfully");
 				setListing(false)
-				// props.history.goBack();				
+				onClose(true);
 			}).catch((err) => {
 				console.log(err);
 				toast.dismiss(load_toast_id);
@@ -108,7 +106,7 @@ const ListItemSalePage = ({ item, balance, nftFee, onClose, onSubmit }) => {
 
 	}
 	const handleClose = () => {
-		onClose();
+		onClose(false);
 	};
 	
 	return (
@@ -137,7 +135,7 @@ const ListItemSalePage = ({ item, balance, nftFee, onClose, onSubmit }) => {
 							{saleType === 'FixedPrice' ? <FixedPrice register={register} balance = {balance}/> : <></>}
 							{saleType === 'TimedAuction' ? <TimedAuction register={register} /> : <></>}
 						</div>
-						<Button className="listBtn outLineBtn"><strong>Complete Listing</strong></Button>
+						<Button className="listBtn outLineBtn" disabled={listing}><strong>Complete Listing</strong></Button>
 					</form>
 			</div>
 		</Modal>

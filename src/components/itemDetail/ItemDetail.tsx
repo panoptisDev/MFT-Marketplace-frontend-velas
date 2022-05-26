@@ -214,9 +214,9 @@ const ItemDetail = (props) => {
 	}
 	// Listing
 	const [showListingModal, setShowListingModal] = useState(false);
-	function onListingClose(value:number) {
+	function onListingClose(isListed:boolean) {
 		setShowListingModal(false);
-		console.log(offerPrice)
+		if (isListed)fetchItem()
 	}
 	// Cancel Listing
 	const [showCancelListingModal, setShowCancelListingModal] = useState(false);
