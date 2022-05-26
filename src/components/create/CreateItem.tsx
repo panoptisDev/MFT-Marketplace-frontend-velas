@@ -110,7 +110,7 @@ export default function CreateItem() {
                 toast.success("NFT Product is created successfully");
                 await axios.get(`/sync_block`);
                 toast.dismiss(load_toast_id);
-                history.push("/")
+                history.push(`/collections`);
                 setCreatingItem(false);
             }
 

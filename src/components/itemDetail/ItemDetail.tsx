@@ -1,5 +1,5 @@
-import {  ShareOutlined, ExpandLess, LocalLibrary } from '@material-ui/icons';
-import {Loupe, ViewList, MoreVert, Refresh, Visibility, Favorite, Loyalty, ExpandMore, Timeline, List, Description} from '@material-ui/icons';
+import { ShareOutlined, ExpandLess, LocalLibrary } from '@material-ui/icons';
+import { Loupe, ViewList, MoreVert, Refresh, Visibility, Favorite, Loyalty, ExpandMore, Timeline, List, Description } from '@material-ui/icons';
 import TaskIcon from '@mui/icons-material/Task';
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import AssessmentIcon from '@mui/icons-material/Assessment';
@@ -21,7 +21,6 @@ import Expand from "react-expand-animated";
 import FormatsortOptionLabel from './FormatsortOptionLabel';
 import MakeOffer from 'pages/sale/MakeOffer';
 import ReactPlayer from 'react-player';
-import SellPage from 'pages/sale/SellPage';
 import ListItemSalePage from 'pages/sale/ListItemSalePage';
 import CancelListPage from 'pages/sale/CancelListPage';
 
@@ -46,16 +45,7 @@ const ItemDetail = (props) => {
 			setBalance(0)
 		}
 	}, []);
-
-	const onSell = () => {
-		// props.history.push({
-		// 	pathname: `/item/${item.itemCollection}/${item.tokenId}/sell`,
-		// 	state: { item: item }
-		// })
-		// return;
-	}
-	
-
+	console.log(item);
 
 	const [isLoading, setIsLoading] = useState(false);
 	const onCancelListing = () => {
@@ -71,6 +61,7 @@ const ItemDetail = (props) => {
 					axios.get(`/sync_block`)
 						.then((res) => {
 							setIsLoading(false);
+							window.location.reload();
 							toast.dismiss(load_toast_id);
 							toast.success("Listing cancelled successfully");
 						})
@@ -93,6 +84,7 @@ const ItemDetail = (props) => {
 					axios.get(`/sync_block`)
 						.then((res) => {
 							setIsLoading(false);
+							window.location.reload();
 							toast.dismiss(load_toast_id);
 							toast.success("Listing cancelled successfully");
 						})
@@ -120,28 +112,25 @@ const ItemDetail = (props) => {
 		setShowPlaceBidModal(false);
 		setBidPrice(value);
 	}
-	
-
-
 	function closePlaceBidModal() {
 		setShowPlaceBidModal(false)
 		setBidPrice(0)
 	}
 
-	function submitPlaceBid() {
-
-		if (!(item?.auction.bids) && (bidPrice - item.auction.price < 0)) {
+	function submitPlaceBid(bid_price: number) {
+		setBidPrice(bid_price);
+		if (!(item?.auction.bids) && (bid_price - item.auction.price < 0)) {
 			toast.error("Your bid must be higher than minimum bid price!")
 
 			return
 		}
 
-		if ((item?.auction.bids?.length > 0) && (bidPrice - item.auction.price * 1.05 <= 0)) {
+		if ((item?.auction.bids?.length > 0) && (bid_price - item.auction.price * 1.05 <= 0)) {
 			toast.error("Your bid must be 5% higher than current bid!")
 			return
 		}
 
-		if (balance - bidPrice < 0) {
+		if (balance < bid_price) {
 			toast.error("Your available balance is less than the bid price!")
 			return
 		}
@@ -150,15 +139,17 @@ const ItemDetail = (props) => {
 		bidOnAuction(
 			account,
 			item.auction.id,
-			bidPrice,
+			bid_price,
 			chainId,
-			library.getSigner()
+			library.getSigner(),
+			balance
 		).then((result) => {
 			if (result) {
 				axios.get(`/sync_block`)
 					.then((res) => {
 						setIsLoading(false);
 						closePlaceBidModal()
+						window.location.reload();
 						toast.dismiss(load_toast_id);
 						toast.success("Placed a Bid Successfully");
 						fetchItem()
@@ -181,12 +172,14 @@ const ItemDetail = (props) => {
 	}
 
 	const [isPriceExpand, setIsPriceExpand] = useState(false)
-	const [isListExpand, setIsListExpand] = useState(false)
+	const [isEventExpand, setIsEventExpand] = useState(false)
+	const [isBidExpand, setIsBidExpand] = useState(false)
+	const [isOfferExpand, setIsOfferExpand] = useState(false)
 	const styles = {
-        open: { width: "100%" },
-        close: { width: "100%" }
-    };
-    const transitions = ["height", "opacity", "background"];
+		open: { width: "100%" },
+		close: { width: "100%" }
+	};
+	const transitions = ["height", "opacity", "background"];
 	const options = [
 		{ value: "1d", label: "1 day", customAbbreviation: "1d" },
 		{ value: "2d", label: "2 days", customAbbreviation: "2d" },
@@ -197,32 +190,46 @@ const ItemDetail = (props) => {
 	// Make Offer
 	const [showOfferModal, setShowOfferModal] = useState(false);
 	const [offerPrice, setOfferPrice] = useState(0);
-	function onMakeOfferClose(value:number) {
+	function onMakeOfferClose(value: number) {
 		setShowOfferModal(false);
 		setOfferPrice(value)
 		console.log(offerPrice)
 	}
-	function submitOffer(value:number) {
+	function submitOffer(value: number) {
 		setOfferPrice(value)
 		console.log(value)
 	}
 	// Sell page
 	const [showSellModal, setShowSellModal] = useState(false);
-	function onSellClose(value:number) {
+	function onSellClose(value: number) {
 		setShowSellModal(false);
 		console.log(offerPrice)
 	}
 	// Listing
 	const [showListingModal, setShowListingModal] = useState(false);
-	function onListingClose(isListed:boolean) {
+	function onListingClose(isListed: boolean) {
 		setShowListingModal(false);
-		if (isListed)fetchItem()
+		if (isListed) fetchItem()
 	}
 	// Cancel Listing
 	const [showCancelListingModal, setShowCancelListingModal] = useState(false);
-	function onCancelListingClose(value:number) {
+	function onCancelListingClose(value: number) {
 		setShowCancelListingModal(false);
-		console.log(offerPrice)
+	}
+
+	//Buy Now
+	const [showBuyModal, setShowBuyModal] = useState(false);
+	function onBuyClose(){
+		setShowBuyModal(false);
+	}
+
+	function submitBuy(){
+
+	}
+
+	//Accept Bid
+	const onBidAccept = (bid:any) => {
+		// The logic to accept bid.
 	}
 
 	// About 
@@ -232,290 +239,405 @@ const ItemDetail = (props) => {
 	const [isPropertyExpand, setIsPropertyExpand] = useState(false)
 	const [isStatsExpand, setIsStatsExpand] = useState(false)
 	const [isLevelExpand, setIsLevelExpand] = useState(false)
+
 	return (
 		<div className="imageDetail">
 			<div className="nftContainer">
 				<div className="imgContaner">
-					{item && (item.assetType === 'video' || item.assetType === 'audio')&& 
-					<ReactPlayer width="100%" height="100%" url={item.assetUrl}
-					playing={ true } controls />
+					{(item.assetType === 'video' || item.assetType === 'audio') &&
+						<ReactPlayer width="100%" height="100%" url={item.assetUrl}
+							playing={true} controls />
 					}
-					{item && item.assetType === 'image' && <img src={item.assetUrl} alt="icon" className="detail-img" />}
+					{item.assetType === 'image' && <img src={item.assetUrl} alt="icon" className="detail-img" />}
 				</div>
 				<div className="col-div br-div">
-					<h2 className="billy-header"><Description/> Description</h2>
+					<h2 className="billy-header"><Description /> Description</h2>
 					<div className="hline"></div>
-					<p className="billy-desc">Created by <a href="https://testnets.opensea.io/0x5367b4557D29cE1Ce3F333Ba1ad155d6A1754C68" target={'_blank'} className="billy-desc">5367B4</a></p>
+					<p className="billy-desc">Created by
+						<a href='' target="_blank" rel="noopener noreferrer" className="billy-desc">
+							{item.creator.toLowerCase() === account.toLowerCase() ? "You" : String(item.creator).substring(2, 7).toUpperCase()}
+						</a>
+					</p>
 					<p className="billy-desc">{item.description}</p>
 					<div className="hline"></div>
-						<div className="row-div cursor-pointer s-b m-b" onClick={()=>{setIsAboutExpand(!isAboutExpand)}}>
-							<h2 className="billy-header"><ViewList/> About Boatsail NFT V2</h2>
-							<h2 className="billy-header">{!isAboutExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
-						
-						</div>
-						<Expand
-                                open={isAboutExpand}
-                                duration={300}
-                                styles={styles}
-                                transitions={transitions}
-                            >
-								<div className="col-div aic jcc">
-									<p className="billy-desc">This collection has no description yet. Contact the owner of this collection about setting it up on OpenSea!</p>
-								</div>
-						</Expand>
-						<div className="row-div cursor-pointer s-b mt-1" onClick={()=>{setIsDetailExpand(!isDetailExpand)}}>
-							<h2 className="billy-header"><Loupe/> Details</h2>
-							<h2 className="billy-header">{!isDetailExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
-						</div>
-						<Expand
-                                open={isDetailExpand}
-                                duration={300}
-                                styles={styles}
-                                transitions={transitions}
-                            >
-								<div className="col-div aic jcc">
-									<div className="row-div cursor-pointer s-b">
-										<p>Contract Address</p>
-										<a href="https://testnets.opensea.io/0x5367b4557D29cE1Ce3F333Ba1ad155d6A1754C68" target={'_blank'} rel="noreferrer"className="billy-desc">0xb170...8508</a>
-									</div>
-									<div className="row-div cursor-pointer s-b">
-										<p>Token ID</p>
-										<p>2</p>
-									</div>
-									<div className="row-div cursor-pointer s-b">
-										<p>Token Standard</p>
-										<p>ERC-721</p>
-									</div>
-									<div className="row-div cursor-pointer s-b">
-										<p>Blockchain</p>
-										<p>Rinkeby</p>
-									</div>
-									<div className="row-div cursor-pointer s-b">
-										<p>Creator Fees</p>
-										<p>0%</p>
-									</div>
-								</div>
-						</Expand>
-						<div className="hline"></div>
+					<div className="row-div cursor-pointer s-b m-b" onClick={() => { setIsAboutExpand(!isAboutExpand) }}>
+						<h2 className="billy-header"><ViewList /> About {item.collection && item.collection.name}</h2>
+						<h2 className="billy-header">{!isAboutExpand ? <ExpandMore /> : <ExpandLess />}</h2>
 
-						<div className="row-div cursor-pointer s-b mt-1" onClick={()=>{setIsPropertyExpand(!isPropertyExpand)}}>
-							<h2 className="billy-header"><TaskIcon/> Properties</h2>
-							<h2 className="billy-header">{!isPropertyExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
+					</div>
+					<Expand
+						open={isAboutExpand}
+						duration={300}
+						styles={styles}
+						transitions={transitions}
+					>
+						<div className="col-div aic jcc">
+							<p className="billy-desc">{item.collection && item.collection.description}</p>
 						</div>
-						<Expand
-                                open={isPropertyExpand}
-                                duration={300}
-                                styles={styles}
-                                transitions={transitions}
-                            >
-								<div className="col-div aic jcc w-100">
-								<ul className="attrs raw">
-										<li className="with-border">
-											<div className="name">background</div>
-											<div className="value text-white">Green</div>
-										</li>
-										<li className="with-border">
-											<div className="name">fur</div>
-											<div className="value text-white">Light_Brown</div>
-										</li>
-										<li className="with-border">
-											<div className="name">body</div>
-											<div className="value text-white">Dog</div>
-										</li>
-										<li className="with-border">
-											<div className="name">mouth</div>
-											<div className="value text-white">Normal</div>
-										</li>
-										<li className="with-border">
-											<div className="name">eyes</div>
-											<div className="value text-white">Small</div>
-										</li>
-										<li className="with-border">
-											<div className="name">suit</div>
-											<div className="value text-white">Blue_Suit</div>
-										</li>
-									</ul>
-								</div>
-						</Expand>
-						<div className="hline"></div>
-						<div className="row-div cursor-pointer s-b mt-1" onClick={()=>{setIsStatsExpand(!isStatsExpand)}}>
-							<h2 className="billy-header"><SettingsApplicationsIcon/> Stats</h2>
-							<h2 className="billy-header">{!isStatsExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
+					</Expand>
+					<div className="row-div cursor-pointer s-b mt-1" onClick={() => { setIsDetailExpand(!isDetailExpand) }}>
+						<h2 className="billy-header"><Loupe /> Details</h2>
+						<h2 className="billy-header">{!isDetailExpand ? <ExpandMore /> : <ExpandLess />}</h2>
+					</div>
+					<Expand
+						open={isDetailExpand}
+						duration={300}
+						styles={styles}
+						transitions={transitions}
+					>
+						<div className="col-div aic jcc">
+							<div className="row-div cursor-pointer s-b">
+								<p>Contract Address</p>
+								<a href="https://testnets.opensea.io/0x5367b4557D29cE1Ce3F333Ba1ad155d6A1754C68" target={'_blank'} rel="noreferrer" className="billy-desc">
+									{item.itemCollection}
+									{/* TODO truncate string */}
+								</a>
+							</div>
+							<div className="row-div cursor-pointer s-b">
+								<p>Token ID</p>
+								<p>{item.tokenId}</p>
+							</div>
+							<div className="row-div cursor-pointer s-b">
+								<p>Token Standard</p>
+								<p>ERC-721</p>
+							</div>
+							<div className="row-div cursor-pointer s-b">
+								<p>Blockchain</p>
+								<p>Velas</p>
+							</div>
+							<div className="row-div cursor-pointer s-b">
+								<p>Creator Fees</p>
+								<p>{item.royalty}</p>
+							</div>
 						</div>
-						<Expand
-                                open={isStatsExpand}
-                                duration={300}
-                                styles={styles}
-                                transitions={transitions}
-                            >
+					</Expand>
+					<div className="hline"></div>
+
+					<div className="row-div cursor-pointer s-b mt-1" onClick={() => { setIsPropertyExpand(!isPropertyExpand) }}>
+						<h2 className="billy-header"><TaskIcon /> Properties</h2>
+						<h2 className="billy-header">{!isPropertyExpand ? <ExpandMore /> : <ExpandLess />}</h2>
+					</div>
+					<Expand
+						open={isPropertyExpand}
+						duration={300}
+						styles={styles}
+						transitions={transitions}
+					>
+						<div className="col-div aic jcc w-100">
+							{
+								item.properties && item.properties.length > 0 ?
+									<div>
+										{item.properties.map((property, key) => {
+											return <li key={key} className="with-border">
+												<div className="name">{property.type}</div>
+												<div className="value text-white">{property.name}</div>
+											</li>
+										})}
+
+									</div> : <div />
+							}
+						</div>
+					</Expand>
+					<div className="hline"></div>
+					<div className="row-div cursor-pointer s-b mt-1" onClick={() => { setIsStatsExpand(!isStatsExpand) }}>
+						<h2 className="billy-header"><SettingsApplicationsIcon /> Stats</h2>
+						<h2 className="billy-header">{!isStatsExpand ? <ExpandMore /> : <ExpandLess />}</h2>
+					</div>
+					<Expand
+						open={isStatsExpand}
+						duration={300}
+						styles={styles}
+						transitions={transitions}
+					>
+						<div className="col-div aic jcc w-100">
+							{
+								item.stats && item.stats.length > 0 ?
+									<div>
+										{item.stats.map((stat, key) => {
+											return <li key={key} className="with-border">
+												<div className="name">{stat.name}</div>
+												<div className="value text-white">{stat.value}</div>
+												<div className="value text-white">{stat.total}</div>
+											</li>
+										})}
+
+									</div> : <div />
+							}
+						</div>
+					</Expand>
+					<div className="hline"></div>
+					<div className="row-div cursor-pointer s-b mt-1" onClick={() => { setIsLevelExpand(!isLevelExpand) }}>
+						<h2 className="billy-header"><AssessmentIcon /> Level</h2>
+						<h2 className="billy-header">{!isLevelExpand ? <ExpandMore /> : <ExpandLess />}</h2>
+					</div>
+					<Expand
+						open={isLevelExpand}
+						duration={300}
+						styles={styles}
+						transitions={transitions}
+					>
+						<div className="col-div aic jcc w-100">
+							{
+								item.levels && item.levels.length > 0 ?
+									<div>
+										{item.levels.map((level, key) => {
+											return <li key={key} className="with-border">
+												<div className="name">{level.name}</div>
+												<div className="value text-white">{level.value}</div>
+												<div className="value text-white">{level.total}</div>
+											</li>
+										})}
+
+									</div> : <div />
+							}
+						</div>
+					</Expand>
+					{
+						item.lockContent === "" ? <div /> : <div>
+							<div className="hline"></div>
+							<div className="row-div cursor-pointer s-b mt-1" onClick={() => { setIsLocalExpand(!isLocalExpand) }}>
+								<h2 className="billy-header"><LocalLibrary /> Lockable Content</h2>
+								<h2 className="billy-header">{!isLocalExpand ? <ExpandMore /> : <ExpandLess />}</h2>
+							</div>
+							<Expand
+								open={isLocalExpand}
+								duration={300}
+								styles={styles}
+								transitions={transitions}
+							>
 								<div className="col-div aic jcc">
-										<p>Stats</p>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum obcaecati numquam nihil quasi dolor possimus similique accusamus nam sequi quo repellat aliquid ullam fugit nemo, quae et! Aut, consequatur totam!</p>
+									<p>{item.lockContent}</p>
 								</div>
-						</Expand>
-						<div className="hline"></div>
-						<div className="row-div cursor-pointer s-b mt-1" onClick={()=>{setIsLevelExpand(!isLevelExpand)}}>
-							<h2 className="billy-header"><AssessmentIcon/> Level</h2>
-							<h2 className="billy-header">{!isLevelExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
+							</Expand>
+
 						</div>
-						<Expand
-                                open={isLevelExpand}
-                                duration={300}
-                                styles={styles}
-                                transitions={transitions}
-                            >
-								<div className="col-div aic jcc">
-										<p>Stats</p>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum obcaecati numquam nihil quasi dolor possimus similique accusamus nam sequi quo repellat aliquid ullam fugit nemo, quae et! Aut, consequatur totam!</p>
-								</div>
-						</Expand>
-						<div className="hline"></div>
-						<div className="row-div cursor-pointer s-b mt-1" onClick={()=>{setIsLocalExpand(!isLocalExpand)}}>
-							<h2 className="billy-header"><LocalLibrary/> Localable Content</h2>
-							<h2 className="billy-header">{!isLocalExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
-						</div>
-						<Expand
-                                open={isLocalExpand}
-                                duration={300}
-                                styles={styles}
-                                transitions={transitions}
-                            >
-								<div className="col-div aic jcc">
-										<p>Locakable Content</p>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum obcaecati numquam nihil quasi dolor possimus similique accusamus nam sequi quo repellat aliquid ullam fugit nemo, quae et! Aut, consequatur totam!</p>
-								</div>
-						</Expand>
+					}
 
 				</div>
-				
-				
+
+
 			</div>
 			<div className="property-box">
 				<div className="property-div">
 					<div className="share-div">
 						<Link to="/velas/velas-apes-club" className="link-blue">
-							velas
+							VELAS
 						</Link>
 						<div className="share-icons">
-						<Refresh className="share-icon"/>
-						<ShareOutlined className="share-icon" />
-						<MoreVert className="share-icon"/>
+							<Refresh onClick={() => { window.location.reload() }} className="share-icon" />
+							<ShareOutlined className="share-icon" />
+							<MoreVert className="share-icon" />
 						</div>
-						
+
 					</div>
 					<h2 className="billy-header">{item.name}</h2>
 					<div className="row-div">
-						
-						<p className="billy-desc">Owned by <a href="https://testnets.opensea.io/0x5367b4557D29cE1Ce3F333Ba1ad155d6A1754C68" target={'_blank'} rel="noreferrer"className="billy-desc">5367B4</a></p>
-						<p className="billy-desc"><Visibility/> 12 views</p>
-						<p className="billy-desc hover-blue"><Favorite/> 1 favorite</p>
+
+						<p className="billy-desc">Owned by
+							<a href='' target="_blank" rel="noopener noreferrer" className="billy-desc">
+								{item.ownerUser && item.ownerUser.address.toLowerCase() === account.toLowerCase() ? "You" :
+									String(item.ownerUser && item.ownerUser.address).substring(2, 7).toUpperCase()}
+							</a>
+						</p>
+						<p className="billy-desc"><Visibility /> 12 views</p>
+						<p className="billy-desc hover-blue"><Favorite /> 1 favorite</p>
 					</div>
 					<div className="hline"></div>
 					<div className="col-div br-div">
-						<p className="billy-desc m-b-5">Highest offer</p>
+						Sales ends {item.auction && new Date(parseFloat(item.auction.endTime) * 1000).toLocaleString('en-US', { timeZone: 'America/New_York' })}
+					</div>
+					<div className="hline"></div>
+					<div className="col-div br-div">
+						<p className="billy-desc m-b-5">Highest Bid</p>
 						<div className="row-div m-b-5">
-							<h2 className="billy-header">0.01</h2>
-							<p className="billy-desc">($ 20.23)</p>
+							<h2 className="billy-header">{item.auction && item.auction.price} VLX</h2>
+							{/* <p className="billy-desc">($ 20.23)</p> */}
 						</div>
 						<div className="row-div">
-						{
-							item && item.owner.toLowerCase() !== account.toLowerCase() && item.pair &&
-							<Button className="outLineBtn" onClick={() => setShowOfferModal(true)}>
-								<Loyalty/> Make Offer
-							</Button>
-						}
-						{
-							item && item.owner.toLowerCase() !== account.toLowerCase() && !item.pair && item.auction && 
+							{/* {
+								item.pair && item.pair.owner.toLowerCase() !== account.toLowerCase() &&
+								<Button className="outLineBtn" onClick={() => setShowOfferModal(true)}>
+									<Loyalty /> Make Offer
+								</Button>
+							} */}
+							{
+								item.pair && item.pair.owner.toLowerCase() !== account.toLowerCase() &&
+								<Button className="outLineBtn" onClick={() => setShowBuyModal(true)}>
+									<Loyalty /> Buy Now
+								</Button>
+							}		
+							{
+								!item.pair && item.auction && item.auction.owner.toLowerCase() !== account.toLowerCase() &&
 								<Button className="outLineBtn" onClick={() => onPlaceBidModal()}>
 									Place Bid
 								</Button>
-						}
-						{
-							item && item.owner.toLowerCase() === account.toLowerCase() && !item.pair && !item.auction && 
+							}
+							{
+								!item.pair && !item.auction &&
 								<Button className="outLineBtn" onClick={() => setShowListingModal(true)}>
 									Sell
 								</Button>
-						}
-
-						{
-							item && item.owner.toLowerCase() === account.toLowerCase() && item.pair && !item.auction && 
+							}
+							{
+								item.pair && !item.auction && item.pair.owner.toLowerCase() === account.toLowerCase() &&
 								<Button className="outLineBtn" onClick={() => setShowCancelListingModal(true)}>
-									Cancel Listing
+									Cancel Selling
 								</Button>
-						}
+							}
+							{
+								!item.pair && item.auction && item.auction.owner.toLowerCase() === account.toLowerCase() &&
+								<Button className="outLineBtn" onClick={() => setShowCancelListingModal(true)}>
+									Cancel Auction
+								</Button>
+							}
 						</div>
 					</div>
 					<div className="hline"></div>
 					<div className="col-div p-t-10 p-b-10">
-						<div className="row-div cursor-pointer s-b" onClick={()=>{setIsPriceExpand(!isPriceExpand)}}>
-						<h2 className="billy-header"><Timeline/> Price History</h2>
-						<h2 className="billy-header">{!isPriceExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
-						
-						</div>
-						<Expand
-                                open={isPriceExpand}
-                                duration={300}
-                                styles={styles}
-                                transitions={transitions}
-                            >
-                               
-							   <div className="col-div p-t-10 p-b-10">
-								<Select
-									defaultValue={options[0]}
-									formatOptionLabel={FormatsortOptionLabel}
-									options={options}
-									instanceId='chainSelect'
-									className="select-gray flex-1 m-r-5"
-								/>
-								<div className="col-div aic jcc">
-									<img src="/assets/no-chart-data.svg" alt="" />
-									<p className="billy-desc">No item activity yet</p>
-								</div>
-									
-							   </div>
-                            </Expand>
-					</div>
-					<div className="hline"></div>
+						<div className="row-div cursor-pointer s-b" onClick={() => { setIsEventExpand(!isEventExpand) }}>
+							<h2 className="billy-header"><Timeline />Item Activity</h2>
+							<h2 className="billy-header">{!isEventExpand ? <ExpandMore /> : <ExpandLess />}</h2>
 
-					<div className="col-div p-t-10 p-b-10">
-						<div className="row-div cursor-pointer s-b" onClick={()=>{setIsListExpand(!isListExpand)}}>
-						<h2 className="billy-header"><List/> Listings</h2>
-						<h2 className="billy-header">{!isListExpand ? <ExpandMore/>:<ExpandLess/>}</h2>
-						
 						</div>
 						<Expand
-                                open={isListExpand}
-                                duration={300}
-                                styles={styles}
-                                transitions={transitions}
-                            >
-                               
-							   <div className="col-div p-t-10 p-b-10">
-								
-								<div className="col-div aic jcc">
-									<img src="/assets/empty-asks.svg" alt="" />
-									<p className="billy-desc">No listings yet</p>
+							open={isEventExpand}
+							duration={300}
+							styles={styles}
+							transitions={transitions}
+						>
+
+							<div className="col-div p-t-10 p-b-10">
+								{item.events.length > 0 ?
+									<div className="col-div aic jcc">
+										<div>Event</div>
+										<div>Price</div>
+										<div>From</div>
+										<div>To</div>
+										<div>Date</div>
+										{
+											item.events.map((event, key) => {
+												return <div key={key}>
+													<div>{event.name}</div>
+													<div>{/* //ethereum icon*/}{event.price}ETH</div>
+													<div>{event.from === account ? "You" : String(event.from).substring(2, 7).toUpperCase()}</div>
+													<div>{event.to === account ? "You" : String(event.to).substring(2, 7).toUpperCase()}</div>
+													<div>{Math.floor(new Date().getTime() / 1000) - parseFloat(event.timestamp)} days ago</div>
+													{/* this can be seconds ago, mins ago, hours ago, or days ago */}
+												</div>
+											})
+										}
+									</div> :
+									<div className="col-div aic jcc">
+										<img src="/assets/no-chart-data.svg" alt="" />
+										<p className="billy-desc">No item activity yet</p>
+									</div>
+								}
+
+
+							</div>
+						</Expand>
+					</div>
+					{item.auction &&
+						<div>
+							<div className="hline"></div>
+							<div className="col-div p-t-10 p-b-10">
+								<div className="row-div cursor-pointer s-b" onClick={() => { setIsPriceExpand(!isPriceExpand) }}>
+									<h2 className="billy-header"><Timeline /> Price History</h2>
+									<h2 className="billy-header">{!isPriceExpand ? <ExpandMore /> : <ExpandLess />}</h2>
+
 								</div>
-									
-							   </div>
-                            </Expand>
-					</div>
-					<div className="hline"></div>
-					<h2 className="billy-header with-border-bottom">Transfer History</h2>
-					<div className="hline"></div>
-					<span className="hover-blue">@ block #14773518: 0x0000…0000 ➞ 0xc501…776F </span>
-					</div>
+								<Expand
+									open={isPriceExpand}
+									duration={300}
+									styles={styles}
+									transitions={transitions}
+								>
+									<div className="col-div p-t-10 p-b-10">
+										<Select
+											defaultValue={options[0]}
+											formatOptionLabel={FormatsortOptionLabel}
+											options={options}
+											instanceId='chainSelect'
+											className="select-gray flex-1 m-r-5"
+										/>
+										{item.auction.bids.length > 0 ?
+											<div className="col-div aic jcc">
+												{
+													item.auction.bids.map((bid, key) => {
+														console.log(bid.bidPrice) // 0.002
+														console.log(bid.timestamp) //ex : 1653574771
+														//This should be filtered by above selected date.
+														return <div key={key}>
+															{/* TODO display graph */}
+															{bid.bidPrice}
+														</div>
+													})
+												}
+											</div> :
+											<div className="col-div aic jcc">
+												<img src="/assets/no-chart-data.svg" alt="" />
+												<p className="billy-desc">No Price yet</p>
+											</div>
+										}
+									</div>
+								</Expand>
+							</div>
+							<div className="hline"></div>
+
+							<div className="col-div p-t-10 p-b-10">
+								<div className="row-div cursor-pointer s-b" onClick={() => { setIsBidExpand(!isBidExpand) }}>
+									<h2 className="billy-header"><List /> Bid</h2>
+									<h2 className="billy-header">{!isBidExpand ? <ExpandMore /> : <ExpandLess />}</h2>
+
+								</div>
+								<Expand
+									open={isBidExpand}
+									duration={300}
+									styles={styles}
+									transitions={transitions}
+								>
+									<div className="col-div p-t-10 p-b-10">
+										{
+											item.auction && item.auction.bids.length > 0 ?
+												<div className="col-div aic jcc">
+													{/* //TODO this data display */}
+													<div>Price</div>
+													<div>Expiration</div>
+													<div>From</div>
+													{
+														item.auction.bids.map((bid, key) => {
+															return <div key={key}>
+																<div>{bid.bidPrice}</div>
+																<div>{Math.ceil((parseFloat(item.auction.endTime) - parseFloat(bid.timestamp)) / (60 * 60 * 24))} days</div>
+																<div>{String(bid.from).substring(2, 7).toUpperCase()}</div>
+																<button onClick={onBidAccept}>Accept</button>
+															</div>
+														})
+													}
+												</div> :
+												<div className="col-div aic jcc">
+													<img src="/assets/empty-asks.svg" alt="" />
+													<p className="billy-desc">No Bid yet</p>
+												</div>
+										}
+									</div>
+								</Expand>
+							</div>
+						</div>
+					}
+
+				</div>
 			</div>
 			{showPlaceBidModal && (
 				<PlaceBid
-					onClose={onPlaceBidClose}
+					onClose={closePlaceBidModal}
 					onSubmit={submitPlaceBid}
 					balance={balance}
 					nftFee={0}
 				/>
 			)}
 
-			{showOfferModal&& (
+			{showOfferModal && (
 				<MakeOffer
 					onClose={onMakeOfferClose}
 					onSubmit={submitOffer}
@@ -523,15 +645,16 @@ const ItemDetail = (props) => {
 					nftFee={0}
 				/>
 			)}
-			{showSellModal && (
-				<SellPage
-					onClose={onSellClose}
-					onSubmit={onSell}
+			
+			{showBuyModal && (
+				<MakeOffer
+					onClose={onBuyClose}
+					onSubmit={submitBuy}
 					balance={balance}
 					nftFee={0}
 				/>
 			)}
-			{showListingModal && item && (
+			{showListingModal && (
 				<ListItemSalePage
 					onClose={onListingClose}
 					onSubmit={onCancelListing}
@@ -543,7 +666,7 @@ const ItemDetail = (props) => {
 			{showCancelListingModal && (
 				<CancelListPage
 					onClose={onCancelListingClose}
-					onSubmit={onCancelListingClose}
+					onSubmit={onCancelListing}
 					balance={balance}
 					nftFee={0}
 				/>
@@ -553,3 +676,5 @@ const ItemDetail = (props) => {
 }
 
 export default ItemDetail;
+
+

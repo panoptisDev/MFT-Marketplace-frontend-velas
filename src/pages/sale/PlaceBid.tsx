@@ -20,8 +20,8 @@ export default function PlaceBid({ balance, nftFee, onClose, onSubmit }) {
     handleClose();
     onSubmit(bidPrice);
   };
-  const onChangePrice = value => {
-    setBidPrice(value);
+  const onChangePrice = (e) => {
+    setBidPrice(e.target.value);
   };
 
   return (

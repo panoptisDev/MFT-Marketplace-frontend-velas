@@ -1,9 +1,4 @@
 import './timedauction.scss'
-import { Tooltip } from '@material-ui/core'
-import { ErrorOutline } from '@material-ui/icons'
-import Select from "react-select";
-import FormatsortOptionLabel from 'components/itemDetail/FormatsortOptionLabel';
-import FormatMoneyOptionLabel from 'components/profile/FormatMoneyOptionLabel';
 
 export default function TimedAuction({ register }) {
     

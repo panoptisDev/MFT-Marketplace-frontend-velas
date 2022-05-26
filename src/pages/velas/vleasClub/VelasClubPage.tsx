@@ -39,7 +39,7 @@ const VelasClubPage = (props) => {
         setIsTopLoading(false)
     };
 
-    const [ item, setItem ] =useState(null);
+    const [ item, setItem ] =useState();
     const [ rate, setRate ] = useState(0);
     const location = useLocation();
 
@@ -50,13 +50,13 @@ const VelasClubPage = (props) => {
         const tokenId = urlData.split("/")[len - 1];
         axios.get(`/item/${collectionAddress}/${tokenId}`)
         .then(res => {
-          setItem(res.data.item) 
-          setRate(res.data.rate)          
+            setItem(res.data.item) 
+            setRate(res.data.rate)          
         })
         .catch(err => {
-          //show an error page that the item doesnt exist
-          setItem(undefined)
-          setRate(0)
+            //show an error page that the item doesnt exist
+            setItem(undefined)
+            setRate(0)
         })
     }
     useEffect(() => {

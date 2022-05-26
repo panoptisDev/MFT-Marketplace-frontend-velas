@@ -59,12 +59,18 @@ const ListItemSalePage = ({ item, balance, nftFee, onClose, onSubmit }) => {
                 toast.error("End Date is required!");
                 return;
             }
-			startTimeStamp = moment(updatedData.startTime).valueOf();
-			endTimeStamp = moment(updatedData.endTime).valueOf();
-            if (moment(updatedData.startTime).valueOf() >= moment(updatedData.endTime).valueOf()) {
+			startTimeStamp = Math.floor(moment(updatedData.startTime).valueOf() / 1000);
+			endTimeStamp = Math.floor(moment(updatedData.endTime).valueOf() / 1000);
+			const curTimeStamp = Math.floor(new Date().getTime() / 1000);
+            if (startTimeStamp < curTimeStamp) {
+                toast.error('The start time must be after the current time.');
+                return;
+            }
+			if (startTimeStamp >= endTimeStamp) {
                 toast.error('End time should be late than start time!');
                 return;
             }
+			
         }
 		setListing(true);
 		const load_toast_id = toast.loading("Please wait...");

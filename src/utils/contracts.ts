@@ -174,7 +174,7 @@ export async function delistItem(id, chainId, provider) {
             isApproved = await setNFTApprovalForAuction(collection, true, chainId, provider);            
         }
         if (isApproved) {
-            const tx =  await auctionContract.createAuction(collection, token_id, "0x0", ethers.utils.parseEther(startPrice),startTime,endTime);
+            const tx =  await auctionContract.createAuction(collection, token_id, ethers.constants.AddressZero, ethers.utils.parseEther(startPrice),startTime,endTime);
             const receipt = await tx.wait(2);
             if(receipt.confirmations) {
                 return true
@@ -200,10 +200,13 @@ export async function finalizeAuction(id, chainId, provider) {
     }
 }
   
-export async function bidOnAuction(account, id, price, chainId, provider) {
+export async function bidOnAuction(account, id, price, chainId, provider, balance) {
     const auctionContract = getContractObj('BoatsailAuction', chainId, provider)
+    console.log(balance);
+    console.log(id);
     try {
-        const tx = await auctionContract.bidOnAuction(id, ethers.utils.parseEther(price))
+        console.log(price);
+        const tx = await auctionContract.bidOnAuction(id, ethers.utils.parseEther(String(price)), { value: ethers.utils.parseEther(String(price)) })
         await tx.wait(2)
         return true      
     } catch (e) {
