@@ -121,12 +121,7 @@ const ListItemSalePage = ({ item, balance, nftFee, onClose, onSubmit }) => {
 			className='listingPage'
 		  	open={true}
 		  	onClose={(event, reason) => {
-				if (reason === "backdropClick") {
-				return false;
-				}      
-				if (reason === "escapeKeyDown") {
-				return false;
-				}
+				if (reason === "backdropClick" || reason === "escapeKeyDown")return false;
 			}}
 			aria-labelledby="simple-modal-title"
 			aria-describedby="simple-modal-description"
