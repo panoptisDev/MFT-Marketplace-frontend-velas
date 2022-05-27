@@ -112,8 +112,8 @@ const CollectionDetailPage = (props) => {
                         </label>
                         <div className="sub-box">
                             <div className="watch-box">
-                                <button className="watch-btn m-r-5 m-l-10"><Add />WatchList</button>
-                                <button className="watch-btn m-l-5 icon-btn"><MoreVert /></button>
+                                {/* <button className="watch-btn m-r-5 m-l-10"><Add />WatchList</button>
+                                <button className="watch-btn m-l-5 icon-btn"><MoreVert /></button> */}
                             </div>
                             <div className="user-info-box">
                                 <label className="avatar-box">
@@ -122,13 +122,13 @@ const CollectionDetailPage = (props) => {
                                 <h2 className="user-name m-0">{collection && collection.name}</h2>
                             </div>
                             {
-                                collection && collection.owner.toLowerCase() === account.toLowerCase() ?
+                                loginStatus && collection && collection.owner.toLowerCase() === account.toLowerCase() ?
                                 <div className="setting-box">
                                     <div className="setting-container">
                                         <div className="share-btn" onClick={showMoreActions}>
                                             <Edit />
                                         </div>
-                                        <Link to="/collections/untitled-collection-316120299/payouts">
+                                        {/* <Link to="/collections/untitled-collection-316120299/payouts">
                                             <Tooltip
                                                 id="tooltip-top"
                                                 title="Creator Earnings"
@@ -139,7 +139,7 @@ const CollectionDetailPage = (props) => {
                                                     <ViewList />
                                                 </div>
                                             </Tooltip>
-                                        </Link>
+                                        </Link> */}
                                     </div>
                                 </div> : <div className="setting-box"/>
                             }
@@ -147,8 +147,8 @@ const CollectionDetailPage = (props) => {
                         </div>
                         <div className="mobile-func-box">
                             <div className="watch-box">
-                                <button className="watch-btn m-r-5"><Add />WatchList</button>
-                                <button className="watch-btn m-l-5 icon-btn"><MoreVert /></button>
+                                {/* <button className="watch-btn m-r-5"><Add />WatchList</button>
+                                <button className="watch-btn m-l-5 icon-btn"><MoreVert /></button> */}
                             </div>
                             <div className="setting-box">
                                 <button className="add-btn">Add Item</button>
@@ -156,7 +156,7 @@ const CollectionDetailPage = (props) => {
                                     <div className="share-btn" onClick={showMoreActions}>
                                         <Edit />
                                     </div>
-                                    <Link to="/collections/untitled-collection-316120299/payouts">
+                                    {/* <Link to="/collections/untitled-collection-316120299/payouts">
                                         <Tooltip
                                             id="tooltip-top"
                                             title="Creator Earnings"
@@ -167,7 +167,7 @@ const CollectionDetailPage = (props) => {
                                                 <ViewList />
                                             </div>
                                         </Tooltip>
-                                    </Link>
+                                    </Link> */}
                                 </div>
                             </div>
                         </div>
@@ -190,8 +190,7 @@ const CollectionDetailPage = (props) => {
                                     <p className="m-0">volume traded</p>
                                 </div>
                             </div>
-                            <div style={{ textAlign: "center" }} className="m-t-20">Welcome to the home of Untitled Collection #316120299 on OpenSea.</div>
-                            <div style={{ textAlign: "center" }}>Discover the best items in this collection.</div>
+                            <div style={{ textAlign: "center" }} className="m-t-20">{collection && collection.description}</div>
                             <div className="hline"></div>
                             <CollectionTabBody {...props} tab={tab} items={items} />
                         </div>

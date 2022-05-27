@@ -12,9 +12,18 @@ import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import './style.scss'
 import { useLocation } from 'react-router-dom';
+import { useWeb3React } from '@web3-react/core';
 
 const SettingsPage = (props) => {
     const { user, login } = props;
+
+    const { connector, library, chainId, account, active } = useWeb3React();
+    const [loginStatus, setLoginStatus] = useState(false);
+    useEffect(() => {
+        const isLoggedin = account && active && chainId === parseInt(process.env.REACT_APP_NETWORK_ID, 10);
+        setLoginStatus(isLoggedin);
+    }, [connector, library, account, active, chainId]);
+
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(true);
     const [sectionHeight, setSectionHeight] = useState("0vh");
@@ -59,7 +68,7 @@ const SettingsPage = (props) => {
 
         case 'profile':
             SettingsBody = () =>
-                <Profile {...props} user={user} login={login} setInfoUpdated={setInfoUpdated}/>
+                <Profile {...props} user={user} login={login} setInfoUpdated={setInfoUpdated} />
             break;
         case 'notifications':
             SettingsBody = () =>
@@ -84,23 +93,27 @@ const SettingsPage = (props) => {
             break;
         default:
             SettingsBody = () =>
-                <Profile {...props} user={user} login={login} setInfoUpdated={setInfoUpdated}/>
+                <Profile {...props} user={user} login={login} setInfoUpdated={setInfoUpdated} />
             break;
     }
 
     return (
         <>
-            <Topbar {...props} user={user} menuOpen={menuOpen} setMenuOpen={setMenuOpen} setIsLoading={setIsTopLoading} setInfoUpdated={setInfoUpdated} isInfoUpdated = {isInfoUpdated}/>
+            <Topbar {...props} user={user} menuOpen={menuOpen} setMenuOpen={setMenuOpen} setIsLoading={setIsTopLoading} setInfoUpdated={setInfoUpdated} isInfoUpdated={isInfoUpdated} />
             <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+
             <div className='page settingsPage'>
                 <div className="loding" style={{ width: "100%", height: loadingHeight + "vh", display: loadingHeight === 0 ? 'none' : 'flex' }}>
                     <Loading />
                 </div>
                 <div className="sections" style={{ width: "100%", height: sectionHeight }}>
-                    <div className="container">
-                        <SideBar />
-                        <SettingsBody />
-                    </div>
+                    {
+                        loginStatus && <div className="container">
+                            <SideBar />
+                            <SettingsBody />
+                        </div>
+                    }
+
                 </div>
                 <img src="/assets/img/bg8.jpg" alt="" className="bg2" />
             </div>

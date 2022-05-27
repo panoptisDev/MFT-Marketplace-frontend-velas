@@ -27,13 +27,19 @@ import CancelListPage from 'pages/sale/CancelListPage';
 const ItemDetail = (props) => {
 	const { item, fetchItem } = props;
 
-	const { account, chainId, library } = useWeb3React();
+	const { connector, library, chainId, account, active } = useWeb3React();
+    const [loginStatus, setLoginStatus] = useState(false);
+    useEffect(() => {
+        const isLoggedin = account && active && chainId === parseInt(process.env.REACT_APP_NETWORK_ID, 10);
+        setLoginStatus(isLoggedin);
+    }, [connector, library, account, active, chainId]);
+
 	const [balance, setBalance] = useState(0)
 	const [showPlaceBidModal, setShowPlaceBidModal] = useState(false);
 	const [bidPrice, setBidPrice] = useState(0);
 	useEffect(() => {
-		fetchBalance();
-	}, [account, chainId, library])
+		if (loginStatus)fetchBalance();
+	}, [loginStatus])
 
 	const fetchBalance = useCallback(async () => {
 		if (!!account && !!library) {
@@ -45,7 +51,6 @@ const ItemDetail = (props) => {
 			setBalance(0)
 		}
 	}, []);
-	console.log(item);
 
 	const [isLoading, setIsLoading] = useState(false);
 	const onCancelListing = () => {
@@ -102,6 +107,10 @@ const ItemDetail = (props) => {
 	}
 
 	function onPlaceBidModal() {
+		if (loginStatus){
+			toast.error("Please connect your wallet.")
+			return;
+		}
 		if (item.auction.owner.toLowerCase() === account.toLowerCase()) {
 			toast.error("You are owner of this item.");
 			return
@@ -224,6 +233,10 @@ const ItemDetail = (props) => {
 	}
 
 	function submitBuy(){
+		if (loginStatus){
+			toast.error("Please connect your wallet.");
+			return;
+		}
 		if (!item.pair){
 			console.log("Item Buy is disabled");
 			return;
@@ -248,7 +261,7 @@ const ItemDetail = (props) => {
                     setShowBuyModal(false)
 					toast.dismiss(load_toast_id);
                     toast.success("Bought Successfully");     
-                    props.history.push(`/seller/${account}`)                    
+                    window.location.reload();                  
                     return true;
                 })
                 .catch((error) => {
@@ -296,7 +309,7 @@ const ItemDetail = (props) => {
 					<div className="hline"></div>
 					<p className="billy-desc">Created by
 						<a href='' target="_blank" rel="noopener noreferrer" className="billy-desc">
-							{item.creator.toLowerCase() === account.toLowerCase() ? "You" : String(item.creator).substring(2, 7).toUpperCase()}
+							{loginStatus && item.creator.toLowerCase() === account.toLowerCase() ? "You" : String(item.creator).substring(2, 7).toUpperCase()}
 						</a>
 					</p>
 					<p className="billy-desc">{item.description}</p>
@@ -476,7 +489,7 @@ const ItemDetail = (props) => {
 
 						<p className="billy-desc">Owned by
 							<a href='' target="_blank" rel="noopener noreferrer" className="billy-desc">
-								{item.ownerUser && item.ownerUser.address.toLowerCase() === account.toLowerCase() ? "You" :
+								{loginStatus && item.ownerUser && item.ownerUser.address.toLowerCase() === account.toLowerCase() ? "You" :
 									String(item.ownerUser && item.ownerUser.address).substring(2, 7).toUpperCase()}
 							</a>
 						</p>
@@ -502,31 +515,31 @@ const ItemDetail = (props) => {
 								</Button>
 							} */}
 							{
-								item.pair && item.pair.owner.toLowerCase() !== account.toLowerCase() &&
+								loginStatus && item.pair && item.pair.owner.toLowerCase() !== account.toLowerCase() &&
 								<Button className="outLineBtn" onClick={() => setShowBuyModal(true)}>
 									<Loyalty /> Buy Now
 								</Button>
 							}		
 							{
-								!item.pair && item.auction && item.auction.owner.toLowerCase() !== account.toLowerCase() &&
+								loginStatus && !item.pair && item.auction && item.auction.owner.toLowerCase() !== account.toLowerCase() &&
 								<Button className="outLineBtn" onClick={() => onPlaceBidModal()}>
 									Place Bid
 								</Button>
 							}
 							{
-								!item.pair && !item.auction &&
+								loginStatus && !item.pair && !item.auction &&
 								<Button className="outLineBtn" onClick={() => setShowListingModal(true)}>
 									Sell
 								</Button>
 							}
 							{
-								item.pair && !item.auction && item.pair.owner.toLowerCase() === account.toLowerCase() &&
+								loginStatus && item.pair && !item.auction && item.pair.owner.toLowerCase() === account.toLowerCase() &&
 								<Button className="outLineBtn" onClick={() => setShowCancelListingModal(true)}>
 									Cancel Selling
 								</Button>
 							}
 							{
-								!item.pair && item.auction && item.auction.owner.toLowerCase() === account.toLowerCase() &&
+								loginStatus && !item.pair && item.auction && item.auction.owner.toLowerCase() === account.toLowerCase() &&
 								<Button className="outLineBtn" onClick={() => setShowCancelListingModal(true)}>
 									Cancel Auction
 								</Button>
@@ -560,8 +573,8 @@ const ItemDetail = (props) => {
 												return <div key={key}>
 													<div>{event.name}</div>
 													<div>{/* //ethereum icon*/}{event.price}ETH</div>
-													<div>{event.from === account ? "You" : String(event.from).substring(2, 7).toUpperCase()}</div>
-													<div>{event.to === account ? "You" : String(event.to).substring(2, 7).toUpperCase()}</div>
+													<div>{event.from === account && loginStatus ? "You" : String(event.from).substring(2, 7).toUpperCase()}</div>
+													<div>{event.to === account && loginStatus ? "You" : String(event.to).substring(2, 7).toUpperCase()}</div>
 													<div>{Math.floor(new Date().getTime() / 1000) - parseFloat(event.timestamp)} days ago</div>
 													{/* this can be seconds ago, mins ago, hours ago, or days ago */}
 												</div>

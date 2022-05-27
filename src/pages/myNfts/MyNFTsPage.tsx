@@ -1,7 +1,4 @@
-import { Block, Send, Storefront, VisibilityOff } from '@material-ui/icons';
 import { useWeb3React } from '@web3-react/core';
-import MyCollectionList from 'components/collectionList/MyCollectionList';
-import Button from 'components/customButtons/Button';
 import Loading from 'components/loading/Loading';
 import Menu from 'components/menu/Menu';
 import Topbar from 'components/topbar/Topbar';
@@ -10,6 +7,7 @@ import { useMediaQuery } from 'react-responsive';
 import axios from 'axios';
 import './style.scss'
 import NFTItemList from 'components/collectionList/NFTItemList';
+import toast from 'react-hot-toast';
 
 const MyNFTsPage = (props) => {
 	const { user } = props;
@@ -22,14 +20,21 @@ const MyNFTsPage = (props) => {
     const isTabletOrMobile = useMediaQuery({query: "screen and (max-width: 450px) and (orientation:portrait)",});
     const isLandOrMobile = useMediaQuery({query: "screen and (max-height: 450px) and (orientation:landscape)",});
 
-	const { account } = useWeb3React();
+	const { connector, library, chainId, account, active } = useWeb3React();
+    const [loginStatus, setLoginStatus] = useState(false);
+    useEffect(() => {
+        const isLoggedin = account && active && chainId === parseInt(process.env.REACT_APP_NETWORK_ID, 10);
+        setLoginStatus(isLoggedin);
+		if (!isLoggedin)toast.error("Please connect your wallet.")
+    }, [connector, library, account, active, chainId]);
+
 	const [ items,  setItems ] = useState<any>([])
 	useEffect(() => {
-		if (account)axios.get(`/item`,{params : {owner : account}})
+		if (loginStatus)axios.get(`/item`,{params : {owner : account}})
 		.then(res =>{
 			setItems(res.data.items);
 		});		
-	}, [account]);
+	}, [loginStatus]);
 
     useEffect(() => {
         if (isLoading || isTopLoading) {
@@ -52,47 +57,6 @@ const MyNFTsPage = (props) => {
         setIsTopLoading(false)
     };
 
-    // const router = useHistory();
-    const [isShowSubMenu, setIsShowSubMenu] = useState(false);
-    const [selectedList, setSelectedList] = useState([]);
-    const [commandType, setCommandType] = useState("");
-
-    const handleCommand = (type, token) => {
-		token = token + '';
-		setIsShowSubMenu(true);
-		setCommandType(type);
-		setSelectedList([...token]);
-	};
-
-	// const handleClickItem = (token) => {
-	// 	token = token + '';
-	// 	if (commandType !== "") {
-	// 		if (selectedList.includes(token)) {
-	// 			const data = selectedList;
-	// 			let filtered = data.filter(function(value, index, arr){
-	// 				return value !== token;
-	// 			});
-	// 			setSelectedList([...filtered]);
-	// 		} else {
-	// 			setSelectedList([...selectedList, token]);
-	// 		}
-	// 	}
-	// };
-
-	const handleClickCancel = () => {
-		setIsShowSubMenu(false);
-		setCommandType("");
-		setSelectedList([]);
-	};
-
-	const handleClickCommand = () => {
-		if (selectedList.length > 0 && commandType !== "hide") {
-			// router.push({
-			// 	pathname: '/' + commandType,
-			// 	query: { assets: selectedList },
-			// })
-		}
-	};
     return (
         <>
             <Topbar user={user} menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
@@ -121,34 +85,6 @@ const MyNFTsPage = (props) => {
 						</ul>
 					</div>
                     <NFTItemList  {...props} items={items} />
-                    {
-				isShowSubMenu &&
-				<div className="transferBox">
-					<div className="cart-container">
-						<div className="cart-box">
-							{
-								selectedList.map((item, key) =>
-									<div className="cart-item" key={key}>
-										<img src="https://m.raregems.io/c/21725?optimizer=image&amp;width=400"
-											 className="cart-img" alt="cart-img" />
-									</div>
-								)
-							}
-
-							{
-								selectedList.length === 0 &&
-								<p>Select items to transfer. You can only sell bundles of items with the same
-									verification status.</p>
-							}
-						</div>
-						<Button className="transfer-btn" onClick={handleClickCommand}>
-							{commandType === "transfer" ? <Send /> : (commandType === "sell" ? <Storefront /> : <VisibilityOff />)}
-							{commandType === "transfer" ? "Transfer" : (commandType === "sell" ? "Sell" : "Hide")}
-						</Button>
-						<Button className="transfer-cancel-btn" onClick={handleClickCancel}><Block />Cancel</Button>
-					</div>
-				</div>
-			}
                 </div>
                 </div>
                 <img src="assets/home_bg_01.jpg" alt="" className="bg1" />

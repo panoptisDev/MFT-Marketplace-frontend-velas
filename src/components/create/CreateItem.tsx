@@ -18,7 +18,15 @@ import { useWeb3React } from '@web3-react/core';
 import { getIpfsHash, getIpfsHashFromFile } from 'utils/ipfs';
 import { addItem } from "utils/contracts";
 
-export default function CreateItem() {
+const CreateItem = (props) => {
+
+    const { connector, library, chainId, account, active } = useWeb3React();
+    const [loginStatus, setLoginStatus] = useState(false);
+    useEffect(() => {
+        const isLoggedin = account && active && chainId === parseInt(process.env.REACT_APP_NETWORK_ID, 10);
+        setLoginStatus(isLoggedin);
+    }, [connector, library, account, active, chainId]);
+
     const history = useHistory();
     const [isShowProModal, setIsShowProModal] = useState(false);
     const [proData, setProData] = useState([]);
@@ -41,7 +49,6 @@ export default function CreateItem() {
     const [fileSrc, setFileSrc] = useState("");
     const [fileType, setFileType] = useState("")
 
-    const { library, chainId, account } = useWeb3React();
     const [creatingItem, setCreatingItem] = useState(false);
 
     useEffect(() => {
@@ -65,7 +72,7 @@ export default function CreateItem() {
     }
 
     async function onCreateItem() {
-        if (!account || !library) {
+        if (!loginStatus) {
             toast.error('Please connect your wallet correctly!');
             return;
         }
@@ -385,3 +392,4 @@ export default function CreateItem() {
         </div>
     )
 }
+export default CreateItem;

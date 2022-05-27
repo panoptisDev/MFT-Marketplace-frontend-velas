@@ -3,109 +3,110 @@ import { useEffect, useState } from 'react';
 import { HashLink } from 'react-router-hash-link'
 import ConnectModal from '../connectModal/ConnectModal';
 import { useHistory, useLocation } from "react-router-dom";
-import axios from 'axios';
 import './topbar.scss'
 import Button from 'components/customButtons/Button';
 import CustomDropdown from 'components/dropdown/CustomDropdown';
 import { truncateWalletString } from 'utils';
 import useAuth from 'hooks/useAuth';
+import axios from 'axios';
 
 const Topbar = (props) => {
-    const { user, menuOpen, setMenuOpen, setIsLoading, setInfoUpdated, isInfoUpdated } = props
-    const [showConnectModal, setShowConnectModal] = useState(false);
+    const { user, menuOpen, setMenuOpen, setIsLoading, isUserInfoUpdated } = props
 
-    const [loginStatus, setLoginStatus] = useState(false);
-    const { logout } = useAuth();
     const { connector, library, chainId, account, active } = useWeb3React();
+    const [loginStatus, setLoginStatus] = useState(false);
     useEffect(() => {
         const isLoggedin = account && active && chainId === parseInt(process.env.REACT_APP_NETWORK_ID, 10);
         setLoginStatus(isLoggedin);
     }, [connector, library, account, active, chainId]);
+    const { logout } = useAuth();
 
+    const [logo, setLogo] = useState("");
     useEffect(() => {
-        if (loginStatus || isInfoUpdated){
-            //fetchUser();
+        if (loginStatus || isUserInfoUpdated) {
+            console.log("Fetching Item");
+            axios.get(`/user/${account}`)
+                .then(res => {
+                    setLogo(res.data.user.logo_url);
+                })
         }
-    });
-
-    const [ logo, setLogo ] = useState("");
-    function fetchUser(){
-        axios.get(`/user/${account}`)
-            .then((res) => {
-                setLogo(res.data.user.logo_url);
-                setInfoUpdated(false);
-            }).catch((err) => {
-                setLogo("");
-            })
-    }
-
+    }, [loginStatus, isUserInfoUpdated]);
+    const [showConnectModal, setShowConnectModal] = useState(false);
     const [navId, setNavId] = useState('mint')
     const search = useLocation();
     useEffect(() => {
+
         const label = search.pathname.replace('/', '')
-        if(label.includes('create/')){
+        if (label.includes('create/')) {
             setNavId(label.split('/')[0])
         }
-        else{
+        else {
             setNavId(label)
         }
-        
+
     }, [setNavId, search]);
 
-    const router = useHistory ();
-	const goToPage = (url) => {
-		const href = "/" + url.toLowerCase() + "/create";
-		router.push(href)
-	};
-    
+    const router = useHistory();
+    const goToPage = (url) => {
+        if (!loginStatus) {
+            return;
+        }
+        let href = "";
+        if (url === "Collection" || url === "Item") {
+            href = "/" + url.toLowerCase() + "/create";
+        } else {
+            href = "/" + url.toLowerCase();
+        }
+        router.push(href)
+    };
+
     const goToProfilePage = (url) => {
-		if (url === "Profile") {
-			router.push({
-                pathname : '/account',
-                search : '?tab=collections',
-                state: { address : account}
+        if (url === "Profile") {
+            router.push({
+                pathname: '/account',
+                search: '?tab=collections',
+                state: { address: account }
             })
-		} else if (url === "Favorites") {
-			router.push({
-                pathname : '/account',
-                search : '?tab=favorites',
-                state: { address : account}
+        } else if (url === "Favorites") {
+            router.push({
+                pathname: '/account',
+                search: '?tab=favorites',
+                state: { address: account }
             })
-		} else if (url === "Settings") {
-			const href = "/account/settings";
-			router.push(href)
-		} else if (url === "My Collections") {
-			const href = "/myCollections";
-			router.push(href)
-		} else if (url === "My Nfts") {
-			const href = "/myNfts";
-			router.push(href)
-		} else if (url === "Log Out"){
+        } else if (url === "Settings") {
+            const href = "/account/settings";
+            router.push(href)
+        } else if (url === "My Collections") {
+            const href = "/myCollections";
+            router.push(href)
+        } else if (url === "My Nfts") {
+            const href = "/myNfts";
+            router.push(href)
+        } else if (url === "Log Out") {
+            if (isUserInfoUpdated)router.push("/");
             logout();
         }
-		
-	};
+
+    };
 
     return (
         <div className="topbar">
             <div className="logo">
-                <HashLink to="/#home" ><img src="/assets/img/logos/logo_white.png" alt="" onLoad={()=>{setIsLoading(false)}} /></HashLink>
+                <HashLink to="/#home" ><img src="/assets/img/logos/logo_white.png" alt="" onLoad={() => { setIsLoading(false) }} /></HashLink>
             </div>
 
             <div className="navList">
                 <ul>
-                    <li onClick={() => { setNavId('') }} className={navId === 'collections' ? "slected" : ""} ><HashLink to="/collections" smooth>COLLECTIOONS</HashLink></li>
-
-                    <li onClick={() => { setNavId('offers') }} className={navId === 'offers' ? "slected" : ""} >
-                        <HashLink to="/offers" smooth>LATEST OFFER</HashLink>
+                    <li onClick={() => { setNavId('') }} className={navId === 'collections' ? "slected" : ""} >
+                        <div onClick={() => goToPage("collections")} style={{ color: 'white', cursor: "pointer" }}>COLLECTIOONS</div>
                     </li>
 
-                    <li onClick={() => { setNavId('trades') }} className={navId === 'trades' ? "slected" : ""} >
-                        <HashLink to="/trades" smooth>LATEST TRADE</HashLink>
+                    <li onClick={() => { setNavId('bids') }} className={navId === 'bids' ? "slected" : ""} >
+                        <div onClick={() => goToPage("bids")} style={{ color: 'white', cursor: "pointer" }}>LATEST BID</div>
                     </li>
 
                     {loginStatus && <li onClick={() => { setNavId('create') }} className={navId === 'create' ? "slected" : ""} >
- 
+
                         <CustomDropdown
                             navDropdown
                             buttonText="Create"
@@ -115,13 +116,13 @@ const Topbar = (props) => {
                             buttonProps={{
                                 className: "navLink",
                                 color: "transparent",
-                                
+
                             }}
                             dropdownList={[
                                 "Collection",
                                 "Item",
                             ]}
-                            // className="activeLink"
+                        // className="activeLink"
                         />
 
                         {/* <HashLink to="/create/collection" smooth>Create</HashLink> */}
@@ -131,45 +132,45 @@ const Topbar = (props) => {
             </div>
 
             <div className="btns">
-                    
+
                 {loginStatus && <CustomDropdown
-					navDropdown
-                    caret = {false}
-                            
-					buttonText={
-						<>
-							<img
-								src={logo !== "" ? logo : "/assets/img/faces/avatar.jpg"}
-								className="img"
-								alt="profile"
-							/>
-							<span className="mobileLabel">Account</span>
-						</>
-					}
-					onClick={(url) => {
-						goToProfilePage(url);
-					}}
-					buttonProps={{
-						className: "navLink imageDropdownButton",
-						color: "transparent",
-					}}
-					dropdownList={[
-						"Profile",
-						"Favorites",
-						"My Collections",
+                    navDropdown
+                    caret={false}
+
+                    buttonText={
+                        <>
+                            <img
+                                src={logo !== "" ? logo : "/assets/img/faces/avatar.jpg"}
+                                className="img"
+                                alt="profile"
+                            />
+                            <span className="mobileLabel">Account</span>
+                        </>
+                    }
+                    onClick={(url) => {
+                        goToProfilePage(url);
+                    }}
+                    buttonProps={{
+                        className: "navLink imageDropdownButton",
+                        color: "transparent",
+                    }}
+                    dropdownList={[
+                        "Profile",
+                        "Favorites",
+                        "My Collections",
                         "My Nfts",
-						"Settings",
-						"Log Out",
-					]}
-					// className="activeLink"
-				/>}
-                <Button 
+                        "Settings",
+                        "Log Out",
+                    ]}
+                // className="activeLink"
+                />}
+                <Button
                     className='outLineBtn'
-                    children = {
+                    children={
                         <span>{loginStatus ? truncateWalletString(account) : "CONNECT WALLET"}
                         </span>
                     }
-                    onClick={() => { !loginStatus && setShowConnectModal(true)}}
+                    onClick={() => { !loginStatus && setShowConnectModal(true) }}
                 />
             </div>
 

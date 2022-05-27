@@ -5,7 +5,6 @@ import Topbar from 'components/topbar/Topbar';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useLocation } from 'react-router-dom';
-import axios from 'axios';
 import './style.scss'
 
 const CreateCollectionPage = (props) => {

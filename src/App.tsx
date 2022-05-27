@@ -23,7 +23,6 @@ import SettingsPage from 'pages/settings/SettingsPage';
 import CollectionDetailPage from 'pages/colloctions/CollectionDetailPage/CollectionDetailPage';
 import VelasPage from 'pages/velas/VelasPage';
 import VelasClubPage from 'pages/velas/vleasClub/VelasClubPage';
-import ListItemSalePage from 'pages/sale/ListItemSalePage';
 import { getUser, useAuthDispatch, useAuthState } from 'context/authContext';
 import { useWeb3React } from '@web3-react/core';
 import { Button, Modal } from '@material-ui/core';
@@ -33,7 +32,7 @@ function App() {
 
   function getModalStyle() {
     const top = 50
-    const left = 50  
+    const left = 50
     return {
       top: `${top}%`,
       left: `${left}%`,
@@ -55,14 +54,14 @@ function App() {
 
   useAxios();
 
-  const {account, active, connector} = useWeb3React();
-  
+  const { connector, library, chainId, account, active } = useWeb3React();
+
   // handle logic to recognize the connector currently being activated
   const [activatingConnector, setActivatingConnector] = React.useState()
   useEffect(() => {
-      if (activatingConnector && activatingConnector === connector) {
-          setActivatingConnector(undefined)
-      }
+    if (activatingConnector && activatingConnector === connector) {
+      setActivatingConnector(undefined)
+    }
   }, [activatingConnector, connector])
 
   // mount only once or face issues :P
@@ -70,15 +69,15 @@ function App() {
   const { activateError } = useInactiveListener(!triedEager || !!activatingConnector)
 
   // handling connection error
-  if((triedEagerError || activateError) && errorModalOpen === null) {
-      const errorMsg = getErrorMessage(triedEagerError || activateError);
-      setNetworkError(errorMsg);
-      setErrorModalOpen(true);
+  if ((triedEagerError || activateError) && errorModalOpen === null) {
+    const errorMsg = getErrorMessage(triedEagerError || activateError);
+    setNetworkError(errorMsg);
+    setErrorModalOpen(true);
   }
 
   const dispatch = useAuthDispatch();
   const { user } = useAuthState();
-  
+
   // const login = async () => {
   //   if(!account || !library) {
   //     console.log('not connected to wallet')
@@ -95,8 +94,8 @@ function App() {
   //   loginUser(dispatch, account, user?.nonce, library.getSigner())
   // }
 
-  useEffect(() => {      
-    if (active && account){
+  useEffect(() => {
+    if (active && account) {
       getUser(dispatch, account);
     }
   }, [active, account, dispatch])
@@ -109,57 +108,57 @@ function App() {
   return (
     <React.Fragment>
       <Router>
-      <Toaster
-        position="top-center"
-        toastOptions={{
-          success: { duration: 3000,
-            style: {
-            } },
-          error: { duration: 3000,
-            style: {
-            }  
-          },
-        }}
-      />
-      <Switch>
-        <Route exact path="/" render={(props) => (<HomePage {...props} user={user}/>)} />
-        <Route exact path="/collections" render={(props) => (<CollectionsPage {...props} user={user}/>)} />
-        <Route exact path="/offers" render={(props) => (<LatestOffersPage {...props} user={user}/>)} />
-        <Route exact path="/trades" render={(props) => (<LatestTradePage {...props} user={user}/>)} />
-        <Route exact path="/item/create" render={(props) => (<CreateItemPage {...props} user={user}/>)} />
-        <Route exact path="/collection/create" render={(props) => (<CreateCollectionPage {...props} user={user}/>)} />
-        <Route exact path="/collection/edit/:name" render={(props) => (<CreateCollectionPage {...props} user={user}/>)} />
-        <Route exact path="/account" render={(props) => (<AccountPage {...props} user={user}/>)}/>
-        <Route exact path="/myCollections" render={(props) => (<MyCollectionsPage {...props} user={user}/>)} />
-        <Route exact path="/myNfts" render={(props) => (<MyNFTsPage {...props} user={user}/>)} />
-        <Route exact path="/account/settings" render={(props) => (<SettingsPage {...props} user={user}/>)} />
-        <Route exact path="/collections/:name" render={(props) => (<CollectionDetailPage {...props} user={user}/>)} />
-        <Route exact path="/velas/velas-apes-club" render={(props) => (<VelasPage {...props} user={user}/>)} />
-        <Route exact path="/velas/velas-apes-club" render={(props) => (<VelasPage {...props} user={user}/>)} />
-        <Route exact path="/velas/velas-apes-club/215" render={(props) => (<VelasClubPage user={user}/>)} />
-        <Route exact path="/item/:collection_address/:tokenId" render={(props) => (<VelasClubPage {...props} user={user}/>)} />
-        {/* <Route exact path="/item/:collection_address/:tokenId/sell" render={(props) => (<ListItemSalePage {...props} user={user}/>)} /> */}
-      </Switch>
-    </Router>
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            success: {
+              duration: 3000,
+              style: {
+              }
+            },
+            error: {
+              duration: 3000,
+              style: {
+              }
+            },
+          }}
+        />
+        <Switch>
+          <Route exact path="/" render={(props) => (<HomePage {...props} user={user}/>)} />
+          <Route exact path="/collections" render={(props) => (<CollectionsPage {...props} user={user}/>)} />
+          <Route exact path="/offers" render={(props) => (<LatestOffersPage {...props} user={user} />)} />
+          <Route exact path="/trades" render={(props) => (<LatestTradePage {...props} user={user} />)} />
+          <Route exact path="/item/create" render={(props) => (<CreateItemPage {...props} user={user} />)} />
+          <Route exact path="/collection/create" render={(props) => (<CreateCollectionPage {...props} user={user} />)} />
+          <Route exact path="/collection/edit/:name" render={(props) => (<CreateCollectionPage {...props} user={user} />)} />
+          <Route exact path="/account" render={(props) => (<AccountPage {...props} user={user} />)} />
+          <Route exact path="/myCollections" render={(props) => (<MyCollectionsPage {...props} user={user} />)} />
+          <Route exact path="/myNfts" render={(props) => (<MyNFTsPage {...props} user={user} />)} />
+          <Route exact path="/account/settings" render={(props) => (<SettingsPage {...props} user={user} />)} />
+          <Route exact path="/collections/:name" render={(props) => (<CollectionDetailPage {...props} user={user} />)} />
+          <Route exact path="/velas/velas-apes-club" render={(props) => (<VelasPage {...props} user={user} />)} />
+          <Route exact path="/velas/velas-apes-club/215" render={(props) => (<VelasClubPage user={user} />)} />
+          <Route exact path="/item/:collection_address/:tokenId" render={(props) => (<VelasClubPage {...props} user={user} />)} />
+        </Switch>
+      </Router>
       <Modal
         open={!!errorModalOpen && !active}
         onClose={(event, reason) => {
           if (reason === "backdropClick") {
             return false;
-          }      
+          }
           if (reason === "escapeKeyDown") {
             return false;
-          }      
+          }
           setErrorModalOpen(false)
         }}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
-        >
+      >
         <div style={modalStyle} className={`${classes.paper} modal-div`}>
           <p>{networkError}</p>
-          <Button className="" onClick={closeErrorModal} variant="contained" color="primary">Close</Button>            
+          <Button className="" onClick={closeErrorModal} variant="contained" color="primary">Close</Button>
         </div>
-
       </Modal>
     </React.Fragment>
   );

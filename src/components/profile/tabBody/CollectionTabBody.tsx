@@ -1,5 +1,6 @@
-import { useState} from "react";
+import { useEffect, useState} from "react";
 import {ArrowForward, Close} from '@material-ui/icons';
+import { useWeb3React } from '@web3-react/core';
 
 import './tabBodyStyle.scss'
 import NFTItemList from "components/collectionList/NFTItemList";
@@ -8,24 +9,16 @@ import ActivitiesTable from "../activitiesTable/ActivitiesTable";
 
 const CollectionTabBody = (props) => {
 	const { tab , items } = props;
-	// const options = [
-	// 	{ value: "single_items", label: "Single items", customAbbreviation: "single_items" },
-	// 	{ value: "all_items", label: "All items", customAbbreviation: "all_items" },
-	// 	{ value: "bundles", label: "Bundles", customAbbreviation: "bundles" },
-	// ];
-	// const secondOptions = [
-	// 	{ value: "recently_listed", label: "Recently Listed", customAbbreviation: "" },
-	// 	{ value: "recently_created", label: "Recently Created", customAbbreviation: "" },
-	// 	{ value: "recently_sold", label: "Recently Sold", customAbbreviation: "" },
-	// 	{ value: "recently_received", label: "Recently Received", customAbbreviation: "" },
-	// 	{ value: "ending_soon", label: "Ending Soon", customAbbreviation: "" },
-	// ];
 
-	// const [isShowSubMenu, setIsShowSubMenu] = useState(false);
+	const { connector, library, chainId, account, active } = useWeb3React();
+    const [loginStatus, setLoginStatus] = useState(false);
+    useEffect(() => {
+        const isLoggedin = account && active && chainId === parseInt(process.env.REACT_APP_NETWORK_ID, 10);
+        setLoginStatus(isLoggedin);
+    }, [connector, library, account, active, chainId]);
+
 	const [isShowLeftMenu, setIsShowLeftMenu] = useState(false);
 	const [isShowMobileFilterMenu, setIsShowMobileFilterMenu] = useState(false);
-	// const [commandType, setCommandType] = useState("");
-	// const [selectedList, setSelectedList] = useState([]);
 
 	const [filterConditions, setFilterConditions] = useState([]);
 
@@ -43,28 +36,6 @@ const CollectionTabBody = (props) => {
 	const handleClickToggleBtn = () => {
 		setIsShowLeftMenu(!isShowLeftMenu);
 	};
-
-	// const handleCommand = (type, token) => {
-	// 	token = token + '';
-	// 	setIsShowSubMenu(true);
-	// 	setCommandType(type);
-	// 	setSelectedList([...token]);
-	// };
-
-	// const handleClickCancel = () => {
-	// 	setIsShowSubMenu(false);
-	// 	setCommandType("");
-	// 	setSelectedList([]);
-	// };
-    // // const router = useHistory();
-	// const handleClickCommand = () => {
-	// 	if (selectedList.length > 0 && commandType !== "hide") {
-	// 		// router.push({
-	// 		// 	pathname: '/' + commandType,
-	// 		// 	query: { assets: selectedList },
-	// 		// })
-	// 	}
-	// };
 
 	return (
 		<div className="tabBody">

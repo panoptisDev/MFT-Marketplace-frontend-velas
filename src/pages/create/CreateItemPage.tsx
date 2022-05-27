@@ -5,10 +5,9 @@ import Topbar from 'components/topbar/Topbar';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import './style.scss'
-type propsType = {
-    user : any
-}
-export default function CreateItemPage({user} : propsType) {
+
+const CreateItemPage = (props) => {
+    const { user } = props;
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(true);
     const [sectionHeight, setSectionHeight] = useState("0vh");
@@ -59,3 +58,5 @@ export default function CreateItemPage({user} : propsType) {
         </>
     )
 }
+
+export default CreateItemPage;

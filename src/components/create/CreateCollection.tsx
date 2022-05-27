@@ -23,6 +23,13 @@ const CreateCollection = (props) => {
     
     const { isCreate, collectionName } = props;
 
+    const { connector, library, chainId, account, active } = useWeb3React();
+    const [loginStatus, setLoginStatus] = useState(false);
+    useEffect(() => {
+        const isLoggedin = account && active && chainId === parseInt(process.env.REACT_APP_NETWORK_ID, 10);
+        setLoginStatus(isLoggedin);
+    }, [connector, library, account, active, chainId]);
+
     const [collection, setCollection] = useState(null);
     let tempName = collectionName;
     useEffect(() => {
@@ -62,7 +69,6 @@ const CreateCollection = (props) => {
 
 	const [ logo, setLogo ] = useState<any>("");
     const [ logo_uri, setLogoUri ] = useState("");
-    const { library, chainId, account } = useWeb3React();
 	const [ FeaturedImg, setFeaturedImg ] = useState<any>("");
     const [ featured_uri, setFeaturedUri ] = useState("");
     const [ banner_uri, setBannerUri ] = useState("");
@@ -138,7 +144,7 @@ const CreateCollection = (props) => {
 	// }
 
     async function onCreateCollection(){
-        if (!account || !library) {
+        if (!loginStatus) {
             toast.error('Please connect your wallet correctly!');
             return;
         }
@@ -321,22 +327,6 @@ const CreateCollection = (props) => {
             <p><strong>Percentage fee</strong></p>
             <input className={'textInput'} type="text" onChange={feeHandle} value={fee} placeholder={'e.g. 2.5'} required />
         </div>
-
-        {/* <div className={'formControl'}>
-            <h4><strong>Blockchain</strong></h4>
-            <p>Select the blockchain where you'd like new items from this collection to be added by default.</p>
-            <Select
-                defaultValue={options[0]}
-                formatOptionLabel = {FormatOptionLabel}
-                options={options}
-                className="mySelect"
-                instanceId='blockChainSelect'
-            />
-        </div>
-
-        <PaymentTokens /> 
-
-        <Theme />*/}
 
         <div className={'formControl'}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>

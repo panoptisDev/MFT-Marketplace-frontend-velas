@@ -28,13 +28,19 @@ const Profile = (props) => {
 
 	const router = useHistory ();
 
-	const { library, chainId, account } = useWeb3React();
+	const { connector, library, chainId, account, active } = useWeb3React();
+    const [loginStatus, setLoginStatus] = useState(false);
+    useEffect(() => {
+        const isLoggedin = account && active && chainId === parseInt(process.env.REACT_APP_NETWORK_ID, 10);
+        setLoginStatus(isLoggedin);
+    }, [connector, library, account, active, chainId]);
+
 	useEffect(() => {
 		//if (!!user) login();
 	}, [account, library])
 
 	useEffect(() => {
-		if (isFirst && account !== ""){
+		if (isFirst && loginStatus){
 			axios.get(`/user/${account}`)
             .then(res => {                
                 setProfile(res.data.user)                
@@ -93,7 +99,10 @@ const Profile = (props) => {
 		setBanner(null);
 	};
 	const copyHandle = () => {
-
+		if (!loginStatus){
+			toast.error("Please connect your wallet.")
+			return;
+		}
 		if (window.Clipboard) {
 			// Internet Explorer-specific code path to prevent textarea being shown while dialog is visible.
 			// window.clipboardData.setData("Text", wallet);
@@ -121,7 +130,7 @@ const Profile = (props) => {
 	};
 
 	async function onSave() {
-		if (!account || !library) {
+		if (!loginStatus) {
 			toast.error("Please connect to your wallet");
 			return;
 		}
@@ -176,7 +185,6 @@ const Profile = (props) => {
 		<div className="settingContainer">
 			<div className="header">
 				<h2>Profile Settings</h2>
-				<Button className="outLineBtn" ><strong>Preview</strong></Button>
 			</div>
 			<form className="form">
 				<div>
@@ -213,7 +221,7 @@ const Profile = (props) => {
 						<div className="formControl">
 							<h4><strong>Wallet Address</strong></h4>
 							<div className={'iconInput'}>
-								<input type="text" value={account} readOnly />
+								<input type="text" value={loginStatus && account} readOnly />
 								{
 									copied ? <LibraryAddCheck onClick={copyHandle} style={{ cursor: 'pointer' }} />
 										: <FileCopy onClick={copyHandle} style={{ cursor: 'pointer' }} />

@@ -14,6 +14,7 @@ import CustomDropdown from 'components/dropdown/CustomDropdown';
 import Card2 from 'components/cards/Card2';
 import './style.scss'
 import CollectionList from 'components/collectionList/CollectionList';
+import toast from 'react-hot-toast';
 
 const MyCollectionsPage = (props) => {
 
@@ -54,6 +55,7 @@ const MyCollectionsPage = (props) => {
     useEffect(() => {
         const isLoggedin = account && active && chainId === parseInt(process.env.REACT_APP_NETWORK_ID, 10);
         setLoginStatus(isLoggedin);
+        if (!isLoggedin)toast.error("Please connect your wallet.")
     }, [connector, library, account, active, chainId, loginStatus]);
 
     const [ myCollections, setMyCollections ] = useState<any>([]);

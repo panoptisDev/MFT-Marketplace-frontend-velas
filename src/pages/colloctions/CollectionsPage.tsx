@@ -8,11 +8,11 @@ import Filter from 'components/filter/Filter';
 import './style.scss'
 import CollectionList from 'components/collectionList/CollectionList';
 import axios from 'axios';
+import { useWeb3React } from '@web3-react/core';
 
 const CollectionsPage = (props) => {
 
     const { user } = props;
-
     const [isLoading, setIsLoading] = useState(false);
     const [isTopLoading, setIsTopLoading] = useState(false);
     const [sectionHeight, setSectionHeight] = useState("0vh");
@@ -57,7 +57,7 @@ const CollectionsPage = (props) => {
 
     return (
         <>
-            <Topbar  user={user} menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
+            <Topbar {...props} user={user} menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
             <Menu menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}/>
             <div className='page collectionPage'>
                 <div className="loding" style = {{width: "100%", height: loadingHeight + "%", display: loadingHeight === 0? 'none':'flex'}}>
