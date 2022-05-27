@@ -28,17 +28,17 @@ const ItemDetail = (props) => {
 	const { item, fetchItem } = props;
 
 	const { connector, library, chainId, account, active } = useWeb3React();
-    const [loginStatus, setLoginStatus] = useState(false);
-    useEffect(() => {
-        const isLoggedin = account && active && chainId === parseInt(process.env.REACT_APP_NETWORK_ID, 10);
-        setLoginStatus(isLoggedin);
-    }, [connector, library, account, active, chainId]);
+	const [loginStatus, setLoginStatus] = useState(false);
+	useEffect(() => {
+		const isLoggedin = account && active && chainId === parseInt(process.env.REACT_APP_NETWORK_ID, 10);
+		setLoginStatus(isLoggedin);
+	}, [connector, library, account, active, chainId]);
 
 	const [balance, setBalance] = useState(0)
 	const [showPlaceBidModal, setShowPlaceBidModal] = useState(false);
 	const [bidPrice, setBidPrice] = useState(0);
 	useEffect(() => {
-		if (loginStatus)fetchBalance();
+		if (loginStatus) fetchBalance();
 	}, [loginStatus])
 
 	const fetchBalance = useCallback(async () => {
@@ -107,7 +107,7 @@ const ItemDetail = (props) => {
 	}
 
 	function onPlaceBidModal() {
-		if (loginStatus){
+		if (loginStatus) {
 			toast.error("Please connect your wallet.")
 			return;
 		}
@@ -117,6 +117,7 @@ const ItemDetail = (props) => {
 		}
 		setShowPlaceBidModal(true);
 	}
+
 	function onPlaceBidClose(value) {
 		setShowPlaceBidModal(false);
 		setBidPrice(value);
@@ -228,61 +229,61 @@ const ItemDetail = (props) => {
 
 	//Buy Now
 	const [showBuyModal, setShowBuyModal] = useState(false);
-	function onBuyClose(){
+	function onBuyClose() {
 		setShowBuyModal(false);
 	}
 
-	function submitBuy(){
-		if (loginStatus){
+	function submitBuy() {
+		if (loginStatus) {
 			toast.error("Please connect your wallet.");
 			return;
 		}
-		if (!item.pair){
+		if (!item.pair) {
 			console.log("Item Buy is disabled");
 			return;
 		}
-		if (balance  < item.pair.price){
+		if (balance < item.pair.price) {
 			toast.error("Your available balance is less than the price!");
 			return;
 		}
 		setIsLoading(true);
 		const load_toast_id = toast.loading("Please wait...");
 		buy(
-            account,
-            item.pair.id,
-            item.pair.price,
-            chainId,
-            library.getSigner()
-        ).then((tokenId) => {
-            if (tokenId) {
-                axios.get(`/api/sync_block`)
-                .then((res) => {
-                    setIsLoading(false);
-                    setShowBuyModal(false)
-					toast.dismiss(load_toast_id);
-                    toast.success("Bought Successfully");     
-                    window.location.reload();                  
-                    return true;
-                })
-                .catch((error) => {
-                    if (error.response) {
+			account,
+			item.pair.id,
+			item.pair.price,
+			chainId,
+			library.getSigner()
+		).then((tokenId) => {
+			if (tokenId) {
+				axios.get(`/api/sync_block`)
+					.then((res) => {
+						setIsLoading(false);
+						setShowBuyModal(false)
 						toast.dismiss(load_toast_id);
-                    	toast.error("Failed Transaction");     
-                        setIsLoading(false);
-                    	setShowBuyModal(false);
-                    }
-                });
-            } else {
-                toast.dismiss(load_toast_id);
-				toast.error("Failed Transaction");     
+						toast.success("Bought Successfully");
+						window.location.reload();
+						return true;
+					})
+					.catch((error) => {
+						if (error.response) {
+							toast.dismiss(load_toast_id);
+							toast.error("Failed Transaction");
+							setIsLoading(false);
+							setShowBuyModal(false);
+						}
+					});
+			} else {
+				toast.dismiss(load_toast_id);
+				toast.error("Failed Transaction");
 				setIsLoading(false);
 				setShowBuyModal(false);
-            }
-        });
+			}
+		});
 	}
 
 	//Accept Bid
-	const onBidAccept = (bid:any) => {
+	const onBidAccept = (bid: any) => {
 		// The logic to accept bid.
 	}
 
@@ -496,17 +497,27 @@ const ItemDetail = (props) => {
 						<p className="billy-desc"><Visibility /> 12 views</p>
 						<p className="billy-desc hover-blue"><Favorite /> 1 favorite</p>
 					</div>
-					<div className="hline"></div>
-					<div className="col-div br-div">
-						Sales ends {item.auction && new Date(parseFloat(item.auction.endTime) * 1000).toLocaleString('en-US', { timeZone: 'America/New_York' })}
-					</div>
-					<div className="hline"></div>
-					<div className="col-div br-div">
-						<p className="billy-desc m-b-5">Highest Bid</p>
-						<div className="row-div m-b-5">
-							<h2 className="billy-header">{item.auction && item.auction.price} VLX</h2>
-							{/* <p className="billy-desc">($ 20.23)</p> */}
+					{
+						loginStatus && item.auction && <div>
+							<div className="hline"></div>
+							<div className="col-div br-div">
+								Sales ends {item.auction && new Date(parseFloat(item.auction.endTime) * 1000).toLocaleString('en-US', { timeZone: 'America/New_York' })}
+							</div>
 						</div>
+					}
+
+					<div className="hline"></div>
+					<div className="col-div br-div">
+						{
+							loginStatus && item.auction && <div>
+								<p className="billy-desc m-b-5">Highest Bid</p>
+								<div className="row-div m-b-5">
+									<h2 className="billy-header">{item.auction && item.auction.price} VLX</h2>
+									{/* <p className="billy-desc">($ 20.23)</p> */}
+								</div>
+							</div>
+						}
+
 						<div className="row-div">
 							{/* {
 								item.pair && item.pair.owner.toLowerCase() !== account.toLowerCase() &&
@@ -519,7 +530,7 @@ const ItemDetail = (props) => {
 								<Button className="outLineBtn" onClick={() => setShowBuyModal(true)}>
 									<Loyalty /> Buy Now
 								</Button>
-							}		
+							}
 							{
 								loginStatus && !item.pair && item.auction && item.auction.owner.toLowerCase() !== account.toLowerCase() &&
 								<Button className="outLineBtn" onClick={() => onPlaceBidModal()}>
@@ -527,7 +538,7 @@ const ItemDetail = (props) => {
 								</Button>
 							}
 							{
-								loginStatus && !item.pair && !item.auction &&
+								loginStatus && !item.pair && !item.auction && item.owner.toLowerCase() === account.toLowerCase() &&
 								<Button className="outLineBtn" onClick={() => setShowListingModal(true)}>
 									Sell
 								</Button>
@@ -698,7 +709,7 @@ const ItemDetail = (props) => {
 					nftFee={0}
 				/>
 			)}
-			
+
 			{showBuyModal && (
 				<MakeOffer
 					onClose={onBuyClose}

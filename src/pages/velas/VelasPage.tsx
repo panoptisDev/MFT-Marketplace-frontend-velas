@@ -7,157 +7,135 @@ import { useMediaQuery } from 'react-responsive';
 import Filter from 'components/filter/Filter';
 import './style.scss'
 import NFTItemList from 'components/collectionList/NFTItemList';
-// import { useHistory } from 'react-router-dom';
 import CopyBox from 'components/copyBox/CopyBox';
 import { Language, Telegram, Twitter, Widgets } from '@material-ui/icons';
-type propsType = {
-    user : any
-}
-export default function VelasPage({user} : propsType) {
-    const [isLoading, setIsLoading] = useState(false);
-    const [isTopLoading, setIsTopLoading] = useState(false);
-    const [sectionHeight, setSectionHeight] = useState("0vh");
-    const [loadingHeight, setLoadingHeight] = useState(0);
+import { useWeb3React } from '@web3-react/core';
+import axios from 'axios';
 
-    const [menuOpen, setMenuOpen] = useState(false);
-    const isTabletOrMobile = useMediaQuery({query: "screen and (max-width: 450px) and (orientation:portrait)",});
-    const isLandOrMobile = useMediaQuery({query: "screen and (max-height: 450px) and (orientation:landscape)",});
-    useEffect(() => {
-        if (isLoading || isTopLoading) {
-            setLoadingHeight(100)
-            setSectionHeight("0vh")
-        }
-        else{
-            setLoadingHeight(0)
-            setSectionHeight("100%")
-        }
+const VelasPage = (props) => {
+	const { user } = props;
 
-        if (!isLandOrMobile && !isTabletOrMobile) {
-            setMenuOpen(false);
-        }
-    }, [isLoading, isTabletOrMobile, isLandOrMobile, isTopLoading]);
-    
-    window.onload = ()=> {
-        setIsLoading(false)
-        setIsTopLoading(false)
+	const { connector, library, chainId, account, active } = useWeb3React();
+	const [loginStatus, setLoginStatus] = useState(false);
+	useEffect(() => {
+		const isLoggedin = account && active && chainId === parseInt(process.env.REACT_APP_NETWORK_ID, 10);
+		setLoginStatus(isLoggedin);
+	}, [connector, library, account, active, chainId]);
 
-    };
+	const [isLoading, setIsLoading] = useState(false);
+	const [isTopLoading, setIsTopLoading] = useState(false);
+	const [sectionHeight, setSectionHeight] = useState("0vh");
+	const [loadingHeight, setLoadingHeight] = useState(0);
 
-    // From API
-    // const [isShowSubMenu, setIsShowSubMenu] = useState(false);
-    // const [selectedList, setSelectedList] = useState([]);
-    // const [commandType, setCommandType] = useState("");
+	const [menuOpen, setMenuOpen] = useState(false);
+	const isTabletOrMobile = useMediaQuery({ query: "screen and (max-width: 450px) and (orientation:portrait)", });
+	const isLandOrMobile = useMediaQuery({ query: "screen and (max-height: 450px) and (orientation:landscape)", });
+	useEffect(() => {
+		if (isLoading || isTopLoading) {
+			setLoadingHeight(100)
+			setSectionHeight("0vh")
+		}
+		else {
+			setLoadingHeight(0)
+			setSectionHeight("100%")
+		}
 
-    const handleCommand = (type, token) => {
-		token = token + '';
-		// setIsShowSubMenu(true);
-		// setCommandType(type);
-		// setSelectedList([...token]);
+		if (!isLandOrMobile && !isTabletOrMobile) {
+			setMenuOpen(false);
+		}
+	}, [isLoading, isTabletOrMobile, isLandOrMobile, isTopLoading]);
+
+	const [ items,  setItems ] = useState<any>([])
+	useEffect(() => {
+		if (loginStatus)axios.get(`/item`)
+		.then(res =>{
+			console.log(res.data.items)
+			setItems(res.data.items);
+		}).catch(err => {
+			console.log(err);
+		});		
+	}, [loginStatus]);
+
+	window.onload = () => {
+		setIsLoading(false)
+		setIsTopLoading(false)
+
 	};
 
-    const address = "";
-	// const handleClickItem = (token) => {
-	// 	token = token + '';
-	// 	if (commandType !== "") {
-	// 		if (selectedList.includes(token)) {
-	// 			const data = selectedList;
-	// 			let filtered = data.filter(function(value, index, arr){
-	// 				return value !== token;
-	// 			});
-	// 			setSelectedList([...filtered]);
-	// 		} else {
-	// 			setSelectedList([...selectedList, token]);
-	// 		}
-	// 	}
-	// };
-
-	// const handleClickCancel = () => {
-	// 	setIsShowSubMenu(false);
-	// 	setCommandType("");
-	// 	setSelectedList([]);
-	// };
-
-	// const handleClickCommand = () => {
-	// 	if (selectedList.length > 0 && commandType !== "hide") {
-	// 		// router.push({
-	// 		// 	pathname: '/' + commandType,
-	// 		// 	query: { assets: selectedList },
-	// 		// })
-	// 	}
-	// };
-    return (
-        <>
-            <Topbar user={user} menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/>
-            <Menu menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}/>
-            <div className='page velasPage'>
-                <div className="loding" style = {{width: "100%", height: loadingHeight + "%", display: loadingHeight === 0? 'none':'flex'}}>
-                    <Loading/>
-                </div>
-                <div className="sections" style = {{width: "100%", height: sectionHeight}}>
-                    <div className="container">
-                        <Filter/>
-                        <div className="partTitle">
-						<h1 className="top">
-							NFTrees
-							<img src="/assets/img/verified.svg" alt="..." className="img-mark" />
-						</h1>
-						{
-							address &&
-							<CopyBox value={address} />
-						}
-						<p className="desc">
-							Grow NFTrees backed by Real Trees 🌳<br/>
-							Have Fun and make Real World Impact
-						</p>
-						<div className="other-site">
-							<Language className="site-item"/>
-							<Twitter className="site-item"/>
-							<Telegram className="site-item"/>
-							<Widgets className="site-item"/>
+	return (
+		<>
+			<Topbar user={user} menuOpen={menuOpen} setMenuOpen={setMenuOpen} setIsLoading={setIsTopLoading} />
+			<Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+			<div className='page velasPage'>
+				<div className="loding" style={{ width: "100%", height: loadingHeight + "%", display: loadingHeight === 0 ? 'none' : 'flex' }}>
+					<Loading />
+				</div>
+				<div className="sections" style={{ width: "100%", height: sectionHeight }}>
+					<div className="container">
+						<Filter />
+						<div className="partTitle">
+							<h1 className="top">
+								NFTrees
+								<img src="/assets/img/verified.svg" alt="..." className="img-mark" />
+							</h1>
+							{
+								loginStatus && <CopyBox value={account} />
+							}
+							<p className="desc">
+								Grow NFTrees backed by Real Trees 🌳<br />
+								Have Fun and make Real World Impact
+							</p>
+							<div className="other-site">
+								<Language className="site-item" />
+								<Twitter className="site-item" />
+								<Telegram className="site-item" />
+								<Widgets className="site-item" />
+							</div>
+							<ul className="stats">
+								<li>
+									<div className="name">TOKENS</div>
+									<div className="value">123&nbsp;190</div>
+								</li>
+								<li>
+									<div className="name">OWNERS</div>
+									<div className="value">123&nbsp;190</div>
+								</li>
+								<li>
+									<div className="name">OFFERS</div>
+									<div className="value">993</div>
+								</li>
+								<li>
+									<div className="name">MIN PRICE</div>
+									<div className="value">
+										<img src="/assets/img/parts/moonriver.svg" alt="..." className="img-mark-16" />&nbsp;993
+									</div>
+								</li>
+								<li>
+									<div className="name">MEDIUM PRICE</div>
+									<div className="value">
+										<img src="/assets/img/parts/moonriver.svg" alt="..." className="img-mark-16" />&nbsp;993
+									</div>
+								</li>
+								<li>
+									<div className="name">MAX PRICE</div>
+									<div className="value">
+										<img src="/assets/img/parts/moonriver.svg" alt="..." className="img-mark-16" />&nbsp;993
+									</div>
+								</li>
+								<li>
+									<div className="name">TRADES</div>
+									<div className="value label-blue">981</div>
+								</li>
+							</ul>
 						</div>
-						<ul className="stats">
-							<li>
-								<div className="name">TOKENS</div>
-								<div className="value">123&nbsp;190</div>
-							</li>
-							<li>
-								<div className="name">OWNERS</div>
-								<div className="value">123&nbsp;190</div>
-							</li>
-							<li>
-								<div className="name">OFFERS</div>
-								<div className="value">993</div>
-							</li>
-							<li>
-								<div className="name">MIN PRICE</div>
-								<div className="value">
-									<img src="/assets/img/parts/moonriver.svg" alt="..." className="img-mark-16" />&nbsp;993
-								</div>
-							</li>
-							<li>
-								<div className="name">MEDIUM PRICE</div>
-								<div className="value">
-									<img src="/assets/img/parts/moonriver.svg" alt="..." className="img-mark-16" />&nbsp;993
-								</div>
-							</li>
-							<li>
-								<div className="name">MAX PRICE</div>
-								<div className="value">
-									<img src="/assets/img/parts/moonriver.svg" alt="..." className="img-mark-16" />&nbsp;993
-								</div>
-							</li>
-							<li>
-								<div className="name">TRADES</div>
-								<div className="value label-blue">981</div>
-							</li>
-						</ul>
+						<NFTItemList  {...props} items={items} />
 					</div>
-                        <NFTItemList  handleCommand={handleCommand}/>
-                    </div>
-                    
-                </div>
-                <img src="/assets/img/bg8.jpg" alt="" className="bg1" />
-            </div>
-        </>
-    )
+
+				</div>
+				<img src="/assets/img/bg8.jpg" alt="" className="bg1" />
+			</div>
+		</>
+	)
 }
+
+export default VelasPage;

@@ -101,8 +101,8 @@ const Topbar = (props) => {
                         <div onClick={() => goToPage("collections")} style={{ color: 'white', cursor: "pointer" }}>COLLECTIOONS</div>
                     </li>
 
-                    <li onClick={() => { setNavId('bids') }} className={navId === 'bids' ? "slected" : ""} >
-                        <div onClick={() => goToPage("bids")} style={{ color: 'white', cursor: "pointer" }}>LATEST BID</div>
+                    <li onClick={() => { setNavId('NFTs') }} className={navId === 'NFTs' ? "slected" : ""} >
+                        <div onClick={() => goToPage("NFTs")} style={{ color: 'white', cursor: "pointer" }}>NFT</div>
                     </li>
 
                     {loginStatus && <li onClick={() => { setNavId('create') }} className={navId === 'create' ? "slected" : ""} >
