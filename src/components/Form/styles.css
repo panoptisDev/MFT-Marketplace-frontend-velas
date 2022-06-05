@@ -1,0 +1,76 @@
+.contact-form {
+  background-color: #14141f;
+  padding: 80px 0;
+}
+.contact {
+  width: 690px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.contact input::placeholder,
+.contact textarea::placeholder {
+  color: #8a8aa0;
+}
+.contact input,
+.form-select {
+  font-size: 14px;
+  width: 100%;
+  border: 1px solid rgba(138, 138, 160, 0.3);
+  border-radius: 8px;
+  padding: 9px 20px;
+  margin-bottom: 24px;
+  box-sizing: border-box;
+  color: white;
+  outline: none;
+  line-height: 28px;
+  background-color: transparent;
+}
+.contact input:focus-within {
+  border: 1px solid rgba(255, 255, 255, 0.547);
+}
+.form-title {
+  color: white;
+  width: 600px;
+  margin: 0 auto;
+  margin-bottom: 60px;
+}
+.form-title h2 {
+  font-size: 36px;
+  margin-top: 0;
+}
+
+.form-title p {
+  font-size: 18px;
+}
+
+.contact textarea {
+  height: 120px;
+  font-size: 14px;
+  border: 1px solid rgba(138, 138, 160, 0.3);
+  border-radius: 8px;
+  padding: 8px 20px;
+  background-color: transparent;
+  margin-bottom: 40px;
+  box-sizing: border-box;
+  width: 100%;
+  color: white;
+  resize: none;
+  outline: none;
+}
+
+.form-select {
+  width: 100%;
+  color: #8a8aa0;
+  appearance: none;
+}
+@media (max-width: 1440px) {
+  .contact {
+    width: 80%;
+  }
+  .form-title {
+    width: 80%;
+  }
+}

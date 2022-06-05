@@ -1,0 +1,80 @@
+.banner {
+  background-color: #14141f;
+  min-height: 500px;
+  padding: 200px 0;
+}
+.banner h1 {
+  color: white;
+  font-size: 56px;
+  font-weight: 700;
+  margin: 0;
+}
+.banner h1 span {
+  color: #14141f;
+  background: linear-gradient(-45deg, #e250e5, #4b50e6, #e250e5, #4b50e6);
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 3px transparent;
+}
+.banner > span {
+  color: white;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+.banner-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto;
+}
+.banner-btns button {
+  border: 2px solid #5142fc;
+  color: #fff;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s;
+  align-items: center;
+  cursor: pointer;
+  padding: 15px 35px;
+  box-sizing: border-box;
+  background: transparent none repeat scroll 0 0;
+}
+/* .explore svg {
+  transform: skewX(30deg);
+}
+.banner-btns svg {
+  margin-right: 5px;
+  font-size: 18px;
+  transition: all 0.3s;
+}
+.explore {
+  margin-right: 10px;
+}
+
+.banner-btns button:hover {
+  border: 2px solid #fff;
+  background-color: #fff;
+  color: #5142fc;
+}
+
+.banner-btns button:svg {
+  margin-right: 10px;
+  transition: all 0.3s;
+}
+.banner-btns button:hover svg {
+  color: #5142fc;
+} */
+@media screen and (max-width: 768px) {
+  .banner h1 {
+    font-size: 54px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .banner {
+    height: fit-content;
+    /* padding-top: 400px; */
+  }
+}

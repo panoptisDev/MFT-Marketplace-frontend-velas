@@ -1,0 +1,39 @@
+.page-header {
+  /* height: 20vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 296px !important;
+  background-image: url("../../assets/images/backdrop.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.page-header h1 {
+  color: white;
+  font-size: 48px;
+  margin-top: 80px;
+  margin-bottom: 10px;
+}
+.page-header-trace {
+  font-size: 18px;
+  color: #8a8aa0;
+}
+.page-header-trace span {
+  color: white;
+}
+.page-header-trace a {
+  color: #8a8aa0;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.page-header-trace a:hover {
+  color: white;
+}
+@media screen and (max-width: 768px) {
+  .page-header h1 {
+    font-size: 36px;
+  }
+}

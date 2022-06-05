@@ -1,102 +1,95 @@
 @import "../../global.scss";
-.myCollectionPage{
-    .sections{
-        .container{
-            display: flex;
-            width: 100%;
-            max-width: 1220px;
-            align-items: center;
-            justify-content: flex-start;
-            flex-direction: column;
-            margin-top: 7rem;
-            @include mobile_potrait{
-                margin-top: 5rem;
-
-            }
-            @include mobile_landscape{
-                margin-top: 5rem;
-            }
-            h2 {
-                font-size: 2.25rem;
-                line-height: 1.5em;
-                color: #ffffff;
-                width: 100%;
-                @include mobile_potrait{
-                    font-size: 1.5rem;
-                    width: 90%;
-                    margin-bottom: 1rem;
-                    line-height: 1;
-
-                }
-                @include mobile_landscape{
-                    font-size: 1.5rem;
-                    width: 90%;
-                    margin-bottom: 0.5rem;
-                    line-height: 1;
-                }
-            }
-            .desc{
-                width: 100%;
-                display: flex;
-                align-items: center;
-                margin: 25px 0 25px 0;
-                @include mobile_potrait{
-                    width: 90%;
-
-                }
-                @include mobile_landscape{
-                    width: 90%;
-                }
-                span{
-                    color: #ffffff;
-                    @include mobile_potrait{
-                        font-size: 12px;
-    
-                    }
-                    @include mobile_landscape{
-                        font-size: 12px;
-                    }
-                }
-                svg{
-                    fill : #fff;
-                    cursor: pointer;
-                }
-            } 
-            .btns{
-                width: 100%;
-                display: flex;
-                align-items: center;
-                @include mobile_potrait{
-                    width: 90%;
-
-                }
-                @include mobile_landscape{
-                    width: 90%;
-                }
-            }
-            .collectionContainer {
-                width: 100% !important;
-                display: flex;
-                margin-top: 50px;
-                flex-direction: row;
-                @include mobile_potrait{
-                    width: 90%;
-                    flex-direction: column;
-
-                }
-                @include mobile_landscape{
-                    width: 90%;
-                }
-            }
-            
-
-            .dehazeBtn {
-                margin-left: 40px;
-                padding: 40px;
-                svg{
-                    margin: 0
-                }
-            }
+.myCollectionPage {
+  background-color: #14141f;
+  padding: 80px 0;
+  .sections {
+    .container {
+      display: flex;
+      width: 100%;
+      max-width: 1220px;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column;
+      @include mobile_potrait {
+        margin-top: 5rem;
+      }
+      @include mobile_landscape {
+        margin-top: 5rem;
+      }
+      h2 {
+        font-size: 2.25rem;
+        line-height: 1.5em;
+        color: #ffffff;
+        width: 100%;
+        @include mobile_potrait {
+          font-size: 1.5rem;
+          width: 90%;
+          margin-bottom: 1rem;
+          line-height: 1;
         }
+        @include mobile_landscape {
+          font-size: 1.5rem;
+          width: 90%;
+          margin-bottom: 0.5rem;
+          line-height: 1;
+        }
+      }
+      .desc {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin: 25px 0 25px 0;
+        @include mobile_potrait {
+          width: 90%;
+        }
+        @include mobile_landscape {
+          width: 90%;
+        }
+        span {
+          color: #ffffff;
+          @include mobile_potrait {
+            font-size: 12px;
+          }
+          @include mobile_landscape {
+            font-size: 12px;
+          }
+        }
+        svg {
+          fill: #fff;
+          cursor: pointer;
+        }
+      }
+      .btns {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        @include mobile_potrait {
+          width: 90%;
+        }
+        @include mobile_landscape {
+          width: 90%;
+        }
+      }
+      .collectionContainer {
+        width: 100% !important;
+        display: flex;
+        flex-direction: row;
+        @include mobile_potrait {
+          width: 90%;
+          flex-direction: column;
+        }
+        @include mobile_landscape {
+          width: 90%;
+        }
+      }
+
+      .dehazeBtn {
+        margin-left: 40px;
+        padding: 40px;
+        svg {
+          margin: 0;
+        }
+      }
     }
+  }
 }

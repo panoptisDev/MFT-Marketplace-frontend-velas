@@ -1,0 +1,55 @@
+.title {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 100%;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
+  background-color: transparent;
+  color: white;
+  position: relative;
+  padding-bottom: 14px;
+  /* padding: 60px 0; */
+}
+.title h1 {
+  margin-top: 0;
+  font-size: 36px;
+}
+.heading-line {
+  position: relative;
+  background-color: #5142fc;
+  height: 3px;
+  width: 80px;
+  border-radius: 30px;
+  margin: 0 auto 20px;
+}
+
+.heading-line.s2 {
+  /* margin: 0 auto 40px; */
+}
+
+.heading-line:before {
+  /* background-color: white;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+  -webkit-animation-direction: alternate-reverse;
+  -webkit-animation-name: watermark-animate;
+  animation-name: watermark-animate; */
+}
+@media screen and (max-width: 576px) {
+  .title h1 {
+    font-size: 24px;
+  }
+}

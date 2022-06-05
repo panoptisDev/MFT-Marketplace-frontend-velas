@@ -1,29 +1,108 @@
-import './filter.scss'
+import React, { useState } from "react";
+import { FormControl, InputGroup } from "react-bootstrap";
+import { AiOutlineSearch } from "react-icons/ai";
+import SearchFilterBar from "../MoreComponents/SearchFilterBar";
+import "./styles.css";
 
-export default function Filter() {
+const initialCheck = {
+  listings: false,
+  purchases: false,
+  sales: false,
+  transfers: false,
+  bids: false,
+  likes: false,
+  followings: false,
+};
+const Filter = () => {
+  const [checked, setChecked] = useState(initialCheck);
+
+  const clearChecks = () => {
+    setChecked(initialCheck);
+  };
+
+  const checkHandler = (e: any) => {
+    setChecked({ ...checked, [e.target.name]: e.target.checked });
+  };
   return (
-    <div className='filter'>
-        <input type="text" placeholder='Enter Collection Name' className='myInput' />
-        <div className="checkGroup">
-        <p>
-            <input type="checkbox" id="chk1" name="chkdemo"   />
-            <label htmlFor={"chk1"}></label> Price
-        </p> 
-        <p>
-            <input type="checkbox" id="chk2" name="chkdemo"   />
-            <label htmlFor={"chk2"}></label> Latest
-        </p> 
-        <p>
-            <input type="checkbox" id="chk3" name="chkdemo"   />
-            <label htmlFor={"chk3"}></label> Oldest
-        </p> 
-        <p>
-            <input type="checkbox" id="chk4" name="chkdemo"   />
-            <label htmlFor={"chk4"}></label> Must Sold
-        </p> 
+    <div className="filter">
+      <SearchFilterBar
+        className="activity-filter-search email-send"
+        icon={<AiOutlineSearch />}
+        label="info@yourgmail.com"
+      />
+      <div className="filter-checkboxes">
+        <div>
+          <h3>Filter</h3>
+          <button onClick={clearChecks} className="clear-checks">
+            Clear All
+          </button>
         </div>
-        
-        
+        <div className="checkbox">
+          <input
+            onChange={checkHandler}
+            name="listings"
+            checked={checked.listings}
+            type="checkbox"
+          />
+          <label htmlFor="">Listings</label>
+        </div>
+        <div className="checkbox">
+          <input
+            onChange={checkHandler}
+            name="purchases"
+            checked={checked.purchases}
+            type="checkbox"
+          />
+          <label htmlFor="">Purchases</label>
+        </div>
+        <div className="checkbox">
+          <input
+            onChange={checkHandler}
+            name="sales"
+            checked={checked.sales}
+            type="checkbox"
+          />
+          <label htmlFor="">Sales</label>
+        </div>
+        <div className="checkbox">
+          <input
+            onChange={checkHandler}
+            name="transfers"
+            checked={checked.transfers}
+            type="checkbox"
+          />
+          <label htmlFor="">Transfers</label>
+        </div>
+        <div className="checkbox">
+          <input
+            onChange={checkHandler}
+            name="bids"
+            checked={checked.bids}
+            type="checkbox"
+          />
+          <label htmlFor="">Bids</label>
+        </div>
+        <div className="checkbox">
+          <input
+            onChange={checkHandler}
+            name="likes"
+            checked={checked.likes}
+            type="checkbox"
+          />
+          <label htmlFor="">Likes</label>
+        </div>
+        <div className="checkbox">
+          <input
+            onChange={checkHandler}
+            name="followings"
+            checked={checked.followings}
+            type="checkbox"
+          />
+          <label htmlFor="">Followings</label>
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
+
+export default Filter;

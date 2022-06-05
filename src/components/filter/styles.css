@@ -1,0 +1,51 @@
+.checkboxes {
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+.checkboxes span {
+  background-color: transparent !important;
+  border: none;
+}
+.filter-checkboxes {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.filter-checkboxes h3 {
+  color: white;
+  text-align: left;
+  font-weight: 600;
+  margin-top: 20px;
+}
+.filter-checkboxes input {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+}
+.checkbox {
+  display: flex;
+  margin-bottom: 20px;
+}
+.checkbox label {
+  color: white;
+  margin-left: 15px;
+}
+.filter-checkboxes div:first-child {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.clear-checks {
+  color: #5141fc;
+  font-size: 16px;
+  line-height: 26px;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  font-weight: 700;
+  position: relative;
+  cursor: pointer;
+}

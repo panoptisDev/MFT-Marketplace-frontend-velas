@@ -1,107 +1,119 @@
+@import "../../../global.scss";
+.tagList {
+  width: 100%;
 
-	@import "../../../global.scss";
-    .tagList{
-        width: 100%;
-        
-    
-        .tab-header {
-            width: 100%;
-            overflow-x: auto;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            height: fit-content;
-            justify-content: center;;
-            @media (max-width: 1200px){
-                justify-content: flex-start;
-            }
+  background-color: #14141f;
+  .tab-header {
+    width: 100%;
+    overflow-x: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: fit-content;
+    justify-content: center;
 
-            .tab-item{
-                height: 100%;
-                width: 180px;
-                padding: 20px;
-                color: #8a939b;
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-                &:hover{
-                    color: white;
-                }
-                @include mobile_potrait{
-                    padding: 10px;
-    
-                }
-                @include mobile_landscape{
-                    font-size: 12px;
-                }
-                &.selected {
-                    color: white;
-                    border-bottom: 4px solid #2081e2;
-                }
+    &::-webkit-scrollbar {
+      width: 1em;
+      height: 5px;
+    }
 
-                &.tab-icon {
-                    font-size: 24px;
-                }
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
 
-                .tab-title {
-                    padding: 0 10px;
-                    font-size: 20px;
-                    line-height: 24px;
-                    @include mobile_potrait{
-                        font-size: 12px;
-                    }
-                    @include mobile_landscape{
-                        font-size: 12px;
-                    }
-                }
-            }
+    &::-webkit-scrollbar-thumb {
+      background-color: darkgrey;
+      outline: 1px solid slategrey;
+    }
+    @media (max-width: 1200px) {
+      justify-content: flex-start;
+    }
+
+    .tab-item {
+      height: 100%;
+      width: 180px;
+      padding: 20px;
+      color: #8a939b;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      &:hover {
+        color: white;
+      }
+      @include mobile_potrait {
+        padding: 10px;
+      }
+      @include mobile_landscape {
+        font-size: 12px;
+      }
+      &.selected {
+        color: white;
+        border-bottom: 4px solid #5141fc;
+      }
+
+      &.tab-icon {
+        font-size: 24px;
+      }
+
+      .tab-title {
+        padding: 0 10px;
+        font-size: 20px;
+        line-height: 24px;
+        @include mobile_potrait {
+          font-size: 12px;
         }
-    }
-    .MuiPaper-root{
-        background-color: #00141f !important;
-    }
-    .actionList{
-        display: flex;
-        flex-direction: column;
-        background-color: #00141f !important;
-        .action-item{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #2081e264;
-            cursor: pointer;
-            padding-right: 20px;
-            background-color: #00141f !important;
-            &:hover {
-                transition: all 0.3s ease 0s;
-                box-shadow: #04111d40 0px 0px 8px 0px;
-                background-color: #ffffff22 !important;
-            }
-
-            .action-icon {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 54px;
-                height: 36px;
-                color: #fff;
-            }
-
-            .action-label{
-                flex: 1;
-                min-width: 100px;
-                font-weight: 500;
-                font-size: 18px;
-                color: #fff;
-                @include mobile_potrait{
-                    font-size: 12px;
-    
-                }
-                @include mobile_landscape{
-                    font-size: 12px;
-                }
-            }
+        @include mobile_landscape {
+          font-size: 12px;
         }
+      }
     }
+  }
+}
+.MuiPaper-root {
+  background-color: #00141f !important;
+}
+.actionList {
+  display: flex;
+  flex-direction: column;
+  background-color: #343444 !important;
+  .action-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: none;
+    cursor: pointer;
+    padding-right: 20px;
+    background-color: #343444 !important;
+    &:hover {
+      font-weight: 600;
+      transition: all 0.3s ease 0s;
+      box-shadow: #04111d40 0px 0px 8px 0px;
+      background-color: #5141fc !important;
+    }
+
+    .action-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 54px;
+      height: 36px;
+      color: #fff;
+    }
+
+    .action-label {
+      flex: 1;
+      min-width: 100px;
+      font-weight: 500;
+      font-size: 18px;
+      color: #fff;
+      @include mobile_potrait {
+        font-size: 12px;
+      }
+      @include mobile_landscape {
+        font-size: 12px;
+      }
+    }
+  }
+}

@@ -12,44 +12,44 @@ import Divider from "@material-ui/core/Divider";
 import Icon from "@material-ui/core/Icon";
 import Popper from "@material-ui/core/Popper";
 
-import Button from "components/customButtons/Button";
-import './customDropStyle.scss'
+import Button from "../MoreComponents/Button";
+import "./customDropStyle.scss";
 
-export default function Dropdown(props) {
-	// const classes = useStyles();
-	const {
-		buttonText,
-		buttonIcon,
-		dropdownList,
-		buttonProps,
-		dropup,
-		dropdownHeader,
-		caret,
-		left,
-		onChangeHandle,
-    defaultValue
-	} = props;
-  const [anchorEl, setAnchorEl] = React.useState(null);
+export default function Dropdown(props: any) {
+  // const classes = useStyles();
+  const {
+    buttonText,
+    buttonIcon,
+    dropdownList,
+    buttonProps,
+    dropup,
+    dropdownHeader,
+    caret,
+    left,
+    onChangeHandle,
+    defaultValue,
+  } = props;
+  const [anchorEl, setAnchorEl] = React.useState<any>(null);
   const [category, setCategory] = React.useState(null);
   useEffect(() => {
     setCategory(defaultValue);
-  },[]);
-  const handleClick = (event) => {
+  }, []);
+  const handleClick = (event: any) => {
     if (anchorEl && anchorEl.contains(event.target)) {
       setAnchorEl(null);
     } else {
       setAnchorEl(event.currentTarget);
     }
   };
-  const handleClose = (param) => {
-	  setCategory(param);
-	  onChangeHandle(param)
+  const handleClose = (param: any) => {
+    setCategory(param);
+    onChangeHandle(param);
   };
   const removeCategory = () => {
-  	setCategory(null);
-	  onChangeHandle('');
+    setCategory(null);
+    onChangeHandle("");
   };
-  const handleCloseAway = (event) => {
+  const handleCloseAway = (event: any) => {
     if (anchorEl.contains(event.target)) {
       return;
     }
@@ -70,28 +70,39 @@ export default function Dropdown(props) {
   return (
     <div className="topBarDropdown">
       <div>
-		  <Button
-			  aria-label="Notifications"
-			  aria-owns={anchorEl ? "menu-list" : null}
-			  aria-haspopup="true"
-			  {...buttonProps}
-			  onClick={handleClick}
-        className = "dropdownBtn"
-			  
-		  >
-			  {icon}
-			  {buttonText !== undefined ? buttonText : null}
-              {caret ? <i className="fas fa-caret-down" style = {{marginLeft : '0.5rem'}}/> : null}
-		  </Button>
-		  { !!category &&
-			  <Button
-              className = "dropdown"
-				  onClick={removeCategory}
-				//   style={{ border: '1px solid #ced4da', borderRadius: '6px', marginLeft: '20px', background: 'none' }}
-			  >
-				  { category } <span style={{ fontSize: '2em', marginLeft: '5px', paddingBottom: '3px', lineHeight: '50%' }}>&times;</span>
-			  </Button>
-		  }
+        <Button
+          aria-label="Notifications"
+          aria-owns={anchorEl ? "menu-list" : null}
+          aria-haspopup="true"
+          {...buttonProps}
+          onClick={handleClick}
+          className="dropdownBtn"
+        >
+          {icon}
+          {buttonText !== undefined ? buttonText : null}
+          {caret ? (
+            <i className="fas fa-caret-down" style={{ marginLeft: "0.5rem" }} />
+          ) : null}
+        </Button>
+        {!!category && (
+          <Button
+            className="dropdown"
+            onClick={removeCategory}
+            //   style={{ border: '1px solid #ced4da', borderRadius: '6px', marginLeft: '20px', background: 'none' }}
+          >
+            {category}{" "}
+            <span
+              style={{
+                fontSize: "2em",
+                marginLeft: "5px",
+                paddingBottom: "3px",
+                lineHeight: "50%",
+              }}
+            >
+              &times;
+            </span>
+          </Button>
+        )}
       </div>
       <Popper
         open={Boolean(anchorEl)}
@@ -123,11 +134,14 @@ export default function Dropdown(props) {
                 : { transformOrigin: "0 0 0" }
             }
           >
-            <Paper className="dropdown" style={
-            	buttonProps.width
-				 ? {width: buttonProps.width, marginLeft: '0'}
-				 : {width: '150px', marginLeft: '0'}
-            }>
+            <Paper
+              className="dropdown"
+              style={
+                buttonProps.width
+                  ? { width: buttonProps.width, marginLeft: "0" }
+                  : { width: "150px", marginLeft: "0" }
+              }
+            >
               <ClickAwayListener onClickAway={handleCloseAway}>
                 <MenuList role="menu" className="menuList">
                   {dropdownHeader !== undefined ? (
@@ -138,7 +152,7 @@ export default function Dropdown(props) {
                       {dropdownHeader}
                     </MenuItem>
                   ) : null}
-                  {dropdownList.map((prop, key) => {
+                  {dropdownList.map((prop: any, key: any) => {
                     if (prop.divider) {
                       return (
                         <Divider
@@ -153,7 +167,7 @@ export default function Dropdown(props) {
                         key={key}
                         onClick={() => handleClose(prop)}
                         className="dropdownItem"
-						style={{ color: 'black' }}
+                        style={{ color: "black" }}
                       >
                         {prop}
                       </MenuItem>
@@ -198,5 +212,5 @@ Dropdown.propTypes = {
   // function that retuns the selected item
   onClick: PropTypes.func,
   onChangeHandle: PropTypes.func,
-  defaultValue: PropTypes.string
+  defaultValue: PropTypes.string,
 };

@@ -1,71 +1,124 @@
-import "./countDown.scss"
-import { useState, useEffect } from 'react';
-import { useWeb3React } from "@web3-react/core";
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import "./timer.css";
+// import Mint from "../Mint/Mint";
+import { ReactComponent as Flame } from "../../assets/icons/flame.svg";
+import { spawn } from "child_process";
 
-type TimeNumber = {
-    deadLine:number,
-    setShowMint(value: boolean): void
+const RowContainer = styled.div`
+  color: hsl(0, 0%, 100%);
+  display: flex;
+  justify-content: center;
+`;
+
+// const Heading = styled.h1`
+//   color: #000000;
+//   text-shadow: 0px 0px 10px rgb(0 0 0 / 30%);
+//   font-family: "RocknRoll One", Sans-serif;
+//   font-size: 32px;
+// `;
+// const Title = styled.p`
+//   font-size: 16px;
+//   line-height: 24px;
+//   margin-bottom: 40px;
+//   color: white;
+// `;
+const Item = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20px;
+  height: 30px;
+`;
+
+const ItemValue = styled.span`
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 0px;
+  text-align: center;
+`;
+// const ItemLabel = styled.p`
+//   color: black;
+//   font-size: 14px !important;
+//   margin-bottom: 3px;
+//   letter-spacing: 0;
+// `;
+
+const Card = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const Timer = ({ mintStartAt, itemDetails }: any) => {
+  const [title, setTitle] = useState("");
+  const [days, setDays] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [timerVisible, setTimerVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const now = Date.now() / 1000;
+      if (now < mintStartAt) {
+        setTitle(`Countdown`);
+        setDays(Math.floor((mintStartAt - now) / (60 * 60 * 24)));
+        setHours(Math.floor((mintStartAt - now) / (60 * 60)) % 24);
+        setMinutes(Math.floor((mintStartAt - now) / 60) % 60);
+        setSeconds(Math.floor(mintStartAt - now) % 60);
+        setTimerVisible(true);
+      } else {
+        setTimerVisible(false);
+      }
+    }, 0);
+    return () => clearInterval(timer);
+  }, [mintStartAt]);
+
+  return (
+    <div
+      className={
+        itemDetails
+          ? "timer-mint-container timer-item-details"
+          : "timer-mint-container"
+      }
+    >
+      <Card>
+        {!itemDetails ? (
+          <Flame className="flame-timer" />
+        ) : (
+          <span className="timer-item-details-span">Countdown</span>
+        )}
+        <RowContainer className="timer-container">
+          <Item className="days-cirlce">
+            <ItemValue id="days">
+              {days.toLocaleString("en-US", { minimumIntegerDigits: 2 })}
+            </ItemValue>
+          </Item>
+          <span>:</span>
+          <Item className="hours-cirlce">
+            <ItemValue id="days">
+              {hours.toLocaleString("en-US", { minimumIntegerDigits: 2 })}
+            </ItemValue>
+          </Item>
+          <span>:</span>
+          <Item className="minutes-cirlce">
+            <ItemValue id="days">
+              {minutes.toLocaleString("en-US", { minimumIntegerDigits: 2 })}
+            </ItemValue>
+          </Item>
+          <span>:</span>
+          <Item className="seconds-cirlce">
+            <ItemValue id="days">
+              {seconds.toLocaleString("en-US", { minimumIntegerDigits: 2 })}
+            </ItemValue>
+          </Item>
+        </RowContainer>
+      </Card>
+    </div>
+  );
 };
-export default function Timer({ setShowMint, deadLine }: TimeNumber) {
-    const [days, setDays] = useState(0);
-    const [hours, setHours] = useState(0);
-    const [minutes, setMinutes] = useState(0);
-    const [seconds, setSeconds] = useState(0);
 
-    const { connector, library, chainId, account, active } = useWeb3React();
-    useEffect(() => {
-
-        let myInterval = setInterval(() => {
-            const currentDate: any = Date.now()/1000;
-            const diff = deadLine - currentDate;
-            const dayNum = diff > 0 ? Math.floor(diff  / 60 / 60 / 24) : 0;
-            const hourNum = diff > 0 ? Math.floor(diff  / 60 / 60) % 24 : 0;
-            const minNum = diff > 0 ? Math.floor(diff  / 60) % 60 : 0;
-            const secNum = diff > 0 ? Math.floor(diff ) % 60 : 0;
-
-            if (currentDate < deadLine) {
-                setDays(dayNum);
-                setHours(hourNum);
-                setMinutes(minNum);
-                setSeconds(secNum);
-            }
-            else{
-                setShowMint(true)
-            }
-
-        }, 0)
-        return () => {
-            clearInterval(myInterval);
-        };
-
-    }, [connector, library, account, active, chainId, deadLine, setShowMint]);
-
-    return (
-        <div className="timer">
-            {days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0
-                ? null
-                : <div className="timerNums">
-                    <div className="days">
-                        <div className="number color1">{days < 10 ? `0${days}` : days}</div>
-                        <div className="txt">Days</div>
-                    </div>
-                    <div className="dot">:</div>
-                    <div className="hours">
-                        <div className="number color2">{hours < 10 ? `0${hours}` : hours}</div>
-                        <div className="txt">Hours</div>
-                    </div>
-                    <div className="dot">:</div>
-                    <div className="mins">
-                        <div className="number color3">{minutes < 10 ? `0${minutes}` : minutes}</div>
-                        <div className="txt">Minutes</div>
-                    </div>
-                    <div className="dot">:</div>
-                    <div className="seconds">
-                        <div className="number color4">{seconds < 10 ? `0${seconds}` : seconds}</div>
-                        <div className="txt">Seconds</div>
-                    </div>
-                </div>
-            }
-        </div>
-    )
-}
+export default Timer;

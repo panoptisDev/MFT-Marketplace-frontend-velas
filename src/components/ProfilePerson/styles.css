@@ -1,0 +1,117 @@
+.profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30px;
+  width: 97%;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background-image: url("../../assets/images/author-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.profile img {
+  border-radius: 10px;
+  width: 212px;
+  margin-right: 40px;
+  height: 212px;
+}
+.author-details {
+  color: white;
+  text-align: left;
+  width: 50%;
+}
+.author-details span {
+  font-size: 18px;
+}
+.author-details h2 {
+  font-size: 36px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+}
+.author-details p {
+  font-size: 14px;
+  width: 100%;
+  margin-top: 0;
+}
+.input-copy-address {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: fit-content;
+}
+.author-details input {
+  width: 190px;
+  height: 36px;
+  font-size: 13px;
+  padding: 13px 19px;
+  padding-right: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  background-color: #f8f8f8;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+}
+
+.input-copy-address svg {
+  position: absolute;
+  color: gray;
+  right: 15px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.input-copy-address svg:hover {
+  color: #5141fc;
+}
+.author-social {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.author-social-contact {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.author-social-icon {
+  background-color: white;
+  width: 40px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  height: 40px;
+  font-size: 24px;
+  margin: 7px;
+  transition: all 0.3s;
+}
+.author-social-icon:hover {
+  color: white;
+  background-color: #5141fc;
+}
+
+@media screen and (max-width: 768px) {
+  .profile > div {
+    flex-direction: column;
+  }
+  .author-details {
+    margin-top: 10px;
+    width: 100%;
+  }
+  .profile img {
+    margin-right: 20px;
+  }
+}

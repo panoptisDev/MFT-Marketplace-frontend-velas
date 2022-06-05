@@ -1,0 +1,44 @@
+.search-bar {
+  display: none;
+  width: 200px;
+  /* height: 51px; */
+  padding: 10px 20px 10px 15px;
+  box-sizing: border-box;
+  position: fixed;
+  background-color: white;
+  border-radius: 30px;
+  display: flex;
+  z-index: 10;
+  /* float: left; */
+  /* right: 20; */
+  margin-left: -150px;
+  /* top: 50px; */
+  margin-top: 30px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.search-bar input {
+  outline: none;
+  position: relative;
+  border: none;
+  width: 100%;
+  font-size: 18px;
+}
+
+.search-component > svg {
+  cursor: pointer;
+  font-size: 15px;
+}
+.search-bar svg {
+  font-size: 20px;
+  cursor: pointer;
+}
+.search-bar.active {
+  display: block;
+}
+@media screen and (max-width: 676px) {
+  .search-bar {
+    margin-left: 00px;
+  }
+}

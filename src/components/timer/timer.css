@@ -1,0 +1,51 @@
+.timer-container > span {
+  margin: 0 5px;
+  display: block;
+}
+.timer-mint-container,
+.timer-item-details {
+  width: fit-content;
+  background-color: #343444;
+  border-radius: 10px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 3px 10px;
+  width: fit-content;
+  z-index: 10;
+  margin-top: -50px;
+  position: relative;
+}
+.timer-item-details {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  margin-top: 0px;
+}
+.timer-item-details-span {
+  font-weight: 600;
+  width: fit-content;
+  font-size: 15px;
+  /* line-height: 26px; */
+  margin-right: 20px;
+  color: white;
+  display: block;
+}
+.timer-mint-container p {
+  margin: 0;
+  font-size: 22px;
+}
+.slogan::before {
+  content: "\e900";
+  color: blue;
+}
+.flame-timer {
+  fill: #4b50e6;
+  font-size: 25px;
+  margin-right: 10px;
+}
+.days-cirlce {
+  margin: 0 !important;
+}

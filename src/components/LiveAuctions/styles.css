@@ -1,0 +1,143 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+.live-auction {
+  background-color: #14141f;
+  padding-top: 80px;
+  /* max-width: 1440px; */
+  margin: 0 auto;
+  padding-bottom: 70px;
+}
+
+.cards-container {
+}
+
+.slider-container {
+  width: 1440px;
+  height: 100%;
+  margin: 0 auto;
+}
+.slick-list {
+  overflow-y: unset !important;
+  box-sizing: border-box;
+  padding-top: 40px;
+}
+.slider-container .slick-dots {
+  bottom: -40px;
+}
+
+.slider-container .slick-dots button::before {
+  width: 5px;
+  height: 5px;
+  border: 3px solid white;
+  border-radius: 50%;
+  content: "";
+}
+.slick-active button::before {
+  border: 3px solid red white;
+  width: 8px !important;
+  height: 8px !important;
+}
+
+.arrow {
+  color: rgb(194, 194, 194);
+  position: absolute;
+  cursor: pointer;
+  z-index: 120;
+  width: 30px;
+  font-size: 20px;
+  height: 30px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.arrow:hover {
+  color: white;
+}
+
+.left-direction {
+  margin-left: 5% !important;
+}
+.right-direction {
+  margin-left: -5% !important;
+}
+.next {
+  left: 57%;
+  bottom: -10%;
+}
+.prev {
+  left: 42%;
+  bottom: -10%;
+}
+.live-auction-second-header {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 1350px;
+  font-weight: 700;
+  align-items: center;
+}
+.live-auction-second-header a {
+  background: linear-gradient(to right, #e250e5, #4b50e6, #e250e5);
+  background-clip: text;
+  -webkit-background-clip: text;
+  font-weight: 700;
+  font-weight: 14px;
+  background-size: 200% 200%;
+  animation: rainbow 2s ease-in-out infinite;
+  color: white;
+  transition: color 0.2s ease-in-out;
+  border-bottom: 1px solid white;
+}
+
+.live-auction-second-header a:hover {
+  color: transparent;
+}
+.live-auction-second-header h1 {
+  color: white;
+  font-weight: 600;
+}
+@media screen and (max-width: 1440px) {
+  .live-auction {
+    width: 100%;
+  }
+  .pageItemDetail {
+    width: 1200px;
+  }
+  .slider-container {
+    width: 100%;
+  }
+  .live-auction-second-header {
+    width: 100%;
+    padding: 0 20px;
+  }
+  .slider-container {
+    height: 100%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .pageItemDetail {
+    width: 1024px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .pageItemDetail {
+    width: 768px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .pageItemDetail {
+    width: 576px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .pageItemDetail {
+    width: 450px;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 455px) {
+  .pageItemDetail {
+    width: 350px;
+  }
+}

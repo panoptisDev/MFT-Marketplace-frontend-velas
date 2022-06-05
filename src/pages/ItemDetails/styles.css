@@ -1,0 +1,30 @@
+.sc-item-details {
+  display: grid;
+  grid-template-columns: 48% 48%;
+  background-color: #14141f;
+  padding: 80px 20px;
+  max-width: 1440px;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+.item-details {
+  padding: 80px 0;
+  background-color: #14141f;
+}
+.sc-item-details > img {
+  width: 100%;
+  border-radius: 20px;
+  height: 100%;
+}
+
+@media screen and (max-width: 1200px) {
+  .sc-item-details {
+    grid-template-columns: 100%;
+    row-gap: 50px;
+    width: 100%;
+    padding-bottom: 0;
+  }
+  .sc-item-details > img {
+    margin: 0 auto;
+  }
+}

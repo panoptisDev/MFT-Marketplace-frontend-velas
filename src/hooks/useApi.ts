@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { baseApiUrl } from 'utils';
+import { useEffect, useState } from "react";
+import { baseApiUrl } from "../utils";
 
 /* eslint-disable camelcase */
 
@@ -79,7 +79,7 @@ export const useGetItemsOfOwner = (ownerAddress: string) => {
           }
         }
       } catch (error) {
-        console.error('Unable to fetch data:', error);
+        console.error("Unable to fetch data:", error);
       }
     };
 
@@ -103,7 +103,7 @@ export const useGetAllItems = () => {
           setData(nftObjectList);
         }
       } catch (error) {
-        console.error('Unable to fetch data:', error);
+        console.error("Unable to fetch data:", error);
       }
     };
 
@@ -127,7 +127,7 @@ export const useGetTranactions = (limit?: number) => {
           setData(nftObjectList);
         }
       } catch (error) {
-        console.error('Unable to fetch data:', error);
+        console.error("Unable to fetch data:", error);
       }
     };
 
@@ -151,7 +151,7 @@ export const useGetMarketStatus = () => {
           setData(nftObjectList);
         }
       } catch (error) {
-        console.error('Unable to fetch data:', error);
+        console.error("Unable to fetch data:", error);
       }
     };
 

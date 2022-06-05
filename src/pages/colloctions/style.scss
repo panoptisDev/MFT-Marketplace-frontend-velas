@@ -1,123 +1,122 @@
 @import "../../global.scss";
-.collectionPage{
-    .sections{
-        .container{
-            display: flex;
-            width: 100%;
-            align-items: center;
-            justify-content: flex-start;
-            flex-direction: column;
-            margin-top: 7rem;
-            max-width: 1220px;
-        }
-        
-        .partTitle {
-            text-align: center;
-            // '& .items li a:hover .media img':  {
-            //     transform: 'scale(1.1)'
-            // },
-    
-            .top {
-                text-align: center;
-                color: #ced4da;
-                margin-bottom: 16px;
-                padding-top: 32px;
-                font-size: 32px;
-                font-weight: bold;
-                @include mobile_potrait{
-                    font-size: 25px;
-
-                }
-                @include mobile_landscape{
-                    font-size: 25px;
-                }
-            }
-    
-            .stats {
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items: center;
-                display: flex;
-                gap: 8px;
-                margin: 0 5px 32px;
-                list-style: none;
-                padding: 0;
-                position: relative;
-                padding: 10px;
-                &::after{
-                    content: "";
-                    position: absolute;
-                    top: 0px;
-                    left: 0px;
-                    width: 20px;
-                    height: 20px;
-                    border-width: 1px;
-                    border-style: solid;
-                    border-radius: 0px 0px 6px 0px;
-                    border-color: transparent #0eabff #0eabff   transparent;
-                    border-image: initial;
-                    transition: width 0.2s ease-out 0s, height 0.2s ease-out 0s;
-                    transform: rotate(180deg);
-                    box-sizing: border-box;
-                    z-index: 1;
-                }
-                &::before{
-                    content: "";
-                    position: absolute;
-                    bottom: 0px;
-                    right: 0px;
-                    width: 20px;
-                    height: 20px;
-                    border-width: 1px;
-                    border-style: solid;
-                    border-radius: 6px 0px 0px 0px;
-                    border-color:  #0eabff transparent transparent #0eabff ;
-                    border-image: initial;
-                    transition: width 0.2s ease-out 0s, height 0.2s ease-out 0s;
-                    transform: rotate(180deg);
-                    box-sizing: border-box;
-                    z-index: 1;
-                }
-                
-    
-                li {
-                    text-align: center;
-                    // background: #361b97e6;
-                    background-color: #0eabff22;
-                    border-radius: 8px;
-                    padding: 8px 24px;
-                    box-shadow: 0px 0px 2px #fff;
-                    // border: 1px #fff solid;
-                    @include mobile_potrait{
-                        padding: 8px 15px;
-                    }
-                    @include mobile_landscape{
-                        padding: 8px 15px;
-                    }
-                    .name {
-                        text-transform: uppercase;
-                        color: #0eabff;
-                        margin-bottom: 4px;
-                        font-size: 10px;
-                        @include mobile_potrait{
-                            font-size: 8px;
-                        }
-                        @include mobile_landscape{
-                            font-size: 8px;
-                        }
-                    }
-    
-                    .value {
-                        color: #fff;
-                        @include mobile_potrait{
-                            font-size: 12px;
-                        }
-                        @include mobile_landscape{
-                            font-size: 12px;
-                        }
-                    }
-                }
-            }
-        }
+.collectionPage {
+  padding: 80px 0;
+  background-color: #14141f;
+  .sections {
+    .container {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column;
+      max-width: 1220px;
     }
+
+    .partTitle {
+      text-align: center;
+      // '& .items li a:hover .media img':  {
+      //     transform: 'scale(1.1)'
+      // },
+
+      .top {
+        text-align: center;
+        color: white;
+        margin-bottom: 16px;
+        padding-top: 32px;
+        font-size: 32px;
+        font-weight: bold;
+        @include mobile_potrait {
+          font-size: 25px;
+        }
+        @include mobile_landscape {
+          font-size: 25px;
+        }
+      }
+
+      .stats {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        gap: 8px;
+        margin: 0 5px 32px;
+        list-style: none;
+        padding: 0;
+        position: relative;
+        padding: 10px;
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          width: 20px;
+          height: 20px;
+          border-width: 1px;
+          border-style: solid;
+          border-radius: 0px 0px 6px 0px;
+          border-color: transparent #0eabff #0eabff transparent;
+          border-image: initial;
+          transition: width 0.2s ease-out 0s, height 0.2s ease-out 0s;
+          transform: rotate(180deg);
+          box-sizing: border-box;
+          z-index: 1;
+        }
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: 0px;
+          right: 0px;
+          width: 20px;
+          height: 20px;
+          border-width: 1px;
+          border-style: solid;
+          border-radius: 6px 0px 0px 0px;
+          border-color: #0eabff transparent transparent #0eabff;
+          border-image: initial;
+          transition: width 0.2s ease-out 0s, height 0.2s ease-out 0s;
+          transform: rotate(180deg);
+          box-sizing: border-box;
+          z-index: 1;
+        }
+
+        li {
+          text-align: center;
+          // background: #361b97e6;
+          background-color: #0eabff22;
+          border-radius: 8px;
+          padding: 8px 24px;
+          box-shadow: 0px 0px 2px #fff;
+          // border: 1px #fff solid;
+          @include mobile_potrait {
+            padding: 8px 15px;
+          }
+          @include mobile_landscape {
+            padding: 8px 15px;
+          }
+          .name {
+            text-transform: uppercase;
+            color: #0eabff;
+            margin-bottom: 4px;
+            font-size: 10px;
+            @include mobile_potrait {
+              font-size: 8px;
+            }
+            @include mobile_landscape {
+              font-size: 8px;
+            }
+          }
+
+          .value {
+            color: #fff;
+            @include mobile_potrait {
+              font-size: 12px;
+            }
+            @include mobile_landscape {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
 }

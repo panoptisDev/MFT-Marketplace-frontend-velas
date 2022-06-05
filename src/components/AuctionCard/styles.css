@@ -1,0 +1,196 @@
+.auction-card {
+  width: 94%;
+  height: 100%;
+  padding: 20px;
+  background-color: #343444;
+  box-shadow: 0px 3px 16px rgb(47 83 109 / 12%);
+  border-radius: 20px;
+  box-sizing: border-box;
+  position: relative;
+  margin: 0 auto;
+  transition: all 0.5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-top img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.auction-card.today-pick-card {
+  height: 100%;
+  width: 95%;
+}
+
+.place-bid.today-pick {
+  background-color: transparent;
+  opacity: 1;
+  color: white;
+  border: 2px solid #5142fc;
+  top: 0px;
+  margin: 0;
+  left: 0;
+  position: relative;
+  transform: translate(0, 0);
+  z-index: 0;
+}
+
+.auction-card:hover .place-bid.today-pick {
+  top: 0px;
+  margin: 0;
+}
+
+.auction-card:hover .place-bid.today-pick {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.place-bid.today-pick:hover {
+  color: black;
+  border-color: white;
+  background-color: white;
+}
+
+.footer-history {
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  align-items: center;
+}
+.footer-history svg {
+  margin-right: 10px;
+  stroke-width: 3px;
+}
+.place-bid:hover svg {
+  fill: white;
+}
+.place-bid.today-pick:hover svg {
+  fill: #5142fc;
+}
+
+.card-top p {
+  font-weight: 700;
+  font-size: 14px;
+  width: 35px;
+  color: white;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.card-bottom {
+  background-color: transparent;
+  /* height: 100px; */
+  margin-top: 10px;
+}
+.outlined {
+  fill: white;
+}
+.filled-red {
+  color: red;
+}
+.auction-card:hover {
+  transform: translateY(-15px);
+}
+
+.bottom-first {
+  color: white;
+  font-weight: 700;
+  width: 100%;
+  font-size: 18px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+.bottom-first p {
+  margin: 0;
+  color: white;
+  background-color: #5142fc;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.bottom-first a {
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s;
+}
+.bottom-first a:hover {
+  color: #5142fc;
+}
+
+.meta-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+.meta-info-left {
+  display: flex;
+  justify-content: flex-start;
+  color: white;
+  align-items: center;
+  text-align: left;
+}
+.meta-info-left div:first-child {
+  background-color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 15px;
+  margin-right: 10px;
+}
+.meta-info-left h6,
+.meta-info h5 {
+  margin: 0;
+  margin-top: 5px;
+}
+.meta-info-right h5 {
+  font-size: 18px;
+}
+.meta-info-right span {
+  font-size: 13px;
+}
+.meta-info-left div:last-child a {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-size: 15px;
+}
+.meta-info-left div:last-child a:hover {
+  color: #5142fc;
+}
+
+.meta-info-right {
+  color: white;
+  text-align: right;
+}
+.card-footer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  padding: 0;
+  border-top: 0;
+}
+.meta-info.today-pick-meta {
+  margin-top: 10px;
+}
+@media screen and (max-width: 1440px) {
+  .auction-card {
+    width: 95%;
+  }
+}
+@media screen and (max-width: 1380px) {
+  .place-bid.today-pick {
+    padding: 5px;
+  }
+}

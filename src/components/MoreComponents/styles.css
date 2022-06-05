@@ -1,0 +1,356 @@
+.explore {
+  border: 2px solid #5142fc;
+  color: #fff;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s;
+  align-items: center;
+  cursor: pointer;
+  padding: 13.5px 30px;
+  font-weight: 600;
+  box-sizing: border-box;
+  background: transparent none repeat scroll 0 0;
+  margin-right: 15px;
+}
+
+.explore:hover {
+  border: 2px solid #fff;
+  background-color: #fff;
+  color: #5142fc;
+}
+.explore:first-child svg {
+  transform: skewX(30deg);
+}
+
+.explore svg {
+  margin-right: 10px;
+  transition: all 0.3s;
+}
+.explore:hover svg {
+  color: #5142fc;
+}
+
+.place-bid {
+  padding: 12px 27px;
+  color: black;
+  opacity: 0;
+  border-radius: 20px;
+  width: fit-content;
+  outline: none;
+  display: flex;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  z-index: 10;
+  border: 0;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+  position: absolute;
+  /* top: 250px; */
+  left: 50%;
+  /* top: 150px; */
+  margin-top: 50px;
+  transform: translate(-50%, 0);
+}
+
+.auction-card:hover .place-bid {
+  opacity: 1;
+  margin-top: -170px;
+  /* top: 000px; */
+}
+.place-bid:hover {
+  color: white;
+  background-color: #5142fc;
+}
+.place-bid svg {
+  transition: all 0.5s;
+  width: 22px;
+  fill: #5142fc;
+  margin-right: 10px;
+  height: 22px;
+}
+.follow-btn-btn {
+  color: #fff;
+  border-radius: 20px;
+  background-color: transparent;
+  border: 1.5px solid white;
+  width: 96px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+  height: 40px;
+}
+.follow-btn-btn:hover {
+  background-color: #5142fc;
+  border: 1.5px solid #5142fc;
+}
+
+.send-message {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 22px;
+  border-radius: 30px;
+  box-sizing: border-box;
+  cursor: pointer;
+  padding: 15px 39px;
+  transition: all 0.5s;
+  width: 100%;
+}
+.item-detail {
+  transition: all 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.send-message:hover {
+  background-color: #5141fc;
+  border: 2px solid #5141fc;
+}
+.item-detail:hover {
+  border: 2px solid white;
+  background-color: white;
+  color: black;
+}
+.item-detail svg {
+  fill: white;
+  transition: all 0.3s;
+  width: 20px;
+  margin-right: 10px;
+  height: 21px;
+}
+.item-detail:hover svg {
+  fill: #5141fc;
+}
+.bid-history {
+  padding: 12px 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+.bid-history-popular {
+  position: relative;
+  margin-right: 20px;
+}
+.bid-history-popular div {
+  background-color: #5142fc;
+  color: white;
+  width: 17px;
+  display: flex;
+  position: absolute;
+  right: -5px;
+  margin-top: -12px;
+  justify-content: center;
+  align-items: center;
+  height: 17px;
+  font-size: 12px;
+  border-radius: 50%;
+}
+.bid-history-left img {
+  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+}
+.bid-history-right h5 {
+  font-size: 14px;
+  margin: 0;
+  font-weight: 700;
+  color: white;
+}
+.bid-history-left {
+}
+.bid-history-left-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.bid-history-left-block span {
+  display: block;
+}
+.bid-history-left-block div {
+  display: flex;
+  align-items: center;
+}
+.bid-history-left-block div a {
+  margin-right: 10px;
+}
+.link-nvigator,
+.activity-card-link {
+  font-size: 15px;
+  cursor: pointer;
+  color: white;
+  transition: all 0.3s;
+  font-weight: 700;
+}
+
+.link-nvigator:hover {
+  color: #5141fc;
+}
+.bid-history-left {
+  display: flex;
+}
+.activity-card-link {
+  font-size: 20px;
+}
+.email-send {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-left: 10px;
+  height: 50px;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.178);
+  border-radius: 10px;
+  margin-top: 20px;
+}
+.email-send input {
+  background-color: transparent;
+  border: none;
+  width: 70%;
+  outline: none;
+  color: rgba(255, 255, 255, 0.502);
+}
+.email-send:focus-within {
+  border: 1px solid #5141fc;
+}
+.email-send svg {
+  fill: white;
+}
+.activity-filter-search {
+  margin-top: 0;
+}
+.dropdown-menu-dark .dropdown-item {
+  transition: all 0.3s;
+}
+.dropdown-menu-dark .dropdown-item:focus,
+.dropdown-menu-dark .dropdown-item:hover {
+  color: #fff;
+  background-color: #5141fc;
+  font-weight: 700;
+}
+.dropdown-menu-dark .dropdown-item.active,
+.dropdown-menu-dark .dropdown-item:active {
+  font-weight: 700;
+  color: #fff;
+  background-color: #5141fc;
+}
+.btn-secondary,
+.btn-secondary:hover {
+  background: #343444;
+  border-color: #343444;
+}
+.btn-secondary:focus {
+  outline: none;
+  background-color: #343444;
+  border-color: #343444;
+  outline-color: #343444;
+  box-shadow: none;
+}
+.btn-secondary {
+  width: 140px;
+  text-align: left;
+  padding: 10px 20px;
+  padding-left: 10px;
+  align-items: center;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+.dropdown-menu,
+.dropdown-menu.show {
+  width: 140px;
+  min-width: 0;
+}
+.dropdown-menu-dark {
+  background-color: #343444;
+}
+.show > .btn-secondary.dropdown-toggle {
+  background: #343444;
+  box-shadow: none;
+  border-color: #343444;
+}
+.show > .btn-secondary.dropdown-toggle:focus {
+  box-shadow: none;
+}
+
+.connect-wallet span {
+  font-size: 15px;
+  font-weight: 700;
+  margin-left: 10px;
+}
+.connect-wallet {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  margin-left: 25px;
+  border: 2px solid #5142fc;
+  color: #fff;
+  background: transparent none repeat scroll 0 0;
+  padding: 12px 35px 12px 32px;
+  border-radius: 30px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.connect-wallet:hover {
+  border: 2px solid #fff;
+  background-color: #fff;
+  color: #5142fc;
+}
+
+.connect-wallet svg {
+  transition: all 0.3s;
+  margin-right: 10px;
+}
+.connect-wallet:hover svg {
+  color: #5142fc;
+}
+.upload-file-btn {
+  border-color: white;
+  font-weight: 600;
+}
+.image-banner-upload {
+  font-weight: 600;
+  margin-right: 0;
+}
+.image-banner-upload:hover {
+  color: #5141fc !important;
+}
+.saveBtn:hover {
+  color: #5141fc !important;
+}
+.bid-modal {
+  width: 100%;
+  background-color: #5141fc;
+  color: white;
+}
+.bid-modal:hover {
+  background-color: #3221f0;
+  border-color: #3221f0;
+  color: white;
+}
+@media screen and (max-width: 1200px) {
+  .connect-wallet {
+    padding: 10px;
+    justify-content: center;
+    /* width: 48px; */
+    height: 48px;
+  }
+  .connect-wallet span {
+    display: none;
+  }
+}
+@media screen and (max-width: 420px) {
+  .bid-history {
+    flex-direction: column;
+  }
+}

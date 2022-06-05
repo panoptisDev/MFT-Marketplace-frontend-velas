@@ -13,26 +13,26 @@ import Grow from "@material-ui/core/Grow";
 import Divider from "@material-ui/core/Divider";
 import Icon from "@material-ui/core/Icon";
 import Popper from "@material-ui/core/Popper";
-import Button from "components/customButtons/Button";
-import './customDropStyle.scss'
+import Button from "../.../../MoreComponents/Button";
+import "./customDropStyle.scss";
 // core components
 
-export default function CustomDropdown(props) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const handleClick = (event) => {
+export default function CustomDropdown(props: any) {
+  const [anchorEl, setAnchorEl] = React.useState<any>(null);
+  const handleClick = (event: any) => {
     if (anchorEl && anchorEl.contains(event.target)) {
       setAnchorEl(null);
     } else {
       setAnchorEl(event.currentTarget);
     }
   };
-  const handleClose = (param) => {
+  const handleClose = (param: any) => {
     setAnchorEl(null);
     if (props && props.onClick) {
       props.onClick(param);
     }
   };
-  const handleCloseAway = (event) => {
+  const handleCloseAway = (event: any) => {
     if (anchorEl.contains(event.target)) {
       return;
     }
@@ -48,17 +48,17 @@ export default function CustomDropdown(props) {
     left,
     caret,
   } = props;
-//   const caretClasses = classNames({
-//     [classes.caret]: true,
-//     [classes.caretActive]: Boolean(anchorEl),
-//     [classes.caretRTL]: rtlActive,
-//   });
-//   const dropdownItem = classNames({
-//     [classes.dropdownItem]: true,
-//     [classes[hoverColor + "Hover"]]: true,
-//     [classes.noLiPadding]: noLiPadding,
-//     [classes.dropdownItemRTL]: rtlActive,
-//   });
+  //   const caretClasses = classNames({
+  //     [classes.caret]: true,
+  //     [classes.caretActive]: Boolean(anchorEl),
+  //     [classes.caretRTL]: rtlActive,
+  //   });
+  //   const dropdownItem = classNames({
+  //     [classes.dropdownItem]: true,
+  //     [classes[hoverColor + "Hover"]]: true,
+  //     [classes.noLiPadding]: noLiPadding,
+  //     [classes.dropdownItemRTL]: rtlActive,
+  //   });
   let icon = null;
   switch (typeof buttonIcon) {
     case "object":
@@ -80,13 +80,12 @@ export default function CustomDropdown(props) {
           aria-haspopup="true"
           {...buttonProps}
           onClick={handleClick}
-          className = "topBarDrop"
+          className="topBarDrop"
         >
           {icon}
           {buttonText !== undefined ? buttonText : null}
-          {caret ? <i className="fas fa-caret-down"/> : null}
+          {caret ? <i className="fas fa-caret-down" /> : null}
           {/* <i className="fas fa-caret-down"></i> */}
-          
         </Button>
       </div>
       <Popper
@@ -103,8 +102,7 @@ export default function CustomDropdown(props) {
             ? "bottom-start"
             : "bottom"
         }
-        className={classNames({
-        })}
+        className={classNames({})}
       >
         {() => (
           <Grow
@@ -127,7 +125,7 @@ export default function CustomDropdown(props) {
                       {dropdownHeader}
                     </MenuItem>
                   ) : null}
-                  {dropdownList.map((prop, key) => {
+                  {dropdownList.map((prop: any, key: any) => {
                     if (prop.divider) {
                       return (
                         <Divider
@@ -142,7 +140,7 @@ export default function CustomDropdown(props) {
                         key={key}
                         onClick={() => handleClose(prop)}
                         className="dropdownItem"
-                        style={{ color: 'black' }}
+                        style={{ color: "black" }}
                       >
                         {prop}
                       </MenuItem>

@@ -1,0 +1,144 @@
+.place-bid-on-item {
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+.place-bid-top div:first-child {
+  margin-right: 20px;
+}
+.owned-created-by {
+  width: 100%;
+  background: #343444;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.owned-created-by span {
+  display: block;
+  font-size: 13px;
+  line-height: 21px;
+  color: #fff;
+  text-align: left;
+}
+.owned-created-by a {
+  color: white;
+  transition: all 0.3s;
+  font-weight: 700;
+}
+.owned-created-by a:hover {
+  color: #5141fc;
+}
+.owned-created-b {
+  text-align: left;
+}
+.owned-created-by img {
+  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  margin-right: 10px;
+}
+.place-bid-top {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.place-bid-on-item h1 {
+  font-size: 36px;
+  color: white;
+  width: fit-content;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+.place-bid-on-item p {
+  font-weight: 400;
+  color: #7a798a;
+  font-size: 14px;
+  text-align: left;
+  line-height: 22px;
+  margin: 10px 0;
+}
+.countdown-bid-price {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.countdown-bid-price strong {
+  margin: 0 5px;
+}
+.countdown-bid-price-div {
+  color: white;
+  border-radius: 10px;
+  padding: 12px;
+  height: 54px;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  margin-right: 20px;
+  background-color: #343444;
+  display: flex;
+  align-items: center;
+}
+
+.place-bid-nav-items {
+  margin-top: 30px;
+}
+.place-bid-nav-item-container {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+.place-bid-nav-item-container .title-font.nav-link.active {
+  border-bottom: 3px solid #5141fc;
+}
+.place-bid-nav-item-container a {
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 0;
+  padding-bottom: 10px;
+  width: fit-content;
+  margin-right: 30px;
+}
+.place-bid-data-detail {
+  width: 100%;
+  margin-top: 10px;
+  height: 220px;
+  overflow-y: scroll;
+  color: white;
+  text-align: left;
+  padding: 0;
+  padding-right: 20px;
+}
+
+.place-bid-data-detail::-webkit-scrollbar {
+  width: 1px;
+}
+
+.place-bid-data-detail::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.place-bid-data-detail::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+@media screen and (max-width: 768px) {
+  .place-bid-on-item h1 {
+    font-size: 24px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .place-bid-top,
+  .countdown-bid-price {
+    flex-direction: column;
+  }
+  .owned-created-by,
+  .countdown-bid-price-div {
+    margin-bottom: 20px;
+    margin-right: 0 !important;
+  }
+}

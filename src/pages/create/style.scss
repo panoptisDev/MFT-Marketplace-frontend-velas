@@ -1,38 +1,42 @@
 @import "../../global.scss";
 
-.createPage{
-    .sections{
-        .container{
-            display: flex;
-            width: 100%;
-            align-items: center;
-            justify-content: flex-start;
-            flex-direction: column;
-            margin-top: 7rem;
-            max-width: 1220px;
-            @include mobile_potrait{
-                margin-top: 5rem;
-            }
-            @include mobile_landscape{
-                margin-top: 5rem;
-            }
-            .title{
-                text-align: center;
-                color: #ced4da;
-                margin-bottom: 16px;
-                padding-top: 32px;
-                font-style: 32px;
-                font-weight: bold;
-                @include mobile_potrait{
-                    font-size: 25px;
-                    padding-top: 5px;
-
-                }
-                @include mobile_landscape{
-                    font-size: 25px;
-                    padding-top: 5px;
-                }
-            }
+.createPage {
+  padding: 80px 0;
+  background-color: #14141f;
+  height: fit-content;
+  .sections {
+    .container {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column;
+      // margin-top: 7rem;
+      height: fit-content;
+      max-width: 1440px;
+      @include mobile_potrait {
+        margin-top: 5rem;
+      }
+      @include mobile_landscape {
+        margin-top: 5rem;
+      }
+      .title {
+        text-align: center;
+        color: #ced4da;
+        margin-top: 0 !important;
+        padding: 0 !important;
+        margin-bottom: 20px;
+        font-style: 32px;
+        font-weight: bold;
+        @include mobile_potrait {
+          font-size: 25px;
+          // padding-top: 5px;
         }
+        @include mobile_landscape {
+          font-size: 25px;
+          // padding-top: 5px;
+        }
+      }
     }
+  }
 }

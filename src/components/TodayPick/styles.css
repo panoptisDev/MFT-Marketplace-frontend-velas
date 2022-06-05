@@ -1,0 +1,41 @@
+.today-pick-component {
+  background-color: #14141f;
+  padding: 80px 0;
+}
+
+.picks-container {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  padding: 0 10px;
+  /* grid-template-rows: 50% 50%; */
+  width: 1440px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  row-gap: 25px;
+  /* column-gap: 25px; */
+  justify-content: center;
+}
+@media screen and (max-width: 1440px) {
+  .picks-container {
+    width: 100%;
+    column-gap: 0px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .picks-container {
+    grid-template-columns: 31% 31% 31%;
+    /* grid-template-rows: 32% 32%; */
+  }
+}
+@media screen and (max-width: 990px) {
+  .picks-container {
+    grid-template-columns: 50% 50%;
+    /* grid-template-rows: 24%; */
+  }
+}
+@media screen and (max-width: 768px) {
+  .picks-container {
+    grid-template-columns: 100%;
+    /* grid-template-rows: unset; */
+  }
+}

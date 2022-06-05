@@ -1,18 +1,20 @@
 // Set of helper functions to facilitate wallet setup
 
-import { nodes } from './getRpcUrl'
+import { nodes } from "./getRpcUrl";
 
 /**
  * Prompt the user to add MATIC as a network on Metamask, or switch to MATIC if the wallet is on a different network
  * @returns {boolean} true if the setup succeeded, false otherwise
  */
- export const setupNetwork = async () => {
-  const provider = window.ethereum;
+let windowObject: any = window;
+export const setupNetwork = async () => {
+  const newVariable: any = process.env.REACT_APP_NETWORK_ID;
+  const provider = windowObject.ethereum;
   if (provider) {
-    const chainId = parseInt(process.env.REACT_APP_NETWORK_ID, 10)
+    const chainId = parseInt(newVariable, 10);
     try {
       await provider.request({
-        method: 'wallet_addEthereumChain',
+        method: "wallet_addEthereumChain",
         params: [
           {
             chainId: `0x${chainId.toString(16)}`,
@@ -26,24 +28,26 @@ import { nodes } from './getRpcUrl'
             blockExplorerUrls: [`${process.env.REACT_APP_BLOCK_EXPLORER}`],
           },
         ],
-      })
-      return true
+      });
+      return true;
     } catch (error) {
       await provider.request({
-        method: 'wallet_switchEthereumChain',
+        method: "wallet_switchEthereumChain",
         params: [
           {
-            chainId: `0x${chainId.toString(16)}`,            
+            chainId: `0x${chainId.toString(16)}`,
           },
         ],
-      })
-      return true
+      });
+      return true;
     }
   } else {
-    console.error("Can't setup the Binance Chain on metamask because window.ethereum is undefined")
-    return false
+    console.error(
+      "Can't setup the Binance Chain on metamask because window.ethereum is undefined"
+    );
+    return false;
   }
-}
+};
 
 /**
  * Prompt the user to add a custom token to metamask
@@ -54,15 +58,15 @@ import { nodes } from './getRpcUrl'
  * @returns {boolean} true if the token has been added, false otherwise
  */
 export const registerToken = async (
-  tokenAddress,
-  tokenSymbol,
-  tokenDecimals,
-  tokenImage,
+  tokenAddress: any,
+  tokenSymbol: any,
+  tokenDecimals: any,
+  tokenImage: any
 ) => {
-  const tokenAdded = await window.ethereum.request({
-    method: 'wallet_watchAsset',
+  const tokenAdded = await windowObject.ethereum.request({
+    method: "wallet_watchAsset",
     params: {
-      type: 'ERC20',
+      type: "ERC20",
       options: {
         address: tokenAddress,
         symbol: tokenSymbol,
@@ -70,7 +74,7 @@ export const registerToken = async (
         image: tokenImage,
       },
     },
-  })
+  });
 
-  return tokenAdded
-}
+  return tokenAdded;
+};

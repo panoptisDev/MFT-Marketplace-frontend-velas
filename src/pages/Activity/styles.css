@@ -1,0 +1,44 @@
+.activity-container {
+  background-color: #14141f;
+  padding: 80px 20px;
+  box-sizing: border-box;
+}
+.activity-layer {
+  width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: 66% 33%;
+}
+.activity-container-cards-1-2 {
+  display: grid;
+  width: 100%;
+  justify-content: space-between;
+  row-gap: 30px;
+  grid-template-columns: 49% 49%;
+}
+.activity-cards-container1,
+.activity-cards-container2 {
+  display: grid;
+  row-gap: 30px;
+}
+@media screen and (max-width: 1440px) {
+  .activity-layer {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 1380px) {
+  .activity-layer {
+    grid-template-columns: 66% 33%;
+  }
+  .activity-container-cards-1-2 {
+    grid-template-columns: 100%;
+    /* justify-content: center; */
+  }
+}
+@media screen and (max-width: 768px) {
+  .activity-layer {
+    grid-template-columns: 100%;
+    row-gap: 30px;
+  }
+}

@@ -1,40 +1,40 @@
 import { useState, useEffect } from "react";
 import { useWeb3React } from "@web3-react/core";
 
-import { connectorLocalStorageKey, getConnector } from "../utils/connectors"
+import { connectorLocalStorageKey, getConnector } from "../utils/connectors";
 
 export function useInactiveListener(suppress = false) {
   const { active, error, activate } = useWeb3React();
-  const [activateError, setActivateError] = useState<any>()
+  const [activateError, setActivateError] = useState<any>();
   const connector = window.localStorage.getItem(connectorLocalStorageKey);
   useEffect(() => {
     if (suppress) {
       return () => {};
     }
-    const { ethereum } = window;
+    const { ethereum }: any = window;
     if (ethereum && ethereum.on && !active && !error) {
-      const handleChainChanged = (chainId) => {
+      const handleChainChanged = (chainId: any) => {
         console.log("chainChanged", chainId);
         if (connector && connector != "") {
-          const currentConnector = getConnector(connector)
+          const currentConnector = getConnector(connector);
           activate(currentConnector);
         }
       };
 
-      const handleAccountsChanged = (accounts) => {
+      const handleAccountsChanged = (accounts: any) => {
         console.log("accountsChanged", accounts);
         if (accounts.length > 0) {
           if (connector && connector != "") {
-            const currentConnector = getConnector(connector)
+            const currentConnector = getConnector(connector);
             activate(currentConnector);
           }
         }
       };
 
-      const handleNetworkChanged = (networkId) => {
+      const handleNetworkChanged = (networkId: any) => {
         console.log("networkChanged", networkId);
         if (connector && connector != "") {
-          const currentConnector = getConnector(connector)
+          const currentConnector = getConnector(connector);
           activate(currentConnector);
         }
       };
@@ -52,12 +52,12 @@ export function useInactiveListener(suppress = false) {
       };
     }
 
-    if(error) {
-      setActivateError(error)
+    if (error) {
+      setActivateError(error);
     }
-      
+
     return () => {};
   }, [active, error, suppress, activate]);
 
-  return {activateError};
+  return { activateError };
 }

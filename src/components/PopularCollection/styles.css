@@ -1,0 +1,139 @@
+.popular-collection {
+  background-color: #030303;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.slider-container {
+  width: 1380px;
+  height: 100%;
+  margin: 0 auto;
+}
+.top-pop-card {
+}
+.top-pop-card img {
+  width: 100%;
+  border-radius: 10px;
+  height: 100%;
+}
+.middle-pop-card img {
+  width: 31%;
+  border-radius: 10px;
+  height: 31%;
+}
+.middle-pop-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.middle-pop-card div {
+  /* border-radius: 10px;
+  background-color: white; */
+}
+.bottom-pop-card {
+  position: relative;
+  margin-top: 20px;
+}
+.pop-collection-card {
+  width: 95% !important;
+  border-radius: 20px;
+  height: 100%;
+  background-color: #343444;
+  padding: 20px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* .seller-left.popular {
+  border-radius: 30px;
+} */
+.popular {
+  position: relative;
+}
+.popular img {
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+}
+.popular div {
+  background-color: #5142fc;
+  color: white;
+  width: 17px;
+  display: flex;
+  position: absolute;
+  margin-top: -10px;
+  right: 0;
+  justify-content: center;
+  align-items: center;
+  height: 17px;
+  font-size: 12px;
+  border-radius: 50%;
+}
+.bottom-pop-card {
+  display: flex;
+  align-items: center;
+}
+.content {
+  margin-left: 10px;
+  text-align: left;
+}
+.likes-content {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+}
+.content a {
+  transition: all 0.3s;
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+.content a:first-child {
+  word-wrap: break-word;
+}
+.content a:hover {
+  color: #5142fc;
+}
+.content div {
+  display: flex;
+  margin-top: 5px;
+}
+.content div span {
+  font-size: 13px;
+  color: white;
+  margin-right: 5px;
+}
+.content div a {
+  font-size: 15px;
+}
+.popular-collection-container .slick-arrow {
+  /* position: relative; */
+  margin-left: 1%;
+  z-index: 10;
+  margin-right: 3%;
+}
+.popular-collection-container .slick-arrow::before {
+  color: white !important;
+  width: 45px !important;
+  height: 43px !important;
+  font-size: 60px;
+  background-color: #5142fc;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+}
+
+.popular-collection-container .slick-arrow:hover::before {
+  color: #5142fc !important;
+  background-color: white;
+}
+@media screen and (max-width: 1440px) {
+  .slider-container {
+    width: 100%;
+  }
+}

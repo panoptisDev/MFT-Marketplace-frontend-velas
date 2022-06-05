@@ -1,0 +1,104 @@
+.footer {
+  background: #0d0d11;
+  display: flex;
+  justify-content: center;
+  color: white;
+  width: 100%;
+  padding: 80px 0;
+  flex-wrap: wrap;
+}
+
+.footer-logo {
+  width: 317.5px;
+  padding: 0 1vw;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.footer-logo img {
+  width: 150px;
+}
+
+.footer-marketplace {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 217px;
+  box-sizing: border-box;
+  padding: 0 10px;
+  margin-bottom: 2vh;
+}
+
+.footer p {
+  font-size: 14px;
+}
+
+.footer-marketplace h5 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.footer-marketplace a {
+  color: white;
+  display: inline;
+  width: fit-content;
+  height: fit-content;
+  font-size: 14px;
+  margin-top: 20px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.footer-marketplace a:hover {
+  color: #5141fc;
+  text-decoration: underline;
+}
+.footer-marketplace.contact-part {
+  /* width: 15%; */
+  width: 270px;
+}
+
+.email-svg {
+  width: 50px;
+  height: 52px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #5141fc;
+}
+
+.social-contact {
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.social-contact-item {
+  margin-right: 10px;
+  margin-top: 10px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #343444;
+  transition: all 0.5s;
+}
+.social-contact-item:hover {
+  background-color: #5141fc;
+}
+.social-contact-item svg {
+  width: 21px;
+  height: 21px;
+}
+@media only screen and (max-width: 668px) {
+  .footer p,
+  .footer a {
+    font-size: 16px !important;
+  }
+}

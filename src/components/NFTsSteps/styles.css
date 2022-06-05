@@ -1,0 +1,68 @@
+.NFTsSteps-container {
+  background-color: #030303;
+  padding: 60px 0;
+}
+.NFTsSteps {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  margin: 0 auto;
+  justify-content: center;
+  width: 1440px;
+}
+
+.detailed-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 284px;
+  margin: 16px;
+  color: white;
+}
+
+.detailed-item img {
+  transition: all 0.7s;
+}
+.detailed-item:hover img {
+  transform: rotateY(360deg);
+}
+
+.detailed-item a {
+  color: white;
+  font-size: 24px;
+  margin: 20px 0;
+  font-weight: 700;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+.detailed-item a:hover {
+  color: #5142fc;
+}
+.detailed-item p {
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+  word-spacing: 1px;
+}
+@media screen and (max-width: 1440px) {
+  .NFTsSteps {
+    width: 100%;
+    grid-template-columns: auto auto;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .NFTsSteps {
+  }
+
+  .detailed-item {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .NFTsSteps {
+    grid-template-columns: auto;
+  }
+  .detailed-item {
+    margin-top: 30px;
+  }
+}

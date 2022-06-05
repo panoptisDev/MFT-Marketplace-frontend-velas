@@ -1,99 +1,98 @@
 @import "../../../global.scss";
-.settingContainer{
-	.header{
-		>h2{
-			color: #ffffff;
-			font-weight: bold;
-			margin: 0;
-			@include mobile_potrait{
-				font-size: 2rem;
-			}
-			@include mobile_landscape{
-				font-size: 2rem;
-			}
-		}
-	}
-	.form{
-		margin-top: 30px;
-		@include mobile_potrait{
-			width: 100%;
-		}
-		@include mobile_landscape{
-			width: 100%;
-		}
-		*{
-			color: #ffffff
-		}
-	}
-	.formControl{
-		margin-bottom: 30px;
-		display: flex;
-		flex-direction: column;
-		input{
-			&:focus{
-				outline: none;
-			}
-		}
-	}
-	.fdr{
-		flex-direction: row;
-		background: transparent;
-		border: 1px solid #0eabff;
-		border-radius: 5px;
-	}
-	.checkGroup{
-		border: 1px solid #0eabff;
-		border-radius: 6px;
-		border-bottom-width: 0;
-		display: flex;
-		flex-direction: column;
-	}
-	.checkItem{
-		display: flex;
-		flex-grow: 1;
-		align-items: center;
-		border-bottom: 1px solid #0eabff;
-		padding-top: 5px;
-		padding-bottom: 5px;
-		@include mobile_potrait{
-			width: 100%;
-		}
-		@include mobile_landscape{
-			width: 100%;
-		}
-		h4{
-			margin-bottom: 1px !important;
-			font-weight: 600;
-			font-size: 1.2rem;
-			@include mobile_potrait{
-				font-size: 1rem;
-			}
-			@include mobile_landscape{
-				font-size: 1rem;
-			}
-		}
-		p{
-			font-size: 1rem;
-			@include mobile_potrait{
-				font-size: 0.8rem;
-			}
-			@include mobile_landscape{
-				font-size: 0.8rem;
-			}
-		}
-	}
-	.tokenItemStyle{
-		display: flex;
-		align-items: center;
-		margin: 4px 17px 4px 6px;
-		padding: 8px 15px 8px 13px;
-		
-	}
-	.saveBtn{
-		@media (max-width: 1024px){
-			display: block;
-			margin: auto;
-			width: 100%;
-		}
-	}
+.settingContainer {
+  .header {
+    > h2 {
+      color: #ffffff;
+      font-weight: bold;
+      margin: 0;
+      @include mobile_potrait {
+        font-size: 2rem;
+      }
+      @include mobile_landscape {
+        font-size: 2rem;
+      }
+    }
+  }
+  .form {
+    margin-top: 30px;
+    @include mobile_potrait {
+      width: 100%;
+    }
+    @include mobile_landscape {
+      width: 100%;
+    }
+    * {
+      color: #ffffff;
+    }
+  }
+  .formControl {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    input {
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .fdr {
+    flex-direction: row;
+    background: transparent;
+    border: 1px solid rgba(138, 138, 160, 0.3);
+    border-radius: 5px;
+  }
+  .checkGroup {
+    border: 1px solid rgba(138, 138, 160, 0.3);
+    border-radius: 6px;
+    border-bottom-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .checkItem {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    border-bottom: 1px solid rgba(138, 138, 160, 0.3);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    @include mobile_potrait {
+      width: 100%;
+    }
+    @include mobile_landscape {
+      width: 100%;
+    }
+    h4 {
+      margin-bottom: 1px !important;
+      font-weight: 600;
+      font-size: 1.2rem;
+      @include mobile_potrait {
+        font-size: 1rem;
+      }
+      @include mobile_landscape {
+        font-size: 1rem;
+      }
+    }
+    p {
+      font-size: 1rem;
+      @include mobile_potrait {
+        font-size: 0.8rem;
+      }
+      @include mobile_landscape {
+        font-size: 0.8rem;
+      }
+    }
+  }
+  .tokenItemStyle {
+    display: flex;
+    align-items: center;
+    margin: 4px 17px 4px 6px;
+    padding: 8px 15px 8px 13px;
+  }
+  .saveBtn {
+    @media (max-width: 1024px) {
+      display: block;
+      margin: auto;
+      width: 100%;
+    }
+  }
 }
