@@ -57,7 +57,7 @@ const AuctionCard = ({ TodayPick, item }: any) => {
       </div>
       {TodayPick ? (
         <div className="card-footer">
-          <button onClick={} className={TodayPick ? "place-bid today-pick" : undefined}>
+          <button className={TodayPick ? "place-bid today-pick" : undefined}>
             <ShoppingBag />
             Place Bid
           </button>
