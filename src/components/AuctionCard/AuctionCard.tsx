@@ -10,13 +10,11 @@ import cardItem from "../../assets/images/card-item.jpg";
 import Likes from "../Likes/Likes";
 import Button from "../MoreComponents/Button";
 
-interface CardType {
-  TodayPick: boolean;
-}
-// item: AuctionDataType
-
 const AuctionCard = ({ TodayPick, item }: any) => {
 
+  const goToDetail = () =>{
+    
+  }
   return (
     <div
       className={TodayPick ? "auction-card today-pick-card" : "auction-card"}
@@ -59,7 +57,7 @@ const AuctionCard = ({ TodayPick, item }: any) => {
       </div>
       {TodayPick ? (
         <div className="card-footer">
-          <button className={TodayPick ? "place-bid today-pick" : undefined}>
+          <button onClick={} className={TodayPick ? "place-bid today-pick" : undefined}>
             <ShoppingBag />
             Place Bid
           </button>
