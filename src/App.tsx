@@ -271,7 +271,7 @@ function App() {
         </Switch>
         <Footer />
       </Router>
-      {/* <Modal
+      <Modal
        open={!!errorModalOpen && !active}
        onClose={(event, reason) => {
          if (reason === "backdropClick") {
@@ -289,7 +289,7 @@ function App() {
          <p>{networkError}</p>
          <Button className="" onClick={closeErrorModal} variant="contained" color="primary">Close</Button>
        </div>
-     </Modal> */}
+     </Modal>
     </div>
   );
 }

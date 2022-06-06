@@ -6,13 +6,6 @@ import PopularCollection from "../../components/PopularCollection/PopularCollect
 import TodayPick from "../../components/TodayPick/TodayPick";
 import TopSellers from "../../components/TopSellers/TopSellers";
 import "./styles.css";
-import {
-  FaCopy,
-  FaTwitter,
-  FaTelegramPlane,
-  FaYoutube,
-  FaTiktok,
-} from "react-icons/fa";
 const Home = (props: any) => {
   return (
     <div>

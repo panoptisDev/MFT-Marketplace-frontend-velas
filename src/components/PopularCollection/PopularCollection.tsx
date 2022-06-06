@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Title from "../Title/Title";
 import "./styles.css";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import Slider from "react-slick";
-import avt from "../../assets/images/avt-15.jpg";
-import collectionItem from "../../assets/images/collection-item.png";
-import collectionImage from "../../assets/images/collection-image.jpg";
 import Likes from "../Likes/Likes";
+import axios from 'axios';
 
 export const NextArrow = ({ onClick }: any) => {
   return (
@@ -70,45 +68,44 @@ const PopularCollection = () => {
       },
     ],
   };
-  const data = [
-    { name: "Ralf Garraway" },
-    { name: "Ralf Garraway" },
-    { name: "Ralf Garraway" },
-    { name: "Ralf Garraway" },
-    { name: "Ralf Garraway" },
-    { name: "Ralf Garraway" },
-  ];
+
+  const [collections, setCollections] = useState<any[]>([])
+  useEffect(() => {
+    axios.get(`/collections`)
+    .then((res) => {
+      setCollections(res.data.collections);
+    }).catch((err) => {
+      console.log("Err : ", err.message);
+      setCollections([]);
+    })
+  })
+  
   return (
     <div className="popular-collection">
       <Title title="Popular Collection" />
       <div className="popular-collection-container">
         <Slider className="slider-container" {...settings}>
-          {data.map((item, index) => (
+          {collections && collections.map((collection, index) => (
             <div key={index} className="pop-collection-card">
               <div className="top-pop-card">
-                <img src={collectionItem} alt="" />
-              </div>
-              <div className="middle-pop-card">
-                <img src={collectionImage} alt="" />
-                <img src={collectionImage} alt="" />
-                <img src={collectionImage} alt="" />
+                <img src={collection.featured_uri} alt="" />
               </div>
               <div className="bottom-pop-card">
                 <div className="popular">
-                  <img src={avt} alt="" />
+                  <img style={{width:50, height:50}} src={collection.logo_uri} alt="" />
                   <div>
                     <AiOutlineCheck />
                   </div>
                 </div>
                 <div className="likes-content">
                   <div className="content">
-                    <Link to="/">Creative Art Collection</Link>
+                    <Link to="/">{collection.name}</Link>
                     <div>
                       <span>Created by</span>
-                      <Link to="/">{item.name}</Link>
+                      <Link to="/">{collection.creatorUser.name}</Link>
                     </div>
                   </div>
-                  <Likes popularCollection={true} />
+                  {/* <Likes popularCollection={true} /> */}
                 </div>
               </div>
             </div>

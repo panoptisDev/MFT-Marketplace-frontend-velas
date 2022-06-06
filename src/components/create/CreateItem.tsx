@@ -136,6 +136,10 @@ const CreateItem = (props: any) => {
         toast.dismiss(load_toast_id);
         history.push(`/collections`);
         setCreatingItem(false);
+      }else{
+        toast.error("NFT Artist Create Failed!");
+        toast.dismiss(load_toast_id);
+        setCreatingItem(false);
       }
     } catch (error) {
       console.log(error);
@@ -146,9 +150,6 @@ const CreateItem = (props: any) => {
 
   return (
     <div className="craeteItemContainer">
-      <div className="create-item-preview">
-        <AuctionCard TodayPick={true} item={false} />
-      </div>
       <div className="upload-container">
         {/* <p className="text-label">Image, Video, Audio, or 3D Model</p> */}
 

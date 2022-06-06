@@ -15,22 +15,6 @@ const CreateItemPage = (props: any) => {
   const [loadingHeight, setLoadingHeight] = useState(0);
 
   const [menuOpen, setMenuOpen] = useState(false);
-  // const isTabletOrMobile = useMediaQuery({query: "screen and (max-width: 450px) and (orientation:portrait)",});
-  // const isLandOrMobile = useMediaQuery({query: "screen and (max-height: 450px) and (orientation:landscape)",});
-  // useEffect(() => {
-  //     if (isLoading || isTopLoading) {
-  //         setLoadingHeight(100)
-  //         setSectionHeight("0vh")
-  //     }
-  //     else{
-  //         setLoadingHeight(0)
-  //         setSectionHeight("100%")
-  //     }
-
-  //     if (!isLandOrMobile && !isTabletOrMobile) {
-  //         setMenuOpen(false);
-  //     }
-  // }, [isLoading, isTabletOrMobile, isLandOrMobile,isTopLoading]);
 
   // loading part
   window.onload = () => {

@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AuctionCard from "../AuctionCard/AuctionCard";
 import Title from "../Title/Title";
 import "./styles.css";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import Slider from "react-slick";
-import data from "../../utils/data";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 export const NextArrow = ({ onClick }: any) => {
   return (
@@ -23,16 +23,7 @@ export const PrevArrow = ({ onClick }: any) => {
   );
 };
 
-// interface AuctionDataType {
-//   Data: {
-//     likes: number;
-//     name: string;
-//     currency: string;
-//     price: string;
-//     creator: string;
-//     time: number;
-//   }[];
-// }
+
 
 const LiveAuctions = () => {
   const settings = {
@@ -75,6 +66,17 @@ const LiveAuctions = () => {
     ],
   };
 
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    axios.get(`/item`)
+    .then((res) => {
+      setItems(res.data.items);
+    }).catch((err) => {
+      console.log("Err : ", err.message);
+      setItems([]);
+    })
+  }, [items])
+
   return (
     <div className="live-auction">
       {window.location.pathname === "/Item-Details" ? (
@@ -86,8 +88,8 @@ const LiveAuctions = () => {
         <Title title="Live Auctions" />
       )}
       <Slider className="slider-container" {...settings}>
-        {data.map((item: any, index: any) => (
-          <AuctionCard item={item} TodayPick={false} />
+        {items && items.map((item: any, index: any) => (
+          <AuctionCard key={index} item={item} TodayPick={false} />
         ))}
       </Slider>
       {/* </div> */}

@@ -23,7 +23,7 @@ import PageHeader from "../../../components/PageHeader/PageHeader";
 const CollectionDetailPage = (props: any) => {
   const { user } = props;
   const [collection, setCollection] = useState<any>(null);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<any[]>([])
   const location = useLocation();
   useEffect(() => {
     if (!collection) {

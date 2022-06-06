@@ -95,7 +95,6 @@ const CreateCollection = (props: any) => {
   const [medium, setMedium] = useState("https://www.medium.com/@");
   const [tme, setTme] = useState("https://t.me/");
   const [fee, setFee] = useState("");
-  // const [ blockchain, setBlockchain ] = useState([]);
   const [isExplicit, setIsExplicit] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const logoChange = (e: any) => {

@@ -16,28 +16,13 @@ interface CardType {
 // item: AuctionDataType
 
 const AuctionCard = ({ TodayPick, item }: any) => {
-  const { name, currency, price, creator, time } = item;
-
-  const [likes, setLikes] = useState(230);
-  const [increase, setIncrease] = useState(true);
-
-  const handleIncrease = () => {};
-
-  const handleLikes = () => {
-    setIncrease(!increase);
-    if (increase) {
-      setLikes(likes + 1);
-    } else {
-      setLikes(likes - 1);
-    }
-  };
 
   return (
     <div
       className={TodayPick ? "auction-card today-pick-card" : "auction-card"}
     >
       <div className="card-top">
-        <img src={cardItem} alt="" />
+        <img src={item.assetUrl} alt="" />
         {!TodayPick ? (
           <Button
             placeBid1={true}
@@ -46,28 +31,29 @@ const AuctionCard = ({ TodayPick, item }: any) => {
             label="Place Bid"
           />
         ) : undefined}
-        <Likes popularCollection={false} />
+        <Likes likes={item.likeCount} popularCollection={false} />
       </div>
-      {!TodayPick ? <Timer mintStartAt={time} /> : undefined}
+      {!TodayPick ? <Timer mintStartAt={item.timeStamp} /> : undefined}
       <div className="card-bottom">
         <div className="bottom-first">
-          <Link to="/">{name || "Garraya Richard"}</Link>
-          <p>{currency || "BBC"}</p>
+          <Link to="/">{item.name || "Garraya Richard"}</Link>
         </div>
         <div className={TodayPick ? "meta-info today-pick-meta" : "meta-info"}>
           <div className="meta-info-left">
-            <div></div>
+            <div>
+              <img src={item.creatorUser.logo_url || ""}></img>
+            </div>
             <div>
               <span>Creator</span>
               <h6>
-                <Link to="/">{creator || "Rachelsons"}</Link>
+                <Link to="/">{item.creatorUser.name || "Rachelsons"}</Link>
               </h6>
             </div>
           </div>
           <div className="meta-info-right">
             <span>Current Bid</span>
             <br />
-            <h5>{price || "4.89 ETH"}</h5>
+            <h5>{"4.89 ETH"}</h5>
           </div>
         </div>
       </div>

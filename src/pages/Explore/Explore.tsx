@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import PageHeader from "../../components/PageHeader/PageHeader";
 import "./styles.css";
 import SelectMenu from "../../components/MoreComponents/SelectMenu";
@@ -10,10 +11,19 @@ import {
   allArtWork,
   sortBy,
 } from "../../utils/options";
-import data from "../../utils/data";
 import AuctionCard from "../../components/AuctionCard/AuctionCard";
 
 const Explore = () => {
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    axios.get(`/item`)
+    .then((res) => {
+      setItems(res.data.items);
+    }).catch((err) => {
+      console.log("Err : ", err.message);
+      setItems([]);
+    })
+  }, [items])
   return (
     <div className="explore-page">
       <PageHeader pageHeader="Explore" />
@@ -30,8 +40,8 @@ const Explore = () => {
           </div>
         </div>
         <div className="picks-container">
-          {data.map((item: any, index: number) => (
-            <AuctionCard item={item} TodayPick={true} />
+          {items.map((item: any, index: number) => (
+            <AuctionCard item={item} TodayPick={true} key={index}/>
           ))}
         </div>
       </div>
