@@ -5,7 +5,7 @@ import "./styles.css";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 
 export const NextArrow = ({ onClick }: any) => {
   return (
@@ -22,8 +22,6 @@ export const PrevArrow = ({ onClick }: any) => {
     </div>
   );
 };
-
-
 
 const LiveAuctions = () => {
   const settings = {
@@ -68,14 +66,16 @@ const LiveAuctions = () => {
 
   const [items, setItems] = useState([]);
   useEffect(() => {
-    axios.get(`/item`)
-    .then((res) => {
-      setItems(res.data.items);
-    }).catch((err) => {
-      console.log("Err : ", err.message);
-      setItems([]);
-    })
-  }, [items])
+    axios
+      .get(`/item`)
+      .then((res) => {
+        setItems(res.data.items);
+      })
+      .catch((err) => {
+        console.log("Err : ", err.message);
+        setItems([]);
+      });
+  }, [items]);
 
   return (
     <div className="live-auction">
@@ -88,9 +88,10 @@ const LiveAuctions = () => {
         <Title title="Live Auctions" />
       )}
       <Slider className="slider-container" {...settings}>
-        {items && items.map((item: any, index: any) => (
-          <AuctionCard key={index} item={item} TodayPick={false} />
-        ))}
+        {items &&
+          items.map((item: any, index: any) => (
+            <AuctionCard key={index} item={item} TodayPick={false} />
+          ))}
       </Slider>
       {/* </div> */}
     </div>

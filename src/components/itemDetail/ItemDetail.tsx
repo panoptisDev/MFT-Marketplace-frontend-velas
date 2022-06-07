@@ -1,8 +1,11 @@
 import { ShareOutlined, ExpandLess, LocalLibrary } from "@material-ui/icons";
 import { Col, Container, Nav, Row, Tab, Tabs } from "react-bootstrap";
 import avt from "../../assets/images/avt-8.jpg";
-import Timer from "../Timer/Timer";
+
+import Timer from "../../components/timer/Timer";
+
 import { ReactComponent as ShoppingBag } from "../../assets/icons/shopping-bag.svg";
+
 import {
   Loupe,
   ViewList,
@@ -16,6 +19,7 @@ import {
   List,
   Description,
 } from "@material-ui/icons";
+
 import TaskIcon from "@mui/icons-material/Task";
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import AssessmentIcon from "@mui/icons-material/Assessment";

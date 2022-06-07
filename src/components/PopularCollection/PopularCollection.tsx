@@ -6,7 +6,7 @@ import "./styles.css";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import Slider from "react-slick";
 import Likes from "../Likes/Likes";
-import axios from 'axios';
+import axios from "axios";
 
 export const NextArrow = ({ onClick }: any) => {
   return (
@@ -23,6 +23,9 @@ export const PrevArrow = ({ onClick }: any) => {
     </div>
   );
 };
+
+import { useHistory } from "react-router-dom";
+
 const PopularCollection = () => {
   const settings = {
     dots: false,
@@ -68,48 +71,62 @@ const PopularCollection = () => {
       },
     ],
   };
+  const history = useHistory();
 
-  const [collections, setCollections] = useState<any[]>([])
+  const gotToPage = (collection: any) => {
+    history.push("/collections/" + collection.name);
+  };
+  const [collections, setCollections] = useState<any[]>([]);
   useEffect(() => {
-    axios.get(`/collections`)
-    .then((res) => {
-      setCollections(res.data.collections);
-    }).catch((err) => {
-      console.log("Err : ", err.message);
-      setCollections([]);
-    })
-  })
-  
+    axios
+      .get(`/collections`)
+      .then((res) => {
+        setCollections(res.data.collections);
+      })
+      .catch((err) => {
+        console.log("Err : ", err.message);
+        setCollections([]);
+      });
+  });
+
   return (
     <div className="popular-collection">
       <Title title="Popular Collection" />
       <div className="popular-collection-container">
         <Slider className="slider-container" {...settings}>
-          {collections && collections.map((collection, index) => (
-            <div key={index} className="pop-collection-card">
-              <div className="top-pop-card">
-                <img src={collection.featured_uri} alt="" />
-              </div>
-              <div className="bottom-pop-card">
-                <div className="popular">
-                  <img style={{width:50, height:50}} src={collection.logo_uri} alt="" />
-                  <div>
-                    <AiOutlineCheck />
-                  </div>
+          {collections &&
+            collections.map((collection, index) => (
+              <div key={index} className="pop-collection-card">
+                <div
+                  onClick={() => gotToPage(collection)}
+                  className="top-pop-card"
+                >
+                  <img src={collection.featured_uri} alt="" />
                 </div>
-                <div className="likes-content">
-                  <div className="content">
-                    <Link to="/">{collection.name}</Link>
+                <div className="bottom-pop-card">
+                  <div className="popular">
+                    <img
+                      style={{ width: 50, height: 50 }}
+                      src={collection.logo_uri}
+                      alt=""
+                    />
                     <div>
-                      <span>Created by</span>
-                      <Link to="/">{collection.creatorUser.name}</Link>
+                      <AiOutlineCheck />
                     </div>
                   </div>
-                  {/* <Likes popularCollection={true} /> */}
+                  <div className="likes-content">
+                    <div className="content">
+                      <Link to="/">{collection.name}</Link>
+                      <div>
+                        <span>Created by</span>
+                        <Link to="/">{collection.creatorUser.name}</Link>
+                      </div>
+                    </div>
+                    {/* <Likes popularCollection={true} /> */}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </Slider>
       </div>
     </div>

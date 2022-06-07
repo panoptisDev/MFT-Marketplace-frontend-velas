@@ -2,7 +2,15 @@ import "./styles.css";
 import { GoRocket } from "react-icons/go";
 import { GiFiles } from "react-icons/gi";
 import Button from "../MoreComponents/Button";
+import { useHistory } from "react-router-dom";
 const Banner = () => {
+  const history = useHistory();
+  const goToCreate = () => {
+    history.push("/Collection/Create");
+  };
+  const goToExplore = () => {
+    history.push("/Explore");
+  };
   return (
     <div className="banner">
       <h1>
@@ -14,6 +22,7 @@ const Banner = () => {
       </span>
       <div className="banner-btns">
         <Button
+          onClick={goToExplore}
           icon={<GoRocket />}
           label="Explore"
           bannerBtn={true}
@@ -21,6 +30,7 @@ const Banner = () => {
         />
         <Button
           icon={<GiFiles />}
+          onClick={goToCreate}
           label="Create"
           bannerBtn={true}
           className="explore"

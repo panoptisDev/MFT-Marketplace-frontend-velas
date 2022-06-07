@@ -1,23 +1,44 @@
 import React, { useState } from "react";
 import "./styles.css";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import Timer from "../Timer/Timer";
+import Timer from "../timer/Timer";
 import { Link } from "react-router-dom";
 import { ReactComponent as ShoppingBag } from "../../assets/icons/shopping-bag.svg";
 import { FiRefreshCw } from "react-icons/fi";
+import ReactPlayer from "react-player";
+
 // import { AuctionDataType } from "../LiveAuctions/LiveAuctions";
 import cardItem from "../../assets/images/card-item.jpg";
+import itemDetail from "../../assets/images/item-detail.jpg";
 import Likes from "../Likes/Likes";
 import Button from "../MoreComponents/Button";
+import { useHistory } from "react-router-dom";
 
 const AuctionCard = ({ TodayPick, item }: any) => {
-  const goToDetail = () => {};
+  const history = useHistory();
+  const gotoDetail = () => {
+    history.push(`/item/${item.itemCollection}/${item.tokenId}`);
+  };
   return (
     <div
       className={TodayPick ? "auction-card today-pick-card" : "auction-card"}
     >
       <div className="card-top">
-        <img src={item.assetUrl} alt="" />
+        {item && (item.assetType === "video" || item.assetType === "audio") ? (
+          <ReactPlayer
+            width="100%"
+            height="300px"
+            url={item.assetUrl}
+            playing={true}
+            controls
+          />
+        ) : (
+          <img
+            onClick={gotoDetail}
+            src={item.assetUrl ? item?.assetUrl : itemDetail}
+            alt=""
+          />
+        )}
         {!TodayPick ? (
           <Button
             placeBid1={true}

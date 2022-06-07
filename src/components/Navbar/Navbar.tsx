@@ -131,7 +131,6 @@ const Navbar = (props: any) => {
         <div className="navbar-links">
           <Link to="/">Home</Link>
           <Link to="/Explore">Explorer</Link>
-          <Link to="/Item-Details">Item Details</Link>
           <Link to="/Activity">Activity</Link>
           <Link to="/Contact">Contact</Link>
           <Link to="/Authors">Authors</Link>
@@ -165,17 +164,6 @@ const Navbar = (props: any) => {
               to="/Explore"
             >
               Explorer
-            </Link>
-          </div>
-          <div>
-            <Link
-              onClick={() => {
-                setStatus(status === "open" ? "close" : "open");
-                setOpen(!open);
-              }}
-              to="/Item-Details"
-            >
-              Item Details
             </Link>
           </div>
           <div>
