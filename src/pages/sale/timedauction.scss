@@ -1,139 +1,144 @@
 @import "../../global.scss";
-.timedauction{
+.timedauction {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  div {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    div{
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        margin-top: 3vh;
-        .label{
-            width: 100%;
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #fff;
-            @include mobile_potrait{
-                font-size: 1rem;
-            }
-            @include mobile_landscape{
-                font-size: 1rem;
-            }
-        }
-        .inputPart{
-            width: 100%;
-            height: 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-direction: row;
-            margin-top: 2vh;
-            border-bottom: 2px gray solid;
-            input{
-                width: 65%;
-                border: none;
-                font-size: 1rem;
-                padding: 0.5rem;
-                border-radius: 0.25em ;
-                border: 1px solid #0eabff;
-                background-color: #ffffff33;
-                color: #fff;
-                @include mobile_potrait{
-                    font-size: 0.8rem;
-                    width: 80%;
-                }
-                @include mobile_landscape{
-                    font-size: 0.8rem;
-                }
-                &:focus{
-                    outline: none;
-                }
-            }
-            span{
-                font-size: 1rem;
-                @include mobile_potrait{
-                    font-size: 0.8rem;
-                }
-                @include mobile_landscape{
-                    font-size: 0.8rem;
-                }
-            }
-            .tokenType{
-                @include select();
-            }
-        }
-        .bellow{
-            width: 100%;
-            margin-top: 1vh;
-            p{
-                width: 100%;
-                margin-bottom: 1vh;
-                color: #fff;
-                @include mobile_potrait{
-                    font-size: 0.6rem;
-                }
-                @include mobile_landscape{
-                    font-size: 0.6rem;
-                }
-            }
-        }
+    margin-top: 3vh;
+    .label {
+      width: 100%;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #fff;
+      @include mobile_potrait {
+        font-size: 1rem;
+      }
+      @include mobile_landscape {
+        font-size: 1rem;
+      }
     }
+    .inputPart {
+      width: 100%;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: row;
+      margin-top: 2vh;
+      border-bottom: 2px gray solid;
+      input {
+        width: 65%;
+        border: none;
+        font-size: 1rem;
+        padding: 0.5rem;
+        border-radius: 0.25em;
+        border: 1px solid rgba(138, 138, 160, 0.3);
+        background-color: transparent;
+        color: #fff;
+        .tokenType {
+          background-color: transparent !important;
+        }
+        @include mobile_potrait {
+          font-size: 0.8rem;
+          width: 80%;
+        }
+        @include mobile_landscape {
+          font-size: 0.8rem;
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+      span {
+        font-size: 1rem;
+        @include mobile_potrait {
+          font-size: 0.8rem;
+        }
+        @include mobile_landscape {
+          font-size: 0.8rem;
+        }
+      }
+      .tokenType {
+        @include select();
+      }
+    }
+    .bellow {
+      width: 100%;
+      margin-top: 1vh;
+      p {
+        width: 100%;
+        margin-bottom: 1vh;
+        color: #fff;
+        @include mobile_potrait {
+          font-size: 0.6rem;
+        }
+        @include mobile_landscape {
+          font-size: 0.6rem;
+        }
+      }
+    }
+  }
 
-    .date{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-direction: row;
-        .startingDate{
-            width: 48%;
-            .inputPart{
-                .select{
-                    @include select();
-                    width: 100%;
-                    @include mobile_potrait{
-                        width: 100%;
-                    }
-                    @include mobile_landscape{
-                        font-size: 0.6rem;
-                    }
-                }
-            }
-        }
-        .expreationDate{
-            width: 48%;
-            .inputPart{
-                .select{
-                    @include select();
-                    width: 100%;
-                    @include mobile_potrait{
-                        width: 100%;
-                    }
-                }
-            }
-        }
-        
-    }
-    .dateBellow{
+  .date {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    .startingDate {
+      width: 48%;
+      .inputPart {
         width: 100%;
-        p{
-            width:100%;
-            color: #fff;
-            @include mobile_potrait{
-                font-size: 0.6rem;
-            }
-            @include mobile_landscape{
-                font-size: 0.6rem;
-            }
-        }
-        a{
+        display: flex;
+        justify-content: flex-start !important;
+        .select {
+          @include select();
+          width: 100%;
+          @include mobile_potrait {
             width: 100%;
-            color: #20b1f9;
-            text-decoration: none;
-            
+          }
+          @include mobile_landscape {
+            font-size: 0.6rem;
+          }
         }
+      }
     }
+    .expreationDate {
+      width: 48%;
+      display: flex;
+      .inputPart {
+        .select {
+          @include select();
+          width: 100%;
+          @include mobile_potrait {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  .dateBellow {
+    width: 100%;
+    p {
+      width: 100%;
+      color: #fff;
+      @include mobile_potrait {
+        font-size: 0.6rem;
+      }
+      @include mobile_landscape {
+        font-size: 0.6rem;
+      }
+    }
+    a {
+      width: 100%;
+      color: #20b1f9;
+      text-decoration: none;
+    }
+  }
 }

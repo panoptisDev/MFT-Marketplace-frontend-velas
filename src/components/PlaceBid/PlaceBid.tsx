@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./styles.css";
 import avt from "../../assets/images/avt-8.jpg";
-import Timer from "../Timer/Timer";
+import Timer from "../timer/Timer";
 import Button from "../MoreComponents/Button";
 import { Col, Container, Nav, Row, Tab, Tabs } from "react-bootstrap";
 import BidHistory from "../MoreComponents/BidHistory";
@@ -47,7 +47,7 @@ const PlaceBid = () => {
       <br />
       <br />
       <BidModal />
-      <Button />
+      {/* <Button /> */}
       <div className="place-bid-nav-items">
         <Tab.Container defaultActiveKey="bid-history">
           <Nav className="place-bid-nav-item-container">
@@ -61,9 +61,34 @@ const PlaceBid = () => {
                 Info
               </Nav.Link>
             </Nav.Item>
-            <Nav.Item>
+            {/* <Nav.Item>
               <Nav.Link eventKey="provenance" className="title-font">
                 Provenance
+              </Nav.Link>
+            </Nav.Item> */}
+            <Nav.Item>
+              <Nav.Link eventKey="details" className="title-font">
+                Details
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="about" className="title-font">
+                About
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="properties" className="title-font">
+                Properties
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="stats" className="title-font">
+                Stats
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="level" className="title-font">
+                Level
               </Nav.Link>
             </Nav.Item>
           </Nav>
@@ -82,7 +107,7 @@ const PlaceBid = () => {
                 <BidHistory />
               </div>
             </Tab.Pane>
-            <Tab.Pane eventKey="provenance">
+            {/* <Tab.Pane eventKey="provenance">
               <div className="place-bid-data-detail">
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
@@ -94,6 +119,31 @@ const PlaceBid = () => {
                 containing Lorem Ipsum passages, and more recently with desktop
                 publishing software like Aldus PageMaker including versions of
                 Lorem Ipsum.
+              </div>
+            </Tab.Pane> */}
+            <Tab.Pane eventKey="about">
+              <div className="place-bid-data-detail">
+                <p>About</p>
+              </div>
+            </Tab.Pane>
+            <Tab.Pane eventKey="details">
+              <div className="place-bid-data-detail">
+                <p>Details</p>
+              </div>
+            </Tab.Pane>
+            <Tab.Pane eventKey="stats">
+              <div className="place-bid-data-detail">
+                <p>Stats</p>
+              </div>
+            </Tab.Pane>
+            <Tab.Pane eventKey="level">
+              <div className="place-bid-data-detail">
+                <p>Level</p>
+              </div>
+            </Tab.Pane>
+            <Tab.Pane eventKey="properties">
+              <div className="place-bid-data-detail">
+                <p>Properties</p>
               </div>
             </Tab.Pane>
           </Tab.Content>

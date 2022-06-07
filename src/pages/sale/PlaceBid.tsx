@@ -52,7 +52,6 @@ export default function PlaceBid({ balance, nftFee, onClose, onSubmit }: any) {
               The price should be higer than 0.111ETH
             </div>
           )}
-
           <select onChange={onChangePrice}>
             <option value="eth">ETH</option>
           </select>

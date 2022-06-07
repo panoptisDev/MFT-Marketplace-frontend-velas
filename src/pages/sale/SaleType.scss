@@ -1,63 +1,63 @@
 @import "../../global.scss";
 
-.saleType{
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    display: flex;
-    
-    div{
-        width: calc(50% - 1rem);
-        height: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        cursor: pointer;
-        border-radius: 1rem;
-        animation: saleTypeAni 1s linear 0s 1 alternate forwards ;
-        transition: all 0.2s ease;
-        
-        @keyframes saleTypeAni {
-            0%{
-            opacity: 0;
-            }
-            100%{
-                opacity: 1;
-            }
-        }
-        &:hover{
-            box-shadow: 0px 0px 5px #0eabff;
-        }
-        @include mobile_potrait{
-            width: 25vw;
-            height: 25vw;
-        }
-        @include mobile_landscape{
-            width: 20vw;
-            height: 20vw;
-        }
+.saleType {
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
 
-        .saleIcon {
-            font-size: 1.5rem;
-            color: #fff;
-            margin-bottom: 0.5rem;
-            @include mobile_potrait{
-                font-size: 2rem;
-            }
-            @include mobile_landscape{
-                font-size: 2rem;
-            }
-        }
-        p{
-            font-size: 1rem;
-            color: #fff;
-            @include mobile_potrait{
-                font-size: 1rem;
-            }
-            @include mobile_landscape{
-                font-size: 1rem;
-            }
-        }
+  div {
+    width: calc(50% - 1rem);
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    border-radius: 1rem;
+    animation: saleTypeAni 1s linear 0s 1 alternate forwards;
+    transition: all 0.2s ease;
+    @keyframes saleTypeAni {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
     }
+    &:hover {
+      box-shadow: 0px 0px 5px #5141fc;
+    }
+    @include mobile_potrait {
+      width: 25vw;
+      height: 25vw;
+    }
+    @include mobile_landscape {
+      width: 20vw;
+      height: 20vw;
+    }
+
+    .saleIcon {
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      @include mobile_potrait {
+        font-size: 2rem;
+      }
+      @include mobile_landscape {
+        font-size: 2rem;
+      }
+    }
+    p {
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 0;
+      @include mobile_potrait {
+        font-size: 1rem;
+      }
+      @include mobile_landscape {
+        font-size: 1rem;
+      }
+    }
+  }
 }

@@ -52,7 +52,7 @@ const Card = styled.div`
   width: 100%;
 `;
 
-const Timer = ({ mintStartAt, itemDetails }: any) => {
+const Timer = ({ mintStartAt, itemDetails, downPhrase }: any) => {
   const [title, setTitle] = useState("");
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
@@ -89,7 +89,9 @@ const Timer = ({ mintStartAt, itemDetails }: any) => {
         {!itemDetails ? (
           <Flame className="flame-timer" />
         ) : (
-          <span className="timer-item-details-span">Countdown</span>
+          <span className="timer-item-details-span">
+            {downPhrase ? "Sales end" : "Countdown"}
+          </span>
         )}
         <RowContainer className="timer-container">
           <Item className="days-cirlce">

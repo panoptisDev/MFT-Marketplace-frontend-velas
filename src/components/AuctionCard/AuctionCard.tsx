@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles.css";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import Timer from "../Timer/Timer";
+import Timer from "../timer/Timer";
 import { Link } from "react-router-dom";
 import { ReactComponent as ShoppingBag } from "../../assets/icons/shopping-bag.svg";
 import { FiRefreshCw } from "react-icons/fi";
@@ -11,10 +11,7 @@ import Likes from "../Likes/Likes";
 import Button from "../MoreComponents/Button";
 
 const AuctionCard = ({ TodayPick, item }: any) => {
-
-  const goToDetail = () =>{
-    
-  }
+  const goToDetail = () => {};
   return (
     <div
       className={TodayPick ? "auction-card today-pick-card" : "auction-card"}
@@ -38,7 +35,7 @@ const AuctionCard = ({ TodayPick, item }: any) => {
         </div>
         <div className={TodayPick ? "meta-info today-pick-meta" : "meta-info"}>
           <div className="meta-info-left">
-            <div>
+            <div className="meta-info-left-img">
               <img src={item.creatorUser.logo_url || ""}></img>
             </div>
             <div>

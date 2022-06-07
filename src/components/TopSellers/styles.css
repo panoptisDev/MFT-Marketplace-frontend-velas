@@ -27,11 +27,14 @@
   margin: 10px;
 }
 
+.seller-left img {
+  width: 100%;
+  height: 100%;
+}
 .seller-left {
-  width: 74px;
-  height: 74px;
+  width: 47px;
+  height: 47px;
   border-radius: 50%;
-  background-color: white;
   position: relative;
 }
 

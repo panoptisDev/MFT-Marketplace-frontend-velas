@@ -24,6 +24,7 @@ const VelasClubPage = (props: any) => {
   const isLandOrMobile = useMediaQuery({
     query: "screen and (max-height: 450px) and (orientation:landscape)",
   });
+
   useEffect(() => {
     if (isLoading || isTopLoading) {
       setLoadingHeight(100);
@@ -64,6 +65,7 @@ const VelasClubPage = (props: any) => {
         setRate(0);
       });
   }
+  // console.log(item);
   useEffect(() => {
     if (!item) {
       fetchItem();

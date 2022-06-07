@@ -23,8 +23,8 @@ import { Toaster } from "react-hot-toast";
 import { getUser, useAuthDispatch, useAuthState } from "./context/authContext";
 import { useWeb3React } from "@web3-react/core";
 import { Button, Modal } from "@material-ui/core";
-import CreateItemPage from "./pages/Create/CreateItemPage";
-import CreateCollectionPage from "./pages/Create/CreateCollectionPage";
+import CreateItemPage from "./pages/create/CreateItemPage";
+import CreateCollectionPage from "./pages/create/CreateCollectionPage";
 import AccountPage from "./pages/account/AccountPage";
 import SettingsPage from "./pages/settings/SettingsPage";
 import CollectionsPage from "./pages/colloctions/CollectionsPage";
@@ -272,24 +272,31 @@ function App() {
         <Footer />
       </Router>
       <Modal
-       open={!!errorModalOpen && !active}
-       onClose={(event, reason) => {
-         if (reason === "backdropClick") {
-           return false;
-         }
-         if (reason === "escapeKeyDown") {
-           return false;
-         }
-         setErrorModalOpen(false)
-       }}
-       aria-labelledby="simple-modal-title"
-       aria-describedby="simple-modal-description"
-     >
-       <div style={modalStyle} className={`${classes.paper} modal-div`}>
-         <p>{networkError}</p>
-         <Button className="" onClick={closeErrorModal} variant="contained" color="primary">Close</Button>
-       </div>
-     </Modal>
+        open={!!errorModalOpen && !active}
+        onClose={(event, reason) => {
+          if (reason === "backdropClick") {
+            return false;
+          }
+          if (reason === "escapeKeyDown") {
+            return false;
+          }
+          setErrorModalOpen(false);
+        }}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <div style={modalStyle} className={`${classes.paper} modal-div`}>
+          <p>{networkError}</p>
+          <Button
+            className=""
+            onClick={closeErrorModal}
+            variant="contained"
+            color="primary"
+          >
+            Close
+          </Button>
+        </div>
+      </Modal>
     </div>
   );
 }

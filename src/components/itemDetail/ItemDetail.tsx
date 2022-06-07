@@ -1,4 +1,8 @@
 import { ShareOutlined, ExpandLess, LocalLibrary } from "@material-ui/icons";
+import { Col, Container, Nav, Row, Tab, Tabs } from "react-bootstrap";
+import avt from "../../assets/images/avt-8.jpg";
+import Timer from "../timer/Timer";
+import { ReactComponent as ShoppingBag } from "../../assets/icons/shopping-bag.svg";
 import {
   Loupe,
   ViewList,
@@ -40,12 +44,30 @@ import MakeOffer from "../../pages/sale/MakeOffer";
 import ReactPlayer from "react-player";
 import ListItemSalePage from "../../pages/sale/ListItemSalePage";
 import CancelListPage from "../../pages/sale/CancelListPage";
+// let data = require("./itemdetailpage_example_data.json");
+import { data } from "./itemdetailpage_example_data";
+
+// const OwnedCreatedBy = ({ name, title, styles }: any) => {
+//   return (
+//     <div className="owned-created-by">
+//       <img src={avt} alt="" />
+//       <div>
+//         <span>{title}</span>
+//         <Link to="/">{name}</Link>
+//       </div>
+//     </div>
+//   );
+// };
 
 const ItemDetail = (props: any) => {
   const { item, fetchItem } = props;
-
+  console.log(item, "this is ITEM");
   const { connector, library, chainId, account, active }: any = useWeb3React();
   const [loginStatus, setLoginStatus] = useState(false);
+  const [oldData, setData] = useState(data);
+
+  console.log(oldData, "This is the right time to prevail");
+
   let newVariable: any = process.env.REACT_APP_NETWORK_ID;
   useEffect(() => {
     const isLoggedin =
@@ -306,12 +328,12 @@ const ItemDetail = (props: any) => {
   };
 
   // About
-  const [isAboutExpand, setIsAboutExpand] = useState(false);
-  const [isDetailExpand, setIsDetailExpand] = useState(false);
-  const [isLocalExpand, setIsLocalExpand] = useState(false);
-  const [isPropertyExpand, setIsPropertyExpand] = useState(false);
-  const [isStatsExpand, setIsStatsExpand] = useState(false);
-  const [isLevelExpand, setIsLevelExpand] = useState(false);
+  // const [isAboutExpand, setIsAboutExpand] = useState(false);
+  // const [isDetailExpand, setIsDetailExpand] = useState(false);
+  // const [isLocalExpand, setIsLocalExpand] = useState(false);
+  // const [isPropertyExpand, setIsPropertyExpand] = useState(false);
+  // const [isStatsExpand, setIsStatsExpand] = useState(false);
+  // const [isLevelExpand, setIsLevelExpand] = useState(false);
 
   return (
     <div className="imageDetail">
@@ -330,216 +352,9 @@ const ItemDetail = (props: any) => {
             <img src={item.assetUrl} alt="icon" className="detail-img" />
           )}
         </div>
-        <div className="col-div br-div">
-          <h2 className="billy-header">
-            <Description /> Description
-          </h2>
-          <div className="hline"></div>
-          <p className="billy-desc">
-            Created by
-            <a
-              href=""
-              target="_blank"
-              rel="noopener noreferrer"
-              className="billy-desc"
-            >
-              {loginStatus &&
-              item.creator.toLowerCase() === account.toLowerCase()
-                ? "You"
-                : String(item.creator).substring(2, 7).toUpperCase()}
-            </a>
-          </p>
+        {/* <div className="col-div br-div">
           <p className="billy-desc">{item.description}</p>
-          <div className="hline"></div>
-          <div
-            className="row-div cursor-pointer s-b m-b"
-            onClick={() => {
-              setIsAboutExpand(!isAboutExpand);
-            }}
-          >
-            <h2 className="billy-header">
-              <ViewList /> About {item.collection && item.collection.name}
-            </h2>
-            <h2 className="billy-header">
-              {!isAboutExpand ? <ExpandMore /> : <ExpandLess />}
-            </h2>
-          </div>
-          <Expand
-            open={isAboutExpand}
-            duration={300}
-            styles={styles}
-            transitions={transitions}
-          >
-            <div className="col-div aic jcc">
-              <p className="billy-desc">
-                {item.collection && item.collection.description}
-              </p>
-            </div>
-          </Expand>
-          <div
-            className="row-div cursor-pointer s-b mt-1"
-            onClick={() => {
-              setIsDetailExpand(!isDetailExpand);
-            }}
-          >
-            <h2 className="billy-header">
-              <Loupe /> Details
-            </h2>
-            <h2 className="billy-header">
-              {!isDetailExpand ? <ExpandMore /> : <ExpandLess />}
-            </h2>
-          </div>
-          <Expand
-            open={isDetailExpand}
-            duration={300}
-            styles={styles}
-            transitions={transitions}
-          >
-            <div className="col-div aic jcc">
-              <div className="row-div cursor-pointer s-b">
-                <p>Contract Address</p>
-                <a
-                  href="https://testnets.opensea.io/0x5367b4557D29cE1Ce3F333Ba1ad155d6A1754C68"
-                  target={"_blank"}
-                  rel="noreferrer"
-                  className="billy-desc"
-                >
-                  {item.itemCollection}
-                  {/* TODO truncate string */}
-                </a>
-              </div>
-              <div className="row-div cursor-pointer s-b">
-                <p>Token ID</p>
-                <p>{item.tokenId}</p>
-              </div>
-              <div className="row-div cursor-pointer s-b">
-                <p>Token Standard</p>
-                <p>ERC-721</p>
-              </div>
-              <div className="row-div cursor-pointer s-b">
-                <p>Blockchain</p>
-                <p>Velas</p>
-              </div>
-              <div className="row-div cursor-pointer s-b">
-                <p>Creator Fees</p>
-                <p>{item.royalty}</p>
-              </div>
-            </div>
-          </Expand>
-          <div className="hline"></div>
 
-          <div
-            className="row-div cursor-pointer s-b mt-1"
-            onClick={() => {
-              setIsPropertyExpand(!isPropertyExpand);
-            }}
-          >
-            <h2 className="billy-header">
-              <TaskIcon /> Properties
-            </h2>
-            <h2 className="billy-header">
-              {!isPropertyExpand ? <ExpandMore /> : <ExpandLess />}
-            </h2>
-          </div>
-          <Expand
-            open={isPropertyExpand}
-            duration={300}
-            styles={styles}
-            transitions={transitions}
-          >
-            <div className="col-div aic jcc w-100">
-              {item.properties && item.properties.length > 0 ? (
-                <div>
-                  {item.properties.map((property: any, key: any) => {
-                    return (
-                      <li key={key} className="with-border">
-                        <div className="name">{property.type}</div>
-                        <div className="value text-white">{property.name}</div>
-                      </li>
-                    );
-                  })}
-                </div>
-              ) : (
-                <div />
-              )}
-            </div>
-          </Expand>
-          <div className="hline"></div>
-          <div
-            className="row-div cursor-pointer s-b mt-1"
-            onClick={() => {
-              setIsStatsExpand(!isStatsExpand);
-            }}
-          >
-            <h2 className="billy-header">
-              <SettingsApplicationsIcon /> Stats
-            </h2>
-            <h2 className="billy-header">
-              {!isStatsExpand ? <ExpandMore /> : <ExpandLess />}
-            </h2>
-          </div>
-          <Expand
-            open={isStatsExpand}
-            duration={300}
-            styles={styles}
-            transitions={transitions}
-          >
-            <div className="col-div aic jcc w-100">
-              {item.stats && item.stats.length > 0 ? (
-                <div>
-                  {item.stats.map((stat: any, key: any) => {
-                    return (
-                      <li key={key} className="with-border">
-                        <div className="name">{stat.name}</div>
-                        <div className="value text-white">{stat.value}</div>
-                        <div className="value text-white">{stat.total}</div>
-                      </li>
-                    );
-                  })}
-                </div>
-              ) : (
-                <div />
-              )}
-            </div>
-          </Expand>
-          <div className="hline"></div>
-          <div
-            className="row-div cursor-pointer s-b mt-1"
-            onClick={() => {
-              setIsLevelExpand(!isLevelExpand);
-            }}
-          >
-            <h2 className="billy-header">
-              <AssessmentIcon /> Level
-            </h2>
-            <h2 className="billy-header">
-              {!isLevelExpand ? <ExpandMore /> : <ExpandLess />}
-            </h2>
-          </div>
-          <Expand
-            open={isLevelExpand}
-            duration={300}
-            styles={styles}
-            transitions={transitions}
-          >
-            <div className="col-div aic jcc w-100">
-              {item.levels && item.levels.length > 0 ? (
-                <div>
-                  {item.levels.map((level: any, key: any) => {
-                    return (
-                      <li key={key} className="with-border">
-                        <div className="name">{level.name}</div>
-                        <div className="value text-white">{level.value}</div>
-                        <div className="value text-white">{level.total}</div>
-                      </li>
-                    );
-                  })}
-                </div>
-              ) : (
-                <div />
-              )}
-            </div>
-          </Expand>
           {item.lockContent === "" ? (
             <div />
           ) : (
@@ -570,35 +385,18 @@ const ItemDetail = (props: any) => {
               </Expand>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
-      <div className="property-box">
-        <div className="property-div">
-          <div className="share-div">
-            <Link to="/velas/velas-apes-club" className="link-blue">
-              VELAS
-            </Link>
-            <div className="share-icons">
-              <Refresh
-                onClick={() => {
-                  window.location.reload();
-                }}
-                className="share-icon"
-              />
-              <ShareOutlined className="share-icon" />
-              <MoreVert className="share-icon" />
-            </div>
-          </div>
-          <h2 className="billy-header">{item.name}</h2>
-          <div className="row-div">
-            <p className="billy-desc">
-              Owned by
-              <a
-                href=""
-                target="_blank"
-                rel="noopener noreferrer"
-                className="billy-desc"
-              >
+      <div className="velas-club-container">
+        <h1 style={{ textAlign: "left", color: "white", marginBottom: "20px" }}>
+          “{item.name} ”
+        </h1>
+        <div className="place-bid-top">
+          <div className="owned-created-by">
+            <img src={avt} alt="" />
+            <div>
+              <span>Created By</span>
+              <Link to="/">
                 {loginStatus &&
                 item.ownerUser &&
                 item.ownerUser.address.toLowerCase() === account.toLowerCase()
@@ -606,287 +404,520 @@ const ItemDetail = (props: any) => {
                   : String(item.ownerUser && item.ownerUser.address)
                       .substring(2, 7)
                       .toUpperCase()}
-              </a>
-            </p>
-            <p className="billy-desc">
-              <Visibility /> 12 views
-            </p>
-            <p className="billy-desc hover-blue">
-              <Favorite /> 1 favorite
-            </p>
+              </Link>
+            </div>
           </div>
-          {loginStatus && item.auction && (
+          <br />
+          <div className="owned-created-by">
+            <img src={avt} alt="" />
             <div>
-              <div className="hline"></div>
-              <div className="col-div br-div">
-                Sales ends{" "}
-                {item.auction &&
-                  new Date(
-                    parseFloat(item.auction.endTime) * 1000
-                  ).toLocaleString("en-US", { timeZone: "America/New_York" })}
+              <span>Owned By</span>
+              <Link to="/">
+                {loginStatus &&
+                item.ownerUser &&
+                item.ownerUser.address.toLowerCase() === account.toLowerCase()
+                  ? "You"
+                  : String(item.ownerUser && item.ownerUser.address)
+                      .substring(2, 7)
+                      .toUpperCase()}
+              </Link>
+            </div>
+          </div>
+          {/* <OwnedCreatedBy name="Ralf Garraway" title="Created By" /> */}
+        </div>
+        <div className="property-box">
+          <div className="property-div">
+            <div className="share-div">
+              <Link to="/velas/velas-apes-club" className="link-blue">
+                VELAS
+              </Link>
+              <div className="share-icons">
+                <Refresh
+                  onClick={() => {
+                    window.location.reload();
+                  }}
+                  className="share-icon"
+                />
+                <ShareOutlined className="share-icon" />
+                <MoreVert className="share-icon" />
               </div>
             </div>
-          )}
-
-          <div className="hline"></div>
-          <div className="col-div br-div">
-            {loginStatus && item.auction && (
+            {/* <h2 className="billy-header">{item.name}</h2> */}
+            <div className="row-div">
+              <p className="billy-desc">
+                <Visibility /> 12 views
+              </p>
+              <p className="billy-desc hover-blue">
+                <Favorite /> 1 favorite
+              </p>
+            </div>
+            {/* <Timer /> */}
+            {/* {loginStatus && oldData.auction && (
               <div>
-                <p className="billy-desc m-b-5">Highest Bid</p>
-                <div className="row-div m-b-5">
-                  <h2 className="billy-header">
-                    {item.auction && item.auction.price} VLX
-                  </h2>
-                  {/* <p className="billy-desc">($ 20.23)</p> */}
+                <div className="hline"></div>
+                <div style={{ color: "white" }} className="col-div br-div">
+                  Sales ends{" "}
+                  {oldData.auction &&
+                    new Date(
+                      oldData.auction.endTime
+                    ).toLocaleString("en-US", { timeZone: "America/New_York" })}
                 </div>
               </div>
-            )}
-
-            <div className="row-div">
-              {/* {
+            )} */}
+            <div className="hline"></div>
+            <div className="countdown-bid-price">
+              {loginStatus && oldData.auction && (
+                <div className="countdown-bid-price-div">
+                  <span>Highest Bid</span>
+                  <span>
+                    <strong>
+                      {" "}
+                      {oldData.auction && oldData.auction.price} VLX
+                    </strong>
+                    {/* <small> = $12.246</small> */}
+                  </span>
+                </div>
+              )}
+              {loginStatus && oldData.auction && (
+                <Timer
+                  downPhrase="Sales ends"
+                  mintStartAt={oldData.auction.endTime}
+                  itemDetails={true}
+                />
+              )}
+            </div>
+            <div className="hline"></div>
+            <div className="col-div br-div">
+              {/* {loginStatus && oldData.auction && (
+                <div>
+                  <p className="billy-desc m-b-5">Highest Bid</p>
+                  <div className="row-div m-b-5">
+                    <h2 className="billy-header">
+                      {oldData.auction && oldData.auction.price} VLX
+                    </h2>
+                    <p className="billy-desc">($ 20.23)</p>
+                  </div>
+                </div>
+              )} */}
+              <div className="row-div auction-bids-btns">
+                {/* {
 								item.pair && item.pair.owner.toLowerCase() !== account.toLowerCase() &&
 								<Button className="outLineBtn" onClick={() => setShowOfferModal(true)}>
 									<Loyalty /> Make Offer
 								</Button>
 							} */}
-              {loginStatus &&
-                item.pair &&
-                item.pair.owner.toLowerCase() !== account.toLowerCase() && (
-                  <Button
-                    className="outLineBtn"
-                    onClick={() => setShowBuyModal(true)}
-                  >
-                    <Loyalty /> Buy Now
-                  </Button>
-                )}
-              {loginStatus &&
-                !item.pair &&
-                item.auction &&
-                item.auction.owner.toLowerCase() !== account.toLowerCase() && (
-                  <Button
-                    className="outLineBtn"
-                    onClick={() => onPlaceBidModal()}
-                  >
-                    Place Bid
-                  </Button>
-                )}
-              {loginStatus &&
-                !item.pair &&
-                !item.auction &&
-                item.owner.toLowerCase() === account.toLowerCase() && (
-                  <Button
-                    className="outLineBtn"
-                    onClick={() => setShowListingModal(true)}
-                  >
-                    Sell
-                  </Button>
-                )}
-              {loginStatus &&
-                item.pair &&
-                !item.auction &&
-                item.pair.owner.toLowerCase() === account.toLowerCase() && (
-                  <Button
-                    className="outLineBtn"
-                    onClick={() => setShowCancelListingModal(true)}
-                  >
-                    Cancel Selling
-                  </Button>
-                )}
-              {loginStatus &&
-                !item.pair &&
-                item.auction &&
-                item.auction.owner.toLowerCase() === account.toLowerCase() && (
-                  <Button
-                    className="outLineBtn"
-                    onClick={() => setShowCancelListingModal(true)}
-                  >
-                    Cancel Auction
-                  </Button>
-                )}
-            </div>
-          </div>
-          <div className="hline"></div>
-          <div className="col-div p-t-10 p-b-10">
-            <div
-              className="row-div cursor-pointer s-b"
-              onClick={() => {
-                setIsEventExpand(!isEventExpand);
-              }}
-            >
-              <h2 className="billy-header">
-                <Timeline />
-                Item Activity
-              </h2>
-              <h2 className="billy-header">
-                {!isEventExpand ? <ExpandMore /> : <ExpandLess />}
-              </h2>
-            </div>
-            <Expand
-              open={isEventExpand}
-              duration={300}
-              styles={styles}
-              transitions={transitions}
-            >
-              <div className="col-div p-t-10 p-b-10">
-                {item.events.length > 0 ? (
-                  <div className="col-div aic jcc">
-                    <div>Event</div>
-                    <div>Price</div>
-                    <div>From</div>
-                    <div>To</div>
-                    <div>Date</div>
-                    {item.events.map((event: any, key: any) => {
-                      return (
-                        <div key={key}>
-                          <div>{event.name}</div>
-                          <div>
-                            {/* //ethereum icon*/}
-                            {event.price}ETH
-                          </div>
-                          <div>
-                            {event.from === account && loginStatus
-                              ? "You"
-                              : String(event.from)
-                                  .substring(2, 7)
-                                  .toUpperCase()}
-                          </div>
-                          <div>
-                            {event.to === account && loginStatus
-                              ? "You"
-                              : String(event.to).substring(2, 7).toUpperCase()}
-                          </div>
-                          <div>
-                            {Math.floor(new Date().getTime() / 1000) -
-                              parseFloat(event.timestamp)}{" "}
-                            days ago
-                          </div>
-                          {/* this can be seconds ago, mins ago, hours ago, or days ago */}
-                        </div>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <div className="col-div aic jcc">
-                    <img src="/assets/no-chart-data.svg" alt="" />
-                    <p className="billy-desc">No item activity yet</p>
-                  </div>
-                )}
-              </div>
-            </Expand>
-          </div>
-          {item.auction && (
-            <div>
-              <div className="hline"></div>
-              <div className="col-div p-t-10 p-b-10">
-                <div
-                  className="row-div cursor-pointer s-b"
-                  onClick={() => {
-                    setIsPriceExpand(!isPriceExpand);
-                  }}
-                >
-                  <h2 className="billy-header">
-                    <Timeline /> Price History
-                  </h2>
-                  <h2 className="billy-header">
-                    {!isPriceExpand ? <ExpandMore /> : <ExpandLess />}
-                  </h2>
-                </div>
-                <Expand
-                  open={isPriceExpand}
-                  duration={300}
-                  styles={styles}
-                  transitions={transitions}
-                >
-                  <div className="col-div p-t-10 p-b-10">
-                    <Select
-                      defaultValue={options[0]}
-                      formatOptionLabel={FormatsortOptionLabel}
-                      options={options}
-                      instanceId="chainSelect"
-                      className="select-gray flex-1 m-r-5"
-                    />
-                    {item.auction.bids.length > 0 ? (
-                      <div className="col-div aic jcc">
-                        {item.auction.bids.map((bid: any, key: any) => {
-                          console.log(bid.bidPrice); // 0.002
-                          console.log(bid.timestamp); //ex : 1653574771
-                          //This should be filtered by above selected date.
-                          return (
-                            <div key={key}>
-                              {/* TODO display graph */}
-                              {bid.bidPrice}
-                            </div>
-                          );
-                        })}
-                      </div>
-                    ) : (
-                      <div className="col-div aic jcc">
-                        <img src="/assets/no-chart-data.svg" alt="" />
-                        <p className="billy-desc">No Price yet</p>
-                      </div>
-                    )}
-                  </div>
-                </Expand>
-              </div>
-              <div className="hline"></div>
 
-              <div className="col-div p-t-10 p-b-10">
-                <div
-                  className="row-div cursor-pointer s-b"
-                  onClick={() => {
-                    setIsBidExpand(!isBidExpand);
-                  }}
-                >
-                  <h2 className="billy-header">
-                    <List /> Bid
-                  </h2>
-                  <h2 className="billy-header">
-                    {!isBidExpand ? <ExpandMore /> : <ExpandLess />}
-                  </h2>
+                <Button
+                  itemDetails={true}
+                  icon={<Loyalty />}
+                  label="Buy Now"
+                  className="send-message item-detail m-b-5"
+                  onClick={() => setShowBuyModal(true)}
+                />
+                {/* {loginStatus &&
+                  item.pair &&
+                  item.pair.owner.toLowerCase() !== account.toLowerCase() && (
+                    <Button
+                      itemDetails={true}
+                      icon={<Loyalty />}
+                      label="Buy Now"
+                      className="send-message item-detail"
+                      onClick={() => setShowBuyModal(true)}
+                    />
+                  )} */}
+                {loginStatus &&
+                  !item.pair &&
+                  oldData.auction &&
+                  oldData.auction.owner.toLowerCase() !==
+                    account.toLowerCase() && (
+                    <Button
+                      onClick={() => onPlaceBidModal()}
+                      itemDetails={true}
+                      icon={<ShoppingBag />}
+                      label="Place a bid"
+                      className="send-message item-detail m-b-5"
+                    />
+                  )}
+                {/* {loginStatus &&
+                  !item.pair &&
+                  !oldData.auction &&
+                  oldData.owner.toLowerCase() === account.toLowerCase() && (
+                    <Button
+                      className="send-message item-detail"
+                      onClick={() => setShowListingModal(true)}
+                    >
+                      Sell
+                    </Button>
+                  )} */}
+
+                <Button
+                  className="send-message item-detail m-b-5"
+                  onClick={() => setShowListingModal(true)}
+                  label="Sell"
+                />
+                <Button
+                  className="send-message item-detail m-b-5"
+                  label="Cancel Selling"
+                  onClick={() => setShowCancelListingModal(true)}
+                />
+                {/* {loginStatus &&
+                  // item.pair &&
+                  !oldData.auction &&
+                  item.pair.owner.toLowerCase() === account.toLowerCase() && (
+                    <Button
+                      className="outLineBtn"
+                      label="Cancel Selling"
+                      onClick={() => setShowCancelListingModal(true)}
+                    />
+                  )} */}
+              </div>
+            </div>
+            <div className="hline"></div>
+            {item.auction && (
+              <div>
+                <div className="hline"></div>
+                <div className="col-div p-t-10 p-b-10">
+                  <div
+                    className="row-div cursor-pointer s-b"
+                    onClick={() => {
+                      setIsPriceExpand(!isPriceExpand);
+                    }}
+                  >
+                    <h2 className="billy-header">
+                      <Timeline /> Price History
+                    </h2>
+                    <h2 className="billy-header">
+                      {!isPriceExpand ? <ExpandMore /> : <ExpandLess />}
+                    </h2>
+                  </div>
+                  <Expand
+                    open={isPriceExpand}
+                    duration={300}
+                    styles={styles}
+                    transitions={transitions}
+                  >
+                    <div className="col-div p-t-10 p-b-10">
+                      <Select
+                        defaultValue={options[0]}
+                        formatOptionLabel={FormatsortOptionLabel}
+                        options={options}
+                        instanceId="chainSelect"
+                        className="select-gray flex-1 m-r-5"
+                      />
+                      {oldData.auction.bids.length > 0 ? (
+                        <div className="col-div aic jcc">
+                          {oldData.auction.bids.map((bid: any, key: any) => {
+                            console.log(bid.bidPrice); // 0.002
+                            console.log(bid.timestamp); //ex : 1653574771
+                            //This should be filtered by above selected date.
+                            return (
+                              <div key={key}>
+                                {/* TODO display graph */}
+                                {bid.bidPrice}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      ) : (
+                        <div className="col-div aic jcc">
+                          <img src="/assets/no-chart-data.svg" alt="" />
+                          <p className="billy-desc">No Price yet</p>
+                        </div>
+                      )}
+                    </div>
+                  </Expand>
                 </div>
-                <Expand
-                  open={isBidExpand}
-                  duration={300}
-                  styles={styles}
-                  transitions={transitions}
-                >
-                  <div className="col-div p-t-10 p-b-10">
-                    {item.auction && item.auction.bids.length > 0 ? (
-                      <div className="col-div aic jcc">
-                        {/* //TODO this data display */}
-                        <div>Price</div>
-                        <div>Expiration</div>
-                        <div>From</div>
-                        {item.auction.bids.map((bid: any, key: any) => {
-                          return (
-                            <div key={key}>
-                              <div>{bid.bidPrice}</div>
-                              <div>
-                                {Math.ceil(
-                                  (parseFloat(item.auction.endTime) -
-                                    parseFloat(bid.timestamp)) /
-                                    (60 * 60 * 24)
-                                )}{" "}
-                                days
+                <div className="hline"></div>
+                <div className="col-div p-t-10 p-b-10">
+                  <div
+                    className="row-div cursor-pointer s-b"
+                    onClick={() => {
+                      setIsBidExpand(!isBidExpand);
+                    }}
+                  >
+                    <h2 className="billy-header">
+                      <List /> Bid
+                    </h2>
+                    <h2 className="billy-header">
+                      {!isBidExpand ? <ExpandMore /> : <ExpandLess />}
+                    </h2>
+                  </div>
+                  <Expand
+                    open={isBidExpand}
+                    duration={300}
+                    styles={styles}
+                    transitions={transitions}
+                  >
+                    <div className="col-div p-t-10 p-b-10">
+                      {oldData.auction && oldData.auction.bids.length > 0 ? (
+                        <div className="col-div aic jcc">
+                          {/* //TODO this data display */}
+                          <div>Price</div>
+                          <div>Expiration</div>
+                          <div>From</div>
+                          {oldData.auction.bids.map((bid: any, key: any) => {
+                            return (
+                              <div key={key}>
+                                <div>{bid.bidPrice}</div>
+                                <div>
+                                  {Math.ceil(
+                                    // (parseFloat(item.auction.endTime) -
+                                    //   parseFloat(bid.timestamp)) /
+                                    (oldData.auction.endTime - bid.timestamp) /
+                                      (60 * 60 * 24)
+                                  )}{" "}
+                                  days
+                                </div>
+                                <div>
+                                  {String(bid.from)
+                                    .substring(2, 7)
+                                    .toUpperCase()}
+                                </div>
                               </div>
-                              <div>
-                                {String(bid.from).substring(2, 7).toUpperCase()}
-                              </div>
+                            );
+                          })}
+                        </div>
+                      ) : (
+                        <div className="col-div aic jcc">
+                          <img src="/assets/empty-asks.svg" alt="" />
+                          <p className="billy-desc">No Bid yet</p>
+                        </div>
+                      )}
+                    </div>
+                  </Expand>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="place-bid-nav-items">
+          <Tab.Container defaultActiveKey="bid-history">
+            <Nav className="place-bid-nav-item-container">
+              {/* <Nav.Item>
+                <Nav.Link eventKey="bid-history" className="title-font">
+                  Bid History
+                </Nav.Link>
+              </Nav.Item> */}
+              {/* <Nav.Item>
+                <Nav.Link eventKey="info" className="title-font">
+                  Info
+                </Nav.Link>
+              </Nav.Item> */}
+              {/* <Nav.Item>
+              <Nav.Link eventKey="provenance" className="title-font">
+                Provenance
+              </Nav.Link>
+            </Nav.Item> */}
+              <Nav.Item>
+                <Nav.Link eventKey="item activity" className="title-font">
+                  Item Activity
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="details" className="title-font">
+                  Details
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="about" className="title-font">
+                  About
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="properties" className="title-font">
+                  Properties
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="stats" className="title-font">
+                  Stats
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="level" className="title-font">
+                  Level
+                </Nav.Link>
+              </Nav.Item>
+            </Nav>
+            <Tab.Content className="items-container-tabs">
+              <Tab.Pane eventKey="item activity">
+                <div className="place-bid-data-detail">
+                  {item.events.length > 0 ? (
+                    <div className="col-div aic jcc">
+                      <div>Event</div>
+                      <div>Price</div>
+                      <div>From</div>
+                      <div>To</div>
+                      <div>Date</div>
+                      {item.events.map((event: any, key: any) => {
+                        return (
+                          <div key={key}>
+                            <div>{event.name}</div>
+                            <div>
+                              {/* //ethereum icon*/}
+                              {event.price}ETH
                             </div>
+                            <div>
+                              {event.from === account && loginStatus
+                                ? "You"
+                                : String(event.from)
+                                    .substring(2, 7)
+                                    .toUpperCase()}
+                            </div>
+                            <div>
+                              {event.to === account && loginStatus
+                                ? "You"
+                                : String(event.to)
+                                    .substring(2, 7)
+                                    .toUpperCase()}
+                            </div>
+                            <div>
+                              {Math.floor(new Date().getTime() / 1000) -
+                                parseFloat(event.timestamp)}{" "}
+                              days ago
+                            </div>
+                            {/* this can be seconds ago, mins ago, hours ago, or days ago */}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="col-div aic jcc">
+                      <img src="/assets/no-chart-data.svg" alt="" />
+                      <p className="billy-desc">No item activity yet</p>
+                    </div>
+                  )}
+                </div>
+              </Tab.Pane>
+              <Tab.Pane eventKey="bid-history">
+                <div className="place-bid-data-detail">
+                  {/* <BidHistory bidHistory={true} />
+                <BidHistory bidHistory={true} />
+                <BidHistory bidHistory={true} />
+                <BidHistory bidHistory={true} />
+                <BidHistory bidHistory={true} /> */}
+                </div>
+              </Tab.Pane>
+              <Tab.Pane eventKey="info">
+                <div className="place-bid-data-detail">
+                  {/* <BidHistory /> */}
+                </div>
+              </Tab.Pane>
+              <Tab.Pane eventKey="about">
+                <div className="place-bid-data-detail">
+                  <p>
+                    This is default collection for boatsail nft marketplace.
+                  </p>
+                </div>
+              </Tab.Pane>
+              <Tab.Pane eventKey="details">
+                <div className="place-bid-data-detail">
+                  <div className="col-div aic jcc">
+                    <div className="row-div cursor-pointer s-b">
+                      <p>Contract Address</p>
+                      <a
+                        href="https://testnets.opensea.io/0x5367b4557D29cE1Ce3F333Ba1ad155d6A1754C68"
+                        target={"_blank"}
+                        rel="noreferrer"
+                        className="billy-desc"
+                      >
+                        {item.itemCollection}
+                        {/* TODO truncate string */}
+                      </a>
+                    </div>
+                    <div className="row-div cursor-pointer s-b">
+                      <p>Token ID</p>
+                      <p>{item.tokenId}</p>
+                    </div>
+                    <div className="row-div cursor-pointer s-b">
+                      <p>Token Standard</p>
+                      <p>ERC-721</p>
+                    </div>
+                    <div className="row-div cursor-pointer s-b">
+                      <p>Blockchain</p>
+                      <p>Velas</p>
+                    </div>
+                    <div className="row-div cursor-pointer s-b">
+                      <p>Creator Fees</p>
+                      <p>{item.royalty}</p>
+                    </div>
+                  </div>
+                </div>
+              </Tab.Pane>
+              <Tab.Pane eventKey="stats">
+                <div className="place-bid-data-detail">
+                  <div className="col-div aic jcc w-100">
+                    {item.stats && item.stats.length > 0 ? (
+                      <div>
+                        {item.stats.map((stat: any, key: any) => {
+                          return (
+                            <li key={key} className="with-border">
+                              <div className="name">{stat.name}</div>
+                              <div className="value text-white">
+                                {stat.value}
+                              </div>
+                              <div className="value text-white">
+                                {stat.total}
+                              </div>
+                            </li>
                           );
                         })}
                       </div>
                     ) : (
-                      <div className="col-div aic jcc">
-                        <img src="/assets/empty-asks.svg" alt="" />
-                        <p className="billy-desc">No Bid yet</p>
-                      </div>
+                      <div />
                     )}
                   </div>
-                </Expand>
-              </div>
-            </div>
-          )}
+                </div>
+              </Tab.Pane>
+              <Tab.Pane eventKey="level">
+                <div className="place-bid-data-detail">
+                  <div className="col-div aic jcc w-100">
+                    {item.levels && item.levels.length > 0 ? (
+                      <div>
+                        {item.levels.map((level: any, key: any) => {
+                          return (
+                            <li key={key} className="with-border">
+                              <div className="name">{level.name}</div>
+                              <div className="value text-white">
+                                {level.value}
+                              </div>
+                              <div className="value text-white">
+                                {level.total}
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div />
+                    )}
+                  </div>
+                </div>
+              </Tab.Pane>
+              <Tab.Pane eventKey="properties">
+                <div className="place-bid-data-detail">
+                  <div className="col-div aic jcc w-100">
+                    {item.properties && item.properties.length > 0 ? (
+                      <div>
+                        {item.properties.map((property: any, key: any) => {
+                          return (
+                            <li key={key} className="with-border">
+                              <div className="name">{property.type}</div>
+                              <div className="value text-white">
+                                {property.name}
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div />
+                    )}
+                  </div>
+                </div>
+              </Tab.Pane>
+            </Tab.Content>
+          </Tab.Container>
         </div>
       </div>
       {showPlaceBidModal && (
@@ -897,7 +928,6 @@ const ItemDetail = (props: any) => {
           nftFee={0}
         />
       )}
-
       {showOfferModal && (
         <MakeOffer
           onClose={onMakeOfferClose}
@@ -906,7 +936,6 @@ const ItemDetail = (props: any) => {
           nftFee={0}
         />
       )}
-
       {showBuyModal && (
         <MakeOffer
           onClose={onBuyClose}

@@ -338,6 +338,12 @@
   border-color: #3221f0;
   color: white;
 }
+.is-disabled,
+.is-disabled:hover {
+  background-color: black;
+  color: gray;
+  border-color: black;
+}
 @media screen and (max-width: 1200px) {
   .connect-wallet {
     padding: 10px;

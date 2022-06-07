@@ -1,151 +1,147 @@
 @import "../../global.scss";
-.fixedprice{
+.fixedprice {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .placeContainer {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    .placeContainer{
+    flex-direction: row;
+    .select-gray {
+      display: flex;
+      & > div:first-of-type {
+        border: 1px solid rgba(138, 138, 160, 0.3);
+        background: #353840;
+        border-radius: 6px 0 0 6px;
+        div {
+          color: #ffffff !important;
+          font-size: 1rem !important;
+        }
+      }
+    }
+
+    .price {
+      font-size: 1rem;
+      padding-left: 0.8rem;
+      padding-right: 0.8rem;
+      flex: 1;
+      border: none;
+      border-radius: 0px;
+      border-top: 1px solid rgba(138, 138, 160, 0.3);
+      border-bottom: 1px solid rgba(138, 138, 160, 0.3);
+      background: #343444;
+      color: #fff;
+      max-height: 43px;
+      min-height: 42px;
+      display: flex;
+      &:focus {
+        outline: none;
+      }
+    }
+    .usd {
+      font-size: 18px;
+      padding: 11px;
+      color: #fff;
+      border: 1px solid rgba(138, 138, 160, 0.3);
+      background: #343444;
+      border-radius: 0 6px 6px 0;
+    }
+    .warning {
+      font-size: 0.8rem;
+      padding: 5px;
+      color: rgb(254, 75, 75);
+      width: auto;
+    }
+  }
+  .flex-start {
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: #aaa;
+  }
+  .space-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    color: #aaa;
+  }
+  .mb-1 {
+    margin-bottom: 1rem;
+  }
+  .mt-1 {
+    margin-top: 1rem;
+  }
+  .row-div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    .select-gray {
+      width: 30%;
+      max-height: 45px;
+      display: flex;
+      & > div:first-of-type {
+        border: 1px solid rgba(138, 138, 160, 0.3);
+        background: #353840;
+        max-height: 48px;
         width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: row;
-        .select-gray{
-          display: flex;
-          &>div:first-of-type {
-            border: 1px solid #0eabff;
-            background: #353840;
-            border-radius: 6px 0 0 6px;
-            div{
-                color: #ffffff !important;
-                font-size: 1rem !important;
-            }
-          }
-        }
-          
-        .price{
-          font-size: 1rem;
-          padding-left: 0.8rem;
-          padding-right: 0.8rem;
-          // width: 10rem;
-          flex: 1;
-  
-          border: none;
-          border-radius: 0px;
-          border-top: 1px solid #0eabff;
-          border-bottom: 1px solid #0eabff;
-          background: #353840;
-          color: #fff;
-          max-height: 43px;
-          min-height: 42px;
-          display: flex;
-          &:focus{
-            outline: none;
-          }
-        }
-        .usd{
-          font-size: 18px;
-          padding: 11px;
-          color: #fff;
-          border: 1px solid #0eabff;
-          background: #353840;
-          border-radius:  0 6px 6px 0;
-        }
-        .warning{
-          font-size: 0.8rem;
-          padding: 5px;
-          color: rgb(254, 75, 75);
-          width: auto;
+
+        div {
+          color: #ffffff !important;
+          font-size: 1rem !important;
         }
       }
-      .flex-start{
-        width: 100%;
-        margin-top: 1rem;
-        margin-bottom: 0.5rem;
-        color: #aaa;
+    }
+    .radius2 {
+      & > div:first-of-type {
+        border-radius: 6px 0 0 6px;
       }
-      .space-between{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        color: #aaa;
+    }
+    .radius1 {
+      & > div:first-of-type {
+        border-radius: 6px;
       }
-      .mb-1{
-        margin-bottom: 1rem;
+    }
+
+    .flex-1 {
+      flex: 1;
+    }
+
+    .time {
+      border-top: 1px solid rgba(138, 138, 160, 0.3);
+      border-right: 1px solid rgba(138, 138, 160, 0.3);
+      border-bottom: 1px solid rgba(138, 138, 160, 0.3);
+
+      background: #353840;
+      border-radius: 0 6px 6px 0;
+      width: 70%;
+      max-height: 45px;
+      min-height: 43px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: #fff;
+      svg {
+        font-size: 1rem;
+        margin: 10px;
+        color: #fff;
       }
-      .mt-1{
-        margin-top: 1rem;
-      }
-      .row-div{
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: row;
-        .select-gray{
-          width: 30%;
-          max-height: 45px;
-          display: flex;
-          &>div:first-of-type {
-            border: 1px solid #0eabff;
-            background: #353840;
-            max-height: 48px;
-            width: 100%;
-           
-            div{
-                color: #ffffff !important;
-                font-size: 1rem !important;
-            }
-          }
-        }
-        .radius2{
-          &>div:first-of-type {
-            border-radius: 6px 0 0 6px;
-          }
-        }
-        .radius1{
-          &>div:first-of-type {
-            border-radius: 6px;
-          }
-        }
-  
-        .flex-1{
-          flex: 1;
-        }
-        
-        .time{
-          border-top: 1px solid #0eabff;
-          border-right: 1px solid #0eabff;
-          border-bottom: 1px solid #0eabff;
-  
-          background: #353840;
-          border-radius:  0 6px 6px 0;
-          width: 70%;  
-          max-height: 45px;
-          min-height: 43px;
-          display: flex;
-          align-items: center;
-          justify-content : flex-start;
-          color: #fff;
-          svg{
-            font-size: 1rem;
-            margin: 10px;
-            color: #fff;
-  
-          }
-        }
-      }
-      .balance{
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        margin-top: 5px;
-        p{
-          color: #aaa;
-        }
-        
-      }
+    }
+  }
+  .balance {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 5px;
+    p {
+      color: #aaa;
+    }
+  }
 }

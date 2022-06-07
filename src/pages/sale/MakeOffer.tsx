@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { Button, Modal } from "@material-ui/core";
+import { Modal } from "@material-ui/core";
+import Button from "../../components/MoreComponents/Button";
 import "./makeOffer.scss";
 import Select from "react-select";
 import FormatsortOptionLabel from "../../components/itemDetail/FormatsortOptionLabel";
@@ -112,6 +113,11 @@ export default function MakeOffer({ balance, nftFee, onClose, onSubmit }: any) {
         <br />
         <div className="btns">
           <Button
+            className={`explore  make-offer ${!isChecked ? "is-disabled" : ""}`}
+            onClick={makeOffer}
+            label="Make Offer"
+          />
+          {/* <Button
             className=""
             onClick={makeOffer}
             variant="contained"
@@ -119,15 +125,21 @@ export default function MakeOffer({ balance, nftFee, onClose, onSubmit }: any) {
             disabled={!isChecked}
           >
             Make Offer
-          </Button>
+          </Button> */}
           <Button
+            className="explore  make-offer"
+            onClick={handleClose}
+            label="Add Funds"
+            disabled={!isChecked}
+          />
+          {/* <Button
             className="addFund"
             onClick={handleClose}
             variant="contained"
             color="primary"
           >
             Add Funds
-          </Button>
+          </Button> */}
         </div>
       </div>
     </Modal>

@@ -16,6 +16,8 @@
 
 .card-top img {
   width: 100%;
+  min-height: 20vh;
+  height: 100%;
   border-radius: 10px;
 }
 
@@ -140,12 +142,16 @@
   align-items: center;
   text-align: left;
 }
-.meta-info-left div:first-child {
-  background-color: white;
-  width: 44px;
-  height: 44px;
+.meta-info-left-img {
+  width: 30%;
+  height: 30%;
   border-radius: 15px;
   margin-right: 10px;
+}
+.meta-info-left-img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
 }
 .meta-info-left h6,
 .meta-info h5 {

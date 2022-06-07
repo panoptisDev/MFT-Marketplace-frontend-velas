@@ -154,9 +154,11 @@ const ListItemSalePage = ({
               <></>
             )}
           </div>
-          <Button className="listBtn outLineBtn" disabled={listing}>
-            <strong>Complete Listing</strong>
-          </Button>
+          <Button
+            label="Complete Listing"
+            className="listBtn outLineBtn explore"
+            disabled={listing}
+          />
         </form>
       </div>
     </Modal>

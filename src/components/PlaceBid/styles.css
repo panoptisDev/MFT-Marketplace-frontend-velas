@@ -13,6 +13,7 @@
   padding: 12px;
   display: flex;
   justify-content: flex-start;
+  text-align: left;
   align-items: center;
 }
 .owned-created-by span {
@@ -20,7 +21,6 @@
   font-size: 13px;
   line-height: 21px;
   color: #fff;
-  text-align: left;
 }
 .owned-created-by a {
   color: white;
