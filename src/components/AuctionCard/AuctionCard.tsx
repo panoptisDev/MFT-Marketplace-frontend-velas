@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles.css";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import Timer from "../timer/Timer";
+import Timer from "../Timer/Timer";
 import { Link } from "react-router-dom";
 import { ReactComponent as ShoppingBag } from "../../assets/icons/shopping-bag.svg";
 import { FiRefreshCw } from "react-icons/fi";

@@ -1,6 +1,6 @@
 import React from "react";
 import ActivityCard from "../../components/ActivityCard/ActivityCard";
-import Filter from "../../components/filter/Filter";
+import Filter from "../../components/Filter/Filter";
 import SelectMenu from "../../components/MoreComponents/SelectMenu";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import "./styles.css";

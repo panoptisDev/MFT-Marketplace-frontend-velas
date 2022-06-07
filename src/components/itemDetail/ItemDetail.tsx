@@ -1,7 +1,7 @@
 import { ShareOutlined, ExpandLess, LocalLibrary } from "@material-ui/icons";
 import { Col, Container, Nav, Row, Tab, Tabs } from "react-bootstrap";
 import avt from "../../assets/images/avt-8.jpg";
-import Timer from "../timer/Timer";
+import Timer from "../Timer/Timer";
 import { ReactComponent as ShoppingBag } from "../../assets/icons/shopping-bag.svg";
 import {
   Loupe,
