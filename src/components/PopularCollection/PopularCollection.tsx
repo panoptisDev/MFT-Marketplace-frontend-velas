@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { AiOutlineCheck } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Title from "../Title/Title";
@@ -7,7 +8,6 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import Slider from "react-slick";
 import Likes from "../Likes/Likes";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 
 export const NextArrow = ({ onClick }: any) => {
   return (
