@@ -1,7 +1,7 @@
 //components
 import Button from "../../MoreComponents/Button";
 import { ErrorOutline } from "@material-ui/icons";
-
+import avt from "../../../assets/avt-8.jpg";
 // style
 import Tooltip from "@material-ui/core/Tooltip";
 import "./offers.scss";

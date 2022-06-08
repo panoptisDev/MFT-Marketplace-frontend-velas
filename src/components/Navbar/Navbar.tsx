@@ -12,6 +12,7 @@ import axios from "axios";
 import Button from "../MoreComponents/Button";
 import ConnectModal from "../connectModal/ConnectModal";
 import CustomDropdown from "../dropdown/CustomDropdown";
+import faces from "../../assets/faces/avatar.png";
 
 let useClickOutside = (handler: any) => {
   let domNode: React.MutableRefObject<any> = useRef();
@@ -131,9 +132,67 @@ const Navbar = (props: any) => {
         <div className="navbar-links">
           <Link to="/">Home</Link>
           <Link to="/Explore">Explorer</Link>
-          <Link to="/Activity">Activity</Link>
+          <Link to="/collections">Collections</Link>
           <Link to="/Contact">Contact</Link>
           <Link to="/Authors">Authors</Link>
+          {loginStatus && (
+            <div
+              onClick={() => {
+                setNavId("create");
+              }}
+              className={
+                navId === "create" ? "slected show-hide-drop" : "show-hide-drop"
+              }
+            >
+              <CustomDropdown
+                navDropdown
+                buttonText="Create"
+                onClick={(url) => {
+                  goToPage(url);
+                }}
+                buttonProps={{
+                  className: "navLink",
+                  color: "transparent",
+                }}
+                dropdownList={["Collection", "Item"]}
+                // className="activeLink"
+              />
+
+              {/* <HashLink to="/create/collection" smooth>Create</HashLink> */}
+            </div>
+          )}
+          {loginStatus && (
+            <CustomDropdown
+              navDropdown
+              caret={false}
+              buttonText={
+                <>
+                  <img
+                    src={logo !== "" ? logo : faces}
+                    className="img"
+                    alt="profile"
+                  />
+                  <span className="mobileLabel">Account</span>
+                </>
+              }
+              onClick={(url) => {
+                goToProfilePage(url);
+              }}
+              buttonProps={{
+                className: "navLink imageDropdownButton",
+                color: "transparent",
+              }}
+              dropdownList={[
+                "Profile",
+                "Favorites",
+                "My Collections",
+                "My Nfts",
+                "Settings",
+                "Log Out",
+              ]}
+              // className="activeLink"
+            />
+          )}
         </div>
         <ConnectModal
           showConnectModal={showConnectModal}
@@ -172,9 +231,9 @@ const Navbar = (props: any) => {
                 setStatus(status === "open" ? "close" : "open");
                 setOpen(!open);
               }}
-              to="/Activity"
+              to="/collections"
             >
-              Activity
+              Collections
             </Link>
           </div>
           <div>
@@ -199,7 +258,7 @@ const Navbar = (props: any) => {
               Authors
             </Link>
           </div>
-          {window.innerWidth < 550 && (
+          {window.innerWidth < 1100 && (
             <>
               <div>
                 <Link
@@ -227,15 +286,15 @@ const Navbar = (props: any) => {
           )}
         </div>
         <div className="nav-btns">
-          <Search />
-          {loginStatus && (
+          {/* <Search /> */}
+          {loginStatus && window.innerWidth < 1100 && (
             <CustomDropdown
               navDropdown
               caret={false}
               buttonText={
                 <>
                   <img
-                    src={logo !== "" ? logo : "/assets/img/faces/avatar.jpg"}
+                    src={logo !== "" ? logo : faces}
                     className="img"
                     alt="profile"
                   />
@@ -259,32 +318,6 @@ const Navbar = (props: any) => {
               ]}
               // className="activeLink"
             />
-          )}
-          {loginStatus && (
-            <div
-              onClick={() => {
-                setNavId("create");
-              }}
-              className={
-                navId === "create" ? "slected show-hide-drop" : "show-hide-drop"
-              }
-            >
-              <CustomDropdown
-                navDropdown
-                buttonText="Create"
-                onClick={(url) => {
-                  goToPage(url);
-                }}
-                buttonProps={{
-                  className: "navLink",
-                  color: "transparent",
-                }}
-                dropdownList={["Collection", "Item"]}
-                // className="activeLink"
-              />
-
-              {/* <HashLink to="/create/collection" smooth>Create</HashLink> */}
-            </div>
           )}
           <Button
             onClick={() => {

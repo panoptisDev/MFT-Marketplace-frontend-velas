@@ -9,7 +9,7 @@ import AuctionCard from "../../components/AuctionCard/AuctionCard";
 const Author = () => {
   return (
     <div className="author">
-      <PageHeader pageHeader="Author" />
+      {/* <PageHeader pageHeader="Author" /> */}
       <div className="author-page">
         <Profile />
       </div>

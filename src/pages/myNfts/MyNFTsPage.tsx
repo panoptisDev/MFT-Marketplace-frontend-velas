@@ -9,6 +9,7 @@ import "./style.scss";
 import NFTItemList from "../../components/collectionList/NFTItemList";
 import toast from "react-hot-toast";
 import PageHeader from "../../components/PageHeader/PageHeader";
+import Card1 from "../../components/cards/Card1";
 
 const MyNFTsPage = (props: any) => {
   const { user } = props;
@@ -65,7 +66,7 @@ const MyNFTsPage = (props: any) => {
 
   return (
     <>
-      <PageHeader pageHeader="My NFTs" />
+      {/* <PageHeader pageHeader="My NFTs" /> */}
       {/* <Topbar user={user} menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/> */}
       {/* <Menu menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}/> */}
       <div className="page myNftsPage">
@@ -97,7 +98,8 @@ const MyNFTsPage = (props: any) => {
             <NFTItemList {...props} items={items} />
           </div>
         </div>
-        <img src="assets/home_bg_01.jpg" alt="" className="bg1" />
+        <Card1 />
+        {/* <img src="assets/home_bg_01.jpg" alt="" className="bg1" /> */}
       </div>
     </>
   );

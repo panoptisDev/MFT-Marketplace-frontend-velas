@@ -31,6 +31,7 @@
 // },
 
 @import "../../../global.scss";
+
 .filterOptionContainer {
   // padding-top: 90px;
   // background: #361b97e6;
@@ -42,9 +43,11 @@
   padding-left: 30px;
   text-align: left;
   width: 250px;
+
   @media screen and (max-width: 768px) {
     width: 100%;
   }
+
   @include mobile_potrait {
     height: auto;
     width: 100%;
@@ -52,37 +55,44 @@
     border-top: 1px #49b2d563 solid;
     border-bottom: 1px #49b2d563 solid;
   }
+
   @include mobile_landscape {
     margin-top: 5rem;
   }
+
   @media (min-width: 576px) {
     max-width: "540px";
     padding-top: "120px";
   }
+
   @media (min-width: 768px) {
     max-width: "720px";
     padding-top: "120px";
   }
+
   @media (min-width: 992px) {
     max-width: "960px";
     padding-top: "120px";
   }
+
   @media (min-width: 1200px) {
     max-width: "1140px";
     padding-top: "120px";
   }
+
   @media (min-width: 1500px) {
     max-width: "1480px";
     padding-top: "120px";
   }
+
   @media (min-width: 1920px) {
     max-width: "1800px";
     padding-top: "120px";
   }
+
   .items li a:hover .media img {
     transform: scale(1.1);
   }
-
   .brand {
     color: #ffffff;
     text-align: left;

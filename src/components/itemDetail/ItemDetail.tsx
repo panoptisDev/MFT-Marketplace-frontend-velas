@@ -518,7 +518,7 @@ const ItemDetail = (props: any) => {
                   className="send-message item-detail m-b-5"
                   onClick={() => setShowBuyModal(true)}
                 />
-                {/* {loginStatus &&
+                {loginStatus &&
                   item.pair &&
                   item.pair.owner.toLowerCase() !== account.toLowerCase() && (
                     <Button
@@ -528,7 +528,7 @@ const ItemDetail = (props: any) => {
                       className="send-message item-detail"
                       onClick={() => setShowBuyModal(true)}
                     />
-                  )} */}
+                  )}
                 {loginStatus &&
                   !item.pair &&
                   oldData.auction &&
@@ -547,14 +547,12 @@ const ItemDetail = (props: any) => {
                   !oldData.auction &&
                   oldData.owner.toLowerCase() === account.toLowerCase() && (
                     <Button
-                      className="send-message item-detail"
+                    label='Sell
+                      className="send-message item-detail m-b-5"
                       onClick={() => setShowListingModal(true)}
-                    >
-                      Sell
-                    </Button>
+                    />
                   )} */}
-
-                <Button
+                {/* <Button
                   className="send-message item-detail m-b-5"
                   onClick={() => setShowListingModal(true)}
                   label="Sell"
@@ -563,9 +561,9 @@ const ItemDetail = (props: any) => {
                   className="send-message item-detail m-b-5"
                   label="Cancel Selling"
                   onClick={() => setShowCancelListingModal(true)}
-                />
-                {/* {loginStatus &&
-                  // item.pair &&
+                /> */}
+                {loginStatus &&
+                  item.pair &&
                   !oldData.auction &&
                   item.pair.owner.toLowerCase() === account.toLowerCase() && (
                     <Button
@@ -573,7 +571,7 @@ const ItemDetail = (props: any) => {
                       label="Cancel Selling"
                       onClick={() => setShowCancelListingModal(true)}
                     />
-                  )} */}
+                  )}
               </div>
             </div>
             <div className="hline"></div>
@@ -695,7 +693,7 @@ const ItemDetail = (props: any) => {
           </div>
         </div>
         <div className="place-bid-nav-items">
-          <Tab.Container defaultActiveKey="bid-history">
+          <Tab.Container defaultActiveKey="item activity">
             <Nav className="place-bid-nav-item-container">
               {/* <Nav.Item>
                 <Nav.Link eventKey="bid-history" className="title-font">

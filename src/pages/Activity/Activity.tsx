@@ -8,7 +8,7 @@ import "./styles.css";
 const Activity = () => {
   return (
     <div className="activity">
-      <PageHeader pageHeader="Activity" />
+      {/* <PageHeader pageHeader="Activity" /> */}
       <div className="activity-container">
         <div className="activity-layer">
           <div className="activity-container-cards-1-2">

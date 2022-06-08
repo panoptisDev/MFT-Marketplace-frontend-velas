@@ -15,9 +15,9 @@ import { getIpfsHashFromFile } from "../../utils/ipfs";
 import toast from "react-hot-toast";
 import { useWeb3React } from "@web3-react/core";
 import PageHeader from "../../components/PageHeader/PageHeader";
+
 const AccountPage = (props: any) => {
   const { user } = props;
-
   const { connector, library, chainId, account, active } = useWeb3React();
   const [loginStatus, setLoginStatus] = useState(false);
   let newVariable: any = process.env.REACT_APP_NETWORK_ID;
@@ -54,7 +54,6 @@ const AccountPage = (props: any) => {
   const [isTopLoading, setIsTopLoading] = useState(false);
   const [sectionHeight, setSectionHeight] = useState("0vh");
   const [loadingHeight, setLoadingHeight] = useState(0);
-
   const [menuOpen, setMenuOpen] = useState(false);
   const isTabletOrMobile = useMediaQuery({
     query: "screen and (max-width: 450px) and (orientation:portrait)",
@@ -80,7 +79,6 @@ const AccountPage = (props: any) => {
     setIsLoading(false);
     setIsTopLoading(false);
   };
-
   // From API
   const [bannerFile, setBannerFile] = useState(null);
   const [avatarFile, setAvatarFile] = useState(null);
@@ -155,7 +153,7 @@ const AccountPage = (props: any) => {
       />
       <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} /> */}
       <div className="page accountPage">
-        <PageHeader pageHeader="Account Settings" />
+        {/* <PageHeader pageHeader="Account Settings" /> */}
         {/* <div
           className="loding"
           style={{
@@ -230,7 +228,7 @@ const AccountPage = (props: any) => {
               </div>
               {loginStatus ? (
                 <div className="setting-box">
-                  <div className="setting-container">
+                  <div className="setting-container accountContainer">
                     <div className="share-btn" onClick={showMoreActions}>
                       <Share />
                     </div>

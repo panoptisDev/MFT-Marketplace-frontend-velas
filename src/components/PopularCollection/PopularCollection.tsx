@@ -7,6 +7,7 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import Slider from "react-slick";
 import Likes from "../Likes/Likes";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 export const NextArrow = ({ onClick }: any) => {
   return (
@@ -23,8 +24,6 @@ export const PrevArrow = ({ onClick }: any) => {
     </div>
   );
 };
-
-import { useHistory } from "react-router-dom";
 
 const PopularCollection = () => {
   const settings = {

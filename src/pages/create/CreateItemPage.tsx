@@ -24,7 +24,7 @@ const CreateItemPage = (props: any) => {
 
   return (
     <>
-      <PageHeader pageHeader="Create Item" />
+      {/* <PageHeader pageHeader="Create Item" /> */}
       {/* <Topbar user={user} menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/> */}
       {/* <Menu menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}/> */}
       <div className="page createPage">
@@ -40,6 +40,9 @@ const CreateItemPage = (props: any) => {
         </div>
         <div className="sections" style={{ width: "100%" }}>
           <div className="container">
+            <h1 className="title" style={{ marginTop: "20px" }}>
+              Create an Item
+            </h1>
             <CreateItem />
           </div>
         </div>

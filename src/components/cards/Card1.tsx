@@ -1,4 +1,5 @@
 import "./card.scss";
+import author from "../../assets/images/author.jpg";
 
 const Card1 = (props: any) => {
   const { collection } = props;
@@ -9,14 +10,14 @@ const Card1 = (props: any) => {
   return (
     <div className="card" onClick={gotToPage}>
       <div className="imgContainer">
-        <img src={collection.logo_uri} alt="" className="nft" />
+        <img src={collection?.logo_uri || author} alt="" className="nft" />
       </div>
       <h4>
         {" "}
-        <img src={collection.logo_uri} alt="" />
-        {collection.name}
+        <img src={collection?.logo_uri || author} alt="" />
+        {collection?.name || "NFT"}
       </h4>
-      <h3>{collection.description}</h3>
+      <h3>{collection?.description || "this is to show card"}</h3>
       <div className="stateVals">
         <p>
           1030 <span>tokens</span>

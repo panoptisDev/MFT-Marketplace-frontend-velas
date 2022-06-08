@@ -23,7 +23,7 @@ import PageHeader from "../../../components/PageHeader/PageHeader";
 const CollectionDetailPage = (props: any) => {
   const { user } = props;
   const [collection, setCollection] = useState<any>(null);
-  const [items, setItems] = useState<any[]>([])
+  const [items, setItems] = useState<any[]>([]);
   const location = useLocation();
   useEffect(() => {
     if (!collection) {
@@ -109,7 +109,7 @@ const CollectionDetailPage = (props: any) => {
 
   return (
     <>
-      <PageHeader pageHeader="Collection Detail" />
+      {/* <PageHeader pageHeader="Collection Detail" /> */}
 
       {/* <Topbar
         user={user}

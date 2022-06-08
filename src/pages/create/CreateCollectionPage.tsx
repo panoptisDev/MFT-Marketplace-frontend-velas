@@ -49,7 +49,7 @@ const CreateCollectionPage = (props: any) => {
     <>
       {/* <Topbar user={user} menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/> */}
       {/* <Menu menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}/> */}
-      <PageHeader pageHeader="Create Collection" />
+      {/* <PageHeader pageHeader="Create Collection" /> */}
       <div className="page createPage">
         <div
           className="loding"

@@ -57,12 +57,12 @@ const AuctionCard = ({ TodayPick, item }: any) => {
         <div className={TodayPick ? "meta-info today-pick-meta" : "meta-info"}>
           <div className="meta-info-left">
             <div className="meta-info-left-img">
-              <img src={item.creatorUser.logo_url || ""}></img>
+              <img src={item?.creatorUser?.logo_url || ""}></img>
             </div>
             <div>
               <span>Creator</span>
               <h6>
-                <Link to="/">{item.creatorUser.name || "Rachelsons"}</Link>
+                <Link to="/">{item?.creatorUser?.name || "Rachelsons"}</Link>
               </h6>
             </div>
           </div>

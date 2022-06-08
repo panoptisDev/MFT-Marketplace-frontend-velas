@@ -97,7 +97,7 @@ const MyCollectionsPage = (props: any) => {
 
   return (
     <>
-      <PageHeader pageHeader="My Collections" />
+      {/* <PageHeader pageHeader="My Collections" /> */}
       {/* <Topbar user={user} menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/> */}
       {/* <Menu menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}/> */}
       <div className="page myCollectionPage">

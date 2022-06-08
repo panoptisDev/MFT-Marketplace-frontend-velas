@@ -6,7 +6,7 @@ import "./styles.css";
 const Contact = () => {
   return (
     <div className="contact-page">
-      <PageHeader pageHeader="Contact" />
+      {/* <PageHeader pageHeader="Contact" /> */}
       <Form />
     </div>
   );

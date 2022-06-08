@@ -32,6 +32,7 @@
 // 		}
 // 	}
 // }
+
 @import "../../../global.scss";
 .collectionPage {
   .sections {
@@ -41,7 +42,6 @@
       padding-left: 0;
       padding-right: 0;
       width: 100%;
-      margin-top: 5rem;
       .add-btn {
         display: inline-flex;
         flex-direction: row;
@@ -58,35 +58,28 @@
         height: 50px;
         margin-left: 10px;
         cursor: pointer;
-
         &:hover {
           background-color: rgb(66, 160, 255);
           border: 1px solid rgb(66, 160, 255);
         }
       }
-
       .m-l-5 {
         margin-left: 5px !important;
       }
-
       .m-r-5 {
         margin-right: 5px !important;
       }
-
       .m-l-10 {
         margin-left: 10px !important;
       }
-
       .m-0 {
         margin: 0px !important;
       }
-
       .edit-icon {
         color: white;
         font-size: 2rem;
         z-index: 5;
       }
-
       .banner-box {
         cursor: pointer;
         width: 100%;
@@ -108,13 +101,11 @@
             fill: #aaa;
           }
         }
-
         &:hover {
           .hover-back {
             display: flex;
           }
         }
-
         .banner-img {
           width: 100%;
           margin: 0 auto;
@@ -128,25 +119,21 @@
             opacity: 0.5;
           }
         }
-
         .empty-banner {
           height: 100%;
           width: 100%;
           position: absolute;
           background-color: #000000b3;
-
           &:hover {
             background-color: #151b22;
           }
         }
       }
-
       .mobile-func-box {
         display: none;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
         @include mobile_potrait {
           display: flex;
           width: 90%;
@@ -197,7 +184,6 @@
               font-size: 12px;
             }
           }
-
           .setting-btn {
             cursor: pointer;
             width: 50px;
@@ -231,7 +217,6 @@
             padding: 10px 20px;
           }
         }
-
         .watch-box {
           flex: 1;
           display: flex;
@@ -250,7 +235,6 @@
           .icon-btn {
             width: 50px;
           }
-
           .watch-btn {
             cursor: pointer;
             display: inline-flex;
@@ -283,19 +267,16 @@
           }
         }
       }
-
       .sub-box {
         width: 100%;
         display: flex;
         flex-direction: row;
-
         .user-info-box {
           flex: 1;
           height: 100%;
           display: flex;
           flex-direction: column;
           align-items: center;
-
           .avatar-box {
             z-index: 10;
             border: 2px solid rgb(38, 43, 47);
@@ -311,28 +292,23 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
             .edit-icon {
               position: absolute;
               display: none;
             }
-
             &:hover .edit-icon {
               display: block !important;
             }
-
             .avatar-img {
               width: 100%;
               height: 100%;
               border-radius: 50%;
               opacity: 1;
             }
-
             &:hover .avatar-img {
               opacity: 0.5;
             }
           }
-
           .user-name {
             color: white;
             font-size: 30px;
@@ -347,7 +323,6 @@
               font-size: 20px;
             }
           }
-
           .joined-label {
             font-weight: 400;
             font-size: 16px;
@@ -356,13 +331,11 @@
             margin-bottom: 0;
           }
         }
-
         .empty-box {
           @media (max-width: 576px) {
             display: none;
           }
         }
-
         .setting-box {
           flex: 1;
           display: flex;
@@ -371,11 +344,9 @@
           margin-top: 20px;
           color: rgb(229, 232, 235);
           width: fit-content;
-
           @media (max-width: 576px) {
-            display: none;
+            // display: none;
           }
-
           .share-btn {
             cursor: pointer;
             width: 50px;
@@ -394,7 +365,6 @@
             border: 1px solid rgb(112, 122, 131);
             color: rgb(229, 232, 235);
           }
-
           .setting-btn {
             cursor: pointer;
             width: 50px;
@@ -414,7 +384,6 @@
             color: rgb(229, 232, 235);
           }
         }
-
         .watch-box {
           flex: 1;
           display: flex;
@@ -423,15 +392,12 @@
           margin-top: 20px;
           color: rgb(229, 232, 235);
           width: fit-content;
-
           @media (max-width: 576px) {
             display: none;
           }
-
           .icon-btn {
             width: 50px;
           }
-
           .watch-btn {
             cursor: pointer;
             display: inline-flex;
@@ -451,7 +417,6 @@
           }
         }
       }
-
       .detail-container {
         width: 100%;
         display: flex;
@@ -459,11 +424,9 @@
         justify-content: center;
         align-items: center;
         color: white;
-
         .m-t-20 {
           margin-top: 20px;
         }
-
         .detail-box {
           width: fit-content;
           -webkit-box-align: center;
@@ -532,38 +495,31 @@
               }
             }
           }
-
           .item-1 {
             // border-radius: 10px 0 0 10px;
             // border-right: 0;
           }
-
           .item-2 {
             // border-right: 0;
           }
-
           .item-4 {
             // border-radius: 0 10px 10px 0;
             // border-left: 0;
           }
-
           @media (max-width: 576px) {
             .item-1 {
               border-radius: 10px 0 0 0;
               border-right: 0;
               border-bottom: 0;
             }
-
             .item-2 {
               border-radius: 0 10px 0 0;
               border-bottom: 0;
             }
-
             .item-3 {
               border-radius: 0 0 0 10px;
               border-right: 0;
             }
-
             .item-4 {
               border-radius: 0 0 10px 0;
               border-left: 1px solid rgb(21, 27, 34) !important;

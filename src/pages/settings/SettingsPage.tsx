@@ -113,7 +113,7 @@ const SettingsPage = (props: any) => {
     <>
       {/* <Topbar {...props} user={user} menuOpen={menuOpen} setMenuOpen={setMenuOpen} setIsLoading={setIsTopLoading} setInfoUpdated={setInfoUpdated} isInfoUpdated={isInfoUpdated} /> */}
       {/* <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} /> */}
-      <PageHeader pageHeader="Settings" />
+      {/* <PageHeader pageHeader="Settings" /> */}
       <div className="page settingsPage">
         {/* <div
           className="loding"

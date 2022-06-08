@@ -91,7 +91,7 @@ const VelasPage = (props: any) => {
     <>
       {/* <Topbar user={user} menuOpen={menuOpen} setMenuOpen={setMenuOpen} setIsLoading={setIsTopLoading} /> */}
       {/* <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} /> */}
-      <PageHeader pageHeader="VELAS" />
+      {/* <PageHeader pageHeader="VELAS" /> */}
       <div className="page velasPage">
         {/* <div className="loding" style={{ width: "100%", height: loadingHeight + "%", display: loadingHeight === 0 ? 'none' : 'flex' }}>
 					<Loading />

@@ -73,7 +73,7 @@ const VelasClubPage = (props: any) => {
   }, [item]);
   return (
     <>
-      <PageHeader pageHeader="Velas Club" />
+      {/* <PageHeader pageHeader="Velas Club" /> */}
       {/* <Topbar user={user} menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/> */}
       {/* <Menu menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}/> */}
       <div className="page velasPage">
