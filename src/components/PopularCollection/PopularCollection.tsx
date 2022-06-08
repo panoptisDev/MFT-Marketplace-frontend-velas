@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { AiOutlineCheck } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Title from "../Title/Title";
@@ -24,7 +25,7 @@ export const PrevArrow = ({ onClick }: any) => {
   );
 };
 
-import { useHistory } from "react-router-dom";
+
 
 const PopularCollection = () => {
   const settings = {

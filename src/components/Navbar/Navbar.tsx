@@ -227,7 +227,6 @@ const Navbar = (props: any) => {
           )}
         </div>
         <div className="nav-btns">
-          <Search />
           {loginStatus && (
             <CustomDropdown
               navDropdown
