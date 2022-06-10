@@ -1,6 +1,5 @@
 @import "../../global.scss";
 .imageDetail {
-  padding: 16px;
   width: 100%;
   max-width: 1320px;
   display: flex;
@@ -147,10 +146,9 @@
 
   .velas-club-container {
     width: 49%;
-    height: 55vh;
-    padding-right: 20px;
+    height: auto;
     box-sizing: border-box;
-    overflow-y: scroll;
+    // overflow-y: scroll;
     @media screen and (max-width: 1024px) {
       margin-top: 20px !important;
       width: 100%;
@@ -180,13 +178,20 @@
       // margin: 1rem;
     }
     .auction-bids-btns {
-      flex-direction: column;
+      // flex-direction: column;
+      display: grid;
+      height: auto;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      row-gap: 15px;
+      column-gap: 15px;
+      grid-template-columns: 25% 25% 25% 25%;
     }
     .property-div {
       height: 100%;
 
       @media (min-width: 576px) {
-        overflow-y: auto;
+        // overflow-y: auto;
 
         &::-webkit-scrollbar {
           width: 7px;
@@ -268,6 +273,7 @@
       }
       .br-div {
         padding-top: 2rem;
+
         // padding-bottom: 2rem;
       }
       .aic {
@@ -315,7 +321,11 @@
       .billy-desc {
         color: #868e96;
         text-align: left;
+        margin-left: 10px !important;
         font-size: 15px;
+      }
+      .billy-desc svg {
+        margin-right: 5px;
       }
     }
     .m-l-1em {
@@ -467,5 +477,23 @@
   @media screen and (max-width: 1024px) {
     width: 100%;
     max-width: 100%;
+  }
+}
+.image-details__accordion {
+  .accordion-button:not(.collapsed) {
+  }
+
+  .item-activity__accordion {
+    .accordion-body {
+      padding: 0 !important;
+    }
+
+    .accordion-collapse.collapse.show {
+    }
+    .accordion-item:first-of-type .accordion-button {
+      border-radius: 0 !important;
+      border-top-left-radius: 8px !important;
+      border-top-right-radius: 8px !important;
+    }
   }
 }

@@ -148,14 +148,14 @@ const ProfileTagList = (props: any) => {
           <span className="tab-title">Favorited</span>
           <span>2</span>
         </div>
-        <div
+        {/* <div
           className={"tab-item" + (searchedUrl === "hidden" ? " selected" : "")}
           onClick={() => goToPage("hidden")}
         >
           <VisibilityOff className="tab-icon" />
           <span className="tab-title">Hidden</span>
           <span>2</span>
-        </div>
+        </div> */}
         <div
           className={
             "tab-item" + (searchedUrl === "activity" ? " selected" : "")
@@ -165,7 +165,7 @@ const ProfileTagList = (props: any) => {
           <History className="tab-icon" />
           <span className="tab-title">Activity</span>
         </div>
-        <div
+        {/* <div
           className={
             "tab-item" +
             (searchedUrl === "bids" || searchedUrl === "bids_made"
@@ -177,7 +177,7 @@ const ProfileTagList = (props: any) => {
           <FormatListBulleted className="tab-icon" />
           <span className="tab-title">Offers</span>
           <KeyboardArrowDown />
-        </div>
+        </div> */}
         <Popover
           classes={{
             paper: "popover",

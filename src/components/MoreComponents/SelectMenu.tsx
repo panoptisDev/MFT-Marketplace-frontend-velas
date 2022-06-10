@@ -22,7 +22,11 @@ const SelectMenu = ({ initialState, data }: any) => {
         </Dropdown.Toggle>
         <Dropdown.Menu variant="dark">
           {data.map((item: any, index: any) => (
-            <Dropdown.Item onClick={() => setfirst(item)} href="#/ac tion-1">
+            <Dropdown.Item
+              key={index}
+              onClick={() => setfirst(item)}
+              href="#/ac tion-1"
+            >
               {item}
             </Dropdown.Item>
           ))}

@@ -1,6 +1,6 @@
 .explore-page-container {
   background-color: #14141f;
-  padding: 20px 0;
+  padding: 30px 0;
 }
 .select-menu {
   display: flex;
@@ -45,7 +45,7 @@
 }
 @media screen and (max-width: 676px) {
   .explore-page-container {
-    padding: 150px 0;
+    /* padding: 150px 0; */
   }
 }
 @media screen and (max-width: 500px) {
@@ -58,6 +58,6 @@
 }
 @media screen and (max-width: 450px) {
   .explore-page-container {
-    padding: 170px 0;
+    /* padding: 170px 0; */
   }
 }

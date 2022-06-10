@@ -42,8 +42,8 @@ export default function Dropdown(props: any) {
     }
   };
   const handleClose = (param: any) => {
-    setCategory(param);
-    onChangeHandle(param);
+    setCategory(param?.title ? param.title : param);
+    onChangeHandle(param?.title ? param.title : param);
   };
   const removeCategory = () => {
     setCategory(null);
@@ -169,7 +169,8 @@ export default function Dropdown(props: any) {
                         className="dropdownItem"
                         style={{ color: "black" }}
                       >
-                        {prop}
+                        {prop?.icon ? prop.icon : prop}
+                        {prop?.title ? prop.title : prop}
                       </MenuItem>
                     );
                   })}

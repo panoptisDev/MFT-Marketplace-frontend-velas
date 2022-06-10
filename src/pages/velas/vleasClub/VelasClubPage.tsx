@@ -80,10 +80,7 @@ const VelasClubPage = (props: any) => {
         {/* <div className="loding" style = {{width: "100%", height: loadingHeight + "%", display: loadingHeight === 0? 'none':'flex'}}>
                     <Loading/>
                 </div> */}
-        <div
-          className="sections"
-          style={{ width: "100%", height: sectionHeight }}
-        >
+        <div className="sections" style={{ width: "100%", height: "auto" }}>
           <div className="container">
             {item && (
               <ItemDetail

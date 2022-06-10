@@ -106,6 +106,7 @@
 }
 .item-detail {
   transition: all 0.5s;
+  width: 30%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -343,6 +344,36 @@
   background-color: black;
   color: gray;
   border-color: black;
+}
+.item-detail-filter {
+  width: 100% !important;
+  margin: 0 auto;
+  padding: 10px 0;
+  background-color: #343444;
+}
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+.checkbox input {
+  width: 20px;
+  height: 20px;
+}
+
+.filter-displayed-data {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+.filter-displayed-data p {
+  margin: 5px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: #5141fc;
+}
+.item-details-clear-filers {
+  margin-top: 5px;
+  margin-left: 5px;
 }
 @media screen and (max-width: 1200px) {
   .connect-wallet {

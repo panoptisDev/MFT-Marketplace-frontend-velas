@@ -1,30 +1,34 @@
 .copyBox {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-    .label-token {
-        color: #495057;
-        font-size: 12px;
-        margin-left: 5px;
-        margin-right: 5px;
-        background: transparent;
-        border: none;
-        width: 150px;
-        &:focus{
-            outline: none;
-        }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  background-color: white;
+  padding: 8px;
+  border-radius: 20px;
+  .label-token {
+    color: #495057;
+    font-size: 12px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background: transparent;
+    border: none;
+    width: 150px;
+    &:focus {
+      outline: none;
     }
+  }
 
-    .img-copy {
-        width: 18px;
-        height: 18px;
-        color: #495057;
-    }
+  .img-copy {
+    width: 18px;
+    height: 18px;
+    color: #495057;
+  }
 
-    .img-mark-16 {
-        width: 16px;
-        height: 16px;
-    }
+  .img-mark-16 {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+  }
 }

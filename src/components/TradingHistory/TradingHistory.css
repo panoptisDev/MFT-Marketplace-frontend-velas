@@ -1,0 +1,155 @@
+.what-so-ever {
+  margin-bottom: 30px;
+  /* overflow: auto !important; */
+  background-color: #343444;
+  width: 100%;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  overflow-x: scroll;
+  margin-top: 20px !important;
+}
+.trading-history {
+  border-radius: 4px;
+  padding-right: 2px;
+  height: 50vh;
+  width: 100%;
+  overflow: scroll !important;
+  margin: auto;
+}
+.history-titles {
+}
+.each-traded-item {
+}
+.trading-values {
+  /* width: 1400px !important; */
+}
+.trading-values div {
+}
+.trading-title {
+  align-items: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  font-size: 20px;
+  padding: 10px;
+}
+.history-titles {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  text-align: left;
+  border-bottom: 1px solid #cecece9f;
+  border-top: 1px solid #cecece9f;
+}
+.each-traded-item {
+  padding: 20px 15px;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  box-sizing: border-box;
+  border-bottom: 1px solid #cecece9f;
+}
+
+.span__item {
+  display: flex;
+  align-items: center;
+  width: 250px;
+  text-align: left;
+}
+.span__unit-price,
+.span__quantity {
+  width: 200px;
+  text-align: left;
+}
+.span__from {
+  display: block !important;
+  word-wrap: break-word !important ;
+  word-break: break-all !important;
+  width: 200px;
+  text-align: left;
+}
+.span__to {
+  width: 200px;
+  /* width: 11.56vw; */
+  text-align: left;
+}
+.span__date {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  text-align: left;
+}
+.each-traded-item img {
+  height: 40px;
+  width: 40px;
+  margin-right: 16px;
+  border-radius: 4px;
+}
+.trading-history span {
+  font-size: 20px;
+}
+.each-row-in-table {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #cecece9f;
+  height: 50px;
+  padding: 0 2vw;
+}
+@media only screen and (max-width: 1440px) {
+  .each-traded-item {
+    height: 72px;
+  }
+
+  .trading-history span {
+    font-size: 16px;
+  }
+  .trading-title {
+    height: 56px;
+    font-size: 16px;
+  }
+}
+@media only screen and (max-width: 1280px) {
+  .trading-title {
+    margin-bottom: 2vh;
+    align-items: center;
+    display: flex;
+  }
+  .what-so-ever {
+    max-width: 950px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 990px) {
+  .what-so-ever {
+    max-width: 750px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .trading-history {
+    width: 820px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .what-so-ever {
+    max-width: 550px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .what-so-ever {
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 420px) {
+  .what-so-ever {
+    max-width: 300px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}

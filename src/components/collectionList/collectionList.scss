@@ -1,18 +1,18 @@
 @import "../../global.scss";
-.collectionList{
+.collectionList {
+  display: grid;
+  justify-content: center;
+  row-gap: 25px;
+  grid-template-columns: 25% 25% 25% 25%;
+  @include mobile_potrait {
+  }
+  @include mobile_landscape {
+  }
+  @media screen and (max-width: 1440px) {
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    position: relative;
-    background-size: cover;
-    background-color: rgba(0, 0, 0, 0);
-    overflow: hidden;
-    max-width: 1200px;
-    @include mobile_potrait{
-    }
-    @include mobile_landscape{
-    }
+    grid-template-columns: auto auto;
+  }
+  @media screen and (max-width: 768px) {
+    grid-template-columns: auto;
+  }
 }

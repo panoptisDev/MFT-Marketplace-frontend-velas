@@ -10,6 +10,15 @@ import CollectionList from "../../components/collectionList/CollectionList";
 import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
 import PageHeader from "../../components/PageHeader/PageHeader";
+import SelectMenu from "../../components/MoreComponents/SelectMenu";
+
+import {
+  allArtWork,
+  allCategories,
+  allItems,
+  buyNow,
+  sortBy,
+} from "../../utils/options";
 
 const CollectionsPage = (props: any) => {
   const { user } = props;
@@ -73,27 +82,43 @@ const CollectionsPage = (props: any) => {
           <div className="container">
             {/* <Filter /> */}
             <div className="hline"></div>
-            <div className="partTitle">
-              <h1 className="top">All Collections</h1>
-              <ul className="stats">
-                <li>
-                  <div className="name">Collections</div>
-                  <div className="value">{collections.length}</div>
-                </li>
-                <li>
-                  <div className="name">Tokens</div>
-                  <div className="value">1&nbsp;088&nbsp;993</div>
-                </li>
-                <li>
-                  <div className="name">Owners</div>
-                  <div className="value">184&nbsp;981</div>
-                </li>
-              </ul>
+            <h1 className="top">All Collections</h1>
+            <div className="header-collection-page-title-filter">
+              <div className="select-menu collection-page-title-filter">
+                <div>
+                  <SelectMenu
+                    data={allCategories}
+                    initialState="All categories"
+                  />
+                  <SelectMenu data={buyNow} initialState="Buy now" />
+                  <SelectMenu data={allItems} initialState="All Items" />
+
+                  <SelectMenu data={allArtWork} initialState="All Artwork" />
+                  <SelectMenu data={sortBy} initialState="Sort by" />
+                </div>
+              </div>
+              <div className="partTitle">
+                <ul className="stats">
+                  <li>
+                    <div className="name">Collections</div>
+                    <div className="value">{collections.length}</div>
+                  </li>
+                  <li>
+                    <div className="name">Tokens</div>
+                    <div className="value">1&nbsp;088&nbsp;993</div>
+                  </li>
+                  <li>
+                    <div className="name">Owners</div>
+                    <div className="value">184&nbsp;981</div>
+                  </li>
+                </ul>
+              </div>
             </div>
+
             <CollectionList {...props} collections={collections} />
           </div>
         </div>
-        <img src="assets/home_bg.jpg" alt="" className="bg1" />
+        {/* <img src="assets/home_bg.jpg" alt="" className="bg1" /> */}
       </div>
     </>
   );

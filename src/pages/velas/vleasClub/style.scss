@@ -1,8 +1,11 @@
 .velasPage {
+  height: auto;
   .sections {
     .container {
       display: flex;
       width: 1440px;
+      height: auto;
+      max-width: 100%;
       align-items: center;
       justify-content: flex-start;
       flex-direction: column;

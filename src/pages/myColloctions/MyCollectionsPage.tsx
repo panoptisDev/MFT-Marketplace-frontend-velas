@@ -161,7 +161,7 @@ const MyCollectionsPage = (props: any) => {
             </div>
           </div>
         </div>
-        <img src="assets/img/bg8.jpg" alt="" className="bg2" />
+        {/* <img src="assets/img/bg8.jpg" alt="" className="bg2" /> */}
       </div>
     </>
   );

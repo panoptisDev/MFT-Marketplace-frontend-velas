@@ -1,7 +1,7 @@
 import { Done, FileCopy } from "@material-ui/icons";
 import { useRef, useState } from "react";
 import "./copyBoxStyle.scss";
-
+import monnriver from "../../assets/images/moonriver.png";
 type PropType = {
   value?: string;
 };
@@ -22,11 +22,7 @@ export default function CopyBox({ value }: PropType) {
 
   return (
     <div className="copyBox">
-      <img
-        src="/assets/img/parts/moonriver.svg"
-        alt="..."
-        className="img-mark-16"
-      />
+      <img src={monnriver} alt="..." className="img-mark-16" />
       {value && (
         <input
           ref={tokenInputRef}

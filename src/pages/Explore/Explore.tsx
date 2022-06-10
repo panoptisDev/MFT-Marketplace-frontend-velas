@@ -11,10 +11,12 @@ import {
   allArtWork,
   sortBy,
 } from "../../utils/options";
+
 import AuctionCard from "../../components/AuctionCard/AuctionCard";
 
 const Explore = () => {
   const [items, setItems] = useState([]);
+
   useEffect(() => {
     axios
       .get(`/item`)
@@ -26,6 +28,7 @@ const Explore = () => {
         setItems([]);
       });
   }, [items]);
+
   return (
     <div className="explore-page">
       {/* <PageHeader /> */}

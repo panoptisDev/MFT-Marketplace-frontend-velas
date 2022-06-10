@@ -5,12 +5,19 @@
   background-color: #14141f;
   .tab-header {
     width: 100%;
-    overflow-x: auto;
+    overflow-x: scroll;
+    margin: 0 auto;
     display: flex;
-    flex-direction: row;
     align-items: center;
+    box-sizing: border-box;
     height: fit-content;
+    padding-bottom: 10px;
     justify-content: center;
+    background-color: #343444;
+    top: -10px;
+    position: relative;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 
     &::-webkit-scrollbar {
       width: 1em;
@@ -33,7 +40,7 @@
       height: 100%;
       width: 180px;
       padding: 20px;
-      color: #8a939b;
+      color: white;
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -49,8 +56,8 @@
         font-size: 12px;
       }
       &.selected {
-        color: white;
-        border-bottom: 4px solid #5141fc;
+        color: #5141fc;
+        font-weight: 600;
       }
 
       &.tab-icon {

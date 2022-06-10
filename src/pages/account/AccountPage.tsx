@@ -3,7 +3,10 @@ import Loading from "../../components/loading/Loading";
 // import Topbar from 'components/topbar/Topbar';
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-
+import { Col, Container, Nav, Row, Tab, Tabs } from "react-bootstrap";
+import data from "../../utils/data";
+import author from "../../assets/images/author-bg.jpg";
+import author1 from "../../assets/images/author.52ebdcb6.jpg";
 import "./style.scss";
 import { Edit, Facebook, Settings, Share } from "@material-ui/icons";
 import { Popover } from "@material-ui/core";
@@ -15,6 +18,7 @@ import { getIpfsHashFromFile } from "../../utils/ipfs";
 import toast from "react-hot-toast";
 import { useWeb3React } from "@web3-react/core";
 import PageHeader from "../../components/PageHeader/PageHeader";
+import EmptyCard from "../../components/EmptyCard/EmptyCard";
 
 const AccountPage = (props: any) => {
   const { user } = props;
@@ -180,16 +184,13 @@ const AccountPage = (props: any) => {
               />
               {bannerFile ? (
                 <img
-                  src={URL.createObjectURL(bannerFile) || "/assets/img/bg7.jpg"}
+                  src={URL.createObjectURL(bannerFile) || author}
                   className="banner-img"
                   alt=""
                 />
               ) : (
                 <img
-                  src={
-                    (userProfile && userProfile.banner_url) ||
-                    "/assets/img/bg7.jpg"
-                  }
+                  src={(userProfile && userProfile.banner_url) || author}
                   className="banner-img"
                   alt=""
                 />
@@ -211,20 +212,24 @@ const AccountPage = (props: any) => {
                     onChange={onChangeAvatarFile}
                     alt=""
                   />
+
                   <Edit className="edit-icon" />
                   <img
                     src={
                       avatarFile
                         ? URL.createObjectURL(avatarFile)
-                        : (userProfile && userProfile.logo_url) ||
-                          "/assets/img/faces/avatar.jpg"
+                        : (userProfile && userProfile.logo_url) || author1
                     }
                     className="avatar-img"
                     alt=""
                   />
                 </label>
-                <h2 className="user-name">{userProfile && userProfile.name}</h2>
-                <CopyBox value={userProfile && userProfile.address} />
+                <div className="profile-name-address">
+                  <h2 className="user-name">
+                    {userProfile && userProfile.name}
+                  </h2>
+                  <CopyBox value={userProfile && userProfile.address} />
+                </div>
               </div>
               {loginStatus ? (
                 <div className="setting-box">
@@ -294,15 +299,102 @@ const AccountPage = (props: any) => {
                 <div className="setting-box" />
               )}
             </div>
+            {userAddress && (
+              <ProfileTagList
+                {...props}
+                userAddress={userAddress}
+                tab={tab}
+                switchTab={switchTab}
+              />
+            )}
           </div>
-          {userAddress && (
+          {/* {userAddress && (
+            <div className="profile-nav-items">
+              <Tab.Container defaultActiveKey="all">
+                <Nav className="nav-item-container">
+                  <Nav.Item>
+                    <Nav.Link eventKey="collected" className="title-font">
+                      Collected
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="created" className="title-font">
+                      Created
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="favorited" className="title-font">
+                      Favorited
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="activity" className="title-font">
+                      Activity
+                    </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="listings" className="title-font">
+                      Listings
+                    </Nav.Link>
+                  </Nav.Item>
+                </Nav>
+                <Tab.Content className="items-container-tabs">
+                  <Tab.Pane eventKey="all">
+                    <div className="author-data-collections">
+                      {data.map((item: any) => (
+                        //   <EmptyCard item={item} />
+                        <EmptyCard item={item} />
+                      ))}
+                    </div>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="art">
+                    <div className="author-data-collections">
+                      {data
+                        .filter((item: any) => item.art)
+                        .map((item: any) => (
+                          <EmptyCard item={item} />
+                        ))}
+                    </div>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="music">
+                    <div className="author-data-collections">
+                      {data
+                        .filter((item: any) => item.music)
+                        .map((item: any) => (
+                          <EmptyCard item={item} />
+                        ))}
+                    </div>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="collectibles">
+                    <div className="author-data-collections">
+                      {data
+                        .filter((item: any) => item.collectibles)
+                        .map((item: any) => (
+                          <EmptyCard item={item} />
+                        ))}
+                    </div>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="sports">
+                    <div className="author-data-collections">
+                      {data
+                        .filter((item: any) => item.sports)
+                        .map((item: any) => (
+                          <EmptyCard item={item} />
+                        ))}
+                    </div>
+                  </Tab.Pane>
+                </Tab.Content>
+              </Tab.Container>
+            </div>
+          )} */}
+          {/* {userAddress && (
             <ProfileTagList
               {...props}
               userAddress={userAddress}
               tab={tab}
               switchTab={switchTab}
             />
-          )}
+          )} */}
         </div>
         {/* <img src="assets/img/bg8.jpg" alt="" className="bg1" /> */}
       </div>

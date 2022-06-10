@@ -1,0 +1,19 @@
+.accordion-header svg {
+  margin-right: 10px;
+}
+.accordion-item {
+  background-color: transparent;
+  color: white;
+  text-align: left;
+}
+.accordion-button {
+  background-color: #343444 !important;
+  color: white;
+  border-radius: 8px;
+}
+.accordion-button::after {
+}
+.accordion-button.collapsed::after {
+}
+.accordion-button {
+}

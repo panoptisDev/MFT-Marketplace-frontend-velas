@@ -13,6 +13,7 @@ const initialCheck = {
   likes: false,
   followings: false,
 };
+
 const Filter = () => {
   const [checked, setChecked] = useState(initialCheck);
 
@@ -23,6 +24,7 @@ const Filter = () => {
   const checkHandler = (e: any) => {
     setChecked({ ...checked, [e.target.name]: e.target.checked });
   };
+
   return (
     <div className="filter">
       <SearchFilterBar
@@ -73,7 +75,7 @@ const Filter = () => {
           />
           <label htmlFor="">Transfers</label>
         </div>
-        <div className="checkbox">
+        {/* <div className="checkbox">
           <input
             onChange={checkHandler}
             name="bids"
@@ -81,8 +83,8 @@ const Filter = () => {
             type="checkbox"
           />
           <label htmlFor="">Bids</label>
-        </div>
-        <div className="checkbox">
+        </div> */}
+        {/* <div className="checkbox">
           <input
             onChange={checkHandler}
             name="likes"
@@ -99,7 +101,7 @@ const Filter = () => {
             type="checkbox"
           />
           <label htmlFor="">Followings</label>
-        </div>
+        </div> */}
       </div>
     </div>
   );

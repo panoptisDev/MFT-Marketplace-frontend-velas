@@ -28,8 +28,8 @@ export default function CustomDropdown(props: any) {
   };
   const handleClose = (param: any) => {
     setAnchorEl(null);
-    if (props && props.onClick) {
-      props.onClick(param);
+    if ((param?.title ? param.title : param) && props.onClick) {
+      props.onClick(param?.title ? param.title : param);
     }
   };
   const handleCloseAway = (event: any) => {
@@ -142,7 +142,8 @@ export default function CustomDropdown(props: any) {
                         className="dropdownItem"
                         style={{ color: "black" }}
                       >
-                        {prop}
+                        {prop?.icon ? prop.icon : prop}
+                        {prop?.title ? prop.title : prop}
                       </MenuItem>
                     );
                   })}

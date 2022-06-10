@@ -10,6 +10,16 @@ import NFTItemList from "../../components/collectionList/NFTItemList";
 import toast from "react-hot-toast";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import Card1 from "../../components/cards/Card1";
+import EmptyCard from "../../components/EmptyCard/EmptyCard";
+import SelectMenu from "../../components/MoreComponents/SelectMenu";
+
+import {
+  allArtWork,
+  allCategories,
+  allItems,
+  buyNow,
+  sortBy,
+} from "../../utils/options";
 
 const MyNFTsPage = (props: any) => {
   const { user } = props;
@@ -73,32 +83,51 @@ const MyNFTsPage = (props: any) => {
         {/* <div className="loding" style = {{width: "100%", height: loadingHeight + "vh", display: loadingHeight === 0? 'none':'flex'}}>
                     <Loading/>
                 </div> */}
-        <div
-          className="sections"
-          style={{ width: "100%", height: sectionHeight }}
-        >
+        <div className="sections" style={{ width: "100%" }}>
           <div className="container">
-            <div className="partTitle">
-              <h1 className="top">My NFTs</h1>
-              <ul className="stats">
-                <li>
-                  <div className="name">TOKENS</div>
-                  <div className="value">190</div>
-                </li>
-                <li>
-                  <div className="name">FOR SALE</div>
-                  <div className="value">1&nbsp;088&nbsp;993</div>
-                </li>
-                <li>
-                  <div className="name">HIDDEN</div>
-                  <div className="value">184&nbsp;981</div>
-                </li>
-              </ul>
+            <h1 className="top">My NFTs</h1>
+            <div className="header-collection-page-title-filter">
+              <div className="select-menu collection-page-title-filter">
+                <div>
+                  <SelectMenu
+                    data={allCategories}
+                    initialState="All categories"
+                  />
+                  <SelectMenu data={buyNow} initialState="Buy now" />
+                  <SelectMenu data={allItems} initialState="All Items" />
+
+                  <SelectMenu data={allArtWork} initialState="All Artwork" />
+                  <SelectMenu data={sortBy} initialState="Sort by" />
+                </div>
+              </div>
+
+              <div className="partTitle">
+                <ul className="stats">
+                  <li>
+                    <div className="name">TOKENS</div>
+                    <div className="value">190</div>
+                  </li>
+                  <li>
+                    <div className="name">FOR SALE</div>
+                    <div className="value">1&nbsp;088&nbsp;993</div>
+                  </li>
+                  <li>
+                    <div className="name">HIDDEN</div>
+                    <div className="value">184&nbsp;981</div>
+                  </li>
+                </ul>
+              </div>
             </div>
             <NFTItemList {...props} items={items} />
           </div>
         </div>
-        <Card1 />
+        <div className="my-nft-cards-container">
+          {/* <Card1 /> */}
+          <EmptyCard myNftsPage={true} />
+          <EmptyCard myNftsPage={true} />
+          <EmptyCard myNftsPage={true} />
+          <EmptyCard myNftsPage={true} />
+        </div>
         {/* <img src="assets/home_bg_01.jpg" alt="" className="bg1" /> */}
       </div>
     </>

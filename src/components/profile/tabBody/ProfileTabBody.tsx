@@ -248,7 +248,6 @@ const ProfileTabBody = (props: any) => {
                   />
                 </div>
               ))}
-
               {selectedList.length === 0 && (
                 <p>
                   Select items to transfer. You can only sell bundles of items

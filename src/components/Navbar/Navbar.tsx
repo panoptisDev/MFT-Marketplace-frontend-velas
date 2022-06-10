@@ -13,7 +13,13 @@ import Button from "../MoreComponents/Button";
 import ConnectModal from "../connectModal/ConnectModal";
 import CustomDropdown from "../dropdown/CustomDropdown";
 import faces from "../../assets/faces/avatar.png";
-
+import no_profile from "../../assets/images/no-profile.png";
+import { BsCollection, BsFillPersonFill } from "react-icons/bs";
+import { MdOutlineFavoriteBorder } from "react-icons/md";
+import { GiFiles } from "react-icons/gi";
+import { AiOutlineSetting } from "react-icons/ai";
+import { BiLogOut } from "react-icons/bi";
+import { IoIdCard } from "react-icons/io5";
 let useClickOutside = (handler: any) => {
   let domNode: React.MutableRefObject<any> = useRef();
 
@@ -154,7 +160,10 @@ const Navbar = (props: any) => {
                   className: "navLink",
                   color: "transparent",
                 }}
-                dropdownList={["Collection", "Item"]}
+                dropdownList={[
+                  { title: "Collection", icon: <BsCollection /> },
+                  { title: "Item", icon: <IoIdCard /> },
+                ]}
                 // className="activeLink"
               />
 
@@ -168,7 +177,7 @@ const Navbar = (props: any) => {
               buttonText={
                 <>
                   <img
-                    src={logo !== "" ? logo : faces}
+                    src={logo !== "" ? logo : no_profile}
                     className="img"
                     alt="profile"
                   />
@@ -183,12 +192,12 @@ const Navbar = (props: any) => {
                 color: "transparent",
               }}
               dropdownList={[
-                "Profile",
-                "Favorites",
-                "My Collections",
-                "My Nfts",
-                "Settings",
-                "Log Out",
+                { title: "Profile", icon: <BsFillPersonFill /> },
+                { title: "Favorites", icon: <MdOutlineFavoriteBorder /> },
+                { title: "My Collections", icon: <BsCollection /> },
+                { title: "My Nfts", icon: <GiFiles /> },
+                { title: "Settings", icon: <AiOutlineSetting /> },
+                { title: "Log Out", icon: <BiLogOut /> },
               ]}
               // className="activeLink"
             />
@@ -294,7 +303,7 @@ const Navbar = (props: any) => {
               buttonText={
                 <>
                   <img
-                    src={logo !== "" ? logo : faces}
+                    src={logo !== "" ? logo : no_profile}
                     className="img"
                     alt="profile"
                   />
@@ -309,12 +318,12 @@ const Navbar = (props: any) => {
                 color: "transparent",
               }}
               dropdownList={[
-                "Profile",
-                "Favorites",
-                "My Collections",
-                "My Nfts",
-                "Settings",
-                "Log Out",
+                { title: "Profile", icon: <BsFillPersonFill /> },
+                { title: "Favorites", icon: <MdOutlineFavoriteBorder /> },
+                { title: "My Collections", icon: <BsCollection /> },
+                { title: "My Nfts", icon: <GiFiles /> },
+                { title: "Settings", icon: <AiOutlineSetting /> },
+                { title: "Log Out", icon: <BiLogOut /> },
               ]}
               // className="activeLink"
             />

@@ -5,6 +5,7 @@ import "./styles.css";
 import { Col, Container, Nav, Row, Tab, Tabs } from "react-bootstrap";
 import data from "../../utils/data";
 import AuctionCard from "../../components/AuctionCard/AuctionCard";
+import EmptyCard from "../../components/EmptyCard/EmptyCard";
 
 const Author = () => {
   return (
@@ -46,7 +47,7 @@ const Author = () => {
             <Tab.Pane eventKey="all">
               <div className="author-data-collections">
                 {data.map((item: any) => (
-                  <AuctionCard TodayPick={true} item={item} />
+                  <EmptyCard item={item} />
                 ))}
               </div>
             </Tab.Pane>
@@ -55,7 +56,7 @@ const Author = () => {
                 {data
                   .filter((item: any) => item.art)
                   .map((item: any) => (
-                    <AuctionCard TodayPick={true} item={item} />
+                    <EmptyCard item={item} />
                   ))}
               </div>
             </Tab.Pane>
@@ -64,7 +65,7 @@ const Author = () => {
                 {data
                   .filter((item: any) => item.music)
                   .map((item: any) => (
-                    <AuctionCard TodayPick={true} item={item} />
+                    <EmptyCard item={item} />
                   ))}
               </div>
             </Tab.Pane>
@@ -73,7 +74,7 @@ const Author = () => {
                 {data
                   .filter((item: any) => item.collectibles)
                   .map((item: any) => (
-                    <AuctionCard TodayPick={true} item={item} />
+                    <EmptyCard item={item} />
                   ))}
               </div>
             </Tab.Pane>
@@ -82,7 +83,7 @@ const Author = () => {
                 {data
                   .filter((item: any) => item.sports)
                   .map((item: any) => (
-                    <AuctionCard TodayPick={true} item={item} />
+                    <EmptyCard item={item} />
                   ))}
               </div>
             </Tab.Pane>

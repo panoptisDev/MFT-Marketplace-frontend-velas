@@ -8,6 +8,7 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import Slider from "react-slick";
 import Likes from "../Likes/Likes";
 import axios from "axios";
+import EmptyCard from "../EmptyCard/EmptyCard";
 
 export const NextArrow = ({ onClick }: any) => {
   return (
@@ -70,12 +71,9 @@ const PopularCollection = () => {
       },
     ],
   };
-  const history = useHistory();
 
-  const gotToPage = (collection: any) => {
-    history.push("/collections/" + collection.name);
-  };
   const [collections, setCollections] = useState<any[]>([]);
+
   useEffect(() => {
     axios
       .get(`/collections`)
@@ -88,43 +86,52 @@ const PopularCollection = () => {
       });
   });
 
+  let array: any = [];
+
+  for (let i = 0; i < 4; i++) {
+    array = array.concat(collections);
+  }
+
   return (
     <div className="popular-collection">
       <Title title="Popular Collection" />
       <div className="popular-collection-container">
         <Slider className="slider-container" {...settings}>
           {collections &&
-            collections.map((collection, index) => (
-              <div key={index} className="pop-collection-card">
-                <div
-                  onClick={() => gotToPage(collection)}
-                  className="top-pop-card"
-                >
-                  <img src={collection.featured_uri} alt="" />
-                </div>
-                <div className="bottom-pop-card">
-                  <div className="popular">
-                    <img
-                      style={{ width: 50, height: 50 }}
-                      src={collection.logo_uri}
-                      alt=""
-                    />
-                    <div>
-                      <AiOutlineCheck />
-                    </div>
-                  </div>
-                  <div className="likes-content">
-                    <div className="content">
-                      <Link to="/">{collection.name}</Link>
-                      <div>
-                        <span>Created by</span>
-                        <Link to="/">{collection.creatorUser.name}</Link>
-                      </div>
-                    </div>
-                    {/* <Likes popularCollection={true} /> */}
-                  </div>
-                </div>
-              </div>
+            array.map((collection: any, index: any) => (
+              <EmptyCard popularCollection={true} collection={collection} />
+              // <div>
+              //   <div key={index} className="pop-collection-card">
+              //     <div
+              //       // onClick={() => gotToPage(collection)}
+              //       className="top-pop-card"
+              //     >
+              //       <img src={collection.featured_uri} alt="" />
+              //     </div>
+              //     <div className="bottom-pop-card">
+              //       <div className="popular">
+              //         <img
+              //           style={{ width: 50, height: 50 }}
+              //           src={collection.logo_uri}
+              //           alt=""
+              //         />
+              //         <div>
+              //           <AiOutlineCheck />
+              //         </div>
+              //       </div>
+              //       <div className="likes-content">
+              //         <div className="content">
+              //           <Link to="/">{collection.name}</Link>
+              //           <div>
+              //             <span>Created by</span>
+              //             <Link to="/">{collection.creatorUser.name}</Link>
+              //           </div>
+              //         </div>
+              //         {/* <Likes popularCollection={true} /> */}
+              //       </div>
+              //     </div>
+              //   </div>
+              // </div>
             ))}
         </Slider>
       </div>

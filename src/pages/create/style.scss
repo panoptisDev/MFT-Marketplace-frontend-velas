@@ -1,7 +1,7 @@
 @import "../../global.scss";
 
 .createPage {
-  padding: 20px 0;
+  padding: 30px 0;
   background-color: #14141f;
   height: fit-content;
   .sections {
@@ -13,12 +13,10 @@
       flex-direction: column;
       // margin-top: 7rem;
       height: fit-content;
-      max-width: 1440px;
+      max-width: 100%;
       @include mobile_potrait {
-        margin-top: 5rem;
       }
       @include mobile_landscape {
-        margin-top: 5rem;
       }
       .title {
         text-align: center;
