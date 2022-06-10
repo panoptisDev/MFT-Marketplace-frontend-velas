@@ -144,11 +144,11 @@ const ItemDetail = (props: any) => {
   };
 
   function onPlaceBidModal() {
-    if (loginStatus) {
+    if (!loginStatus) {
       toast.error("Please connect your wallet.");
       return;
     }
-    if (item.auction.owner.toLowerCase() === account.toLowerCase()) {
+    if (item?.auction.owner.toLowerCase() === account.toLowerCase()) {
       toast.error("You are owner of this item.");
       return;
     }
@@ -335,7 +335,6 @@ const ItemDetail = (props: any) => {
   // const [isPropertyExpand, setIsPropertyExpand] = useState(false);
   // const [isStatsExpand, setIsStatsExpand] = useState(false);
   // const [isLevelExpand, setIsLevelExpand] = useState(false);
-  console.log(item?.auction);
   return (
     <div className="image-details__accordion">
       <div className="imageDetail">

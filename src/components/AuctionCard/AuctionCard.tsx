@@ -14,7 +14,7 @@ import Likes from "../Likes/Likes";
 import Button from "../MoreComponents/Button";
 import { useHistory } from "react-router-dom";
 
-const AuctionCard = ({ TodayPick, item }: any) => {
+const AuctionCard = ({ TodayPick, item, rate }: any) => {
   const history = useHistory();
   const gotoDetail = () => {
     history.push(`/item/${item.itemCollection}/${item.tokenId}`);
@@ -34,7 +34,6 @@ const AuctionCard = ({ TodayPick, item }: any) => {
           />
         ) : (
           <img
-            
             src={item.assetUrl ? item?.assetUrl : itemDetail}
             alt=""
           />
@@ -45,11 +44,12 @@ const AuctionCard = ({ TodayPick, item }: any) => {
             icon={<ShoppingBag />}
             className="place-bid"
             label="Place Bid"
+            onClick={gotoDetail}
           />
         ) : undefined}
         <Likes likes={item.likeCount} popularCollection={false} />
       </div>
-      {!TodayPick ? <Timer mintStartAt={item.timeStamp} /> : undefined}
+      {!TodayPick ? <Timer mintStartAt={item?.auction.endTime} /> : undefined}
       <div className="card-bottom">
         <div className="bottom-first">
           <Link to="/">{item?.name}</Link>
@@ -71,11 +71,12 @@ const AuctionCard = ({ TodayPick, item }: any) => {
               <h5>Not Listed</h5>
             </div> :
             <div className="meta-info-right">
-              <span>Current Price</span>
+              {
+                item?.auction ? <span>Highest Bid Price</span> : <span>Current Price</span>
+              }              
               <br />
               <h5>
-                {item?.pair ? item?.pair.price : item?.auction.price} VLX
-              </h5>
+                {item?.pair ? item?.pair.price : item?.auction.price} VLX</h5>
             </div>
           }
         </div>
