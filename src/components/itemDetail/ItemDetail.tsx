@@ -62,28 +62,13 @@ import AccordionComponent from "../Accordion/Accordion";
 import ItemActivityTable from "../Table/Table";
 import { BiDetail } from "react-icons/bi";
 import ItemDetailFilter from "../MoreComponents/ItemDetailFilter";
-
-// const OwnedCreatedBy = ({ name, title, styles }: any) => {
-//   return (
-//     <div className="owned-created-by">
-//       <img src={avt} alt="" />
-//       <div>
-//         <span>{title}</span>
-//         <Link to="/">{name}</Link>
-//       </div>
-//     </div>
-//   );
-// };
+import SellPage from "../../pages/sale/SellPage";
+import BuyNowPage from "../../pages/sale/BuyNowPage";
 
 const ItemDetail = (props: any) => {
-  const { item, fetchItem } = props;
-  console.log(item, "this is ITEM");
+  const { item, fetchItem, rate } = props;
   const { connector, library, chainId, account, active }: any = useWeb3React();
   const [loginStatus, setLoginStatus] = useState(false);
-  const [oldData, setData] = useState(data);
-
-  console.log(oldData, "This is the right time to prevail");
-
   let newVariable: any = process.env.REACT_APP_NETWORK_ID;
   useEffect(() => {
     const isLoggedin =
@@ -289,7 +274,7 @@ const ItemDetail = (props: any) => {
   }
 
   function submitBuy() {
-    if (loginStatus) {
+    if (!loginStatus) {
       toast.error("Please connect your wallet.");
       return;
     }
@@ -305,14 +290,14 @@ const ItemDetail = (props: any) => {
     const load_toast_id = toast.loading("Please wait...");
     buy(
       account,
-      item.pair.id,
-      item.pair.price,
+      item?.pair.id,
+      item?.pair.price,
       chainId,
       library.getSigner()
     ).then((tokenId) => {
       if (tokenId) {
         axios
-          .get(`/api/sync_block`)
+          .get(`/sync_block`)
           .then((res) => {
             setIsLoading(false);
             setShowBuyModal(false);
@@ -346,11 +331,11 @@ const ItemDetail = (props: any) => {
   // About
   // const [isAboutExpand, setIsAboutExpand] = useState(false);
   // const [isDetailExpand, setIsDetailExpand] = useState(false);
-  // const [isLocalExpand, setIsLocalExpand] = useState(false);
+  const [isLocalExpand, setIsLocalExpand] = useState(false);
   // const [isPropertyExpand, setIsPropertyExpand] = useState(false);
   // const [isStatsExpand, setIsStatsExpand] = useState(false);
   // const [isLevelExpand, setIsLevelExpand] = useState(false);
-
+  console.log(item?.auction);
   return (
     <div className="image-details__accordion">
       <div className="imageDetail">
@@ -369,40 +354,40 @@ const ItemDetail = (props: any) => {
               <img src={item.assetUrl} alt="icon" className="detail-img" />
             )}
           </div>
-          {/* <div className="col-div br-div">
-          <p className="billy-desc">{item.description}</p>
+          <div className="col-div br-div">
+            <p className="billy-desc">{item.description}</p>
 
-          {item.lockContent === "" ? (
-            <div />
-          ) : (
-            <div>
-              <div className="hline"></div>
-              <div
-                className="row-div cursor-pointer s-b mt-1"
-                onClick={() => {
-                  setIsLocalExpand(!isLocalExpand);
-                }}
-              >
-                <h2 className="billy-header">
-                  <LocalLibrary /> Lockable Content
-                </h2>
-                <h2 className="billy-header">
-                  {!isLocalExpand ? <ExpandMore /> : <ExpandLess />}
-                </h2>
-              </div>
-              <Expand
-                open={isLocalExpand}
-                duration={300}
-                styles={styles}
-                transitions={transitions}
-              >
-                <div className="col-div aic jcc">
-                  <p>{item.lockContent}</p>
+            {item.lockContent === "" ? (
+              <div />
+            ) : (
+              <div>
+                <div className="hline"></div>
+                <div
+                  className="row-div cursor-pointer s-b mt-1"
+                  onClick={() => {
+                    setIsLocalExpand(!isLocalExpand);
+                  }}
+                >
+                  <h2 className="billy-header">
+                    <LocalLibrary /> Lockable Content
+                  </h2>
+                  <h2 className="billy-header">
+                    {!isLocalExpand ? <ExpandMore /> : <ExpandLess />}
+                  </h2>
                 </div>
-              </Expand>
-            </div>
-          )}
-        </div> */}
+                <Expand
+                  open={isLocalExpand}
+                  duration={300}
+                  styles={styles}
+                  transitions={transitions}
+                >
+                  <div className="col-div aic jcc">
+                    <p>{item.lockContent}</p>
+                  </div>
+                </Expand>
+              </div>
+            )}
+          </div>
           <Accordion
             style={{ width: "100%" }}
             defaultActiveKey={["0"]}
@@ -417,13 +402,12 @@ const ItemDetail = (props: any) => {
                   <span>Created By</span>
                   <Link to="/">
                     {loginStatus &&
-                    item.ownerUser &&
-                    item.ownerUser.address.toLowerCase() ===
+                      item?.ownerUser.address.toLowerCase() ===
                       account.toLowerCase()
                       ? "You"
                       : String(item.ownerUser && item.ownerUser.address)
-                          .substring(2, 7)
-                          .toUpperCase()}
+                        .substring(2, 7)
+                        .toUpperCase()}
                   </Link>
                 </div>
               </Accordion.Body>
@@ -434,7 +418,7 @@ const ItemDetail = (props: any) => {
                 <BsInfoCircleFill /> About{" "}
               </Accordion.Header>
               <Accordion.Body>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                {item?.description}
               </Accordion.Body>
             </Accordion.Item>
             <br />
@@ -454,7 +438,6 @@ const ItemDetail = (props: any) => {
                       className="billy-desc"
                     >
                       {item.itemCollection}
-                      {/* TODO truncate string */}
                     </a>
                   </div>
                   <div className="row-div cursor-pointer s-b">
@@ -471,7 +454,7 @@ const ItemDetail = (props: any) => {
                   </div>
                   <div className="row-div cursor-pointer s-b">
                     <p>Creator Fees</p>
-                    <p>{item.royalty}</p>
+                    <p>{item.royalty}%</p>
                   </div>
                 </div>
               </Accordion.Body>
@@ -483,7 +466,7 @@ const ItemDetail = (props: any) => {
           <h1
             style={{ textAlign: "left", color: "white", marginBottom: "20px" }}
           >
-            “{item.name} ”
+            “{item.name}”
           </h1>
           {/* <div className="place-bid-top">
             <div className="owned-created-by">
@@ -520,12 +503,15 @@ const ItemDetail = (props: any) => {
                 </span>
                 <Link to="/">
                   {loginStatus &&
-                  item.ownerUser &&
-                  item.ownerUser.address.toLowerCase() === account.toLowerCase()
+                    item.ownerUser &&
+                    item.ownerUser.address.toLowerCase() === account.toLowerCase()
                     ? "You"
                     : String(item.ownerUser && item.ownerUser.address)
-                        .substring(2, 7)
-                        .toUpperCase()}
+                      .substring(2, 7)
+                      .toUpperCase()}
+                  {!loginStatus && String(item.ownerUser && item.ownerUser.address)
+                    .substring(2, 7)
+                    .toUpperCase()}
                 </Link>
                 <p className="billy-desc">
                   <Visibility /> 12 views
@@ -534,73 +520,82 @@ const ItemDetail = (props: any) => {
                   <Favorite /> 1 favorite
                 </p>
               </div>
-              {/* <Timer /> */}
-              {/* {loginStatus && oldData.auction && (
-              <div>
-                <div className="hline"></div>
-                <div style={{ color: "white" }} className="col-div br-div">
-                  Sales ends{" "}
-                  {oldData.auction &&
-                    new Date(
-                      oldData.auction.endTime
-                    ).toLocaleString("en-US", { timeZone: "America/New_York" })}
-                </div>
-              </div>
-            )} */}
               <div className="hline"></div>
-              <div className="countdown-bid-price">
-                {loginStatus && oldData.auction && (
+              {
+                item?.lastSold !== 0 &&
+                <div className="countdown-bid-price">
                   <div className="countdown-bid-price-div">
-                    <span>Highest Bid</span>
+                    <span>Last Sold Price</span>
                     <span>
                       <strong>
                         {" "}
-                        {oldData.auction && oldData.auction.price} VLX
+                        {item?.lastSold} VLX
                       </strong>
-                      {/* <small> = $12.246</small> */}
+                      <small> = {(item?.lastSold * rate).toFixed(3)} USD</small>
+                    </span>
+                  </div>
+                </div>
+              }
+              {
+                item?.lastBid !== 0 &&
+                <div className="countdown-bid-price">
+                  <div className="countdown-bid-price-div">
+                    <span>Highest Bid Price</span>
+                    <span>
+                      <strong>
+                        {" "}
+                        {item?.lastBid} VLX
+                      </strong>
+                      <small> = {(item?.lastBid * rate).toFixed(3)} USD</small>
+                    </span>
+                  </div>
+                </div>
+              }
+              <div className="countdown-bid-price">
+                {item?.auction && (
+                  <div className="countdown-bid-price-div">
+                    <span>Current Bid Price</span>
+                    <span>
+                      <strong>
+                        {" "}
+                        {item?.auction.price} VLX
+                      </strong>
+                      <small> = {(item?.auction.price * rate).toFixed(3)} USD</small>
                     </span>
                   </div>
                 )}
-                {loginStatus && oldData.auction && (
+                {item?.pair && (
+                  <div className="countdown-bid-price-div">
+                    <span>Current Price</span>
+                    <span>
+                      <strong>
+                        {" "}
+                        {item?.pair.price} VLX
+                      </strong>
+                      <small> = {(item?.pair.price * rate).toFixed(3)} USD</small>
+                    </span>
+                  </div>
+                )}
+                {!item?.pair && !item?.auction && (
+                  <div className="countdown-bid-price-div">
+                    <span>Not Listed</span>
+                  </div>
+                )}
+                {loginStatus && item?.auction && (
                   <Timer
                     downPhrase="Sales ends"
-                    mintStartAt={oldData.auction.endTime}
+                    mintStartAt={item?.auction.endTime}
                     itemDetails={true}
                   />
                 )}
               </div>
               <div className="hline"></div>
               <div className="col-div br-div">
-                {/* {loginStatus && oldData.auction && (
-                <div>
-                  <p className="billy-desc m-b-5">Highest Bid</p>
-                  <div className="row-div m-b-5">
-                    <h2 className="billy-header">
-                      {oldData.auction && oldData.auction.price} VLX
-                    </h2>
-                    <p className="billy-desc">($ 20.23)</p>
-                  </div>
-                </div>
-              )} */}
                 <div className="row-div auction-bids-btns">
-                  {/* {
-								item.pair && item.pair.owner.toLowerCase() !== account.toLowerCase() &&
-								<Button className="outLineBtn" onClick={() => setShowOfferModal(true)}>
-									<Loyalty /> Make Offer
-								</Button>
-							} */}
-
-                  <Button
-                    itemDetails={true}
-                    icon={<Loyalty />}
-                    label="Buy Now"
-                    className="send-message item-detail m-b-5"
-                    onClick={() => setShowBuyModal(true)}
-                  />
 
                   {loginStatus &&
-                    item.pair &&
-                    item.pair.owner.toLowerCase() !== account.toLowerCase() && (
+                    item?.pair &&
+                    item?.pair.owner.toLowerCase() !== account.toLowerCase() && (
                       <Button
                         itemDetails={true}
                         icon={<Loyalty />}
@@ -610,10 +605,10 @@ const ItemDetail = (props: any) => {
                       />
                     )}
                   {loginStatus &&
-                    !item.pair &&
-                    oldData.auction &&
-                    oldData.auction.owner.toLowerCase() !==
-                      account.toLowerCase() && (
+                    !item?.pair &&
+                    item?.auction &&
+                    item?.auction.owner.toLowerCase() !==
+                    account.toLowerCase() && (
                       <Button
                         onClick={() => onPlaceBidModal()}
                         itemDetails={true}
@@ -622,33 +617,23 @@ const ItemDetail = (props: any) => {
                         className="send-message item-detail m-b-5"
                       />
                     )}
-                  {/* {loginStatus &&
-                  !item.pair &&
-                  !oldData.auction &&
-                  oldData.owner.toLowerCase() === account.toLowerCase() && (
-                    <Button
-                    label='Sell
-                      className="send-message item-detail m-b-5"
-                      onClick={() => setShowListingModal(true)}
-                    />
-                  )} */}
-                  {/* <Button
-                  className="send-message item-detail m-b-5"
-                  onClick={() => setShowListingModal(true)}
-                  label="Sell"
-                />
-                <Button
-                  className="send-message item-detail m-b-5"
-                  label="Cancel Selling"
-                  onClick={() => setShowCancelListingModal(true)}
-                /> */}
                   {loginStatus &&
-                    item.pair &&
-                    !oldData.auction &&
-                    item.pair.owner.toLowerCase() === account.toLowerCase() && (
+                    !item.pair &&
+                    !item?.auction &&
+                    item?.owner.toLowerCase() === account.toLowerCase() && (
                       <Button
-                        className="outLineBtn"
-                        label="Cancel Selling"
+                        label='Sell'
+                        className="send-message item-detail m-b-5"
+                        onClick={() => setShowListingModal(true)}
+                      />
+                    )}
+                  {loginStatus &&
+                    (item.pair ||
+                    item?.auction) &&
+                    item.itemOwner.toLowerCase() === account.toLowerCase() && (
+                      <Button
+                        className="send-message item-detail m-b-5"
+                        label="Cancel Listing"
                         onClick={() => setShowCancelListingModal(true)}
                       />
                     )}
@@ -686,9 +671,9 @@ const ItemDetail = (props: any) => {
                           instanceId="chainSelect"
                           className="select-gray flex-1 m-r-5"
                         />
-                        {oldData.auction.bids.length > 0 ? (
+                        {item?.auction.bids?.length > 0 ? (
                           <div className="col-div aic jcc">
-                            {oldData.auction.bids.map((bid: any, key: any) => {
+                            {item?.auction.bids.map((bid: any, key: any) => {
                               console.log(bid.bidPrice); // 0.002
                               console.log(bid.timestamp); //ex : 1653574771
                               //This should be filtered by above selected date.
@@ -731,13 +716,13 @@ const ItemDetail = (props: any) => {
                       transitions={transitions}
                     >
                       <div className="col-div p-t-10 p-b-10">
-                        {oldData.auction && oldData.auction.bids.length > 0 ? (
+                        {item?.auction.bids?.length > 0 ? (
                           <div className="col-div aic jcc">
                             {/* //TODO this data display */}
                             <div>Price</div>
                             <div>Expiration</div>
                             <div>From</div>
-                            {oldData.auction.bids.map((bid: any, key: any) => {
+                            {item?.auction.bids.map((bid: any, key: any) => {
                               return (
                                 <div key={key}>
                                   <div>{bid.bidPrice}</div>
@@ -745,9 +730,9 @@ const ItemDetail = (props: any) => {
                                     {Math.ceil(
                                       // (parseFloat(item.auction.endTime) -
                                       //   parseFloat(bid.timestamp)) /
-                                      (oldData.auction.endTime -
+                                      (item?.auction.endTime -
                                         bid.timestamp) /
-                                        (60 * 60 * 24)
+                                      (60 * 60 * 24)
                                     )}{" "}
                                     days
                                   </div>
@@ -785,6 +770,7 @@ const ItemDetail = (props: any) => {
             onSubmit={submitPlaceBid}
             balance={balance}
             nftFee={0}
+            rate={rate}
           />
         )}
         {showOfferModal && (
@@ -793,14 +779,16 @@ const ItemDetail = (props: any) => {
             onSubmit={submitOffer}
             balance={balance}
             nftFee={0}
+            rate={rate}
           />
         )}
         {showBuyModal && (
-          <MakeOffer
+          <BuyNowPage
             onClose={onBuyClose}
             onSubmit={submitBuy}
             balance={balance}
             nftFee={0}
+            rate={rate}
           />
         )}
         {showListingModal && (
@@ -810,6 +798,7 @@ const ItemDetail = (props: any) => {
             balance={balance}
             nftFee={0}
             item={item}
+            rate={rate}
           />
         )}
         {showCancelListingModal && (
@@ -818,6 +807,7 @@ const ItemDetail = (props: any) => {
             onSubmit={onCancelListing}
             balance={balance}
             nftFee={0}
+            rate={rate}
           />
         )}
       </div>

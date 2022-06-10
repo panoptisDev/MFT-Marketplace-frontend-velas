@@ -1,0 +1,50 @@
+.cancelListPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .modal-content {
+    width: 28rem;
+    background: #343444;
+    padding: 2rem;
+    border-radius: 10px;
+    // border: 1px #0eabff65 solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .title {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .row-div {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+      border-top: 1px #aaaaaa55 solid;
+      border-bottom: 1px solid #aaaaaa55;
+      p {
+        color: #fff;
+        font-size: 1rem;
+      }
+    }
+  }
+  .btns {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+  }
+}

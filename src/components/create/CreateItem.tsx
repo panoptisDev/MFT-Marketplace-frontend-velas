@@ -101,6 +101,7 @@ const CreateItem = (props: any) => {
     }
     if (!selectedCollection) {
       toast.error("Please select collection!");
+      return;
     }
     const load_toast_id = toast.loading("Please wait...");
     try {

@@ -20,17 +20,26 @@ const ListItemSalePage = ({
   nftFee,
   onClose,
   onSubmit,
+  rate
 }: any) => {
-  const { register, handleSubmit }: any = useForm();
+  const { register, handleSubmit } = useForm();
 
-  const { account, active, chainId, library } = useWeb3React();
+  const { connector, library, chainId, account, active }: any = useWeb3React();
+  const [loginStatus, setLoginStatus] = useState(false);
+  let newVariable: any = process.env.REACT_APP_NETWORK_ID;
+  useEffect(() => {
+    const isLoggedin =
+      account && active && chainId === parseInt(newVariable, 10);
+    setLoginStatus(isLoggedin);
+  }, [connector, library, account, active, chainId]);
+
   const [saleType, setSaleType] = useState("FixedPrice");
 
   const [listing, setListing] = useState(false);
-  const onCancelListing: any = async (updatedData: any) => {
+  const onCancelListing = async (updatedData:any) => {
     let startTimeStamp = 0;
     let endTimeStamp = 0;
-    if (!account || !library) {
+    if (!loginStatus) {
       toast.error("Please connect your wallet correctly!");
       return;
     }
@@ -140,25 +149,26 @@ const ListItemSalePage = ({
             <ArrowBackIcon />
           </Button>
         </div>
-        <form className="saleContainer" onSubmit={handleSubmit()}>
+        <form className="saleContainer" onSubmit={handleSubmit(onCancelListing)}>
           <div className="row-div">
             <SaleType setSaleType={setSaleType}></SaleType>
             {saleType === "FixedPrice" ? (
-              <FixedPrice register={register} balance={balance} />
+              <FixedPrice register={register} balance={balance} rate={rate} />
             ) : (
               <></>
             )}
             {saleType === "TimedAuction" ? (
-              <TimedAuction register={register} />
+              <TimedAuction register={register} rate={rate}/>
             ) : (
               <></>
             )}
           </div>
-          <Button
-            label="Complete Listing"
+          <button
             className="listBtn outLineBtn explore"
             disabled={listing}
-          />
+          >
+            Complete Listing
+          </button>
         </form>
       </div>
     </Modal>

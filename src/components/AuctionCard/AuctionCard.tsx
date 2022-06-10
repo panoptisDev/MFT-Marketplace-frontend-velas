@@ -34,7 +34,7 @@ const AuctionCard = ({ TodayPick, item }: any) => {
           />
         ) : (
           <img
-            onClick={gotoDetail}
+            
             src={item.assetUrl ? item?.assetUrl : itemDetail}
             alt=""
           />
@@ -52,7 +52,7 @@ const AuctionCard = ({ TodayPick, item }: any) => {
       {!TodayPick ? <Timer mintStartAt={item.timeStamp} /> : undefined}
       <div className="card-bottom">
         <div className="bottom-first">
-          <Link to="/">{item.name || "Garraya Richard"}</Link>
+          <Link to="/">{item?.name}</Link>
         </div>
         <div className={TodayPick ? "meta-info today-pick-meta" : "meta-info"}>
           <div className="meta-info-left">
@@ -66,23 +66,28 @@ const AuctionCard = ({ TodayPick, item }: any) => {
               </h6>
             </div>
           </div>
-          <div className="meta-info-right">
-            <span>Current Bid</span>
-            <br />
-            <h5>{"4.89 ETH"}</h5>
-          </div>
+          {
+            !item?.pair && !item?.auction ? <div className="meta-info-right">
+              <h5>Not Listed</h5>
+            </div> :
+            <div className="meta-info-right">
+              <span>Current Price</span>
+              <br />
+              <h5>
+                {item?.pair ? item?.pair.price : item?.auction.price} VLX
+              </h5>
+            </div>
+          }
         </div>
       </div>
       {TodayPick ? (
         <div className="card-footer">
-          <button className={TodayPick ? "place-bid today-pick" : undefined}>
+          <button  onClick={gotoDetail} className={TodayPick ? "place-bid today-pick" : undefined}>
             <ShoppingBag />
-            Place Bid
+            {
+              item?.pair ? "Buy" : item?.auction ? "Place Bid" : "Go to Details"
+            }
           </button>
-          <div className="footer-history">
-            <FiRefreshCw />
-            View History
-          </div>
         </div>
       ) : undefined}
     </div>

@@ -19,17 +19,12 @@ const TopSellers = () => {
       });
   });
 
-  let array: any = [];
-  for (let i = 0; i < 4; i++) {
-    array = array.concat(sellers);
-  }
-
   return (
     <div className="top-sellers">
       <Title title="Top Seller" />
       <div className="sellers">
         {sellers &&
-          array.map((user: any, index: any) => (
+          sellers.map((user: any, index: any) => (
             <div key={index} className="each-seller">
               <div className="seller-left">
                 <img src={user.logo_url || avt}></img>

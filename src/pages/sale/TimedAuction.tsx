@@ -1,18 +1,14 @@
+import { useState } from "react";
 import "./timedauction.scss";
 
-export default function TimedAuction({ register }: any) {
-  const methodOptions = [
-    {
-      value: "highest_bidder",
-      label: "Sell to highest bidder",
-      customAbbreviation: "",
-    },
-    {
-      value: "lowest_bidder",
-      label: "Sell to lowest bidder",
-      customAbbreviation: "",
-    },
-  ];
+export default function TimedAuction({ register, rate }: any) {
+
+  const [auctionPrice, setAuctionPrice] = useState(0);
+  const onChangePrice = (value: any) => {
+    console.log(parseFloat(value.target.value));
+    setAuctionPrice(parseFloat(value.target.value !== "" ? value.target.value : "0"));
+  };
+  
   return (
     <div className="timedauction">
       <div className="minimumBid">
@@ -22,15 +18,10 @@ export default function TimedAuction({ register }: any) {
             {...register("price")}
             type="number"
             step=".001"
+            onChange={onChangePrice}
             placeholder="Enter Minimum bid"
           />
-          <div className="tokenType">
-            <select {...register("currency")}>
-              <option className="item" value="eth">
-                ETH
-              </option>
-            </select>
-          </div>
+          <span className="usd">VLX = ${(auctionPrice * rate).toFixed(3)}</span>
         </div>
         <div className="bellow">
           <p>Bids below this amount won't be allowed</p>

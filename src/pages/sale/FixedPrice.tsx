@@ -7,7 +7,7 @@ import FormatsortOptionLabel from "../../components/itemDetail/FormatsortOptionL
 import FormatMoneyOptionLabel from "../../components/itemDetail/FormatsortOptionLabel";
 import { useState } from "react";
 
-export default function FixedPrice({ register, balance }: any) {
+export default function FixedPrice({ register, balance, rate }: any) {
   const options = [
     { value: "usd", label: "USD", customAbbreviation: "" },
     { value: "eth", label: "ETH", customAbbreviation: "" },
@@ -24,48 +24,33 @@ export default function FixedPrice({ register, balance }: any) {
 
   const [fixedPrice, setFixedPrice] = useState(0);
   const onChangePrice = (value: any) => {
-    console.log(parseFloat(value.target.value));
-    setFixedPrice(parseFloat(value.target.value));
+    setFixedPrice(parseFloat(value.target.value !== "" ? value.target.value : "0"));
   };
   return (
     <div className="fixedprice">
       <p className="flex-start">Price</p>
       <div className="placeContainer">
-        <Select
-          defaultValue={options[0]}
-          formatOptionLabel={FormatMoneyOptionLabel}
-          options={options}
-          instanceId="chainSelect"
-          className="select-gray flex-1 m-r-5"
-        />
         <input
           {...register("price")}
           className="price"
           name="price"
+          type="number"
+          min="0"
+          step=".001"
           onChange={onChangePrice}
           placeholder="Amount"
         />
-        <span className="usd">$0.00</span>
+        <span className="usd">VLX = ${(fixedPrice * rate).toFixed(3)}</span>
       </div>
 
       <div className="balance">
         <p> Available: {balance.toFixed(3)} ETH</p>
       </div>
-      <p className="flex-start">Duration</p>
-      <div className="row-div">
-        <Select
-          defaultValue={options1[0]}
-          formatOptionLabel={FormatsortOptionLabel}
-          options={options1}
-          instanceId="chainSelect"
-          className="select-gray radius2 flex-1"
-        />
-      </div>
       <p className="space-between mb-1 mt-1">
         Fees
         <Tooltip
           id="tooltip-top"
-          title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores earum fuga unde laboriosam molestias deleniti tempora obcaecati harum aperiam iusto quae quo quisquam,"
+          title="Create get the fee for one transaction"
           placement="top"
           classes={{ tooltip: "tooltip" }}
           className="myTooltip"

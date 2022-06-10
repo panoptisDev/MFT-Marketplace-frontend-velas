@@ -19,12 +19,23 @@ const TodayPick = () => {
       setItems([]);
     })
   }, [items])
-  
+
+  const getDate = () => {
+    const newDate = new Date();
+    const year = newDate.getFullYear();
+    const month = newDate.getMonth()-1;
+    const d = newDate.getDate();
+    const date = new Date(year, month, d);
+    return Math.floor(date.getTime()/1000);
+  }
+
   return (
     <div className="today-pick-component">
       <Title title="Today's Pick" />
       <div className="picks-container">
-        {items && items.map((item: any, index: number) => (
+        {items && items.filter((item: any) => {
+          return item?.timestamp > getDate();
+        }).map((item: any, index: number) => (
           <AuctionCard item={item} TodayPick={true} key={index} />
         ))}
       </div>

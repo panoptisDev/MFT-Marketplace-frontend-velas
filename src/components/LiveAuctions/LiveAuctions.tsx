@@ -90,7 +90,7 @@ const LiveAuctions = () => {
       <Slider className="slider-container" {...settings}>
         {items &&
           items.map((item: any, index: any) => (
-            <AuctionCard key={index} item={item} TodayPick={false} />
+            item.auction && <AuctionCard key={index} item={item} TodayPick={false} />
           ))}
       </Slider>
       {/* </div> */}

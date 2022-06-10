@@ -106,7 +106,7 @@
 }
 .item-detail {
   transition: all 0.5s;
-  width: 30%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;

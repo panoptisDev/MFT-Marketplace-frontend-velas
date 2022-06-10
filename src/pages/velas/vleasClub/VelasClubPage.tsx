@@ -73,13 +73,7 @@ const VelasClubPage = (props: any) => {
   }, [item]);
   return (
     <>
-      {/* <PageHeader pageHeader="Velas Club" /> */}
-      {/* <Topbar user={user} menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}  setIsLoading ={setIsTopLoading}/> */}
-      {/* <Menu menuOpen = {menuOpen} setMenuOpen = {setMenuOpen}/> */}
       <div className="page velasPage">
-        {/* <div className="loding" style = {{width: "100%", height: loadingHeight + "%", display: loadingHeight === 0? 'none':'flex'}}>
-                    <Loading/>
-                </div> */}
         <div className="sections" style={{ width: "100%", height: "auto" }}>
           <div className="container">
             {item && (
@@ -87,6 +81,7 @@ const VelasClubPage = (props: any) => {
                 itemDetailsPage={true}
                 {...props}
                 item={item}
+                rate={rate}
                 fetchItem={fetchItem}
               />
             )}
