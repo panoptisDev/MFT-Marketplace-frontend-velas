@@ -1,4 +1,3 @@
-import Card1 from "../cards/Card1";
 import EmptyCard from "../EmptyCard/EmptyCard";
 import "./collectionList.scss";
 
@@ -16,9 +15,9 @@ const CollectionList = (props: any) => {
         array.map((collection: any, index: any) => {
           return (
             <EmptyCard
+              collection={collection}
               collectionList={true}
               {...props}
-              collection={collection}
               key={index}
             />
           );

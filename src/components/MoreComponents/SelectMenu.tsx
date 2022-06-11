@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Dropdown, DropdownButton } from "react-bootstrap";
+import { useState } from "react";
+import { Dropdown } from "react-bootstrap";
 
 const SelectMenu = ({ initialState, data }: any) => {
   const [first, setfirst] = useState<any>(initialState);

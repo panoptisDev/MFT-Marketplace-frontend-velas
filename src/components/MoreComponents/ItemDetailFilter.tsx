@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dropdown, DropdownButton } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import { AiOutlineClose } from "react-icons/ai";
 
 const initialCheck = {
@@ -9,7 +9,7 @@ const initialCheck = {
   transfers: false,
 };
 
-const ItemDetailFilter = ({ initialState, data }: any) => {
+const ItemDetailFilter = () => {
   const [checked, setChecked] = useState(initialCheck);
 
   const clearChecks = () => {

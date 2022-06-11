@@ -25,7 +25,6 @@ import toast from "react-hot-toast";
 import { useWeb3React } from "@web3-react/core";
 import { getIpfsHash, getIpfsHashFromFile } from "../../utils/ipfs";
 import { addItem } from "../../utils/contracts";
-import AuctionCard from "../AuctionCard/AuctionCard";
 
 const CreateItem = (props: any) => {
   const { connector, library, chainId, account, active } = useWeb3React();
@@ -137,7 +136,7 @@ const CreateItem = (props: any) => {
         toast.dismiss(load_toast_id);
         history.push(`/collections`);
         setCreatingItem(false);
-      }else{
+      } else {
         toast.error("NFT Artist Create Failed!");
         toast.dismiss(load_toast_id);
         setCreatingItem(false);

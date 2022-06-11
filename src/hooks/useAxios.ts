@@ -20,11 +20,11 @@ export function useAxios() {
 
   axios.interceptors.response.use(
     (response) => {
-      const { status, statusText, data } = response;
+      // const { status, statusText, data } = response;
       return Promise.resolve(response);
     },
     (error) => {
-      const { status, statusText, data } = error.response;
+      const { status } = error.response;
 
       if (status === 401) {
         logout(dispatch);

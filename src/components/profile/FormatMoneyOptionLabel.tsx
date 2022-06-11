@@ -1,4 +1,3 @@
-import React from "react";
 import { AttachMoney } from "@material-ui/icons";
 
 const FormatMoneyOptionLabel = ({ value, label, customAbbreviation }: any) => (

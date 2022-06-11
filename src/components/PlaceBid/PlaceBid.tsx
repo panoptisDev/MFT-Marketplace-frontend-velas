@@ -1,10 +1,8 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import "./styles.css";
 import avt from "../../assets/images/avt-8.jpg";
 import Timer from "../timer/Timer";
-import Button from "../MoreComponents/Button";
-import { Col, Container, Nav, Row, Tab, Tabs } from "react-bootstrap";
+import { Nav, Tab } from "react-bootstrap";
 import BidHistory from "../MoreComponents/BidHistory";
 import BidModal from "../connectModal/BidModal";
 

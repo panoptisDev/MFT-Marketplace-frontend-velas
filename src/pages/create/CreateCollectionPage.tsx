@@ -6,10 +6,9 @@ import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useLocation } from "react-router-dom";
 import "./style.scss";
-import PageHeader from "../../components/PageHeader/PageHeader";
 
 const CreateCollectionPage = (props: any) => {
-  const { user } = props;
+  // const { user } = props;
   const [isLoading, setIsLoading] = useState(false);
   const [isTopLoading, setIsTopLoading] = useState(false);
   const [sectionHeight, setSectionHeight] = useState("0vh");

@@ -1,4 +1,4 @@
-import Loading from "../../components/loading/Loading";
+// import Loading from "../../components/loading/Loading";
 // import Menu from '../../omponents/menu/Menu';
 import Support from "../../components/settings/accountSupport/Support";
 import Earning from "../../components/settings/earning/Earning";
@@ -13,7 +13,6 @@ import { useMediaQuery } from "react-responsive";
 import "./style.scss";
 import { useLocation } from "react-router-dom";
 import { useWeb3React } from "@web3-react/core";
-import PageHeader from "../../components/PageHeader/PageHeader";
 
 const SettingsPage = (props: any) => {
   const { user, login } = props;

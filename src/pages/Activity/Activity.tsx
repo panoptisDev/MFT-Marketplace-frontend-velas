@@ -1,8 +1,6 @@
-import React from "react";
 import ActivityCard from "../../components/ActivityCard/ActivityCard";
 import Filter from "../../components/filter/Filter";
-import SelectMenu from "../../components/MoreComponents/SelectMenu";
-import PageHeader from "../../components/PageHeader/PageHeader";
+// import SelectMenu from "../../components/MoreComponents/SelectMenu";
 import "./styles.css";
 
 const Activity = () => {

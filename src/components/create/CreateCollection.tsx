@@ -10,26 +10,26 @@ import Switch from "@material-ui/core/Switch";
 // import Dropdown from "components/dropdown/Dropdown";
 
 import { useWeb3React } from "@web3-react/core";
-import { getIpfsHash, getIpfsHashFromFile } from "../../utils/ipfs";
+import { getIpfsHashFromFile } from "../../utils/ipfs";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { createNewCollection } from "../../utils/contracts";
 import { allCategories } from "../../utils/options";
 import SelectMenu from "../MoreComponents/SelectMenu";
 
-const options = [
-  {
-    value: "ethereum",
-    label: "Ethereum",
-    customAbbreviation: "an open-source blockchain that powers most NFT sails",
-  },
-  {
-    value: "polygon",
-    label: "Polygon",
-    customAbbreviation:
-      "A fast gas-free blockchain experience that works with Ethereum",
-  },
-];
+// const options = [
+//   {
+//     value: "ethereum",
+//     label: "Ethereum",
+//     customAbbreviation: "an open-source blockchain that powers most NFT sails",
+//   },
+//   {
+//     value: "polygon",
+//     label: "Polygon",
+//     customAbbreviation:
+//       "A fast gas-free blockchain experience that works with Ethereum",
+//   },
+// ];
 const CreateCollection = (props: any) => {
   const { isCreate, collectionName } = props;
 

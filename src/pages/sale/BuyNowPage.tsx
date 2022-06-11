@@ -2,12 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Button, Modal } from "@material-ui/core";
 import "./BuyNowPage.scss";
-export default function BuyNowPage({
-  balance,
-  nftFee,
-  onClose,
-  onSubmit,
-}: any) {
+export default function BuyNowPage({ balance, onClose, onSubmit }: any) {
   const [bidPrice, setBidPrice] = useState<any>();
 
   const handleClose = () => {
@@ -38,9 +33,7 @@ export default function BuyNowPage({
       aria-describedby="simple-modal-description"
     >
       <div className="modal-content">
-        <div className="title">
-          Are you sure you want to buy this Item?
-        </div>
+        <div className="title">Are you sure you want to buy this Item?</div>
         <br />
         <div className="btns">
           <Button

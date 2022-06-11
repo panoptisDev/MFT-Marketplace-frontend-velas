@@ -8,8 +8,6 @@ import axios from "axios";
 import "./style.scss";
 import NFTItemList from "../../components/collectionList/NFTItemList";
 import toast from "react-hot-toast";
-import PageHeader from "../../components/PageHeader/PageHeader";
-import Card1 from "../../components/cards/Card1";
 import EmptyCard from "../../components/EmptyCard/EmptyCard";
 import SelectMenu from "../../components/MoreComponents/SelectMenu";
 
@@ -22,7 +20,7 @@ import {
 } from "../../utils/options";
 
 const MyNFTsPage = (props: any) => {
-  const { user } = props;
+  // const { user } = props;
   const [isLoading, setIsLoading] = useState(false);
   const [isTopLoading, setIsTopLoading] = useState(true);
   const [sectionHeight, setSectionHeight] = useState("0vh");

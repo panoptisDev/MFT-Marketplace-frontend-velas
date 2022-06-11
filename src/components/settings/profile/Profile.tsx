@@ -15,7 +15,6 @@ import { useWeb3React } from "@web3-react/core";
 import toast from "react-hot-toast";
 import { getIpfsHashFromFile } from "../../../utils/ipfs";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 
 const Profile = (props: any) => {
   const [isFirst, setFirst] = useState(true); //is used for displaying user data when enter in this screen.
@@ -32,11 +31,11 @@ const Profile = (props: any) => {
   const [copied, setCopied] = useState(false);
   const [update, setUpdating] = useState(false);
 
-  const router = useHistory();
-
   const { connector, library, chainId, account, active } = useWeb3React();
   const [loginStatus, setLoginStatus] = useState<any>(false);
+
   let newVariable: any = process.env.REACT_APP_NETWORK_ID;
+
   useEffect(() => {
     const isLoggedin: any =
       account && active && chainId === parseInt(newVariable, 10);

@@ -70,18 +70,20 @@
 .countdown-bid-price strong {
   margin: 0 5px;
 }
+
 .countdown-bid-price-div {
   color: white;
+  margin: 4px;
   border-radius: 10px;
   padding: 12px;
   height: 54px;
   justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
-  margin-right: 20px;
   background-color: #343444;
   display: flex;
   align-items: center;
+  /* margin-bottom: 15px; */
 }
 
 .place-bid-nav-items {

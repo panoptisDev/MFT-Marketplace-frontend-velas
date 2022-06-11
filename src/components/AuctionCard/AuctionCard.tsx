@@ -1,20 +1,16 @@
-import React, { useState } from "react";
 import "./styles.css";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
 import Timer from "../timer/Timer";
 import { Link } from "react-router-dom";
 import { ReactComponent as ShoppingBag } from "../../assets/icons/shopping-bag.svg";
-import { FiRefreshCw } from "react-icons/fi";
 import ReactPlayer from "react-player";
 
 // import { AuctionDataType } from "../LiveAuctions/LiveAuctions";
-import cardItem from "../../assets/images/card-item.jpg";
 import itemDetail from "../../assets/images/item-detail.jpg";
 import Likes from "../Likes/Likes";
 import Button from "../MoreComponents/Button";
 import { useHistory } from "react-router-dom";
 
-const AuctionCard = ({ TodayPick, item, rate }: any) => {
+const AuctionCard = ({ TodayPick, item }: any) => {
   const history = useHistory();
   const gotoDetail = () => {
     history.push(`/item/${item.itemCollection}/${item.tokenId}`);
@@ -33,10 +29,7 @@ const AuctionCard = ({ TodayPick, item, rate }: any) => {
             controls
           />
         ) : (
-          <img
-            src={item.assetUrl ? item?.assetUrl : itemDetail}
-            alt=""
-          />
+          <img src={item.assetUrl ? item?.assetUrl : itemDetail} alt="" />
         )}
         {!TodayPick ? (
           <Button
@@ -57,7 +50,7 @@ const AuctionCard = ({ TodayPick, item, rate }: any) => {
         <div className={TodayPick ? "meta-info today-pick-meta" : "meta-info"}>
           <div className="meta-info-left">
             <div className="meta-info-left-img">
-              <img src={item?.creatorUser?.logo_url || ""}></img>
+              <img src={item?.creatorUser?.logo_url || ""} alt=""></img>
             </div>
             <div>
               <span>Creator</span>
@@ -66,28 +59,31 @@ const AuctionCard = ({ TodayPick, item, rate }: any) => {
               </h6>
             </div>
           </div>
-          {
-            !item?.pair && !item?.auction ? <div className="meta-info-right">
-              <h5>Not Listed</h5>
-            </div> :
+          {!item?.pair && !item?.auction ? (
             <div className="meta-info-right">
-              {
-                item?.auction ? <span>Highest Bid Price</span> : <span>Current Price</span>
-              }              
-              <br />
-              <h5>
-                {item?.pair ? item?.pair.price : item?.auction.price} VLX</h5>
+              <h5>Not Listed</h5>
             </div>
-          }
+          ) : (
+            <div className="meta-info-right">
+              {item?.auction ? (
+                <span>Highest Bid Price</span>
+              ) : (
+                <span>Current Price</span>
+              )}
+              <br />
+              <h5>{item?.pair ? item?.pair.price : item?.auction.price} VLX</h5>
+            </div>
+          )}
         </div>
       </div>
       {TodayPick ? (
         <div className="card-footer">
-          <button  onClick={gotoDetail} className={TodayPick ? "place-bid today-pick" : undefined}>
+          <button
+            onClick={gotoDetail}
+            className={TodayPick ? "place-bid today-pick" : undefined}
+          >
             <ShoppingBag />
-            {
-              item?.pair ? "Buy" : item?.auction ? "Place Bid" : "Go to Details"
-            }
+            {item?.pair ? "Buy" : item?.auction ? "Place Bid" : "Go to Details"}
           </button>
         </div>
       ) : undefined}

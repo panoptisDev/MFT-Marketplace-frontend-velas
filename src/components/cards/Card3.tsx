@@ -1,5 +1,6 @@
 import { MoreVert } from "@material-ui/icons";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import "./card.scss";
 
 const Card3 = (props: any) => {
@@ -8,9 +9,12 @@ const Card3 = (props: any) => {
     e.preventDefault();
     setAnchorElTop(e.currentTarget);
   };
+
+  const history = useHistory();
   const gotToPage = () => {
-    props.history.push("/collections/" + props.collection.name);
+    history.push("/collections/" + props.collection.name);
   };
+
   return (
     <div className="card">
       <div className="imgContainer" onClick={gotToPage}>
@@ -18,7 +22,6 @@ const Card3 = (props: any) => {
       </div>
       <h4>{props.collection.name}</h4>
       <h3>{props.collection.description}</h3>
-
       <div className="moreActionBox" onClick={showMoreActions}>
         <MoreVert />
       </div>

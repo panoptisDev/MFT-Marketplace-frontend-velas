@@ -1,12 +1,15 @@
-import React from "react";
 import "./styles.css";
 import Table from "react-bootstrap/Table";
-import { BsCalendar2EventFill, BsFillCartCheckFill } from "react-icons/bs";
-import { BiTransfer } from "react-icons/bi";
 import { useWeb3React } from "@web3-react/core";
 
 const ItemActivityTable = ({ item, loginStatus }: any) => {
-  const { connector, library, chainId, account, active }: any = useWeb3React();
+  const {
+    // connector,
+    //  library,
+    //  chainId,
+    account,
+  }: //  active
+  any = useWeb3React();
 
   return (
     <div>

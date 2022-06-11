@@ -77,7 +77,7 @@ function App() {
 
   useAxios();
 
-  const { connector, library, chainId, account, active } = useWeb3React();
+  const { connector, account, active } = useWeb3React();
 
   // handle logic to recognize the connector currently being activated
   const [activatingConnector, setActivatingConnector] = useState();
@@ -124,9 +124,9 @@ function App() {
   };
   // Loading part
   const [imgCount, setImgCount] = useState(0);
-  const onImgLoad = () => {
-    setImgCount(imgCount + 1);
-  };
+  // const onImgLoad = () => {
+  //   setImgCount(imgCount + 1);
+  // };
   useEffect(() => {
     if (imgCount === 4) {
       setTimeout(() => {

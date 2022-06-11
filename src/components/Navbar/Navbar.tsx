@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
-import Dropdown from "../Dropdown.tsx/Dropdown";
 import { useWeb3React } from "@web3-react/core";
 import "./styles.css";
 import logo_white from "../../assets/images/logo_white.png";
 import { FaWallet } from "react-icons/fa";
-import Search from "../Search/Search";
 import { Link, useHistory } from "react-router-dom";
 import { truncateWalletString } from "../../utils";
 import useAuth from "../../hooks/useAuth";
@@ -12,7 +10,6 @@ import axios from "axios";
 import Button from "../MoreComponents/Button";
 import ConnectModal from "../connectModal/ConnectModal";
 import CustomDropdown from "../dropdown/CustomDropdown";
-import faces from "../../assets/faces/avatar.png";
 import no_profile from "../../assets/images/no-profile.png";
 import { BsCollection, BsFillPersonFill } from "react-icons/bs";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
@@ -20,9 +17,9 @@ import { GiFiles } from "react-icons/gi";
 import { AiOutlineSetting } from "react-icons/ai";
 import { BiLogOut } from "react-icons/bi";
 import { IoIdCard } from "react-icons/io5";
+
 let useClickOutside = (handler: any) => {
   let domNode: React.MutableRefObject<any> = useRef();
-
   useEffect(() => {
     let maybeHandler = (event: any) => {
       if (!domNode.current.contains(event.target)) {
@@ -41,18 +38,20 @@ let useClickOutside = (handler: any) => {
 };
 
 const Navbar = (props: any) => {
-  const { user, isUserInfoUpdated, setIsLoading } = props;
+  const { isUserInfoUpdated, setIsLoading } = props;
   const [showConnectModal, setShowConnectModal] = useState(false);
   const { connector, library, chainId, account, active } = useWeb3React();
   const [loginStatus, setLoginStatus] = useState(false);
   const newVariable: any = process.env.REACT_APP_NETWORK_ID;
+
   useEffect(() => {
     const isLoggedin: any =
       account && active && chainId === parseInt(newVariable, 10);
     setLoginStatus(isLoggedin);
-  }, [connector, library, account, active, chainId]);
+  }, [connector, library, account, active, chainId, newVariable]);
 
   const [logo, setLogo] = useState("");
+
   useEffect(() => {
     if (loginStatus || isUserInfoUpdated) {
       console.log("Fetching Item");
@@ -71,6 +70,7 @@ const Navbar = (props: any) => {
 
   const [status, setStatus] = useState("close");
   const [open, setOpen] = useState(false);
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 300) {

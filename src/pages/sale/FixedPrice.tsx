@@ -1,30 +1,32 @@
 import { Tooltip } from "@material-ui/core";
 import { ErrorOutline } from "@material-ui/icons";
 import "./fixedprice.scss";
-import SaleType from "./SaleType";
-import Select from "react-select";
-import FormatsortOptionLabel from "../../components/itemDetail/FormatsortOptionLabel";
-import FormatMoneyOptionLabel from "../../components/itemDetail/FormatsortOptionLabel";
+// import SaleType from "./SaleType";
+// import Select from "react-select";
+// import FormatsortOptionLabel from "../../components/itemDetail/FormatsortOptionLabel";
+// import FormatMoneyOptionLabel from "../../components/itemDetail/FormatsortOptionLabel";
 import { useState } from "react";
 
 export default function FixedPrice({ register, balance, rate }: any) {
-  const options = [
-    { value: "usd", label: "USD", customAbbreviation: "" },
-    { value: "eth", label: "ETH", customAbbreviation: "" },
-    { value: "sol", label: "SOL", customAbbreviation: "" },
-  ];
+  // const options = [
+  //   { value: "usd", label: "USD", customAbbreviation: "" },
+  //   { value: "eth", label: "ETH", customAbbreviation: "" },
+  //   { value: "sol", label: "SOL", customAbbreviation: "" },
+  // ];
 
-  const options1 = [
-    { value: "1d", label: "1 day", customAbbreviation: "1d" },
-    { value: "2d", label: "2 days", customAbbreviation: "2d" },
-    { value: "3d", label: "3 days", customAbbreviation: "3d" },
-    { value: "7d", label: "7 days", customAbbreviation: "7d" },
-    { value: "1m", label: "Bundles", customAbbreviation: "1m" },
-  ];
+  // const options1 = [
+  //   { value: "1d", label: "1 day", customAbbreviation: "1d" },
+  //   { value: "2d", label: "2 days", customAbbreviation: "2d" },
+  //   { value: "3d", label: "3 days", customAbbreviation: "3d" },
+  //   { value: "7d", label: "7 days", customAbbreviation: "7d" },
+  //   { value: "1m", label: "Bundles", customAbbreviation: "1m" },
+  // ];
 
   const [fixedPrice, setFixedPrice] = useState(0);
   const onChangePrice = (value: any) => {
-    setFixedPrice(parseFloat(value.target.value !== "" ? value.target.value : "0"));
+    setFixedPrice(
+      parseFloat(value.target.value !== "" ? value.target.value : "0")
+    );
   };
   return (
     <div className="fixedprice">

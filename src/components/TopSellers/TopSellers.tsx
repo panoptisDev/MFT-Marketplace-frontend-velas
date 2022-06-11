@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Title from "../Title/Title";
 import "./styles.css";
-import { AiOutlineCheck } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import avt from "../../assets/images/avt-15.jpg";
@@ -27,7 +26,7 @@ const TopSellers = () => {
           sellers.map((user: any, index: any) => (
             <div key={index} className="each-seller">
               <div className="seller-left">
-                <img src={user.logo_url || avt}></img>
+                <img src={user.logo_url || avt} alt=""></img>
               </div>
               <div className="seller-right">
                 <Link to="/">

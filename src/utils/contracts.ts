@@ -1,5 +1,5 @@
 import "@ethersproject/shims";
-import { BigNumber, ethers } from "ethers";
+import { ethers } from "ethers";
 import { getContractObj, getCollectionContract, getContractInfo } from ".";
 
 export function isAddress(address: any) {
@@ -256,7 +256,9 @@ export async function buy(
   const marketContract = getContractObj("BoatsailMarket", chainId, provider);
   if (!marketContract) return false;
   try {
-    const tx = await marketContract.buy(id, { value: ethers.utils.parseEther(String(price)) });
+    const tx = await marketContract.buy(id, {
+      value: ethers.utils.parseEther(String(price)),
+    });
     await tx.wait(2);
     return true;
   } catch (e) {

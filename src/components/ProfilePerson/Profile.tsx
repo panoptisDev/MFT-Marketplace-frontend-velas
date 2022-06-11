@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./styles.css";
 import author from "../../assets/images/author.jpg";
 
@@ -12,8 +11,7 @@ import {
 import Button from "../MoreComponents/Button";
 
 const Profile = () => {
-  const [first, setfirst] = useState("Dweqwfqweqghtrjasfajtrsaweq");
-
+  const first = "Dweqwfqweqghtrjasfajtrsaweq";
   return (
     <div className="profile">
       <div style={{ display: "flex" }}>

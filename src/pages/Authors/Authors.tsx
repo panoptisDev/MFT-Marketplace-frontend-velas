@@ -1,10 +1,8 @@
-import React from "react";
-import PageHeader from "../../components/PageHeader/PageHeader";
 import Profile from "../../components/ProfilePerson/Profile";
 import "./styles.css";
-import { Col, Container, Nav, Row, Tab, Tabs } from "react-bootstrap";
+import { Nav, Tab } from "react-bootstrap";
 import data from "../../utils/data";
-import AuctionCard from "../../components/AuctionCard/AuctionCard";
+// import AuctionCard from "../../components/AuctionCard/AuctionCard";
 import EmptyCard from "../../components/EmptyCard/EmptyCard";
 
 const Author = () => {

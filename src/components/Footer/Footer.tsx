@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Footer.css";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo_white.png";

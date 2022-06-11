@@ -11,9 +11,32 @@
   color: white;
   border-radius: 8px;
 }
-.accordion-button::after {
+.LvlPropStat-Tables {
+  border-radius: 4px;
+  padding-right: 2px;
+  height: 200px !important;
+  width: 100%;
+  margin: auto;
 }
-.accordion-button.collapsed::after {
+.LvlPropStat-Tables .each-traded-item {
+  padding: 10px !important;
 }
-.accordion-button {
+
+.LvlPropStat-Tables span {
+  font-size: 20px;
+}
+@media only screen and (max-width: 1440px) {
+  .LvlPropStat-Tables span {
+    font-size: 16px;
+  }
+}
+@media only screen and (max-width: 990px) {
+  .what-so-ever {
+    max-width: 750px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .LvlPropStat-Tables {
+    width: 820px;
+  }
 }

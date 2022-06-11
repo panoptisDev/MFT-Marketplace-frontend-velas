@@ -1,12 +1,6 @@
 import { ShareOutlined, ExpandLess, LocalLibrary } from "@material-ui/icons";
-import { Col, Container, Nav, Row, Tab, Tabs } from "react-bootstrap";
-import avt from "../../assets/images/avt-8.jpg";
-import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import { BsInfoCircleFill } from "react-icons/bs";
-import { SiOpslevel } from "react-icons/si";
-import { ImStatsDots } from "react-icons/im";
-import { AiFillPropertySafety } from "react-icons/ai";
 import { TbListDetails } from "react-icons/tb";
 import { FiActivity } from "react-icons/fi";
 import TradingHistory from "../../components/TradingHistory/TradingHistory";
@@ -15,8 +9,8 @@ import Timer from "../../components/timer/Timer";
 import { ReactComponent as ShoppingBag } from "../../assets/icons/shopping-bag.svg";
 
 import {
-  Loupe,
-  ViewList,
+  // Loupe,
+  // ViewList,
   MoreVert,
   Refresh,
   Visibility,
@@ -25,12 +19,12 @@ import {
   ExpandMore,
   Timeline,
   List,
-  Description,
+  // Description,
 } from "@material-ui/icons";
 
-import TaskIcon from "@mui/icons-material/Task";
-import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
-import AssessmentIcon from "@mui/icons-material/Assessment";
+// import TaskIcon from "@mui/icons-material/Task";
+// import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
+// import AssessmentIcon from "@mui/icons-material/Assessment";
 // import LoupeIcon from '@mui/icons-material/Loupe';
 // material-ui components
 import "./itemDetail.scss";
@@ -57,13 +51,14 @@ import ReactPlayer from "react-player";
 import ListItemSalePage from "../../pages/sale/ListItemSalePage";
 import CancelListPage from "../../pages/sale/CancelListPage";
 // let data = require("./itemdetailpage_example_data.json");
-import { data } from "./itemdetailpage_example_data";
+// import { data } from "./itemdetailpage_example_data";
 import AccordionComponent from "../Accordion/Accordion";
-import ItemActivityTable from "../Table/Table";
+// import ItemActivityTable from "../Table/Table";
 import { BiDetail } from "react-icons/bi";
 import ItemDetailFilter from "../MoreComponents/ItemDetailFilter";
-import SellPage from "../../pages/sale/SellPage";
+// import SellPage from "../../pages/sale/SellPage";
 import BuyNowPage from "../../pages/sale/BuyNowPage";
+// import BidModal from "../connectModal/BidModal";
 
 const ItemDetail = (props: any) => {
   const { item, fetchItem, rate } = props;
@@ -79,6 +74,7 @@ const ItemDetail = (props: any) => {
   const [balance, setBalance] = useState<any>(0);
   const [showPlaceBidModal, setShowPlaceBidModal] = useState<any>(false);
   const [bidPrice, setBidPrice] = useState<any>(0);
+
   useEffect(() => {
     if (loginStatus) fetchBalance();
   }, [loginStatus]);
@@ -155,10 +151,10 @@ const ItemDetail = (props: any) => {
     setShowPlaceBidModal(true);
   }
 
-  function onPlaceBidClose(value: any) {
-    setShowPlaceBidModal(false);
-    setBidPrice(value);
-  }
+  // function onPlaceBidClose(value: any) {
+  //   setShowPlaceBidModal(false);
+  //   setBidPrice(value);
+  // }
   function closePlaceBidModal() {
     setShowPlaceBidModal(false);
     setBidPrice(0);
@@ -222,9 +218,9 @@ const ItemDetail = (props: any) => {
   }
 
   const [isPriceExpand, setIsPriceExpand] = useState(false);
-  const [isEventExpand, setIsEventExpand] = useState(false);
+  // const [isEventExpand, setIsEventExpand] = useState(false);
   const [isBidExpand, setIsBidExpand] = useState(false);
-  const [isOfferExpand, setIsOfferExpand] = useState(false);
+  // const [isOfferExpand, setIsOfferExpand] = useState(false);
   const styles: any = {
     open: { width: "100%" },
     close: { width: "100%" },
@@ -250,11 +246,12 @@ const ItemDetail = (props: any) => {
     console.log(value);
   }
   // Sell page
-  const [showSellModal, setShowSellModal] = useState(false);
-  function onSellClose(value: number) {
-    setShowSellModal(false);
-    console.log(offerPrice);
-  }
+  // const [showSellModal, setShowSellModal] = useState(false);
+
+  // function onSellClose(value: number) {
+  //   setShowSellModal(false);
+  //   console.log(offerPrice);
+  // }
   // Listing
   const [showListingModal, setShowListingModal] = useState(false);
   function onListingClose(isListed: boolean) {
@@ -324,9 +321,9 @@ const ItemDetail = (props: any) => {
   }
 
   //Accept Bid
-  const onBidAccept = (bid: any) => {
-    // The logic to accept bid.
-  };
+  // const onBidAccept = (bid: any) => {
+  //   // The logic to accept bid.
+  // };
 
   // About
   // const [isAboutExpand, setIsAboutExpand] = useState(false);
@@ -401,12 +398,12 @@ const ItemDetail = (props: any) => {
                   <span>Created By</span>
                   <Link to="/">
                     {loginStatus &&
-                      item?.ownerUser.address.toLowerCase() ===
+                    item?.ownerUser.address.toLowerCase() ===
                       account.toLowerCase()
                       ? "You"
                       : String(item.ownerUser && item.ownerUser.address)
-                        .substring(2, 7)
-                        .toUpperCase()}
+                          .substring(2, 7)
+                          .toUpperCase()}
                   </Link>
                 </div>
               </Accordion.Body>
@@ -416,9 +413,7 @@ const ItemDetail = (props: any) => {
               <Accordion.Header>
                 <BsInfoCircleFill /> About{" "}
               </Accordion.Header>
-              <Accordion.Body>
-                {item?.description}
-              </Accordion.Body>
+              <Accordion.Body>{item?.description}</Accordion.Body>
             </Accordion.Item>
             <br />
 
@@ -502,15 +497,16 @@ const ItemDetail = (props: any) => {
                 </span>
                 <Link to="/">
                   {loginStatus &&
-                    item.ownerUser &&
-                    item.ownerUser.address.toLowerCase() === account.toLowerCase()
+                  item.ownerUser &&
+                  item.ownerUser.address.toLowerCase() === account.toLowerCase()
                     ? "You"
                     : String(item.ownerUser && item.ownerUser.address)
+                        .substring(2, 7)
+                        .toUpperCase()}
+                  {!loginStatus &&
+                    String(item.ownerUser && item.ownerUser.address)
                       .substring(2, 7)
                       .toUpperCase()}
-                  {!loginStatus && String(item.ownerUser && item.ownerUser.address)
-                    .substring(2, 7)
-                    .toUpperCase()}
                 </Link>
                 <p className="billy-desc">
                   <Visibility /> 12 views
@@ -520,46 +516,38 @@ const ItemDetail = (props: any) => {
                 </p>
               </div>
               <div className="hline"></div>
-              {
-                item?.lastSold !== 0 &&
+              {item?.lastSold !== 0 && (
                 <div className="countdown-bid-price">
                   <div className="countdown-bid-price-div">
                     <span>Last Sold Price</span>
                     <span>
-                      <strong>
-                        {" "}
-                        {item?.lastSold} VLX
-                      </strong>
+                      <strong> {item?.lastSold} VLX</strong>
                       <small> = {(item?.lastSold * rate).toFixed(3)} USD</small>
                     </span>
                   </div>
                 </div>
-              }
-              {
-                item?.lastBid !== 0 &&
+              )}
+              {item?.lastBid !== 0 && (
                 <div className="countdown-bid-price">
                   <div className="countdown-bid-price-div">
                     <span>Highest Bid Price</span>
                     <span>
-                      <strong>
-                        {" "}
-                        {item?.lastBid} VLX
-                      </strong>
+                      <strong> {item?.lastBid} VLX</strong>
                       <small> = {(item?.lastBid * rate).toFixed(3)} USD</small>
                     </span>
                   </div>
                 </div>
-              }
+              )}
               <div className="countdown-bid-price">
                 {item?.auction && (
                   <div className="countdown-bid-price-div">
                     <span>Current Bid Price</span>
                     <span>
-                      <strong>
+                      <strong> {item?.auction.price} VLX</strong>
+                      <small>
                         {" "}
-                        {item?.auction.price} VLX
-                      </strong>
-                      <small> = {(item?.auction.price * rate).toFixed(3)} USD</small>
+                        = {(item?.auction.price * rate).toFixed(3)} USD
+                      </small>
                     </span>
                   </div>
                 )}
@@ -567,11 +555,11 @@ const ItemDetail = (props: any) => {
                   <div className="countdown-bid-price-div">
                     <span>Current Price</span>
                     <span>
-                      <strong>
+                      <strong> {item?.pair.price} VLX</strong>
+                      <small>
                         {" "}
-                        {item?.pair.price} VLX
-                      </strong>
-                      <small> = {(item?.pair.price * rate).toFixed(3)} USD</small>
+                        = {(item?.pair.price * rate).toFixed(3)} USD
+                      </small>
                     </span>
                   </div>
                 )}
@@ -591,10 +579,10 @@ const ItemDetail = (props: any) => {
               <div className="hline"></div>
               <div className="col-div br-div">
                 <div className="row-div auction-bids-btns">
-
                   {loginStatus &&
                     item?.pair &&
-                    item?.pair.owner.toLowerCase() !== account.toLowerCase() && (
+                    item?.pair.owner.toLowerCase() !==
+                      account.toLowerCase() && (
                       <Button
                         itemDetails={true}
                         icon={<Loyalty />}
@@ -607,7 +595,7 @@ const ItemDetail = (props: any) => {
                     !item?.pair &&
                     item?.auction &&
                     item?.auction.owner.toLowerCase() !==
-                    account.toLowerCase() && (
+                      account.toLowerCase() && (
                       <Button
                         onClick={() => onPlaceBidModal()}
                         itemDetails={true}
@@ -621,14 +609,13 @@ const ItemDetail = (props: any) => {
                     !item?.auction &&
                     item?.owner.toLowerCase() === account.toLowerCase() && (
                       <Button
-                        label='Sell'
+                        label="Sell"
                         className="send-message item-detail m-b-5"
                         onClick={() => setShowListingModal(true)}
                       />
                     )}
                   {loginStatus &&
-                    (item.pair ||
-                    item?.auction) &&
+                    (item.pair || item?.auction) &&
                     item.itemOwner.toLowerCase() === account.toLowerCase() && (
                       <Button
                         className="send-message item-detail m-b-5"
@@ -729,9 +716,8 @@ const ItemDetail = (props: any) => {
                                     {Math.ceil(
                                       // (parseFloat(item.auction.endTime) -
                                       //   parseFloat(bid.timestamp)) /
-                                      (item?.auction.endTime -
-                                        bid.timestamp) /
-                                      (60 * 60 * 24)
+                                      (item?.auction.endTime - bid.timestamp) /
+                                        (60 * 60 * 24)
                                     )}{" "}
                                     days
                                   </div>

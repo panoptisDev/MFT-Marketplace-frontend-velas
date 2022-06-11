@@ -3,10 +3,8 @@ import {
   PhotoFilter,
   FormatPaint,
   FavoriteBorder,
-  VisibilityOff,
   History,
   Storefront,
-  FormatListBulleted,
   KeyboardArrowDown,
   Collections,
   Apps,
@@ -16,14 +14,12 @@ import {
   ErrorOutline,
 } from "@material-ui/icons";
 import Popover from "@material-ui/core/Popover";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./tagListStyle.scss";
 import ProfileTabBody from "../tabBody/ProfileTabBody";
 
 const ProfileTagList = (props: any) => {
   const { switchTab, tab, userAddress } = props;
-  const router = useHistory();
   const [anchorElCreated, setAnchorElCreated] = React.useState(null);
   const [anchorElOffers, setAnchorElOffers] = React.useState(null);
   const [anchorElListings, setAnchorElListings] = React.useState(null);
@@ -33,10 +29,10 @@ const ProfileTagList = (props: any) => {
     setAnchorElCreated(e.currentTarget);
   };
 
-  const showMoreOffers = (e: any) => {
-    e.preventDefault();
-    setAnchorElOffers(e.currentTarget);
-  };
+  // const showMoreOffers = (e: any) => {
+  //   e.preventDefault();
+  //   setAnchorElOffers(e.currentTarget);
+  // };
 
   const showMoreListings = (e: any) => {
     e.preventDefault();

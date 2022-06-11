@@ -8,8 +8,7 @@ import { useMediaQuery } from "react-responsive";
 import "./style.scss";
 import CollectionList from "../../components/collectionList/CollectionList";
 import axios from "axios";
-import { useWeb3React } from "@web3-react/core";
-import PageHeader from "../../components/PageHeader/PageHeader";
+// import { useWeb3React } from "@web3-react/core";
 import SelectMenu from "../../components/MoreComponents/SelectMenu";
 
 import {
@@ -21,7 +20,7 @@ import {
 } from "../../utils/options";
 
 const CollectionsPage = (props: any) => {
-  const { user } = props;
+  // const { user } = props;
   const [isLoading, setIsLoading] = useState(false);
   const [isTopLoading, setIsTopLoading] = useState(false);
   const [sectionHeight, setSectionHeight] = useState("0vh");

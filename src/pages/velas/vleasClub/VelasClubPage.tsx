@@ -8,10 +8,9 @@ import axios from "axios";
 import "./style.scss";
 import ItemDetail from "../../../components/itemDetail/ItemDetail";
 import { useLocation } from "react-router-dom";
-import PageHeader from "../../../components/PageHeader/PageHeader";
 
 const VelasClubPage = (props: any) => {
-  const { user } = props;
+  // const { user } = props;
   const [isLoading, setIsLoading] = useState(false);
   const [isTopLoading, setIsTopLoading] = useState(false);
   const [sectionHeight, setSectionHeight] = useState("0vh");

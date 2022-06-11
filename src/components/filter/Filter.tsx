@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { FormControl, InputGroup } from "react-bootstrap";
+import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import SearchFilterBar from "../MoreComponents/SearchFilterBar";
 import "./styles.css";

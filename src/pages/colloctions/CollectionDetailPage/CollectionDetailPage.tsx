@@ -1,14 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-  Edit,
-  ViewList,
-  Add,
-  MoreVert,
-  PhotoFilter,
-  History,
-} from "@material-ui/icons";
-import Tooltip from "@material-ui/core/Tooltip";
-import { Link, useLocation } from "react-router-dom";
+import { Edit } from "@material-ui/icons";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 import "./CollectionDetailPage.scss";
@@ -18,10 +10,9 @@ import { useMediaQuery } from "react-responsive";
 // import Menu from "components/menu/Menu";
 import CollectionTabBody from "../../../components/profile/tabBody/CollectionTabBody";
 import { useWeb3React } from "@web3-react/core";
-import PageHeader from "../../../components/PageHeader/PageHeader";
 
 const CollectionDetailPage = (props: any) => {
-  const { user } = props;
+  // const { user } = props;
   const [collection, setCollection] = useState<any>(null);
   const [items, setItems] = useState<any[]>([]);
   const location = useLocation();

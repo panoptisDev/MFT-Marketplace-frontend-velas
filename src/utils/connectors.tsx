@@ -1,7 +1,7 @@
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 import { currentNetwork } from "./index";
-import getNodeUrl from "./getRpcUrl";
+// import getNodeUrl from "./getRpcUrl";
 import Metamask from "../icons/Metamask";
 import WalletConnect from "../icons/WalletConnect";
 

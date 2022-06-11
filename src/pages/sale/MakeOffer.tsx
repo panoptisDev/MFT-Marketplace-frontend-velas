@@ -1,5 +1,5 @@
 import { useState } from "react";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 import { Modal } from "@material-ui/core";
 import Button from "../../components/MoreComponents/Button";
 import "./makeOffer.scss";

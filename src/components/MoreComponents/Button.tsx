@@ -1,4 +1,3 @@
-import React from "react";
 import "./styles.css";
 
 const Button = ({
@@ -8,7 +7,6 @@ const Button = ({
   bannerBtn,
   placeBid1,
   placeBid2,
-  authorFollow,
   itemDetails,
   navBar,
   className,

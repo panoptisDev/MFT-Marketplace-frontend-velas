@@ -1,5 +1,5 @@
 .what-so-ever {
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   /* overflow: auto !important; */
   background-color: #343444;
   width: 100%;
@@ -8,12 +8,25 @@
   overflow-x: scroll;
   margin-top: 20px !important;
 }
+.what-so-ever::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.what-so-ever::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.what-so-ever::-webkit-scrollbar-thumb {
+  background-color: #887dff;
+  outline: none;
+}
 .trading-history {
   border-radius: 4px;
   padding-right: 2px;
   height: 50vh;
   width: 100%;
-  overflow: scroll !important;
+  /* overflow: scroll !important; */
   margin: auto;
 }
 .history-titles {

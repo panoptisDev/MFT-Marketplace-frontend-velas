@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import { AiOutlineCheck } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Title from "../Title/Title";
 import "./styles.css";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import Slider from "react-slick";
-import Likes from "../Likes/Likes";
 import axios from "axios";
 import EmptyCard from "../EmptyCard/EmptyCard";
 
@@ -99,7 +95,11 @@ const PopularCollection = () => {
         <Slider className="slider-container" {...settings}>
           {collections &&
             array.map((collection: any, index: any) => (
-              <EmptyCard popularCollection={true} collection={collection} />
+              <EmptyCard
+                key={index}
+                popularCollection={true}
+                collection={collection}
+              />
               // <div>
               //   <div key={index} className="pop-collection-card">
               //     <div

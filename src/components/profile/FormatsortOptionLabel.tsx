@@ -1,5 +1,3 @@
-import React from "react";
-
 const FormatsortOptionLabel = ({ value, label, customAbbreviation }: any) => (
   <div
     style={{

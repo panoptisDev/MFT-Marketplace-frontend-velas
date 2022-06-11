@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import "./styles.css";
 import { ReactComponent as Magnifier } from "../../assets/icons/magnifier.svg";

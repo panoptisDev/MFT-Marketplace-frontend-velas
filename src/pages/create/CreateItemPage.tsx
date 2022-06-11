@@ -2,19 +2,18 @@ import CreateItem from "../../components/create/CreateItem";
 // import Loading from 'components/loading/Loading';
 // import Menu from 'components/menu/Menu';
 // import Topbar from 'components/topbar/Topbar';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 // import { useMediaQuery } from 'react-responsive';
 import "./style.scss";
-import PageHeader from "../../components/PageHeader/PageHeader";
 
 const CreateItemPage = (props: any) => {
-  const { user } = props;
+  // const { user } = props;
   const [isLoading, setIsLoading] = useState(false);
   const [isTopLoading, setIsTopLoading] = useState(true);
-  const [sectionHeight, setSectionHeight] = useState("0vh");
+  // const [sectionHeight, setSectionHeight] = useState("0vh");
   const [loadingHeight, setLoadingHeight] = useState(0);
 
-  const [menuOpen, setMenuOpen] = useState(false);
+  // const [menuOpen, setMenuOpen] = useState(false);
 
   // loading part
   window.onload = () => {

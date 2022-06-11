@@ -2,6 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Button, Modal } from "@material-ui/core";
 import "./PlaceBid.scss";
+
 export default function PlaceBid({ balance, nftFee, onClose, onSubmit }: any) {
   const [open, setOpen] = useState<any>(true);
   const [currencyValue, setCurrencyValue] = useState<any>("ETH");
@@ -26,7 +27,7 @@ export default function PlaceBid({ balance, nftFee, onClose, onSubmit }: any) {
 
   return (
     <Modal
-      className="place-bid"
+      className="item-place-bid"
       open={true}
       onClose={(event, reason) => {
         if (reason === "backdropClick") {

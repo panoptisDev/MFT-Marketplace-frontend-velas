@@ -11,7 +11,7 @@ export function useEagerConnect() {
   const [error, setError] = useState();
   const connector = window.localStorage.getItem(connectorLocalStorageKey);
   useEffect(() => {
-    if (connector && connector != "") {
+    if (connector && connector !== "") {
       const currentConnector = getConnector(connector);
       if (connector === "injectedConnector") {
         (currentConnector as InjectedConnector)

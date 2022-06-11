@@ -1,5 +1,4 @@
 import Banner from "../../components/Banner/Banner";
-import Footer from "../../components/Footer/Footer";
 import LiveAuctions from "../../components/LiveAuctions/LiveAuctions";
 import NFTsSteps from "../../components/NFTsSteps/NFTsSteps";
 import PopularCollection from "../../components/PopularCollection/PopularCollection";

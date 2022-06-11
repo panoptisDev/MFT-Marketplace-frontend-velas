@@ -2,7 +2,6 @@ import "./ListItemSalePage.scss";
 
 import { useEffect, useState } from "react";
 import Button from "../../components/MoreComponents/Button";
-import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { createAuction, listItem } from "../../utils/contracts";
@@ -20,7 +19,7 @@ const ListItemSalePage = ({
   nftFee,
   onClose,
   onSubmit,
-  rate
+  rate,
 }: any) => {
   const { register, handleSubmit } = useForm();
 
@@ -36,7 +35,7 @@ const ListItemSalePage = ({
   const [saleType, setSaleType] = useState("FixedPrice");
 
   const [listing, setListing] = useState(false);
-  const onCancelListing = async (updatedData:any) => {
+  const onCancelListing = async (updatedData: any) => {
     let startTimeStamp = 0;
     let endTimeStamp = 0;
     if (!loginStatus) {
@@ -149,7 +148,10 @@ const ListItemSalePage = ({
             <ArrowBackIcon />
           </Button>
         </div>
-        <form className="saleContainer" onSubmit={handleSubmit(onCancelListing)}>
+        <form
+          className="saleContainer"
+          onSubmit={handleSubmit(onCancelListing)}
+        >
           <div className="row-div">
             <SaleType setSaleType={setSaleType}></SaleType>
             {saleType === "FixedPrice" ? (
@@ -158,15 +160,12 @@ const ListItemSalePage = ({
               <></>
             )}
             {saleType === "TimedAuction" ? (
-              <TimedAuction register={register} rate={rate}/>
+              <TimedAuction register={register} rate={rate} />
             ) : (
               <></>
             )}
           </div>
-          <button
-            className="listBtn outLineBtn explore"
-            disabled={listing}
-          >
+          <button className="listBtn outLineBtn explore" disabled={listing}>
             Complete Listing
           </button>
         </form>

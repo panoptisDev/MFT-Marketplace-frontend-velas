@@ -1,10 +1,9 @@
-import Loading from "../../components/loading/Loading";
+// import Loading from "../../components/loading/Loading";
 // import Menu from 'components/menu/Menu';
 // import Topbar from 'components/topbar/Topbar';
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { Col, Container, Nav, Row, Tab, Tabs } from "react-bootstrap";
-import data from "../../utils/data";
+// import { Col, Container, Nav, Row, Tab, Tabs } from "react-bootstrap";
 import author from "../../assets/images/author-bg.jpg";
 import author1 from "../../assets/images/author.52ebdcb6.jpg";
 import "./style.scss";
@@ -17,8 +16,7 @@ import ProfileTagList from "../../components/profile/tagList/ProfileTagList";
 import { getIpfsHashFromFile } from "../../utils/ipfs";
 import toast from "react-hot-toast";
 import { useWeb3React } from "@web3-react/core";
-import PageHeader from "../../components/PageHeader/PageHeader";
-import EmptyCard from "../../components/EmptyCard/EmptyCard";
+// import EmptyCard from "../../components/EmptyCard/EmptyCard";
 
 const AccountPage = (props: any) => {
   const { user } = props;
@@ -29,7 +27,7 @@ const AccountPage = (props: any) => {
     const isLoggedin: any =
       account && active && chainId === parseInt(newVariable, 10);
     setLoginStatus(isLoggedin);
-  }, [connector, library, account, active, chainId]);
+  }, [connector, library, account, active, chainId, newVariable]);
 
   const [userProfile, setUserProfile] = useState<any>(undefined);
   const location = useLocation();
@@ -212,7 +210,6 @@ const AccountPage = (props: any) => {
                     onChange={onChangeAvatarFile}
                     alt=""
                   />
-
                   <Edit className="edit-icon" />
                   <img
                     src={

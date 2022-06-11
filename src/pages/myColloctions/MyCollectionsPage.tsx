@@ -15,10 +15,9 @@ import CustomDropdown from "../../components/dropdown/CustomDropdown";
 import "./style.scss";
 import CollectionList from "../../components/collectionList/CollectionList";
 import toast from "react-hot-toast";
-import PageHeader from "../../components/PageHeader/PageHeader";
 
 const MyCollectionsPage = (props: any) => {
-  const { user } = props;
+  // const { user } = props;
   const [isLoading, setIsLoading] = useState(false);
   const [isTopLoading, setIsTopLoading] = useState(false);
   const [sectionHeight, setSectionHeight] = useState("0vh");

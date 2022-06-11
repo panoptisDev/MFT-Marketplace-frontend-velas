@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AuctionCard from "../AuctionCard/AuctionCard";
 import Title from "../Title/Title";
 import "./styles.css";
@@ -92,9 +92,17 @@ const LiveAuctions = () => {
       )}
       <Slider className="slider-container" {...settings}>
         {items &&
-          items.map((item: any, index: any) => (
-            item.auction && <AuctionCard key={index} item={item} rate={rate} TodayPick={false} />
-          ))}
+          items.map(
+            (item: any, index: any) =>
+              item.auction && (
+                <AuctionCard
+                  key={index}
+                  item={item}
+                  rate={rate}
+                  TodayPick={false}
+                />
+              )
+          )}
       </Slider>
       {/* </div> */}
     </div>

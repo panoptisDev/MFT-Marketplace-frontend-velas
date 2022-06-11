@@ -1,9 +1,6 @@
-import React, { useState } from "react";
 import "./styles.css";
 
 const Title = ({ title }: any) => {
-  const [first, setFirst] = useState(0);
-
   //   useEffect(() => {
   //     setInterval(function () {
   //       setFirst(first + 1);

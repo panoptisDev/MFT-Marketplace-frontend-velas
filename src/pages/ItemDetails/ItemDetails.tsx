@@ -1,5 +1,3 @@
-import React from "react";
-import PageHeader from "../../components/PageHeader/PageHeader";
 import PlaceBid from "../../components/PlaceBid/PlaceBid";
 import "./styles.css";
 import itemDetail from "../../assets/images/item-detail.jpg";

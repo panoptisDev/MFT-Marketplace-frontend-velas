@@ -1,4 +1,3 @@
-import React from "react";
 import "./styles.css";
 import activity from "../../assets/images/activity.jpg";
 import Link from "../MoreComponents/Link";

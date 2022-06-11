@@ -8,23 +8,14 @@ import { useMediaQuery } from "react-responsive";
 import "./style.scss";
 import NFTItemList from "../../components/collectionList/NFTItemList";
 import CopyBox from "../../components/copyBox/CopyBox";
-import { Language, Telegram, Twitter, Widgets } from "@material-ui/icons";
 import { useWeb3React } from "@web3-react/core";
 import axios from "axios";
-import PageHeader from "../../components/PageHeader/PageHeader";
-import {
-  FaTwitter,
-  FaFacebook,
-  FaTelegramPlane,
-  FaYoutube,
-  FaTiktok,
-  FaDiscord,
-} from "react-icons/fa";
+import { FaTwitter, FaTelegramPlane } from "react-icons/fa";
 import { TbWorld } from "react-icons/tb";
 import { MdWidgets } from "react-icons/md";
 
 const VelasPage = (props: any) => {
-  const { user } = props;
+  // const { user } = props;
 
   const { connector, library, chainId, account, active }: any = useWeb3React();
   const [loginStatus, setLoginStatus] = useState(false);

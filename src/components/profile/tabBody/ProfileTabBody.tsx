@@ -16,6 +16,7 @@ import "./tabBodyStyle.scss";
 import LeftFilterBox from "../leftFilterBox/LeftFilterBox";
 import ActivitiesTable from "../activitiesTable/ActivitiesTable";
 import DataCard from "../dataCard/DataCard";
+import MyCollectionList from "../../collectionList/MyCollectionList";
 // import MyCollectionList from "components/collectionList/MyCollectionList";
 
 const ProfileTabBody = (props: any) => {
@@ -72,12 +73,12 @@ const ProfileTabBody = (props: any) => {
     setIsShowLeftMenu(!isShowLeftMenu);
   };
 
-  const handleCommand: any = (type: any, token: any) => {
-    token = token + "";
-    setIsShowSubMenu(true);
-    setCommandType(type);
-    setSelectedList([...token]);
-  };
+  // const handleCommand: any = (type: any, token: any) => {
+  //   token = token + "";
+  //   setIsShowSubMenu(true);
+  //   setCommandType(type);
+  //   setSelectedList([...token]);
+  // };
 
   // const handleClickItem = (token) => {
   // 	token = token + '';
@@ -136,147 +137,165 @@ const ProfileTabBody = (props: any) => {
   });
 
   return (
-    <div className="tabBody">
-      {tab !== "favorites" && (
-        <div className={"left-filter-bar" + (isShowLeftMenu ? " active" : "")}>
-          {isShowLeftMenu ? (
+    <>
+      <div className="tabBody">
+        {tab !== "favorites" && (
+          <div
+            className={"left-filter-bar" + (isShowLeftMenu ? " active" : "")}
+          >
+            {isShowLeftMenu ? (
+              <LeftFilterBox
+                handleChangeFilterCondition={setFilterConditions}
+                filterConditions={filterConditions}
+                handleClickToggleBtn={handleClickToggleBtn}
+                tab={tab}
+              />
+            ) : (
+              <div className="toggle-box" onClick={handleClickToggleBtn}>
+                <ArrowForward className="toggle-btn" />
+              </div>
+            )}
+          </div>
+        )}
+        {isShowMobileFilterMenu && (
+          <div className="mobile-filter-bar">
             <LeftFilterBox
               handleChangeFilterCondition={setFilterConditions}
               filterConditions={filterConditions}
               handleClickToggleBtn={handleClickToggleBtn}
               tab={tab}
+              hideMenu={() => setIsShowMobileFilterMenu(false)}
+              isMobile={true}
             />
-          ) : (
-            <div className="toggle-box" onClick={handleClickToggleBtn}>
-              <ArrowForward className="toggle-btn" />
-            </div>
-          )}
-        </div>
-      )}
-      {isShowMobileFilterMenu && (
-        <div className="mobile-filter-bar">
-          <LeftFilterBox
-            handleChangeFilterCondition={setFilterConditions}
-            filterConditions={filterConditions}
-            handleClickToggleBtn={handleClickToggleBtn}
-            tab={tab}
-            hideMenu={() => setIsShowMobileFilterMenu(false)}
-            isMobile={true}
-          />
-        </div>
-      )}
-      <div className="content-box">
-        {!(
-          tab === "activity" ||
-          tab.includes("bids") ||
-          tab.includes("listings")
-        ) && (
-          <div className="search-box">
-            <input
-              className="bordered-input m-r-5 flex-1"
-              placeholder="Search"
-            />
-            <div className="flex-1 sort-box">
-              <Select
-                defaultValue={options[0]}
-                formatOptionLabel={FormatsortOptionLabel}
-                options={options}
-                instanceId="chainSelect"
-                className="select-gray flex-1 m-r-5"
-              />
-              <Select
-                defaultValue={secondOptions[0]}
-                formatOptionLabel={FormatsortOptionLabel}
-                options={secondOptions}
-                instanceId="chainSelect"
-                className="select-gray flex-1 m-l-5"
-              />
-            </div>
-            {!isShowSubMenu && !isShowMobileFilterMenu && tab !== "favorites" && (
-              <div className="filterButton">
-                <div
-                  className="filter-btn"
-                  onClick={() =>
-                    setIsShowMobileFilterMenu(!isShowMobileFilterMenu)
-                  }
-                >
-                  Filter
-                </div>
-              </div>
-            )}
           </div>
         )}
-        {filterConditions.length > 0 && (
-          <div className="filter-content">
-            {filterConditions.map((label: any, key: any) => (
-              <div className="filter-button" key={key}>
-                {label}
-                <Close
-                  onClick={() => removeConditions(label)}
-                  className="filter-close"
+        <div className="content-box">
+          {!(
+            tab === "activity" ||
+            tab.includes("bids") ||
+            tab.includes("listings")
+          ) && (
+            <div className="search-box">
+              <input
+                className="bordered-input m-r-5 flex-1"
+                placeholder="Search"
+              />
+              <div className="flex-1 sort-box">
+                <Select
+                  defaultValue={options[0]}
+                  formatOptionLabel={FormatsortOptionLabel}
+                  options={options}
+                  instanceId="chainSelect"
+                  className="select-gray flex-1 m-r-5"
+                />
+                <Select
+                  defaultValue={secondOptions[0]}
+                  formatOptionLabel={FormatsortOptionLabel}
+                  options={secondOptions}
+                  instanceId="chainSelect"
+                  className="select-gray flex-1 m-l-5"
                 />
               </div>
-            ))}
-            <div className="clear-btn" onClick={removeAllConditions}>
-              Clear All
+              {!isShowSubMenu &&
+                !isShowMobileFilterMenu &&
+                tab !== "favorites" && (
+                  <div className="filterButton">
+                    <div
+                      className="filter-btn"
+                      onClick={() =>
+                        setIsShowMobileFilterMenu(!isShowMobileFilterMenu)
+                      }
+                    >
+                      Filter
+                    </div>
+                  </div>
+                )}
             </div>
-          </div>
-        )}
-        {/* {tab === "collections" && (
-          <MyCollectionList {...props} collections={collections} />
-        )}
-        {(tab === "created" || tab === "created_collections") && (
-          <MyCollectionList collections={createdCollections} />
-        )}
-        {tab === "hidden" && <MyCollectionList collections={collections} />}
-        {tab === "favorites" && (
-          <MyCollectionList collections={createdCollections} />
-        )}
-        {tab === "activity" && <ActivitiesTable />}
-        {(tab.includes("bids") || tab.includes("listings")) && <DataCard />} */}
-      </div>
-      {isShowSubMenu && (
-        <div className="transferBox">
-          <div className="cart-container">
-            <div className="cart-box">
-              {selectedList.map((item: any, key: any) => (
-                <div className="cart-item" key={key}>
-                  <img
-                    src="https://m.raregems.io/c/21725?optimizer=image&amp;width=400"
-                    className="cart-img"
-                    alt="cart-img"
+          )}
+          {filterConditions.length > 0 && (
+            <div className="filter-content">
+              {filterConditions.map((label: any, key: any) => (
+                <div className="filter-button" key={key}>
+                  {label}
+                  <Close
+                    onClick={() => removeConditions(label)}
+                    className="filter-close"
                   />
                 </div>
               ))}
-              {selectedList.length === 0 && (
-                <p>
-                  Select items to transfer. You can only sell bundles of items
-                  with the same verification status.
-                </p>
-              )}
+              <div className="clear-btn" onClick={removeAllConditions}>
+                Clear All
+              </div>
             </div>
-            <Button className="transfer-btn" onClick={handleClickCommand}>
-              {commandType === "transfer" ? (
-                <Send />
-              ) : commandType === "sell" ? (
-                <Storefront />
-              ) : (
-                <VisibilityOff />
-              )}
-              {commandType === "transfer"
-                ? "Transfer"
-                : commandType === "sell"
-                ? "Sell"
-                : "Hide"}
-            </Button>
-            <Button className="transfer-cancel-btn" onClick={handleClickCancel}>
-              <Block />
-              Cancel
-            </Button>
-          </div>
+          )}
         </div>
-      )}
-    </div>
+
+        {isShowSubMenu && (
+          <div className="transferBox">
+            <div className="cart-container">
+              <div className="cart-box">
+                {selectedList.map((item: any, key: any) => (
+                  <div className="cart-item" key={key}>
+                    <img
+                      src="https://m.raregems.io/c/21725?optimizer=image&amp;width=400"
+                      className="cart-img"
+                      alt="cart-img"
+                    />
+                  </div>
+                ))}
+                {selectedList.length === 0 && (
+                  <p>
+                    Select items to transfer. You can only sell bundles of items
+                    with the same verification status.
+                  </p>
+                )}
+              </div>
+              <Button className="transfer-btn" onClick={handleClickCommand}>
+                {commandType === "transfer" ? (
+                  <Send />
+                ) : commandType === "sell" ? (
+                  <Storefront />
+                ) : (
+                  <VisibilityOff />
+                )}
+                {commandType === "transfer"
+                  ? "Transfer"
+                  : commandType === "sell"
+                  ? "Sell"
+                  : "Hide"}
+              </Button>
+              <Button
+                className="transfer-cancel-btn"
+                onClick={handleClickCancel}
+              >
+                <Block />
+                Cancel
+              </Button>
+            </div>
+          </div>
+        )}
+      </div>
+      <div className="profile-tab-body-cards">
+        {tab === "collections" && (
+          <div className="profile-tab-body-cards-collections">
+            <MyCollectionList {...props} collections={collections} />
+          </div>
+        )}
+        {(tab === "created" || tab === "created_collections") && (
+          <div className="profile-tab-body-cards-collections">
+            <MyCollectionList collections={createdCollections} />
+          </div>
+        )}
+        {tab === "hidden" && <MyCollectionList collections={collections} />}
+        {tab === "favorites" && (
+          <div className="profile-tab-body-cards-collections">
+            <MyCollectionList collections={createdCollections} />
+          </div>
+        )}
+        {tab === "activity" && <ActivitiesTable />}
+        {(tab.includes("bids") || tab.includes("listings")) && <DataCard />}
+      </div>
+    </>
   );
 };
 

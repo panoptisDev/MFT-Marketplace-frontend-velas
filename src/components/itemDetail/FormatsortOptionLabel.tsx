@@ -1,6 +1,4 @@
-import React from "react";
-
-const FormatsortOptionLabel = ({ value, label, customAbbreviation }: any) => (
+const FormatsortOptionLabel = ({ label }: any) => (
   <div
     style={{
       display: "flex",

@@ -1,4 +1,3 @@
-import Button from "../MoreComponents/Button";
 import ReactPlayer from "react-player";
 // import { useNavigate } from "react-router-dom";
 import "./card.scss";

@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import "./timer.css";
 // import Mint from "../Mint/Mint";
 import { ReactComponent as Flame } from "../../assets/icons/flame.svg";
-import { spawn } from "child_process";
 
 const RowContainer = styled.div`
   color: hsl(0, 0%, 100%);

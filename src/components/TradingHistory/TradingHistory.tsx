@@ -1,8 +1,7 @@
-import React from "react";
 import "./TradingHistory.css";
-import { VscLinkExternal } from "react-icons/vsc";
-import SwapVertIcon from "@material-ui/icons/SwapVert";
-import { data1 } from "./TradingData";
+// import { VscLinkExternal } from "react-icons/vsc";
+// import SwapVertIcon from "@material-ui/icons/SwapVert";
+// import { data1 } from "./TradingData";
 
 const TradingHistory = ({ loginStatus, item, account }: any) => {
   return (

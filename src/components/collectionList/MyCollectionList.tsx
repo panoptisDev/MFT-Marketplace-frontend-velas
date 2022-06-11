@@ -1,14 +1,25 @@
-import { InsertEmoticon } from "@material-ui/icons";
-import Card3 from "../cards/Card3";
+import EmptyCard from "../EmptyCard/EmptyCard";
 import "./collectionList.scss";
 
 const MyCollectionList = (props: any) => {
   const { collections } = props;
+  console.log(collections, "this is collection");
+  let array: any = [];
+  for (let i = 0; i < 4; i++) {
+    array = array.concat(collections);
+  }
   return (
     <div className="collectionList" id="sneak">
       {collections &&
-        collections.map((collection: any, key: any) => {
-          return <Card3 {...props} collection={collection} key={key} />;
+        array.map((collection: any, key: any) => {
+          return (
+            <EmptyCard
+              collectionList={true}
+              {...props}
+              collection={collection}
+              key={key}
+            />
+          );
         })}
     </div>
   );
