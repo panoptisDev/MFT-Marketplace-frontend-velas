@@ -50,7 +50,7 @@ export default function PlaceBid({ balance, nftFee, onClose, onSubmit }: any) {
           />
           {parseFloat(bidPrice) < 0.111 && (
             <div className="warning">
-              The price should be higer than 0.111ETH
+              The price should be higer than 0.111MTV
             </div>
           )}
           <select onChange={onChangePrice}>
