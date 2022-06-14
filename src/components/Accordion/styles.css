@@ -11,6 +11,22 @@
   color: white;
   border-radius: 8px;
 }
+.no-levels-yet {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+.no-levels-yet svg {
+  width: 100px;
+  margin-top: 10px;
+  height: 74px;
+  fill: white;
+  margin-bottom: 10px;
+  color: white !important;
+  fill: white !important;
+}
 .LvlPropStat-Tables {
   border-radius: 4px;
   padding-right: 2px;

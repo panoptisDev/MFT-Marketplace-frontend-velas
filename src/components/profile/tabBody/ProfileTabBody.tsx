@@ -226,7 +226,6 @@ const ProfileTabBody = (props: any) => {
             </div>
           )}
         </div>
-
         {isShowSubMenu && (
           <div className="transferBox">
             <div className="cart-container">

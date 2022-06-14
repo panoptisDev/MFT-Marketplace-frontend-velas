@@ -44,18 +44,20 @@ export default function PlaceBid({ balance, nftFee, onClose, onSubmit }: any) {
         <div className="place_bid_title">Place a Bid</div>
         <div className="placeContainer">
           <input
+            min="0"
             name="price"
             onChange={onChangePrice}
             placeholder="Your Bid Price:"
+            type="number"
           />
           {parseFloat(bidPrice) < 0.111 && (
             <div className="warning">
-              The price should be higer than 0.111MTV
+              The price should be higer than 0.000 USD
             </div>
           )}
-          <select onChange={onChangePrice}>
+          {/* <select onChange={onChangePrice}>
             <option value="eth">ETH</option>
-          </select>
+          </select> */}
         </div>
         <br />
         <div className="btns">

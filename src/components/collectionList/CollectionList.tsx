@@ -2,9 +2,14 @@ import EmptyCard from "../EmptyCard/EmptyCard";
 import "./collectionList.scss";
 
 const CollectionList = (props: any) => {
-  const { collections } = props;
+  const { collections, collectionsListPage } = props;
   return (
-    <div className="collectionList" id="sneak">
+    <div
+      className={`collectionList ${
+        collectionsListPage && "collectionsListPage"
+      }`}
+      id="sneak"
+    >
       {collections &&
         collections.map((collection: any, index: any) => {
           return (

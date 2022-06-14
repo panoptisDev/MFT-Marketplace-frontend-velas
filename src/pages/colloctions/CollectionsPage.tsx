@@ -114,7 +114,11 @@ const CollectionsPage = (props: any) => {
               </div>
             </div>
 
-            <CollectionList {...props} collections={collections} />
+            <CollectionList
+              {...props}
+              collections={collections}
+              collectionsListPage={true}
+            />
           </div>
         </div>
         {/* <img src="assets/home_bg.jpg" alt="" className="bg1" /> */}

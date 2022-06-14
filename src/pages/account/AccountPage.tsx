@@ -27,7 +27,7 @@ const AccountPage = (props: any) => {
     const isLoggedin: any =
       account && active && chainId === parseInt(newVariable, 10);
     setLoginStatus(isLoggedin);
-  }, [connector, library, account, active, chainId, newVariable]);
+  }, [connector, library, account, active, chainId]);
 
   const [userProfile, setUserProfile] = useState<any>(undefined);
   const location = useLocation();
@@ -41,7 +41,7 @@ const AccountPage = (props: any) => {
 
   function getUser() {
     const userAddr: any = location.pathname.split("/")[2];
-    var valid = WAValidator.validate(userAddr, 'eth');
+    var valid = WAValidator.validate(userAddr, "eth");
     if (valid && userAddr && userAddr !== "") {
       setUserAddress(userAddr);
       axios.get(`/user/${userAddr}`).then((res) => {

@@ -5,6 +5,9 @@ import { ImStatsDots } from "react-icons/im";
 import { AiFillPropertySafety } from "react-icons/ai";
 import LevelsTable from "./StatsTable";
 import PropertiesTable from "./PropertiesTable";
+import { ReactComponent as Levels } from "../../assets/level.svg";
+import { ReactComponent as Stats } from "../../assets/stats.svg";
+import { ReactComponent as Properties } from "../../assets/properties.svg";
 
 const AccordionComponent = ({ loginStatus, account, item }: any) => {
   console.log(item.levels, "This is it buddy");
@@ -41,7 +44,10 @@ const AccordionComponent = ({ loginStatus, account, item }: any) => {
                 })} */}
               </div>
             ) : (
-              <div />
+              <div className="no-levels-yet">
+                <Levels />
+                <p>No Levels yet</p>
+              </div>
             )}
           </div>
         </Accordion.Body>
@@ -76,7 +82,11 @@ const AccordionComponent = ({ loginStatus, account, item }: any) => {
                 })} */}
               </div>
             ) : (
-              <div />
+              <div className="no-levels-yet">
+                <Stats />
+                <p>No Stats yet</p>
+              </div>
+              // <div />
             )}
           </div>
         </Accordion.Body>
@@ -107,7 +117,10 @@ const AccordionComponent = ({ loginStatus, account, item }: any) => {
                 })} */}
               </div>
             ) : (
-              <div />
+              <div className="no-levels-yet">
+                <Properties />
+                <p>No Properties yet</p>
+              </div>
             )}
           </div>
         </Accordion.Body>

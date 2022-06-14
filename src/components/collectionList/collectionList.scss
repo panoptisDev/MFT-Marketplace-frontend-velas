@@ -1,8 +1,11 @@
 @import "../../global.scss";
-.collectionList {
+
+.collectionList,
+.collectionsListPage {
   display: grid;
   justify-content: center;
   max-width: 100%;
+  grid-template-columns: 25% 25% 25% 25%;
   height: auto;
   @include mobile_potrait {
   }
@@ -12,6 +15,9 @@
     width: 100%;
   }
   @media screen and (max-width: 768px) {
-    
   }
+}
+.collectionsListPage {
+  max-width: 100%;
+  grid-template-columns: none;
 }

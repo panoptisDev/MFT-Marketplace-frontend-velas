@@ -49,10 +49,11 @@
 .history-titles {
   display: flex;
   align-items: center;
-  padding: 10px 15px;
+  padding: 5px 15px;
   text-align: left;
-  border-bottom: 1px solid #cecece9f;
-  border-top: 1px solid #cecece9f;
+  background-color: #535369;
+  border-bottom: 1px solid #cecece2f;
+  border-top: none;
 }
 .each-traded-item {
   padding: 20px 15px;
@@ -60,7 +61,7 @@
   align-items: center;
   display: flex;
   box-sizing: border-box;
-  border-bottom: 1px solid #cecece9f;
+  border-bottom: 1px solid #cecece2f;
 }
 
 .span__item {
@@ -137,31 +138,29 @@
 
 @media only screen and (max-width: 990px) {
   .what-so-ever {
-    max-width: 750px;
+    max-width: 700px;
     margin: 0 auto;
     width: 100%;
   }
   .trading-history {
-    width: 820px;
+    width: 800px;
   }
 }
 @media only screen and (max-width: 768px) {
   .what-so-ever {
-    max-width: 550px;
-    margin: 0 auto;
-    width: 100%;
+    max-width: 550px !important;
   }
 }
 @media only screen and (max-width: 576px) {
   .what-so-ever {
-    max-width: 400px;
+    max-width: 400px !important;
     margin: 0 auto;
     width: 100%;
   }
 }
 @media only screen and (max-width: 420px) {
   .what-so-ever {
-    max-width: 300px;
+    max-width: 300px !important;
     margin: 0 auto;
     width: 100%;
   }

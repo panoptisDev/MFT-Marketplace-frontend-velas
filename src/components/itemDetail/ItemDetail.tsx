@@ -5,9 +5,19 @@ import { TbListDetails } from "react-icons/tb";
 import { FiActivity } from "react-icons/fi";
 import TradingHistory from "../../components/TradingHistory/TradingHistory";
 import Timer from "../../components/timer/Timer";
-
+import { ReactComponent as NoChartData } from "../../assets/no-chart-data.svg";
 import { ReactComponent as ShoppingBag } from "../../assets/icons/shopping-bag.svg";
-
+import { ReactComponent as EmptyAsks } from "../../assets/empty-asks.svg";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 import {
   // Loupe,
   // ViewList,
@@ -58,6 +68,7 @@ import { BiDetail } from "react-icons/bi";
 import ItemDetailFilter from "../MoreComponents/ItemDetailFilter";
 // import SellPage from "../../pages/sale/SellPage";
 import BuyNowPage from "../../pages/sale/BuyNowPage";
+import { CartesianAxis } from "recharts";
 // import BidModal from "../connectModal/BidModal";
 
 const ItemDetail = (props: any) => {
@@ -332,6 +343,59 @@ const ItemDetail = (props: any) => {
   // const [isPropertyExpand, setIsPropertyExpand] = useState(false);
   // const [isStatsExpand, setIsStatsExpand] = useState(false);
   // const [isLevelExpand, setIsLevelExpand] = useState(false);
+
+  const data = [
+    {
+      name: "1/2",
+      name2: "A",
+      uv: 4000,
+      pv: 2400,
+      amt: 2400,
+    },
+    {
+      name: "1/3",
+      name2: "B",
+      uv: 3000,
+      pv: 1398,
+      amt: 2210,
+    },
+    {
+      name: "1/4",
+      name2: "C",
+      uv: 2000,
+      pv: 9800,
+      amt: 2290,
+    },
+    {
+      name: "1/5",
+      name2: "D",
+      uv: 2780,
+      pv: 3908,
+      amt: 2000,
+    },
+    {
+      name: "1/6",
+      name2: "E",
+      uv: 1890,
+      pv: 4800,
+      amt: 2181,
+    },
+    {
+      name: "1/7",
+      name2: "F",
+      uv: 2390,
+      pv: 3800,
+      amt: 2500,
+    },
+    {
+      name: "1/8",
+      name2: "G",
+      uv: 3490,
+      pv: 4300,
+      amt: 2100,
+    },
+  ];
+
   return (
     <div className="image-details__accordion">
       <div className="imageDetail">
@@ -352,7 +416,6 @@ const ItemDetail = (props: any) => {
           </div>
           <div className="col-div br-div">
             <p className="billy-desc">{item.description}</p>
-
             {item.lockContent === "" ? (
               <div />
             ) : (
@@ -396,10 +459,14 @@ const ItemDetail = (props: any) => {
               <Accordion.Body>
                 <div>
                   <span>Created By</span>
-                  <Link rel='noopener noreferrer' target="_blank" to={{
-                        pathname: "/account/" + item?.ownerUser.address,
-                        search: "?tab=collections",
-                      }}>
+                  <Link
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    to={{
+                      pathname: "/account/" + item?.ownerUser.address,
+                      search: "?tab=collections",
+                    }}
+                  >
                     {loginStatus &&
                     item?.ownerUser.address.toLowerCase() ===
                       account.toLowerCase()
@@ -498,10 +565,14 @@ const ItemDetail = (props: any) => {
                 <span style={{ color: "white", marginRight: "10px" }}>
                   Owned By
                 </span>
-                <Link rel='noopener noreferrer' target="_blank" to={{
-                        pathname: "/account/" + item?.ownerUser.address,
-                        search: "?tab=collections",
-                      }}>
+                <Link
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  to={{
+                    pathname: "/account/" + item?.ownerUser.address,
+                    search: "?tab=collections",
+                  }}
+                >
                   {loginStatus &&
                   item.ownerUser &&
                   item.ownerUser.address.toLowerCase() === account.toLowerCase()
@@ -633,119 +704,111 @@ const ItemDetail = (props: any) => {
               </div>
               <div className="hline"></div>
               {item.auction && (
-                <div>
-                  <div className="hline"></div>
-                  <div className="col-div p-t-10 p-b-10">
-                    <div
-                      className="row-div cursor-pointer s-b"
-                      onClick={() => {
-                        setIsPriceExpand(!isPriceExpand);
-                      }}
-                    >
-                      <h2 className="billy-header">
-                        <Timeline /> Price History
-                      </h2>
-                      <h2 className="billy-header">
-                        {!isPriceExpand ? <ExpandMore /> : <ExpandLess />}
-                      </h2>
-                    </div>
-                    <Expand
-                      open={isPriceExpand}
-                      duration={300}
-                      styles={styles}
-                      transitions={transitions}
-                    >
-                      <div className="col-div p-t-10 p-b-10">
-                        <Select
-                          defaultValue={options[0]}
-                          formatOptionLabel={FormatsortOptionLabel}
-                          options={options}
-                          instanceId="chainSelect"
-                          className="select-gray flex-1 m-r-5"
-                        />
-                        {item?.auction.bids?.length > 0 ? (
-                          <div className="col-div aic jcc">
-                            {item?.auction.bids.map((bid: any, key: any) => {
-                              console.log(bid.bidPrice); // 0.002
-                              console.log(bid.timestamp); //ex : 1653574771
-                              //This should be filtered by above selected date.
-                              return (
-                                <div key={key}>
-                                  {/* TODO display graph */}
-                                  {bid.bidPrice}
+                <Accordion
+                  style={{ width: "100%" }}
+                  defaultActiveKey={["0"]}
+                  alwaysOpen
+                >
+                  <br />
+                  <Accordion.Item eventKey="0">
+                    <Accordion.Header>
+                      <Timeline /> Price History
+                    </Accordion.Header>
+                    <Accordion.Body>
+                      {item?.auction.bids?.length > 0 ? (
+                        <div className="col-div aic jcc">
+                          {item?.auction.bids.map((bid: any, key: any) => {
+                            console.log(bid.bidPrice); // 0.002
+                            console.log(bid.timestamp); //ex : 1653574771
+                            //This should be filtered by above selected date.
+                            return (
+                              <div key={key}>
+                                {/* TODO display graph */}
+                                {/* {bid.bidPrice} */}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      ) : (
+                        <div className="col-div aic jcc">
+                          <img src="/assets/no-chart-data.svg" alt="" />
+                          {/* <NoChartData /> */}
+                          <p className="billy-desc">No Price yet</p>
+                          {/* <ResponsiveContainer width="100%" height="100%"> */}
+                          <LineChart
+                            width={500}
+                            height={200}
+                            data={data}
+                            margin={{
+                              top: 5,
+                              right: 30,
+                              left: 20,
+                              bottom: 5,
+                            }}
+                          >
+                            <CartesianGrid
+                              vertical={false}
+                              strokeDasharray="1"
+                            />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            <Line
+                              type="monotone"
+                              dataKey="pv"
+                              stroke="#8884d8"
+                              activeDot={{ r: 8 }}
+                            />
+                          </LineChart>
+                          {/* </ResponsiveContainer> */}
+                        </div>
+                      )}
+                    </Accordion.Body>
+                  </Accordion.Item>
+                  <br />
+                  <Accordion.Item eventKey="1">
+                    <Accordion.Header>
+                      <List /> Bid
+                    </Accordion.Header>
+                    <Accordion.Body>
+                      {item?.auction.bids?.length > 0 ? (
+                        <div className="col-div aic jcc">
+                          {/* //TODO this data display */}
+                          <div>Price</div>
+                          <div>Expiration</div>
+                          <div>From</div>
+                          {item?.auction.bids.map((bid: any, key: any) => {
+                            return (
+                              <div key={key}>
+                                <div>{bid.bidPrice}</div>
+                                <div>
+                                  {Math.ceil(
+                                    // (parseFloat(item.auction.endTime) -
+                                    //   parseFloat(bid.timestamp)) /
+                                    (item?.auction.endTime - bid.timestamp) /
+                                      (60 * 60 * 24)
+                                  )}{" "}
+                                  days
                                 </div>
-                              );
-                            })}
-                          </div>
-                        ) : (
-                          <div className="col-div aic jcc">
-                            <img src="/assets/no-chart-data.svg" alt="" />
-                            <p className="billy-desc">No Price yet</p>
-                          </div>
-                        )}
-                      </div>
-                    </Expand>
-                  </div>
-                  <div className="hline"></div>
-                  <div className="col-div p-t-10 p-b-10">
-                    <div
-                      className="row-div cursor-pointer s-b"
-                      onClick={() => {
-                        setIsBidExpand(!isBidExpand);
-                      }}
-                    >
-                      <h2 className="billy-header">
-                        <List /> Bid
-                      </h2>
-                      <h2 className="billy-header">
-                        {!isBidExpand ? <ExpandMore /> : <ExpandLess />}
-                      </h2>
-                    </div>
-                    <Expand
-                      open={isBidExpand}
-                      duration={300}
-                      styles={styles}
-                      transitions={transitions}
-                    >
-                      <div className="col-div p-t-10 p-b-10">
-                        {item?.auction.bids?.length > 0 ? (
-                          <div className="col-div aic jcc">
-                            {/* //TODO this data display */}
-                            <div>Price</div>
-                            <div>Expiration</div>
-                            <div>From</div>
-                            {item?.auction.bids.map((bid: any, key: any) => {
-                              return (
-                                <div key={key}>
-                                  <div>{bid.bidPrice}</div>
-                                  <div>
-                                    {Math.ceil(
-                                      // (parseFloat(item.auction.endTime) -
-                                      //   parseFloat(bid.timestamp)) /
-                                      (item?.auction.endTime - bid.timestamp) /
-                                        (60 * 60 * 24)
-                                    )}{" "}
-                                    days
-                                  </div>
-                                  <div>
-                                    {String(bid.from)
-                                      .substring(2, 7)
-                                      .toUpperCase()}
-                                  </div>
+                                <div>
+                                  {String(bid.from)
+                                    .substring(2, 7)
+                                    .toUpperCase()}
                                 </div>
-                              );
-                            })}
-                          </div>
-                        ) : (
-                          <div className="col-div aic jcc">
-                            <img src="/assets/empty-asks.svg" alt="" />
-                            <p className="billy-desc">No Bid yet</p>
-                          </div>
-                        )}
-                      </div>
-                    </Expand>
-                  </div>
-                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      ) : (
+                        <div className="col-div aic jcc">
+                          <img src="/assets/empty-asks.svg" alt="" />
+                          <EmptyAsks />
+                          <p className="billy-desc">No Bid yet</p>
+                        </div>
+                      )}
+                    </Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
               )}
             </div>
           </div>

@@ -12,7 +12,9 @@ const CollectionTabBody = (props: any) => {
 
   const { connector, library, chainId, account, active } = useWeb3React();
   const [loginStatus, setLoginStatus] = useState(false);
+
   let newVariable: any = process.env.REACT_APP_NETWORK_ID;
+
   useEffect(() => {
     const isLoggedin: any =
       account && active && chainId === parseInt(newVariable, 10);
