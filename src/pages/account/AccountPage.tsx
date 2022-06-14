@@ -16,7 +16,7 @@ import ProfileTagList from "../../components/profile/tagList/ProfileTagList";
 import { getIpfsHashFromFile } from "../../utils/ipfs";
 import toast from "react-hot-toast";
 import { useWeb3React } from "@web3-react/core";
-// import EmptyCard from "../../components/EmptyCard/EmptyCard";
+import WAValidator from "multicoin-address-validator";
 
 const AccountPage = (props: any) => {
   const { user } = props;
@@ -40,13 +40,12 @@ const AccountPage = (props: any) => {
   }, [user, userProfile]);
 
   function getUser() {
-    const state: any = location.state;
-    const userAddr = state && state["address"];
-    if (userAddr && userAddr !== "") {
+    const userAddr: any = location.pathname.split("/")[2];
+    var valid = WAValidator.validate(userAddr, 'eth');
+    if (valid && userAddr && userAddr !== "") {
       setUserAddress(userAddr);
       axios.get(`/user/${userAddr}`).then((res) => {
         setUserProfile(res.data.user);
-        console.log(res.data.user);
       });
     }
   }
@@ -146,26 +145,7 @@ const AccountPage = (props: any) => {
 
   return (
     <>
-      {/* <Topbar
-        user={user}
-        menuOpen={menuOpen}
-        setMenuOpen={setMenuOpen}
-        setIsLoading={setIsTopLoading}
-        isUserInfoUpdated={isUserInfoUpdated}
-      />
-      <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} /> */}
       <div className="page accountPage">
-        {/* <PageHeader pageHeader="Account Settings" /> */}
-        {/* <div
-          className="loding"
-          style={{
-            width: "100%",
-            height: loadingHeight + "%",
-            display: loadingHeight === 0 ? "none" : "flex",
-          }}
-        >
-          <Loading />
-        </div> */}
         <div
           className="sections"
           style={{ width: "100%", height: sectionHeight }}
@@ -285,7 +265,7 @@ const AccountPage = (props: any) => {
                         </div>
                       </div>
                     </Popover>
-                    <Link to="/account/settings">
+                    <Link to="/myaccount/settings">
                       <div className="setting-btn">
                         <Settings />
                       </div>
@@ -305,95 +285,7 @@ const AccountPage = (props: any) => {
               />
             )}
           </div>
-          {/* {userAddress && (
-            <div className="profile-nav-items">
-              <Tab.Container defaultActiveKey="all">
-                <Nav className="nav-item-container">
-                  <Nav.Item>
-                    <Nav.Link eventKey="collected" className="title-font">
-                      Collected
-                    </Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link eventKey="created" className="title-font">
-                      Created
-                    </Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link eventKey="favorited" className="title-font">
-                      Favorited
-                    </Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link eventKey="activity" className="title-font">
-                      Activity
-                    </Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link eventKey="listings" className="title-font">
-                      Listings
-                    </Nav.Link>
-                  </Nav.Item>
-                </Nav>
-                <Tab.Content className="items-container-tabs">
-                  <Tab.Pane eventKey="all">
-                    <div className="author-data-collections">
-                      {data.map((item: any) => (
-                        //   <EmptyCard item={item} />
-                        <EmptyCard item={item} />
-                      ))}
-                    </div>
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="art">
-                    <div className="author-data-collections">
-                      {data
-                        .filter((item: any) => item.art)
-                        .map((item: any) => (
-                          <EmptyCard item={item} />
-                        ))}
-                    </div>
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="music">
-                    <div className="author-data-collections">
-                      {data
-                        .filter((item: any) => item.music)
-                        .map((item: any) => (
-                          <EmptyCard item={item} />
-                        ))}
-                    </div>
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="collectibles">
-                    <div className="author-data-collections">
-                      {data
-                        .filter((item: any) => item.collectibles)
-                        .map((item: any) => (
-                          <EmptyCard item={item} />
-                        ))}
-                    </div>
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="sports">
-                    <div className="author-data-collections">
-                      {data
-                        .filter((item: any) => item.sports)
-                        .map((item: any) => (
-                          <EmptyCard item={item} />
-                        ))}
-                    </div>
-                  </Tab.Pane>
-                </Tab.Content>
-              </Tab.Container>
-            </div>
-          )} */}
-          {/* {userAddress && (
-            <ProfileTagList
-              {...props}
-              userAddress={userAddress}
-              tab={tab}
-              switchTab={switchTab}
-            />
-          )} */}
         </div>
-        {/* <img src="assets/img/bg8.jpg" alt="" className="bg1" /> */}
       </div>
     </>
   );

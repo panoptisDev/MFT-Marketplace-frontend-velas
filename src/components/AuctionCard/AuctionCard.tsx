@@ -55,7 +55,10 @@ const AuctionCard = ({ TodayPick, item }: any) => {
             <div>
               <span>Creator</span>
               <h6>
-                <Link to="/">{item?.creatorUser?.name || "Rachelsons"}</Link>
+                <Link rel='noopener noreferrer' target="_blank" to={{
+                        pathname: "/account/" + item?.creatorUser?.address,
+                        search: "?tab=collections",
+                      }}>{item?.creatorUser?.name || "Rachelsons"}</Link>
               </h6>
             </div>
           </div>
@@ -71,7 +74,7 @@ const AuctionCard = ({ TodayPick, item }: any) => {
                 <span>Current Price</span>
               )}
               <br />
-              <h5>{item?.pair ? item?.pair.price : item?.auction.price} VLX</h5>
+              <h5>{item?.pair ? item?.pair.price + "VLX" : item?.auction.endTime >= new Date().getTime() ? item?.auction.price + "VLX" :  "Auction Ended"}</h5>
             </div>
           )}
         </div>

@@ -37,20 +37,17 @@ const MyNFTsPage = (props: any) => {
   const { connector, library, chainId, account, active } = useWeb3React();
   const [loginStatus, setLoginStatus] = useState(false);
   let newVariable: any = process.env.REACT_APP_NETWORK_ID;
+  const [items, setItems] = useState<any>([]);
   useEffect(() => {
     const isLoggedin: any =
       account && active && chainId === parseInt(newVariable, 10);
     setLoginStatus(isLoggedin);
-    if (!isLoggedin) toast.error("Please connect your wallet.");
-  }, [connector, library, account, active, chainId]);
-
-  const [items, setItems] = useState<any>([]);
-  useEffect(() => {
-    if (loginStatus)
+    if (isLoggedin){
       axios.get(`/item`, { params: { owner: account } }).then((res) => {
         setItems(res.data.items);
       });
-  }, [loginStatus]);
+    }
+  }, [connector, library, account, active, chainId]);
 
   useEffect(() => {
     if (isLoading || isTopLoading) {

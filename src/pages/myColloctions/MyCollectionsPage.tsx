@@ -53,17 +53,12 @@ const MyCollectionsPage = (props: any) => {
   const [loginStatus, setLoginStatus] = useState(false);
   const { connector, library, chainId, account, active } = useWeb3React();
   let newVariable: any = process.env.REACT_APP_NETWORK_ID;
+  const [myCollections, setMyCollections] = useState<any>([]);
   useEffect(() => {
     const isLoggedin: any =
       account && active && chainId === parseInt(newVariable, 10);
     setLoginStatus(isLoggedin);
-    if (!isLoggedin) toast.error("Please connect your wallet.");
-  }, [connector, library, account, active, chainId, loginStatus]);
-
-  const [myCollections, setMyCollections] = useState<any>([]);
-
-  useEffect(() => {
-    if (loginStatus) {
+    if (isLoggedin){
       axios
         .get(`/collection`, { params: { owner: account } })
         .then((res) => {
@@ -74,7 +69,7 @@ const MyCollectionsPage = (props: any) => {
           setMyCollections([]);
         });
     }
-  });
+  }, [connector, library, account, active, chainId, loginStatus]);
 
   const linkList: any = {
     "Import an existing smart contract": "https://studio.manifold.xyz/",
@@ -109,7 +104,7 @@ const MyCollectionsPage = (props: any) => {
         >
           <div className="container">
             <h2 className="top">My Collections</h2>
-            <div className="desc">
+            {/* <div className="desc">
               <span>
                 Create, curate, and manage collections of unique NFTs to share
                 and sell.
@@ -124,7 +119,7 @@ const MyCollectionsPage = (props: any) => {
               >
                 <ErrorOutline className="tooltip-icon" />
               </Tooltip>
-            </div>
+            </div> */}
             <div className="btns">
               <Button
                 label=" Create a collection"
@@ -132,7 +127,7 @@ const MyCollectionsPage = (props: any) => {
                 onClick={onCreateCollection}
               />
 
-              <div style={{ display: "inline-block" }}>
+              {/* <div style={{ display: "inline-block" }}>
                 <CustomDropdown
                   navDropdown
                   buttonText={<Dehaze />}
@@ -152,7 +147,7 @@ const MyCollectionsPage = (props: any) => {
                     "Mint on Zora",
                   ]}
                 />
-              </div>
+              </div> */}
             </div>
 
             <div className="collectionContainer">

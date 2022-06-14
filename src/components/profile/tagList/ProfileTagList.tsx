@@ -41,9 +41,8 @@ const ProfileTagList = (props: any) => {
   const [searchedUrl, setSearchedUrl] = useState("collections");
   const goToPage = (url: any) => {
     props.history.push({
-      pathname: "/account",
-      search: `?tab=${url}`,
-      state: { address: props.userAddress },
+      pathname: "/account/" + props.userAddress,
+      search: `?tab=${url}`
     });
     switchTab(url);
     setSearchedUrl(url);

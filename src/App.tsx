@@ -146,26 +146,6 @@ function App() {
   };
 
   return (
-    // <div className="App">
-    //   <Router>
-    //     <ScrollToTop />
-    //     <Navbar setIsLoading={setIsTopLoading} user={user} />
-    //     <Routes>
-    //     {/* <Route exact path="/account" render={(props) => (<AccountPage {...props} user={user} />)} /> */}
-    //       <Route path="/" component={<Home />} />
-    //       <Route path="/Contact" component={<Contact />} />
-    //       <Route path="/Authors" component={<Author />} />
-    //       <Route path="/Item-Details" component={<ItemDetails />} />
-    //       <Route path="/Activity" component={<Activity />} />
-    //       <Route path="/Explore" component={<Explore />} />
-    //       <Route path="/Item/Create" component={<CreateItemPage />} />
-    //       <Route path="/Collection/Create" component={<CreateCollectionPage />} />
-    //       <Route path="/Account"render={(props) => (<AccountPage {...props} user={user} />)} />
-    //       <Route path="/Account/Settings" component={<SettingsPage />} />
-    //     </Routes>
-    //     <Footer />
-    //   </Router>
-    // </div>
     <div className="App">
       <Router>
         <ScrollToTop />
@@ -226,12 +206,12 @@ function App() {
 
           <Route
             exact
-            path="/Account"
+            path="/Account/:address"
             render={(props) => <AccountPage {...props} user={user} />}
           />
           <Route
             exact
-            path="/Account/Settings"
+            path="/MyAccount/Settings"
             render={(props) => <SettingsPage {...props} user={user} />}
           />
           <Route
@@ -264,10 +244,6 @@ function App() {
             path="/item/:collection_address/:tokenId"
             render={(props) => <VelasClubPage {...props} user={user} />}
           />
-          {/* <Route exact path="/account/settings" render={(props) => (<SettingsPage {...props} user={user} />)} />
-         <Route exact path="/collections/:name" render={(props) => (<CollectionDetailPage {...props} user={user} />)} />
-         <Route exact path="/NFTs" render={(props) => (<VelasPage {...props} user={user} />)} />
-         <Route exact path="/item/:collection_address/:tokenId" render={(props) => (<VelasClubPage {...props} user={user} />)} /> */}
         </Switch>
         <Footer />
       </Router>

@@ -396,7 +396,10 @@ const ItemDetail = (props: any) => {
               <Accordion.Body>
                 <div>
                   <span>Created By</span>
-                  <Link to="/">
+                  <Link rel='noopener noreferrer' target="_blank" to={{
+                        pathname: "/account/" + item?.ownerUser.address,
+                        search: "?tab=collections",
+                      }}>
                     {loginStatus &&
                     item?.ownerUser.address.toLowerCase() ===
                       account.toLowerCase()
@@ -495,7 +498,10 @@ const ItemDetail = (props: any) => {
                 <span style={{ color: "white", marginRight: "10px" }}>
                   Owned By
                 </span>
-                <Link to="/">
+                <Link rel='noopener noreferrer' target="_blank" to={{
+                        pathname: "/account/" + item?.ownerUser.address,
+                        search: "?tab=collections",
+                      }}>
                   {loginStatus &&
                   item.ownerUser &&
                   item.ownerUser.address.toLowerCase() === account.toLowerCase()

@@ -174,9 +174,8 @@ const Profile = (props: any) => {
         toast.dismiss(load_toast_id);
         toast.success("Profile is updated successfully.");
         props.history.push({
-          pathname: "/account",
-          search: "?tab=collections",
-          state: { address: account },
+          pathname: "/account/" + account,
+          search: "?tab=collections"
         });
       })
       .catch((err) => {

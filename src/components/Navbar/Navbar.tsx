@@ -43,23 +43,17 @@ const Navbar = (props: any) => {
   const { connector, library, chainId, account, active } = useWeb3React();
   const [loginStatus, setLoginStatus] = useState(false);
   const newVariable: any = process.env.REACT_APP_NETWORK_ID;
-
+  const [logo, setLogo] = useState("");
   useEffect(() => {
     const isLoggedin: any =
       account && active && chainId === parseInt(newVariable, 10);
     setLoginStatus(isLoggedin);
-  }, [connector, library, account, active, chainId, newVariable]);
-
-  const [logo, setLogo] = useState("");
-
-  useEffect(() => {
-    if (loginStatus || isUserInfoUpdated) {
-      console.log("Fetching Item");
+    if (isLoggedin) {
       axios.get(`/user/${account}`).then((res) => {
         setLogo(res.data.user.logo_url);
       });
     }
-  }, [loginStatus, isUserInfoUpdated]);
+  }, [connector, library, account, active, chainId, newVariable]);
 
   let domNode = useClickOutside(() => {
     setStatus("close");
@@ -102,18 +96,16 @@ const Navbar = (props: any) => {
   const goToProfilePage: any = (url: any) => {
     if (url === "Profile") {
       router.push({
-        pathname: "/account",
+        pathname: "/account/" + account,
         search: "?tab=collections",
-        state: { address: account },
       });
     } else if (url === "Favorites") {
       router.push({
-        pathname: "/account",
-        search: "?tab=favorites",
-        state: { address: account },
+        pathname: "/account/" + account,
+        search: "?tab=favorites"
       });
     } else if (url === "Settings") {
-      const href = "/account/settings";
+      const href = "/myaccount/settings";
       router.push(href);
     } else if (url === "My Collections") {
       const href = "/myCollections";
@@ -140,7 +132,7 @@ const Navbar = (props: any) => {
           <Link to="/Explore">Explorer</Link>
           <Link to="/collections">Collections</Link>
           <Link to="/Contact">Contact</Link>
-          <Link to="/Authors">Authors</Link>
+          {/* <Link to="/Authors">Authors</Link> */}
           {loginStatus && (
             <div
               onClick={() => {

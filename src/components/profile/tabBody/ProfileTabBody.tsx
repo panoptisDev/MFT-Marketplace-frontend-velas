@@ -117,6 +117,7 @@ const ProfileTabBody = (props: any) => {
         axios
           .get(`/collection`, { params: { owner: userAddress } })
           .then((res) => {
+            console.log(res.data.collections);
             setCollections(res.data.collections);
           });
       }
@@ -170,11 +171,7 @@ const ProfileTabBody = (props: any) => {
           </div>
         )}
         <div className="content-box">
-          {!(
-            tab === "activity" ||
-            tab.includes("bids") ||
-            tab.includes("listings")
-          ) && (
+          {tab !== "activity" && (
             <div className="search-box">
               <input
                 className="bordered-input m-r-5 flex-1"

@@ -1,7 +1,5 @@
+import { Link } from "react-router-dom";
 import "./TradingHistory.css";
-// import { VscLinkExternal } from "react-icons/vsc";
-// import SwapVertIcon from "@material-ui/icons/SwapVert";
-// import { data1 } from "./TradingData";
 
 const TradingHistory = ({ loginStatus, item, account }: any) => {
   return (
@@ -43,19 +41,25 @@ const TradingHistory = ({ loginStatus, item, account }: any) => {
                       <span className="span__unit-price">
                         {event.price} ETH
                       </span>
-                      <span className="span__from">
+                      <Link className="span__from" rel='noopener noreferrer' target="_blank" to={{
+                        pathname: "/account/" + event.from,
+                        search: "?tab=collections",
+                      }}>
                         {event.from === account && loginStatus
                           ? "You"
                           : String(event.from).substring(2, 7).toUpperCase()}
-                      </span>
-                      <span className="span__to">
+                      </Link>
+                      <Link className="span__to" rel='noopener noreferrer' target="_blank" to={{
+                        pathname: "/account/" + event.to,
+                        search: "?tab=collections",
+                      }}>
                         {event.to === account && loginStatus
                           ? "You"
                           : String(event.to).substring(2, 7).toUpperCase()}
-                      </span>
+                      </Link>
                       <span className="span__date">
-                        {Math.floor(new Date().getTime() / 1000) -
-                          parseFloat(event.timestamp)}{" "}
+                        {Math.floor((Math.floor(new Date().getTime() / 1000) -
+                          parseFloat(event.timestamp)) / (3600 * 24))}{" "}
                         days ago
                       </span>
                     </div>

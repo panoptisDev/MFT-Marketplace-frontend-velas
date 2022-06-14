@@ -15,7 +15,7 @@ export const data: DataTypes["data"] = [
     head: "Set Up Your Wallet",
     img: wallet,
     title:
-      "Once you’ve set up your wallet of choice, connect it to OpenSeaby clicking the NFT Marketplacein the top right corner.",
+      "Once you’ve set up your wallet of choice, connect it to Boatsail by clicking the NFT Marketplacein the top right corner.",
   },
   {
     head: "Create Your Collection",

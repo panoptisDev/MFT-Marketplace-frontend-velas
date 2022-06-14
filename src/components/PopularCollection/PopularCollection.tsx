@@ -71,8 +71,8 @@ const PopularCollection = () => {
   const [collections, setCollections] = useState<any[]>([]);
 
   useEffect(() => {
-    axios
-      .get(`/collections`)
+    if (collections.length === 0){
+      axios.get(`/collections`)
       .then((res) => {
         setCollections(res.data.collections);
       })
@@ -80,13 +80,8 @@ const PopularCollection = () => {
         console.log("Err : ", err.message);
         setCollections([]);
       });
-  });
-
-  let array: any = [];
-
-  for (let i = 0; i < 4; i++) {
-    array = array.concat(collections);
-  }
+    }
+  }, [collections]);    
 
   return (
     <div className="popular-collection">
@@ -94,7 +89,7 @@ const PopularCollection = () => {
       <div className="popular-collection-container">
         <Slider className="slider-container" {...settings}>
           {collections &&
-            array.map((collection: any, index: any) => (
+            collections.map((collection: any, index: any) => (
               <EmptyCard
                 key={index}
                 popularCollection={true}

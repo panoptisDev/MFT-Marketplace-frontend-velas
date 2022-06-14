@@ -7,16 +7,17 @@ import avt from "../../assets/images/avt-15.jpg";
 const TopSellers = () => {
   const [sellers, setSellers] = useState<any[]>([]);
   useEffect(() => {
-    axios
-      .get(`/users`)
-      .then((res) => {
-        setSellers(res.data.users);
-      })
-      .catch((err) => {
-        console.log("Err : ", err.message);
-        setSellers([]);
-      });
-  });
+    if (sellers.length === 0) {
+      axios.get("/topsellers")
+        .then((res) => {
+          console.log(res.data.users);
+          setSellers(res.data.users);
+        })
+        .catch((err) => {
+          setSellers([]);
+        });
+    }
+  }, [sellers])
 
   return (
     <div className="top-sellers">
@@ -29,10 +30,13 @@ const TopSellers = () => {
                 <img src={user.logo_url || avt} alt=""></img>
               </div>
               <div className="seller-right">
-                <Link to="/">
+                <Link rel='noopener noreferrer' target="_blank" to={{
+                        pathname: "/account/" + user.address,
+                        search: "?tab=collections",
+                      }}>
                   <h6>{user.name}</h6>
                 </Link>
-                <span>{"0"} ETH</span>
+                <span>{user.sumprice} VLX</span>
               </div>
               <div></div>
             </div>

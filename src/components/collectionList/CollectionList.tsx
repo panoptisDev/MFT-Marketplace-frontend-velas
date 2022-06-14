@@ -3,16 +3,10 @@ import "./collectionList.scss";
 
 const CollectionList = (props: any) => {
   const { collections } = props;
-  let array: any = [];
-
-  for (let i = 0; i < 4; i++) {
-    array = array.concat(collections);
-  }
-
   return (
     <div className="collectionList" id="sneak">
       {collections &&
-        array.map((collection: any, index: any) => {
+        collections.map((collection: any, index: any) => {
           return (
             <EmptyCard
               collection={collection}

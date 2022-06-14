@@ -54,7 +54,7 @@ const CollectionDetailPage = (props: any) => {
 
   const goToPage = (url: string) => {
     props.history.push({
-      pathname: "/account",
+      pathname: "/account/" + props.userAddress,
       search: `?tab=${url}`,
       state: { address: props.userAddress },
     });

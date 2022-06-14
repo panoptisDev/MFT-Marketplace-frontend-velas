@@ -2,8 +2,6 @@
 .collectionList {
   display: grid;
   justify-content: center;
-  row-gap: 25px;
-  grid-template-columns: 25% 25% 25% 25%;
   max-width: 100%;
   height: auto;
   @include mobile_potrait {
@@ -12,9 +10,8 @@
   }
   @media screen and (max-width: 1440px) {
     width: 100%;
-    grid-template-columns: auto auto;
   }
   @media screen and (max-width: 768px) {
-    grid-template-columns: auto;
+    
   }
 }

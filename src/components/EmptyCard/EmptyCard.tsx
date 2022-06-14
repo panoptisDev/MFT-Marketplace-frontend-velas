@@ -22,20 +22,13 @@ const EmptyCard = ({
         popularCollection
           ? "empty-card popularCollection"
           : collectionList
-          ? "empty-card collectionListPage"
-          : "empty-card"
+            ? "empty-card collectionListPage"
+            : "empty-card"
       }
     >
       <div onClick={() => gotToPage(collection)} className="emptty-card-top">
         <img
-          src={
-            collectionList
-              ? collection?.logo_uri
-              : popularCollection
-              ? collection?.featured_uri
-              : author
-          }
-          alt=""
+          src={collection?.featured_uri || author} alt=""
         />
       </div>
       <div className="emptty-card-middle">
@@ -48,59 +41,22 @@ const EmptyCard = ({
             : "Living Vase 01 By Lanz..."}
         </h2>
         <div>
-          {popularCollection ? (
-            <div>
-              <span>Creator:</span>
-              <h6>
-                <Link to="/">{item?.creatorUser?.name || "Rachelsons"}</Link>
-              </h6>
-            </div>
-          ) : collectionList ? undefined : (
-            <div>
-              <span>Creator:</span>
-              <h6>
-                <Link to="/">
-                  {collection?.creatorUser?.name || "Rachelsons"}
-                </Link>
-              </h6>
-            </div>
-          )}
-          {/* <div>
+          <div>
             <span>Creator:</span>
             <h6>
-              <h6>
-                {popularCollection ? (
-                  <Link to="/">
-                    {collection?.creatorUser?.name || "Rachelsons"}
-                  </Link>
-                ) : (
-                  <Link to="/">{item?.creatorUser?.name || "Rachelsons"}</Link>
-                )}
-              </h6>
+              <Link rel='noopener noreferrer' target="_blank" to={{
+                        pathname: "/account/" + collection?.user.address,
+                        search: "?tab=collections",
+                      }}>
+                {collection?.user?.name || "Rachelsons"}
+              </Link>
             </h6>
-          </div> */}
-          {collectionList && (
-            <div style={{ textAlign: "center" }}>
-              <h4>{collection?.description}</h4>
-            </div>
-          )}
-          {!popularCollection && !collectionList ? (
-            <div>
-              <span>Current Bid:</span>
-              <h5>{"4.89 ETH"}</h5>
-            </div>
-          ) : collectionList ? (
-            <div className="collectioList-item-footer">
-              <div>
-                <span>1030</span>
-                <h5>tokens</h5>
-              </div>
-              <div>
-                <span>124</span>
-                <h5>offers</h5>
-              </div>
-            </div>
-          ) : undefined}
+          </div>
+
+
+          <div style={{ textAlign: "center" }}>
+            <p>{collection?.description}</p>
+          </div>
         </div>
       </div>
     </div>
