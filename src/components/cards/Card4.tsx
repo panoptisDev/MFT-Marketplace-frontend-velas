@@ -3,12 +3,17 @@ import ReactPlayer from "react-player";
 import "./card.scss";
 
 const Card4 = (props: any) => {
-  const { item } = props;
+  const { item, collectionsCollectionsList } = props;
   const gotoDetail = () => {
     props.history.push(`/item/${item.itemCollection}/${item.tokenId}`);
   };
   return (
-    <div className="card" onClick={gotoDetail}>
+    <div
+      className={`card ${
+        collectionsCollectionsList && "collectionsCollectionsList"
+      }`}
+      onClick={gotoDetail}
+    >
       <div className="imgContainer">
         {item && (item.assetType === "video" || item.assetType === "audio") && (
           <ReactPlayer

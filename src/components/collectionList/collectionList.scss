@@ -1,23 +1,47 @@
 @import "../../global.scss";
 
-.collectionList,
-.collectionsListPage {
+.collectionList {
   display: grid;
-  justify-content: center;
-  max-width: 100%;
   grid-template-columns: 25% 25% 25% 25%;
-  height: auto;
-  @include mobile_potrait {
-  }
-  @include mobile_landscape {
-  }
+  margin: 0 auto;
+  max-width: 100%;
+  width: 1440px;
+  justify-content: center;
+
   @media screen and (max-width: 1440px) {
-    width: 100%;
+    width: 1160px;
+  }
+  @media screen and (max-width: 1200px) {
+    grid-template-columns: 33% 33% 33%;
+    width: 950px;
+  }
+  @media screen and (max-width: 950px) {
+    grid-template-columns: 50% 50%;
+    width: 750px;
   }
   @media screen and (max-width: 768px) {
+    grid-template-columns: 100%;
   }
 }
 .collectionsListPage {
+  margin: auto;
   max-width: 100%;
-  grid-template-columns: none;
+  width: 1440px;
+  row-gap: 20px;
+  justify-content: center;
+  grid-template-columns: 25% 25% 25% 25%;
+  @media screen and (max-width: 1440px) {
+    width: 1160px;
+  }
+  @media screen and (max-width: 1200px) {
+    grid-template-columns: 33% 33% 33%;
+    width: 950px;
+  }
+  @media screen and (max-width: 950px) {
+    grid-template-columns: 50% 50%;
+    width: 750px;
+  }
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 100%;
+  }
 }

@@ -6,7 +6,14 @@ const NFTItemList = (props: any) => {
     <div className="collectionList" id="sneak">
       {items &&
         items.map((item: any, index: any) => {
-          return <Card4 {...props} key={index} item={item} />;
+          return (
+            <Card4
+              collectionsCollectionsList={true}
+              {...props}
+              key={index}
+              item={item}
+            />
+          );
         })}
     </div>
   );

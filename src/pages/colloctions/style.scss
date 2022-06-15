@@ -2,11 +2,12 @@
 .collectionPage {
   padding: 30px 0;
   background-color: #14141f;
-
+  width: 100% !important;
+  max-width: 100%;
   .sections {
     .container {
       display: flex;
-      width: 100%;
+      width: 100% !important;
       align-items: center;
       justify-content: flex-start;
       flex-direction: column;

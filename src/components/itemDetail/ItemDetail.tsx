@@ -69,6 +69,7 @@ import ItemDetailFilter from "../MoreComponents/ItemDetailFilter";
 // import SellPage from "../../pages/sale/SellPage";
 import BuyNowPage from "../../pages/sale/BuyNowPage";
 import { CartesianAxis } from "recharts";
+import BiddingHistory from "../TradingHistory/BiddingHistory";
 // import BidModal from "../connectModal/BidModal";
 
 const ItemDetail = (props: any) => {
@@ -771,34 +772,35 @@ const ItemDetail = (props: any) => {
                     </Accordion.Header>
                     <Accordion.Body>
                       {item?.auction.bids?.length > 0 ? (
-                        <div className="col-div aic jcc">
-                          {/* //TODO this data display */}
-                          <div>Price</div>
-                          <div>Expiration</div>
-                          <div>From</div>
-                          {item?.auction.bids.map((bid: any, key: any) => {
-                            return (
-                              <div key={key}>
-                                <div>{bid.bidPrice}</div>
-                                <div>
-                                  {Math.ceil(
-                                    // (parseFloat(item.auction.endTime) -
-                                    //   parseFloat(bid.timestamp)) /
-                                    (item?.auction.endTime - bid.timestamp) /
-                                      (60 * 60 * 24)
-                                  )}{" "}
-                                  days
-                                </div>
-                                <div>
-                                  {String(bid.from)
-                                    .substring(2, 7)
-                                    .toUpperCase()}
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
+                        <BiddingHistory item={item} />
                       ) : (
+                        // <div className="col-div aic jcc">
+                        //   {/* //TODO this data display */}
+                        //   <div>Price</div>
+                        //   <div>Expiration</div>
+                        //   <div>From</div>
+                        //   {item?.auction.bids.map((bid: any, key: any) => {
+                        //     return (
+                        //       <div key={key}>
+                        //         <div>{bid.bidPrice}</div>
+                        //         <div>
+                        //           {Math.ceil(
+                        //             // (parseFloat(item.auction.endTime) -
+                        //             //   parseFloat(bid.timestamp)) /
+                        //             (item?.auction.endTime - bid.timestamp) /
+                        //               (60 * 60 * 24)
+                        //           )}{" "}
+                        //           days
+                        //         </div>
+                        //         <div>
+                        //           {String(bid.from)
+                        //             .substring(2, 7)
+                        //             .toUpperCase()}
+                        //         </div>
+                        //       </div>
+                        //     );
+                        //   })}
+                        // </div>
                         <div className="col-div aic jcc">
                           <img src="/assets/empty-asks.svg" alt="" />
                           <EmptyAsks />

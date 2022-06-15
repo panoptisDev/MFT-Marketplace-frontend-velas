@@ -29,6 +29,9 @@
   /* overflow: scroll !important; */
   margin: auto;
 }
+.bidding-history {
+  height: 200px;
+}
 .history-titles {
 }
 .each-traded-item {
