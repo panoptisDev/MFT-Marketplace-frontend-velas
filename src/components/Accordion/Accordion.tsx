@@ -23,7 +23,20 @@ const AccordionComponent = ({ loginStatus, account, item }: any) => {
           <div className="col-div aic jcc w-100">
             {item.levels && item.levels.length > 0 ? (
               <div>
-                <LevelsTable item={item} />
+                <div className="properties-stats-levels-container">
+                  {item.levels.map((level: any, key: any) => {
+                    return (
+                      <div className="properties-stats-levels" key={key}>
+                        <span>{level.name}</span>
+                        <span>{level.value}</span>
+                        <span className="properties-stats-levels-span-last">
+                          {level.total}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* <LevelsTable item={item} /> */}
                 {/* {item.levels.map((level: any, key: any) => {
                   return (
                     <div key={key} className="with-border">
@@ -61,7 +74,25 @@ const AccordionComponent = ({ loginStatus, account, item }: any) => {
           <div className="col-div aic jcc w-100">
             {item.stats && item.stats.length > 0 ? (
               <div>
-                <LevelsTable item={item} />
+                <div>
+                  {item.stats.length > 0 ? (
+                    <div className="properties-stats-levels-container">
+                      {item.stats.map((stat: any, key: any) => {
+                        return (
+                          <div className="properties-stats-levels" key={key}>
+                            <span>{stat.name}</span>
+                            <span>{stat.value}</span>
+                            <span className="properties-stats-levels-span-last">
+                              {stat.total}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : undefined}
+                </div>
+
+                {/* <LevelsTable item={item} /> */}
                 {/* {item.stats.map((stat: any, key: any) => {
                   return (
                     <div key={key} className="with-border">
@@ -97,10 +128,26 @@ const AccordionComponent = ({ loginStatus, account, item }: any) => {
           <AiFillPropertySafety /> Properties{" "}
         </Accordion.Header>
         <Accordion.Body>
-          <div className="col-div aic jcc w-100">
+          <div>
             {item.properties && item.properties.length > 0 ? (
               <div>
-                <PropertiesTable item={item} />
+                {/* <PropertiesTable item={item} /> */}
+                <div>
+                  {item.properties.length > 0 ? (
+                    <div className="properties-stats-levels-container">
+                      {item.properties.map((property: any, key: any) => {
+                        return (
+                          <div className="properties-stats-levels" key={key}>
+                            <span>{property.name}</span>
+                            <span className="properties-stats-levels-span">
+                              {property.type}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : undefined}
+                </div>
                 {/* {item.properties.map((property: any, key: any) => {
                   return (
                     <div key={key} className="with-border">

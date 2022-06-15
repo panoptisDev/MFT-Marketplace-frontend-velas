@@ -486,7 +486,6 @@ const ItemDetail = (props: any) => {
               <Accordion.Body>{item?.description}</Accordion.Body>
             </Accordion.Item>
             <br />
-
             <Accordion.Item eventKey="2">
               <Accordion.Header>
                 <TbListDetails /> Details{" "}
