@@ -3,10 +3,10 @@ import toast from "react-hot-toast";
 import { Button, Modal } from "@material-ui/core";
 import "./PlaceBid.scss";
 
-export default function PlaceBid({ balance, nftFee, onClose, onSubmit }: any) {
+export default function PlaceBid({ balance, nftFee, onClose, onSubmit, rate }: any) {
   const [open, setOpen] = useState<any>(true);
   const [currencyValue, setCurrencyValue] = useState<any>("ETH");
-  const [bidPrice, setBidPrice] = useState<any>();
+  const [bidPrice, setBidPrice] = useState<any>(0);
 
   const handleClose = () => {
     setOpen(false);
@@ -46,18 +46,16 @@ export default function PlaceBid({ balance, nftFee, onClose, onSubmit }: any) {
           <input
             min="0"
             name="price"
+            type="number"
             onChange={onChangePrice}
             placeholder="Your Bid Price:"
-            type="number"
           />
+          <div>VLX = {(rate * parseFloat(bidPrice)).toFixed(3)}USD</div>
           {parseFloat(bidPrice) < 0.111 && (
             <div className="warning">
-              The price should be higer than 0.000 USD
+              The price should be higer than 0.111VLX
             </div>
           )}
-          {/* <select onChange={onChangePrice}>
-            <option value="eth">ETH</option>
-          </select> */}
         </div>
         <br />
         <div className="btns">

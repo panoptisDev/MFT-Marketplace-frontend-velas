@@ -17,6 +17,7 @@ import LeftFilterBox from "../leftFilterBox/LeftFilterBox";
 import ActivitiesTable from "../activitiesTable/ActivitiesTable";
 import DataCard from "../dataCard/DataCard";
 import MyCollectionList from "../../collectionList/MyCollectionList";
+import AuctionCard from "../../AuctionCard/AuctionCard";
 // import MyCollectionList from "components/collectionList/MyCollectionList";
 
 const ProfileTabBody = (props: any) => {
@@ -122,7 +123,7 @@ const ProfileTabBody = (props: any) => {
           });
       }
     }
-  });
+  }, [collections]);
 
   const [createdCollections, setCreatedCollections] = useState(undefined);
   useEffect(() => {
@@ -135,7 +136,20 @@ const ProfileTabBody = (props: any) => {
           });
       }
     }
-  });
+  }, [createdCollections]);
+
+  const [items, setItems] = useState([]);
+  const [rate, setRate] = useState(0)
+  useEffect(() => {
+    if (items.length === 0){
+      if (userAddress && userAddress !== "")
+      axios.get(`/item`, { params: { owner: userAddress } }).then((res) => {
+        setItems(res.data.items);
+        setRate(res.data.rate);
+      });
+    }
+  }, [items]);
+  
 
   return (
     <>
@@ -171,7 +185,7 @@ const ProfileTabBody = (props: any) => {
           </div>
         )}
         <div className="content-box">
-          {tab !== "activity" && (
+          {/* {tab !== "activity" && (
             <div className="search-box">
               <input
                 className="bordered-input m-r-5 flex-1"
@@ -208,7 +222,7 @@ const ProfileTabBody = (props: any) => {
                   </div>
                 )}
             </div>
-          )}
+          )} */}
           {filterConditions.length > 0 && (
             <div className="filter-content">
               {filterConditions.map((label: any, key: any) => (
@@ -272,18 +286,26 @@ const ProfileTabBody = (props: any) => {
         )}
       </div>
       <div className="profile-tab-body-cards">
-        {tab === "collections" && (
+        {(tab === "" || tab === "collections") && (
           <div className="profile-tab-body-cards-collections">
             <MyCollectionList {...props} collections={collections} />
           </div>
         )}
-        {(tab === "created" || tab === "created_collections") && (
+        {(tab === "created") && (
           <div className="profile-tab-body-cards-collections">
-            <MyCollectionList collections={createdCollections} />
+            {items && items.map((item: any, index: any) =>
+                <AuctionCard
+                  key={index}
+                  item={item}
+                  rate={rate}
+                  TodayPick={true}
+                />
+              )
+            }
           </div>
         )}
         {tab === "hidden" && <MyCollectionList collections={collections} />}
-        {tab === "favorites" && (
+        {(tab === "favorites" || tab === "created_collections") && (
           <div className="profile-tab-body-cards-collections">
             <MyCollectionList collections={createdCollections} />
           </div>

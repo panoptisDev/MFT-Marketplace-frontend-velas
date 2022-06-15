@@ -67,17 +67,19 @@ const LiveAuctions = () => {
   const [items, setItems] = useState([]);
   const [rate, setRate] = useState(0);
   useEffect(() => {
-    axios
-      .get(`/item`)
-      .then((res) => {
-        setItems(res.data.items);
-        setRate(res.data.rate);
-      })
-      .catch((err) => {
-        console.log("Err : ", err.message);
-        setItems([]);
-        setRate(0);
-      });
+    if (items.length === 0) {
+      axios
+        .get(`/item`)
+        .then((res) => {
+          setItems(res.data.items);
+          setRate(res.data.rate);
+        })
+        .catch((err) => {
+          console.log("Err : ", err.message);
+          setItems([]);
+          setRate(0);
+        });
+    }
   }, [items]);
 
   return (
