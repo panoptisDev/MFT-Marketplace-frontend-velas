@@ -74,7 +74,7 @@ const AuctionCard = ({ TodayPick, item }: any) => {
                 <span>Current Price</span>
               )}
               <br />
-              <h5>{item?.pair ? item?.pair.price + "VLX" : item?.auction.endTime >= new Date().getTime() ? item?.auction.price + "VLX" :  "Auction Ended"}</h5>
+              <h5>{item?.pair ? item?.pair.price + "VLX" : item?.auction.endTime >= new Date().getTime() / 1000 ? item?.auction.price + "VLX" :  "Auction Ended"}</h5>
             </div>
           )}
         </div>
