@@ -89,7 +89,7 @@ const Timer = ({ mintStartAt, itemDetails, downPhrase }: any) => {
           <Flame className="flame-timer" />
         ) : (
           <span className="timer-item-details-span">
-            {downPhrase ? "Sales end" : "Countdown"}
+            {downPhrase ? downPhrase : "Countdown"}
           </span>
         )}
         <RowContainer className="timer-container">

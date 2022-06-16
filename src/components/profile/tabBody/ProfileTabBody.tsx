@@ -14,10 +14,10 @@ import Button from "../../MoreComponents/Button";
 
 import "./tabBodyStyle.scss";
 import LeftFilterBox from "../leftFilterBox/LeftFilterBox";
-import ActivitiesTable from "../activitiesTable/ActivitiesTable";
 import DataCard from "../dataCard/DataCard";
 import MyCollectionList from "../../collectionList/MyCollectionList";
 import AuctionCard from "../../AuctionCard/AuctionCard";
+import ItemActivityTable from "../../Table/Table";
 // import MyCollectionList from "components/collectionList/MyCollectionList";
 
 const ProfileTabBody = (props: any) => {
@@ -143,13 +143,28 @@ const ProfileTabBody = (props: any) => {
   useEffect(() => {
     if (items.length === 0){
       if (userAddress && userAddress !== "")
-      axios.get(`/item`, { params: { owner: userAddress } }).then((res) => {
+      axios.get(`/item`, { params: { itemOwner: userAddress } }).then((res) => {
         setItems(res.data.items);
         setRate(res.data.rate);
       });
     }
   }, [items]);
-  
+
+  const [events, setEvents] = useState([]);
+  useEffect(() => {
+    if (events.length === 0){
+      if (userAddress && userAddress !== ""){
+        axios.get(`/events`, { params : { from : userAddress, to : userAddress}})
+        .then((res) => {
+          setEvents(res.data.events);
+        })
+        .catch((err) => {
+          console.log(err.message)
+          setEvents([]);
+        })
+      }
+    }
+  }, [events])  
 
   return (
     <>
@@ -291,10 +306,10 @@ const ProfileTabBody = (props: any) => {
             <MyCollectionList {...props} collections={collections} />
           </div>
         )}
-        {(tab === "created") && (
+        {(tab === "created" || tab === "listings" || tab === "listings_inactive") && (
           <div className="profile-tab-body-cards-collections">
             {items && items.map((item: any, index: any) =>
-                <AuctionCard
+                (tab === "created" || (tab === "listings" && (item?.pair || item?.auction)) || (tab === "listings_inactive" && !item?.pair && !item?.auction)) &&<AuctionCard
                   key={index}
                   item={item}
                   rate={rate}
@@ -310,8 +325,8 @@ const ProfileTabBody = (props: any) => {
             <MyCollectionList collections={createdCollections} />
           </div>
         )}
-        {tab === "activity" && <ActivitiesTable />}
-        {(tab.includes("bids") || tab.includes("listings")) && <DataCard />}
+        {tab === "activity" && <ItemActivityTable events={events}/>}
+        {(tab.includes("bids")) && <DataCard />}
       </div>
     </>
   );

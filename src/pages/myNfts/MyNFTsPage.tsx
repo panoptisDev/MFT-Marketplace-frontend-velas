@@ -43,7 +43,7 @@ const MyNFTsPage = (props: any) => {
       account && active && chainId === parseInt(newVariable, 10);
     setLoginStatus(isLoggedin);
     if (isLoggedin){
-      axios.get(`/item`, { params: { owner: account } }).then((res) => {
+      axios.get(`/item`, { params: { itemOwner: account } }).then((res) => {
         setItems(res.data.items);
       });
     }
@@ -82,7 +82,7 @@ const MyNFTsPage = (props: any) => {
           <div className="container">
             <h1 className="top">My NFTs</h1>
             <div className="header-collection-page-title-filter">
-              <div className="select-menu collection-page-title-filter">
+              {/* <div className="select-menu collection-page-title-filter">
                 <div>
                   <SelectMenu
                     data={allCategories}
@@ -94,34 +94,27 @@ const MyNFTsPage = (props: any) => {
                   <SelectMenu data={allArtWork} initialState="All Artwork" />
                   <SelectMenu data={sortBy} initialState="Sort by" />
                 </div>
-              </div>
+              </div> */}
 
-              <div className="partTitle">
+              {/* <div className="partTitle">
                 <ul className="stats">
                   <li>
                     <div className="name">TOKENS</div>
-                    <div className="value">190</div>
+                    <div className="value">0</div>
                   </li>
                   <li>
                     <div className="name">FOR SALE</div>
-                    <div className="value">1&nbsp;088&nbsp;993</div>
+                    <div className="value">0</div>
                   </li>
                   <li>
                     <div className="name">HIDDEN</div>
-                    <div className="value">184&nbsp;981</div>
+                    <div className="value">0</div>
                   </li>
                 </ul>
-              </div>
+              </div> */}
             </div>
             <NFTItemList {...props} items={items} />
           </div>
-        </div>
-        <div className="my-nft-cards-container">
-          {/* <Card1 /> */}
-          <EmptyCard myNftsPage={true} />
-          <EmptyCard myNftsPage={true} />
-          <EmptyCard myNftsPage={true} />
-          <EmptyCard myNftsPage={true} />
         </div>
         {/* <img src="assets/home_bg_01.jpg" alt="" className="bg1" /> */}
       </div>

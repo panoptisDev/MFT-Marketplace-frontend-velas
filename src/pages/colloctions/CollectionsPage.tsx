@@ -83,7 +83,7 @@ const CollectionsPage = (props: any) => {
             <div className="hline"></div>
             <h1 className="top">All Collections</h1>
             <div className="header-collection-page-title-filter">
-              <div className="select-menu collection-page-title-filter">
+              {/* <div className="select-menu collection-page-title-filter">
                 <div>
                   <SelectMenu
                     data={allCategories}
@@ -95,8 +95,8 @@ const CollectionsPage = (props: any) => {
                   <SelectMenu data={allArtWork} initialState="All Artwork" />
                   <SelectMenu data={sortBy} initialState="Sort by" />
                 </div>
-              </div>
-              <div className="partTitle">
+              </div> */}
+              {/* <div className="partTitle">
                 <ul className="stats">
                   <li>
                     <div className="name">Collections</div>
@@ -104,14 +104,14 @@ const CollectionsPage = (props: any) => {
                   </li>
                   <li>
                     <div className="name">Tokens</div>
-                    <div className="value">1&nbsp;088&nbsp;993</div>
+                    <div className="value">0</div>
                   </li>
                   <li>
                     <div className="name">Owners</div>
-                    <div className="value">184&nbsp;981</div>
+                    <div className="value">1</div>
                   </li>
                 </ul>
-              </div>
+              </div> */}
             </div>
 
             <CollectionList

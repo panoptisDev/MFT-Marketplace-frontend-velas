@@ -72,6 +72,7 @@ const ListItemSalePage = ({
         toast.error("End Date is required!");
         return;
       }
+      console.log(updatedData.startTime);
       startTimeStamp = Math.floor(
         moment(updatedData.startTime).valueOf() / 1000
       );
@@ -86,6 +87,7 @@ const ListItemSalePage = ({
         return;
       }
     }
+    
     setListing(true);
     const load_toast_id = toast.loading("Please wait...");
     const tokenId =

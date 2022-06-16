@@ -645,9 +645,18 @@ const ItemDetail = (props: any) => {
                     <span>Not Listed</span>
                   </div>
                 )}
+              </div>
+              <div className="countdown-bid-price">
                 {loginStatus && item?.auction && (
                   <Timer
-                    downPhrase="Sales ends"
+                    downPhrase="Sales Starts"
+                    mintStartAt={item?.auction.startTime}
+                    itemDetails={true}
+                  />
+                )}
+                {loginStatus && item?.auction && (
+                  <Timer
+                    downPhrase="Sales Ends"
                     mintStartAt={item?.auction.endTime}
                     itemDetails={true}
                   />
@@ -724,7 +733,7 @@ const ItemDetail = (props: any) => {
                             return (
                               <div key={key}>
                                 {/* TODO display graph */}
-                                {/* {bid.bidPrice} */}
+                                {bid.bidPrice}
                               </div>
                             );
                           })}

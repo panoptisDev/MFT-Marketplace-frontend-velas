@@ -10,8 +10,6 @@ import { ReactComponent as Stats } from "../../assets/stats.svg";
 import { ReactComponent as Properties } from "../../assets/properties.svg";
 
 const AccordionComponent = ({ loginStatus, account, item }: any) => {
-  console.log(item.levels, "This is it buddy");
-  console.log(item, "This is it buddy");
   return (
     <Accordion defaultActiveKey={["0"]} alwaysOpen>
       <br />

@@ -10,7 +10,7 @@ import Likes from "../Likes/Likes";
 import Button from "../MoreComponents/Button";
 import { useHistory } from "react-router-dom";
 
-const AuctionCard = ({ TodayPick, item }: any) => {
+const AuctionCard = ({ TodayPick, item}: any) => {
   const history = useHistory();
   const gotoDetail = () => {
     history.push(`/item/${item.itemCollection}/${item.tokenId}`);
