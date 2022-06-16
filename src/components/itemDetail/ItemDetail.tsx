@@ -89,6 +89,8 @@ const ItemDetail = (props: any) => {
   const [showPlaceBidModal, setShowPlaceBidModal] = useState<any>(false);
   const [bidPrice, setBidPrice] = useState<any>(0);
   const [bidData, setBidData] = useState<any>([]);
+  // const [bidDataItemDate, setBidbidDataItemDate] = useState<any>([]);
+  // const [bidDataItemIndex, setBidbidDataItemIndex] = useState<any>();
 
   // console.log(bidData);
   useEffect(() => {
@@ -97,7 +99,6 @@ const ItemDetail = (props: any) => {
 
   // let bidData: any = [];
   // console.log(bidData);
-
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
@@ -111,7 +112,7 @@ const ItemDetail = (props: any) => {
     return null;
   };
   function ChartData(item: any) {
-    item?.auction?.bids?.map((bid: any) => {
+    item?.auction?.bids?.map((bid: any, index: any) => {
       setBidData((bidData: any) => [
         ...bidData,
         {
@@ -119,29 +120,27 @@ const ItemDetail = (props: any) => {
             .toISOString()
             .slice(6, 10)
             .replace("-", "/"),
+          name2: new Date(bid.timestamp * 1000).toISOString().replace("-", "/"),
           pv: bid.bidPrice,
           amt: bid.bidPrice,
         },
       ]);
+      // setBidbidDataItemDate((bidDataItemDate: any) => [
+      //   ...bidDataItemDate,
+      //   {
+      //     index: index,
+      //     name: new Date(bid.timestamp * 1000).toISOString().slice(1, 19),
+      //     // .replace("-", "/"),
+      //     pv: bid.bidPrice,
+      //     amt: bid.bidPrice,
+      //   },
+      // ]);
     });
   }
 
   useEffect(() => {
     ChartData(item);
-    // item?.auction?.bids?.forEach((bid: any) => {
-    //   setBidData({
-    //     name: new Date(bid.timestamp * 1000)
-    //       .toISOString()
-    //       .slice(6, 10)
-    //       .replace("-", "/"),
-    //     pv: bid.bidPrice,
-    //     amt: bid.bidPrice,
-    //   });
-    // });
-    // console.log(bidData);
   }, [item]);
-
-  console.log(bidData, "this is the right thing believe me");
 
   const fetchBalance = useCallback(async () => {
     if (!!account && !!library) {
