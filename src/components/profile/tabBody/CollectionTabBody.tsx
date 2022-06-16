@@ -5,7 +5,7 @@ import { useWeb3React } from "@web3-react/core";
 import "./tabBodyStyle.scss";
 import NFTItemList from "../../collectionList/NFTItemList";
 import LeftFilterBox from "../leftFilterBox/LeftFilterBox";
-import ActivitiesTable from "../activitiesTable/ActivitiesTable";
+import ItemActivityTable from "../../Table/Table";
 
 const CollectionTabBody = (props: any) => {
   const { tab, items } = props;
@@ -89,7 +89,7 @@ const CollectionTabBody = (props: any) => {
           </div>
         )}
         {tab === "items" && items && <NFTItemList {...props} items={items} />}
-        {tab === "activity" && <ActivitiesTable />}
+        {tab === "activity" && <ItemActivityTable />}
       </div>
     </div>
   );

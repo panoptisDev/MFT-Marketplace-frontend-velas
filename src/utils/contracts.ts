@@ -345,10 +345,7 @@ export async function bidOnAuction(
     chainId,
     provider
   );
-  console.log(balance);
-  console.log(id);
   try {
-    console.log(price);
     const tx = await auctionContract.bidOnAuction(
       id,
       ethers.utils.parseEther(String(price)),

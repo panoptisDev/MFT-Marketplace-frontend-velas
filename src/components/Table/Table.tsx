@@ -2,7 +2,7 @@ import "./styles.css";
 import Table from "react-bootstrap/Table";
 import { useWeb3React } from "@web3-react/core";
 
-const ItemActivityTable = ({ item, loginStatus }: any) => {
+const ItemActivityTable = ({ events, loginStatus }: any) => {
   const {
     // connector,
     //  library,
@@ -24,7 +24,7 @@ const ItemActivityTable = ({ item, loginStatus }: any) => {
           </tr>
         </thead>
         <tbody>
-          {item.events.map((event: any, key: any) => {
+          {events.map((event: any, key: any) => {
             return (
               <div key={key}>
                 <tr>
@@ -51,8 +51,8 @@ const ItemActivityTable = ({ item, loginStatus }: any) => {
                 </tr>
                 <tr>
                   <td>
-                    {Math.floor(new Date().getTime() / 1000) -
-                      parseFloat(event.timestamp)}{" "}
+                    {Math.floor((Math.floor(new Date().getTime() / 1000) -
+                      parseFloat(event.timestamp))/(3600 *24))}{" "}
                     days ago
                   </td>
                 </tr>

@@ -141,7 +141,7 @@ const ProfileTagList = (props: any) => {
         >
           <FavoriteBorder className="tab-icon" />
           <span className="tab-title">Favorited</span>
-          <span>2</span>
+          <span>{collections ? collections?.length : undefined}</span>
         </div>
         {/* <div
           className={"tab-item" + (searchedUrl === "hidden" ? " selected" : "")}

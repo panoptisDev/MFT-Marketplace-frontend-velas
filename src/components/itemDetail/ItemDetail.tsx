@@ -613,9 +613,18 @@ const ItemDetail = (props: any) => {
                     <span>Not Listed</span>
                   </div>
                 )}
+              </div>
+              <div className="countdown-bid-price">
                 {loginStatus && item?.auction && (
                   <Timer
-                    downPhrase="Sales ends"
+                    downPhrase="Sales Starts"
+                    mintStartAt={item?.auction.startTime}
+                    itemDetails={true}
+                  />
+                )}
+                {loginStatus && item?.auction && (
+                  <Timer
+                    downPhrase="Sales Ends"
                     mintStartAt={item?.auction.endTime}
                     itemDetails={true}
                   />

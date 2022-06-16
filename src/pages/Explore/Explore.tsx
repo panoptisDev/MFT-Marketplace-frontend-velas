@@ -32,7 +32,7 @@ const Explore = () => {
     <div className="explore-page">
       {/* <PageHeader /> */}
       <div className="explore-page-container">
-        <div className="select-menu">
+        {/* <div className="select-menu">
           <div>
             <SelectMenu data={allCategories} initialState="All categories" />
             <SelectMenu data={buyNow} initialState="Buy now" />
@@ -42,7 +42,7 @@ const Explore = () => {
             <SelectMenu data={allArtWork} initialState="All Artwork" />
             <SelectMenu data={sortBy} initialState="Sort by" />
           </div>
-        </div>
+        </div> */}
         <div className="picks-container">
           {items.map((item: any, index: number) => (
             <AuctionCard item={item} TodayPick={true} key={index} />
