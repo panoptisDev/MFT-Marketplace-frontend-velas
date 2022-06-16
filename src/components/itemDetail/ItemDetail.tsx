@@ -17,6 +17,7 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  LabelList,
 } from "recharts";
 import {
   // Loupe,
@@ -70,6 +71,7 @@ import ItemDetailFilter from "../MoreComponents/ItemDetailFilter";
 import BuyNowPage from "../../pages/sale/BuyNowPage";
 import { CartesianAxis } from "recharts";
 import BiddingHistory from "../TradingHistory/BiddingHistory";
+import { ConstructionOutlined } from "@mui/icons-material";
 // import BidModal from "../connectModal/BidModal";
 
 const ItemDetail = (props: any) => {
@@ -88,28 +90,58 @@ const ItemDetail = (props: any) => {
   const [bidPrice, setBidPrice] = useState<any>(0);
   const [bidData, setBidData] = useState<any>([]);
 
+  // console.log(bidData);
   useEffect(() => {
     if (loginStatus) fetchBalance();
   }, [loginStatus]);
 
-  let ChartData = (item: any) => {
-    item?.auction?.bids?.map((bid: any, key: any) => {
-      setBidData([
+  // let bidData: any = [];
+  // console.log(bidData);
+
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip-lineChart">
+          <h4>{label}</h4>
+          <p className="label">{`${payload[0].value}`} VLX</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
+  function ChartData(item: any) {
+    item?.auction?.bids?.map((bid: any) => {
+      setBidData((bidData) => [
+        ...bidData,
         {
           name: new Date(bid.timestamp * 1000)
             .toISOString()
             .slice(6, 10)
             .replace("-", "/"),
+          pv: bid.bidPrice,
+          amt: bid.bidPrice,
         },
-        { pv: bid.bidPrice },
-        { amt: bid.bidPrice },
       ]);
     });
-  };
+  }
 
   useEffect(() => {
     ChartData(item);
+    // item?.auction?.bids?.forEach((bid: any) => {
+    //   setBidData({
+    //     name: new Date(bid.timestamp * 1000)
+    //       .toISOString()
+    //       .slice(6, 10)
+    //       .replace("-", "/"),
+    //     pv: bid.bidPrice,
+    //     amt: bid.bidPrice,
+    //   });
+    // });
+    // console.log(bidData);
   }, [item]);
+
+  console.log(bidData, "this is the right thing believe me");
 
   const fetchBalance = useCallback(async () => {
     if (!!account && !!library) {
@@ -694,34 +726,14 @@ const ItemDetail = (props: any) => {
                     <Accordion.Body>
                       {item?.auction.bids?.length > 0 ? (
                         <div className="col-div aic jcc">
-                          {/* {item?.auction.bids.map((bid: any, key: any) => {
-                            // console.log(bid.bidPrice); // 0.002
-                            // console.log(bid.timestamp); //ex : 1653574771
-                            setBidData([
-                              { name: bid.timestamp },
-                              { pd: bid.bidPrice },
-                            ]);
-                            //This should be filtered by above selected date.
-                            return ( */}
-                          {/* {item?.auction?.bids && ( */}
-                          <LineChart
-                            width={500}
-                            height={200}
-                            data={bidData}
-                            margin={{
-                              top: 5,
-                              right: 30,
-                              left: 20,
-                              bottom: 5,
-                            }}
-                          >
+                          <LineChart width={500} height={200} data={bidData}>
                             <CartesianGrid
                               vertical={false}
-                              strokeDasharray="1"
+                              strokeDasharray="0"
                             />
                             <XAxis dataKey="name" />
                             <YAxis />
-                            <Tooltip />
+                            <Tooltip content={<CustomTooltip />} />
                             <Line
                               type="monotone"
                               dataKey="pv"
@@ -729,9 +741,6 @@ const ItemDetail = (props: any) => {
                               activeDot={{ r: 8 }}
                             />
                           </LineChart>
-                          {/* )} */}
-                          {/* ); */}
-                          {/* })} */}
                         </div>
                       ) : (
                         <div className="col-div aic jcc">
