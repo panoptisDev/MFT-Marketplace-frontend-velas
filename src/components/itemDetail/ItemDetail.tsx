@@ -86,10 +86,30 @@ const ItemDetail = (props: any) => {
   const [balance, setBalance] = useState<any>(0);
   const [showPlaceBidModal, setShowPlaceBidModal] = useState<any>(false);
   const [bidPrice, setBidPrice] = useState<any>(0);
+  const [bidData, setBidData] = useState<any>([]);
 
   useEffect(() => {
     if (loginStatus) fetchBalance();
   }, [loginStatus]);
+
+  let ChartData = (item: any) => {
+    item?.auction?.bids?.map((bid: any, key: any) => {
+      setBidData([
+        {
+          name: new Date(bid.timestamp * 1000)
+            .toISOString()
+            .slice(6, 10)
+            .replace("-", "/"),
+        },
+        { pv: bid.bidPrice },
+        { amt: bid.bidPrice },
+      ]);
+    });
+  };
+
+  useEffect(() => {
+    ChartData(item);
+  }, [item]);
 
   const fetchBalance = useCallback(async () => {
     if (!!account && !!library) {
@@ -344,58 +364,6 @@ const ItemDetail = (props: any) => {
   // const [isPropertyExpand, setIsPropertyExpand] = useState(false);
   // const [isStatsExpand, setIsStatsExpand] = useState(false);
   // const [isLevelExpand, setIsLevelExpand] = useState(false);
-
-  const data = [
-    {
-      name: "1/2",
-      name2: "A",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: "1/3",
-      name2: "B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: "1/4",
-      name2: "C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: "1/5",
-      name2: "D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: "1/6",
-      name2: "E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: "1/7",
-      name2: "F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: "1/8",
-      name2: "G",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
 
   return (
     <div className="image-details__accordion">
@@ -717,28 +685,20 @@ const ItemDetail = (props: any) => {
                     <Accordion.Body>
                       {item?.auction.bids?.length > 0 ? (
                         <div className="col-div aic jcc">
-                          {item?.auction.bids.map((bid: any, key: any) => {
-                            console.log(bid.bidPrice); // 0.002
-                            console.log(bid.timestamp); //ex : 1653574771
+                          {/* {item?.auction.bids.map((bid: any, key: any) => {
+                            // console.log(bid.bidPrice); // 0.002
+                            // console.log(bid.timestamp); //ex : 1653574771
+                            setBidData([
+                              { name: bid.timestamp },
+                              { pd: bid.bidPrice },
+                            ]);
                             //This should be filtered by above selected date.
-                            return (
-                              <div key={key}>
-                                {/* TODO display graph */}
-                                {/* {bid.bidPrice} */}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      ) : (
-                        <div className="col-div aic jcc">
-                          <img src="/assets/no-chart-data.svg" alt="" />
-                          {/* <NoChartData /> */}
-                          <p className="billy-desc">No Price yet</p>
-                          {/* <ResponsiveContainer width="100%" height="100%"> */}
+                            return ( */}
+                          {/* {item?.auction?.bids && ( */}
                           <LineChart
                             width={500}
                             height={200}
-                            data={data}
+                            data={bidData}
                             margin={{
                               top: 5,
                               right: 30,
@@ -760,7 +720,15 @@ const ItemDetail = (props: any) => {
                               activeDot={{ r: 8 }}
                             />
                           </LineChart>
-                          {/* </ResponsiveContainer> */}
+                          {/* )} */}
+                          {/* ); */}
+                          {/* })} */}
+                        </div>
+                      ) : (
+                        <div className="col-div aic jcc">
+                          <img src="/assets/no-chart-data.svg" alt="" />
+                          {/* <NoChartData /> */}
+                          <p className="billy-desc">No Price yet</p>
                         </div>
                       )}
                     </Accordion.Body>
