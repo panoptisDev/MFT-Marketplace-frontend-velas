@@ -112,7 +112,7 @@ const ItemDetail = (props: any) => {
   };
   function ChartData(item: any) {
     item?.auction?.bids?.map((bid: any) => {
-      setBidData((bidData) => [
+      setBidData((bidData: any) => [
         ...bidData,
         {
           name: new Date(bid.timestamp * 1000)
